@@ -5,6 +5,7 @@ if($manager = opendir("$mcc_dir/class/")){
         if($file != "." and $file != "..") 
             if(strtolower(end(explode(".", $file))) == "php") require_once "$mcc_dir/class/$file";
     closedir($manager);
+   
 }
 $cn = Connect::getInstance();
 $today= date('Y-m-d');
