@@ -24,6 +24,7 @@ switch($mod){
     case 17: include "module/master/vehicle-category$page.php"; break;
     case 18: include "module/master/center$page.php"; break;
     case 19: include "module/master/measure$page.php"; break;
+    case 20: include "module/master/route$page.php"; break;
     
     
 

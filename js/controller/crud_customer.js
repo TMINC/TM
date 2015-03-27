@@ -24,6 +24,8 @@ var load = function () {
             //$("#dt_maintenance tbody tr").remove();
             $("#dt_maintenance tbody").append(response);
             table();
+            unistyle();
+            maskinput(); 
             agregar();
             editar();
             guardar();
@@ -31,6 +33,12 @@ var load = function () {
             multiseleccion();
         }        
     });
+};
+var unistyle = function (){
+    $(".uni_style").uniform();  
+};
+var maskinput = function (){
+    $("#editCode").inputmask("99999999999");
 };
 var multiseleccion = function () {
     $('.sel_row').off().on('click', function () {
@@ -168,6 +176,25 @@ var eliminar = function () {
 var guardar = function () {
     $("#save").off().on('click', function (e) {
         e.preventDefault();
+        if($('#validation_form').validate({
+            onkeyup: false,
+            errorClass: 'error',
+            validClass: 'valid',
+            rules: {
+                editName: { required: true, minlength: 3 },
+                editCode: { required: true, number: true },
+                editDescription: { required: true, minlength: 3 }
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass("f_error");                
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass("f_error");    
+            },
+            errorPlacement: function(error, element) {
+                $(element).closest('.form-group').append(error);
+            }
+        }).form()){
         $(".modal").modal("hide");
         var _id = $("#editId").val();
         var _name = $("#editName").val();
@@ -180,8 +207,12 @@ var guardar = function () {
             url: "module/master/crud/customer.php",
             data: "action="+ _action +"& id="+ _id+"& name="+ _name +"& code="+ _code+"& description="+ _description+"& status="+ _status,
             success: function () {
-                load();            
+                load();    
+                $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
             }        
-        });
+        });  
+        }
+        return false;
+      
     });
 };

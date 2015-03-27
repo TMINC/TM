@@ -1,23 +1,23 @@
 <?php
 /** 
  * Copyright (C) 2015 netpartners-international.com
- * By: Johnny Moscoso Rossel
+ * By: Angel Silva Figueroa
  **/
 ?>
     <div class="row">
         <div class="col-sm-12 col-md-12">
-            <h3 class="heading">CHOFER(ES)</h3>
+            <h3 class="heading">RUTA(S)</h3>
             <div class="clearfix sepH_b">
                 <div class="btn-group col_vis_menu">
                     <a href="#" data-toggle="dropdown" class="btn dropdown-toggle btn-default">COLUMNAS <span class="caret"></span></a>
                     <ul class="dropdown-menu tableMenu" id="dt_maintenance_nav">
                         <li><div class="checkbox"><label class="" for="dt_col_1"><input type="checkbox" value="0" id="dt_col_1" name="toggle-cols" checked="checked" class="uni_style"/> &check;</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_2"><input type="checkbox" value="1" id="dt_col_2" name="toggle-cols" checked="checked" class="uni_style"/> ID</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> LICENCIA</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> NOM. Y APE.</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> PROVEED.</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> TIPO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> NOMBRE</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> ORIGEN</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> DESTINO</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> KM.</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> TIEMPO</label></div></li>
                     </ul>
                 </div>
                 <!-- actions for datatables -->
@@ -36,10 +36,11 @@
                     <tr>
                         <th class="center"><input name="sel_row" class="sel_row uni_style" data-tableid="dt_maintenance" type="checkbox"></th>
                         <th class="center" style="width: 120px;">ID</th>
-                        <th class="center">LICENCIA</th>
-                        <th class="center">NOMBRE(S) Y APELLIDO(S)</th>
-                        <th class="center">PROVEEDOR</th>
-                        <th class="center">TIPO</th>
+                        <th class="center">NOMBRE</th>
+                        <th class="center">ORIGEN</th>
+                        <th class="center">DESTINO</th>
+                        <th class="center">KIL&Oacute;METROS</th>
+                        <th class="center">TIEMPO</th>
                         <th class="center" style="width: 100px;">ACCI&Oacute;N</th>
                     </tr>
                 </thead>
@@ -56,31 +57,31 @@
                     <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
                 </div>
                 <div class="modal-body">
-                    <form id="validation_form">
+                <form id="validation_form">
                 <table class="table table-bordered">
                 <tr>
                     <td><b>ID :</b></td>
                     <td class="form-group"><input class="form-control" readonly="true" type="text" id="editId" name="editId"></td>
                 </tr>
                 <tr>
-                    <td><b>PROVEEDOR :</b></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editCarrier" name="editCarrier" data-placeholder="SELECCIONE UNA EMPRESA DE TRANSPORTE..." /></td>
+                    <td><b>NOMBRE :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editName" name="editName"></td>
                 </tr>
                 <tr>
-                    <td><b>LICENCIA :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editLicense" name="editLicense"></td>
+                    <td><b>ORIGEN :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editOrigin" name="editOrigin"></td>
                 </tr>
                 <tr>
-                    <td><b>NOMBRE(S) :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editFirstName" name="editFirstName"></td>
+                    <td><b>DESTINO :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editDestination" name="editDestination"></td>
                 </tr>
                 <tr>
-                    <td><b>APELLIDO(S) :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editLastName" name="editLastName"></td>
+                    <td><b>KIL&Oacute;METROS :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editKilometers" name="editKilometers"></td>
                 </tr>
                 <tr>
-                    <td><b>TIPO :</b></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editType" name="editType" data-placeholder="SELECCIONE UN TIPO..." /></td>
+                    <td><b>TIEMPO :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editTime" name="editTime"></td>
                 </tr>
                 <tr>
                     <td><b>ESTADO :</b></td>
@@ -166,18 +167,16 @@
     <script src="js/pages/tm_datatables.js"></script>
     <!-- tooltips -->
     <script src="lib/qtip2/jquery.qtip.min.js"></script>
-    <!-- chosen -->
-    <script src="lib/chosen/chosen.jquery.min.js"></script>
     <!-- validations -->
     <script src="lib/validation/jquery.validate.min.js"></script>
     <script src="lib/validation/localization/messages_es.js"></script>
     <!-- crud functions -->
-    <script src="js/controller/crud_driver.js"></script>
+    <script src="js/controller/crud_route.js"></script>
     <script>
         $(document).ready(function() {
             //* show all elements & remove preloader
             setTimeout('$("html").removeClass("js")',1000);
             $('#collapseOne').addClass(' in');
-            $('#info-driver').addClass(' active');
+            $('#info-route').addClass(' active');
         });
     </script>

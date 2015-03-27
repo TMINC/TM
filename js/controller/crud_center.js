@@ -23,6 +23,8 @@ var load = function () {
             $('#dt_maintenance').dataTable().fnDestroy();
             $("#dt_maintenance tbody").append(response);
             table();
+            unistyle();
+            maskinput();
             popover();
             agregar();
             editar();
@@ -32,6 +34,12 @@ var load = function () {
             chosen();
         }        
     });
+};
+var unistyle = function (){
+    $(".uni_style").uniform();  
+};
+var maskinput = function (){
+   
 };
 var popover = function (){
     $(".pop_over").popover();
@@ -121,7 +129,7 @@ var agregar = function(){
         $("#editCustomer").trigger("liszt:updated");
         $("#editName").val("");
         $("#editType").empty();
-        $("#editType").append('<option selected="true"> </option>');
+        $("#editType").append('<option value="" selected="true"> </option>');
         $("#editType").append('<option value="1">CENTRO DE ACOPIO</option>');
         $("#editType").append('<option value="2">PLANTA</option>');
         $("#editType").append('<option value="3">PUERTO DESTINO</option>');        
@@ -216,23 +224,49 @@ var eliminar = function () {
 var guardar = function () {
     $("#save").off().on('click', function (e) {
         e.preventDefault();
-        $(".modal").modal("hide");
-        var _id = $("#editId").val();
-        var _customer = $("#editCustomer option:selected").val();
-        var _name = $("#editName").val();
-        var _type = $("#editType option:selected").val();
-        var _address = $("#editAddress").val();
-        var _latitud = $("#editLatitud").val();
-        var _longitud = $("#editLongitud").val();
-        var _status = $("#editStatus").is(':checked');
-        var _action = $("#editAction").val();
-        $.ajax({
-            type: "POST",
-            url: "module/master/crud/center.php",
-            data: "action="+ _action +"& id="+ _id+"& name="+ _name +"& address="+ _address+"& type="+ _type+"& latitud="+ _latitud+"& longitud="+ _longitud+"& customer="+ _customer+"& status="+ _status,
-            success: function () {
-                load();            
-            }        
-        });
+        if($('#validation_form').validate({
+            onkeyup: false,
+            errorClass: 'error',
+            validClass: 'valid',
+            rules: {
+                editCustomer: { required: true, minlength: 3 },
+                editName: { required: true, minlength: 3 },
+                editType: { required: true },
+                editAddress: { required: true, minlength: 3 },
+                editLatitud: { required: true, minlength: 3 },
+                editLongitud: { required: true, minlength: 3 }
+                
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass("f_error");                
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass("f_error");                
+            },
+            errorPlacement: function(error, element) {
+                $(element).closest('.form-group').append(error);
+            }
+        }).form()){
+            $(".modal").modal("hide");
+            var _id = $("#editId").val();
+            var _customer = $("#editCustomer option:selected").val();
+            var _name = $("#editName").val();
+            var _type = $("#editType option:selected").val();
+            var _address = $("#editAddress").val();
+            var _latitud = $("#editLatitud").val();
+            var _longitud = $("#editLongitud").val();
+            var _status = $("#editStatus").is(':checked');
+            var _action = $("#editAction").val();
+            $.ajax({
+                type: "POST",
+                url: "module/master/crud/center.php",
+                data: "action="+ _action +"& id="+ _id+"& name="+ _name +"& address="+ _address+"& type="+ _type+"& latitud="+ _latitud+"& longitud="+ _longitud+"& customer="+ _customer+"& status="+ _status,
+                success: function () {
+                    load();   
+                    $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
+                }        
+            }); 
+        }
+        return false;        
     });
 };

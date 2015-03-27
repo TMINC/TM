@@ -25,8 +25,8 @@
                 $stmt->store_result();
                 $stmt->bind_result($category_id, $category_info, $category_name, $category_description, $category_status);
                 while($row = $stmt->fetch()) {
-                    if($category_status=='1'){$status='<a class="hint--left hint--success" style="float:right;cursor:pointer;" data-hint="Activo"><i class="glyphicon glyphicon-check" /></a>';}else{$status='<a class="hint--left hint--error" style="float:right;cursor:pointer;" data-hint="Inactivo"><i class="glyphicon glyphicon-unchecked" /></a>';}
-                    echo '<tr><td class="center"><input id="c'.$category_id.'" name="row_sel" type="checkbox" class="row_sel" data-id="'.$category_id.'"></td>'.
+                    if($category_status=='1'){$status='<a class="hint--left hint--success" style="float:right;cursor:pointer;" data-hint="Activo"><i class="glyphicon glyphicon-ok" /></a>';}else{$status='<a class="hint--left hint--error" style="float:right;cursor:pointer;" data-hint="Inactivo"><i class="glyphicon glyphicon-minus" /></a>';}
+                    echo '<tr><td class="center"><input id="c'.$category_id.'" name="row_sel" type="checkbox" class="row_sel uni_style" data-id="'.$category_id.'"></td>'.
                         '<td>'.$category_id.$status.'</td>'.
                         '<td>'.$category_info.'</td>'.
                         '<td>'.$category_name.'</td>'.

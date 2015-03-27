@@ -26,8 +26,8 @@
                 $stmt->bind_result($class_id, $class_info, $class_name, $class_description, $class_type, $class_status);
                 while($row = $stmt->fetch()) {
                     if($class_type=='1'){$type='R';}if($class_type=='2'){$type='O';}
-                    if($class_status=='1'){$status='<a class="hint--left hint--success" style="float:right;cursor:pointer;" data-hint="Activo"><i class="glyphicon glyphicon-check" /></a>';}else{$status='<a class="hint--left hint--error" style="float:right;cursor:pointer;" data-hint="Inactivo"><i class="glyphicon glyphicon-unchecked" /></a>';}
-                    echo '<tr><td class="center"><input id="c'.$class_id.'" name="row_sel" type="checkbox" class="row_sel" data-id="'.$class_id.'"></td>'.
+                    if($class_status=='1'){$status='<a class="hint--left hint--success" style="float:right;cursor:pointer;" data-hint="Activo"><i class="glyphicon glyphicon-ok" /></a>';}else{$status='<a class="hint--left hint--error" style="float:right;cursor:pointer;" data-hint="Inactivo"><i class="glyphicon glyphicon-minus" /></a>';}
+                    echo '<tr><td class="center"><input id="c'.$class_id.'" name="row_sel" type="checkbox" class="row_sel uni_style" data-id="'.$class_id.'"></td>'.
                         '<td>'.$class_id.$status.'</td>'.
                         '<td>'.$class_info.'</td>'.
                         '<td>'.$class_name.'</td>'.

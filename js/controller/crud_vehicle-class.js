@@ -23,6 +23,8 @@ var load = function () {
             $('#dt_maintenance').dataTable().fnDestroy();
             $("#dt_maintenance tbody").append(response);
             table();
+            unistyle();
+            maskinput(); 
             agregar();
             editar();
             guardar();
@@ -31,6 +33,12 @@ var load = function () {
             chosen();
         }        
     });
+};
+var unistyle = function (){
+    $(".uni_style").uniform();  
+};
+var maskinput = function (){
+    
 };
 var chosen = function (){
     $(".chzn_edit").chosen();
@@ -186,7 +194,26 @@ var eliminar = function () {
 var guardar = function () {
     $("#save").off().on('click', function (e) {
         e.preventDefault();
-        $(".modal").modal("hide");
+        if($('#validation_form').validate({
+            onkeyup: false,
+            errorClass: 'error',
+            validClass: 'valid',
+            rules: {
+                editInfo: { required: true },
+                editName: { required: true },
+                editDescription: { required: true }
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass("f_error");
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass("f_error");    
+            },
+            errorPlacement: function(error, element) {
+                $(element).closest('.form-group').append(error);
+            }
+        }).form()){
+             $(".modal").modal("hide");
         var _id = $("#editId").val();
         var _info = $("#editInfo").val();
         var _name = $("#editName").val();
@@ -199,8 +226,12 @@ var guardar = function () {
             url: "module/master/crud/vehicle-class.php",
             data: "action="+ _action +"& id="+ _id+"& info="+ _info +"& name="+ _name +"& description="+ _description+"& type="+ _type+"& status="+ _status,
             success: function () {
-                load();            
+                load();    
+                $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
             }        
         });
+        }
+        return false;
+       
     });
 };

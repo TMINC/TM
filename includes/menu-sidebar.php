@@ -29,6 +29,7 @@
                                     <li id="transfer-center"><a href="./?mod=18">&ShortRightArrow; Centro(s)</a></li>
                                     <li class="nav-header">Generales</li>
                                     <li id="other-measure"><a href="./?mod=19">&ShortRightArrow; U.Medida</a></li>
+                                    <li id="info-route"><a href="./?mod=20">&ShortRightArrow; Ruta(s)</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -42,7 +43,7 @@
                         <div class="accordion-body collapse" id="collapseTwo">
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li id="active"><a href="./?mod=21">&ShortRightArrow; Pedido(s)</a></li>
+                                    <li id="order"><a href="./?mod=21">&ShortRightArrow; Pedido(s)</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -111,15 +112,15 @@
                 <ul class="list-unstyled">
                     <li>
                         <span class="act act-warning">65</span>
-                        <strong>New comments</strong>
+                        <strong>Gu&iacute;a(s) por Atender</strong>
                     </li>
                     <li>
                         <span class="act act-success">10</span>
-                        <strong>New articles</strong>
+                        <strong>Gu&iacute;a(s) en Transporte</strong>
                     </li>
                     <li>
                         <span class="act act-danger">85</span>
-                        <strong>New registrations</strong>
+                        <strong>Gu&iacute;a(s) Finalizadas</strong>
                     </li>
                 </ul>
             </div>

@@ -27,7 +27,7 @@ function sec_session_start() {
 
 function login($user, $password, $mysqli) {
     // Using prepared statements means that SQL injection is not possible. 
-    if ($stmt = $mysqli->prepare("SELECT iUseID, cUseNam, cUsePas, cUseSal 
+    if ($stmt = $mysqli->prepare("SELECT iUseID, cUseUse, cUseNam, cUsePas, cUseSal 
 				  FROM tm_user 
                                   WHERE cUseUse = ? LIMIT 1")) 
     {
@@ -35,7 +35,7 @@ function login($user, $password, $mysqli) {
         $stmt->execute();    // Execute the prepared query.
         $stmt->store_result();
         // get variables from result.
-        $stmt->bind_result($user_id, $username, $db_password, $salt);
+        $stmt->bind_result($user_id, $useractive, $username, $db_password, $salt);
         $stmt->fetch();
 
         // hash the password with the unique salt.
@@ -61,10 +61,15 @@ function login($user, $password, $mysqli) {
 
                     // XSS protection as we might print this value
                     $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
+                    $useractive = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $useractive);
 
+                    $_SESSION['user'] = $useractive;
                     $_SESSION['username'] = $username;
                     $_SESSION['login_string'] = hash('sha512', $password . $user_browser);
-
+                    if (!$mysqli->query("UPDATE tm_user SET cUseAct='1' WHERE iUseID='".$user_id."'")) {
+                        header("Location: ../error.php?err=Database Error: Cannot prepare statement");
+                        exit();
+                    }
                     // Login successful. 
                     return true;
                 } else {
@@ -75,8 +80,7 @@ function login($user, $password, $mysqli) {
                                     VALUES ('$user_id', '$now')")) {
                         header("Location: ../error.php?err=Database Error: Cannot prepare statement");
                         exit();
-                    }
-
+                    }$mysqli->query();                    
                     return false;
                 }
             }

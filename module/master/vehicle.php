@@ -11,13 +11,14 @@
                 <div class="btn-group col_vis_menu">
                     <a href="#" data-toggle="dropdown" class="btn dropdown-toggle btn-default">COLUMNAS <span class="caret"></span></a>
                     <ul class="dropdown-menu tableMenu" id="dt_maintenance_nav">
-                        <li><div class="checkbox"><label class="" for="dt_col_1"><input type="checkbox" value="0" id="dt_col_1" name="toggle-cols" checked="checked"/> &check;</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_2"><input type="checkbox" value="1" id="dt_col_2" name="toggle-cols" checked="checked"/> ID</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked"/> PLACA</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked"/> TIPO VEH&Iacute;CULO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked"/> CLASE VEH&Iacute;CULO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked"/> CARACTER&Iacute;STICAS</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked"/> ACCI&Oacute;N</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_1"><input type="checkbox" value="0" id="dt_col_1" name="toggle-cols" checked="checked" class="uni_style"/> &check;</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_2"><input type="checkbox" value="1" id="dt_col_2" name="toggle-cols" checked="checked" class="uni_style"/> ID</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> PLACA</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> TIPO</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> CLASE</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> CATEG.</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> CARACTER.</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
                     </ul>
                 </div>
                 <!-- actions for datatables -->
@@ -34,11 +35,12 @@
             <table class="table table-striped table-bordered dTableR" id="dt_maintenance" style="cursor:">
                 <thead>
                     <tr>
-                        <th class="center"><input name="sel_row" class="sel_row" data-tableid="dt_maintenance" type="checkbox"></th>
+                        <th class="center"><input name="sel_row" class="sel_row uni_style" data-tableid="dt_maintenance" type="checkbox"></th>
                         <th class="center" style="width: 120px;">ID</th>
                         <th class="center">PLACA</th>
                         <th class="center">TIPO VEH&Iacute;CULO</th>
                         <th class="center">CLASE VEH&Iacute;CULO</th>
+                        <th class="center">CATEGOR&Iacute;A VEH&Iacute;CULO</th>
                         <th class="center">CARACTER&Iacute;STICA</th>
                         <th class="center" style="width: 100px;">ACCI&Oacute;N</th>
                     </tr>
@@ -56,60 +58,66 @@
                     <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
                 </div>
                 <div class="modal-body">
+                    <form id="validation_form">
                 <table class="table table-bordered">
                 <tr>
                     <td><b>ID :</b></td>
-                    <td><input class="form-control" readonly="true" type="text" id="editId"></td>
+                    <td class="form-group"><input class="form-control" readonly="true" type="text" id="editId" name="editId"></td>
                 </tr>
                 <tr>
                     <td><b>PLACA :</b></td>
-                    <td><input class="form-control" type="text" id="editPlate"></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editPlate" name="editPlate"></td>
                 </tr>
                   <tr>
                     <td><b>GENERO :</b></td>
-                    <td><input class="form-control" type="text" id="editGenre"></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editGenre" name="editGenre"></td>
                 </tr>
                 <tr>
                     <td><b>TIPO :</b></td>
-                    <td><select class="form-control chzn_edit" id="editType" data-placeholder="SELECCIONE UN TIPO..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editType" name="editType" data-placeholder="SELECCIONE UN TIPO..." /></td>
                 </tr>
                 <tr>
                     <td><b>CLASE :</b></td>
-                    <td><select class="form-control chzn_edit" id="editClass" data-placeholder="SELECCIONE UNA CLASE..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editClass" name="editClass" data-placeholder="SELECCIONE UNA CLASE..." /></td>
+                </tr>
+                <tr>
+                    <td><b>CATEGOR&Iacute;A :</b></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editCategory" name="editCategory" data-placeholder="SELECCIONE UNA CATEGOR&Iacute;A..." /></td>
                 </tr>
                  <tr>
                     <td><b>U.M PESO :</b></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureWeight" data-placeholder="SELECCIONE UNA UNIDAD DE MEDIDA..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureWeight" name="editMeasureWeight" data-placeholder="SELECCIONE UNA UNIDAD DE MEDIDA..." /></td>
                 </tr>
                  <tr>
                     <td><b>PESO :</b></td>
-                    <td><input class="form-control" type="text" id="editWeight"></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editWeight" name="editWeight"></td>
                 </tr>
                 <tr>
                     <td><b>U.M DISTANCIA :</b></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureHeight" data-placeholder="SELECCIONE UNA UNIDAD DE MEDIDA..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureHeight" name="editMeasureHeight" data-placeholder="SELECCIONE UNA UNIDAD DE MEDIDA..." /></td>
                 </tr>
                  <tr>
                     <td><b>LONGITUD :</b></td>
-                    <td><input class="form-control" type="text" id="editLength"></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editLength" name="editLength"></td>
                 </tr>           
                  <tr>
                     <td><b>ANCHURA :</b></td>
-                    <td><input class="form-control" type="text" id="editWidth"></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editWidth" name="editWidth"></td>
                 </tr>
                  <tr>
                     <td><b>ALTURA :</b></td>
-                    <td><input class="form-control" type="text" id="editHeight"></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editHeight" name="editHeight"></td>
                 </tr>
                  <tr>
                     <td><b>ESTADO :</b></td>
-                    <td><input type="checkbox" id="editStatus" checked="true"></td>
+                    <td class="form-group"><input type="checkbox" id="editStatus" class="uni_style"></td>
                 </tr> 
                 <tr class="hide">
                     <td><b>ACCI&Oacute;N :</b></td>
                     <td><input class="form-control" type="text" id="editAction"></td>
                 </tr> 
                 </table>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-primary" id="save"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
@@ -166,8 +174,12 @@
     <script src="js/selectNav.js"></script>
     <!-- moment.js date library -->
     <script src="lib/moment/moment.min.js"></script>
+    <!-- masked inputs -->
+    <script src="js/forms/jquery.inputmask.min.js"></script>
     <!-- common functions -->
     <script src="js/pages/tm_common.js"></script>
+    <!-- styled form elements -->
+    <script src="lib/uniform/jquery.uniform.min.js"></script>
     <!-- datatable -->
     <script src="lib/datatables/jquery.dataTables.min.js"></script>
     <script src="lib/datatables/extras/Scroller/media/js/dataTables.scroller.min.js"></script>
@@ -182,6 +194,9 @@
     <script src="lib/qtip2/jquery.qtip.min.js"></script>
     <!-- chosen -->
     <script src="lib/chosen/chosen.jquery.min.js"></script>
+     <!-- validations -->
+    <script src="lib/validation/jquery.validate.min.js"></script>
+    <script src="lib/validation/localization/messages_es.js"></script>
     <!-- crud functions -->
     <script src="js/controller/crud_vehicle.js"></script>
     <script>

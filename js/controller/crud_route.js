@@ -1,12 +1,12 @@
 /** 
  * Copyright (C) 2015 netpartners-international.com
- * By: Johnny Moscoso Rossel
+ * By: Angel Silva Figueroa
  **/
 $(document).ready(function() {
-    measure.dt_maintenance();
+    route.dt_maintenance();
 });
 
-measure = {    
+route = {    
     dt_maintenance: function() {
         load();             
     }
@@ -14,7 +14,7 @@ measure = {
 var load = function () {    
     $.ajax({
         type: "POST",
-        url: "module/master/crud/measure.php",
+        url: "module/master/crud/route.php",
         data: "action=select",
         success: function (response) {
             $("#dt_maintenance tbody").empty();
@@ -24,13 +24,13 @@ var load = function () {
             $("#dt_maintenance tbody").append(response);
             table();
             unistyle();
-            maskinput();
+            maskinput(); 
+            popover();
             agregar();
             editar();
             guardar();
             eliminar();
             multiseleccion();
-            chosen();
         }        
     });
 };
@@ -38,10 +38,10 @@ var unistyle = function (){
     $(".uni_style").uniform();  
 };
 var maskinput = function (){
-    
+   $("#editTime").inputmask("99:99:99");
 };
-var chosen = function (){
-    $(".chzn_edit").chosen();
+var popover = function (){
+    $(".pop_over").popover();
 };
 var multiseleccion = function () {
     $('.sel_row').off().on('click', function () {
@@ -98,11 +98,13 @@ var table = function () {
                     { "sType": "string" },
                     { "sType": "string" },
                     { "sType": "string" },
+                    { "sType": "string" },
+                    { "sType": "string" },
                     { "bSortable": false }
                 ],
             "sPaginationType": "bootstrap"
         });
-        $('#dt_maintenance_nav').on('click','li input',function(){
+        $('#dt_maintenance_nav').off().on('click','li input',function(){
             fnShowHide($(this).val());
         });
     }
@@ -111,18 +113,11 @@ var agregar = function(){
     $(".add").off().on('click', function (e) {
         e.preventDefault();
         $("#editId").val("");
-        $("#editType").empty();
-        $("#editType").append('<option selected="true"> </option>');
-        $("#editType").append('<option value="1">LONGITUD</option>');
-        $("#editType").append('<option value="2">VOLUMEN</option>');
-        $("#editType").append('<option value="3">MASA</option>');
-        $("#editType").append('<option value="4">TIEMPO</option>');
-        $("#editType").append('<option value="5">SUPERFICIE</option>');
-        $("#editType").append('<option value="6">MONEDA</option>');
-        chosen();
-        $("#editType").trigger("liszt:updated");    
-        $("#editCode").val("");
-        $("#editDescription").val("");  
+        $("#editName").val("");
+        $("#editOrigin").val("");
+        $("#editDestination").val("");
+        $("#editKilometers").val("");
+        $("#editTime").val("");
         $("#editStatus").removeAttr('checked');
         $("#editAction").val("insert");        
     });
@@ -131,21 +126,11 @@ var editar = function(){
     $(".edit").off().on('click', function (e) {
         e.preventDefault();
         var _id = $(this).data('id'); $("#editId").val(_id);
-        $("#editType").empty();
-        var _type = $(this).data('type');var sel='selected';
-        for(i=1; i<4; i++){
-            if(i==_type){sel='selected';}else{sel='';}
-            if(i==1){$("#editType").append('<option value="' + i + '" ' + sel + '>LONGITUD</option>');}
-            if(i==2){$("#editType").append('<option value="' + i + '" ' + sel + '>VOLUMEN</option>');}
-            if(i==3){$("#editType").append('<option value="' + i + '" ' + sel + '>MASA</option>');}
-            if(i==4){$("#editType").append('<option value="' + i + '" ' + sel + '>TIEMPO</option>');}
-            if(i==5){$("#editType").append('<option value="' + i + '" ' + sel + '>SUPERFICIE</option>');}
-            if(i==6){$("#editType").append('<option value="' + i + '" ' + sel + '>MONEDA</option>');}
-           }  
-        chosen();
-        $("#editType").trigger("liszt:updated");        
-        var _abbreviation = $(this).data('abbreviation'); $("#editCode").val(_abbreviation);
-        var _description = $(this).data('description'); $("#editDescription").val(_description);
+        var _name = $(this).data('name'); $("#editName").val(_name);
+        var _origin = $(this).data('origin'); $("#editOrigin").val(_origin);
+        var _destination = $(this).data('destination'); $("#editDestination").val(_destination);
+        var _kilometers = $(this).data('kilometers'); $("#editKilometers").val(_kilometers);
+        var _time = $(this).data('time'); $("#editTime").val(_time);
         var _status = $(this).data('status');
         if(_status=="1"){
             $("#editStatus").attr('checked','checked');
@@ -181,7 +166,7 @@ var eliminar = function () {
                         $.colorbox.close();
                         $.ajax({
                             type: "POST",
-                            url: "module/master/crud/measure.php",
+                            url: "module/master/crud/route.php",
                             data: "action=delete& id="+ _id,
                             success: function () {
                                 load();            
@@ -205,36 +190,40 @@ var guardar = function () {
             errorClass: 'error',
             validClass: 'valid',
             rules: {
-                editCode: { required: true },
-                editDescription: { required: true, minlength: 3 }
-                
+                editName: { required: true, minlength: 3 },
+                editOrigin: { required: true },
+                editDestination: { required: true },
+                editKilometers: { required: true, number: true },
+                editTime: { required: true, minlength: 8 }
             },
             highlight: function(element) {
-                $(element).closest('.form-group').addClass("f_error");    
+                $(element).closest('.form-group').addClass("f_error");     
             },
             unhighlight: function(element) {
-                $(element).closest('.form-group').removeClass("f_error");
+                $(element).closest('.form-group').removeClass("f_error");    
             },
             errorPlacement: function(error, element) {
                 $(element).closest('.form-group').append(error);
             }
         }).form()){
-           $(".modal").modal("hide");
+        $(".modal").modal("hide");
         var _id = $("#editId").val();
-        var _abbreviation = $("#editCode").val();
-        var _description = $("#editDescription").val();
-        var _type = $("#editType option:selected").val();
+        var _name = $("#editName").val();
+        var _origin = $("#editOrigin").val();
+        var _destination = $("#editDestination").val();
+        var _kilometers = $("#editKilometers").val();
+        var _time = $("#editTime").val();
         var _status = $("#editStatus").is(':checked');
         var _action = $("#editAction").val();
         $.ajax({
             type: "POST",
-            url: "module/master/crud/measure.php",
-            data: "action="+ _action +"& id="+ _id+"& abbreviation="+ _abbreviation +"& description="+ _description+"& type="+ _type+"& status="+ _status,
+            url: "module/master/crud/route.php",
+            data: "action="+ _action +"& id="+ _id+"& name="+ _name +"& origin="+ _origin+"& destination="+ _destination+"& kilometers="+ _kilometers+"& time="+ _time+"& status="+ _status,
             success: function () {
-                load();       
+                load(); 
                 $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
             }        
-        });
+        }); 
         }
         return false;
         

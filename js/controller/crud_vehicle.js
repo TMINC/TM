@@ -23,6 +23,8 @@ var load = function () {
             $('#dt_maintenance').dataTable().fnDestroy();
             $("#dt_maintenance tbody").append(response);
             table();
+            unistyle();
+            maskinput(); 
             popover();
             agregar();
             editar();
@@ -32,6 +34,12 @@ var load = function () {
             chosen();
         }        
     });
+};
+var unistyle = function (){
+    $(".uni_style").uniform();  
+};
+var maskinput = function (){
+    $("#editCode").inputmask("99999999999");
 };
 var popover = function (){
     $(".pop_over").popover();
@@ -95,11 +103,12 @@ var table = function () {
                     { "sType": "string" },
                     { "sType": "string" },
                     { "sType": "string" },
+                    { "sType": "string" },
                     { "bSortable": false }
                 ],
             "sPaginationType": "bootstrap"
         });
-        $('#dt_maintenance_nav').on('click','li input',function(){
+        $('#dt_maintenance_nav').off().on('click','li input',function(){
             fnShowHide($(this).val());
         });
     }
@@ -109,25 +118,8 @@ var agregar = function(){
         e.preventDefault();
         $("#editId").val("");
         $("#editPlate").val("");
-        $("#editGenre").val("");
-        $("#editType").empty();
-        $("#editClass").empty();
-        $("#editWeight").val("");
-        $("#editMeasureWeight").val("");
-        $("#editLength").val("");
-        $("#editWidth").val("");
-        $("#editHeight").val("");
-        $("#editMeasureHeight").val("");
-        var _sel='0';
-        $.ajax({
-            type: "POST",
-            async:false,
-            url: "module/master/crud/vehicle-class.php",
-            data: "action=consult&sel="+ _sel,
-            success: function (data) { $("#editClass").append('<option selected="true"> </option>'); $("#editClass").append(data); }        
-        });        
-        chosen();
-        $("#editClass").trigger("liszt:updated");
+        $("#editGenre").val("");  
+        
         $("#editType").empty();
         var _sel='0';
         $.ajax({
@@ -139,11 +131,73 @@ var agregar = function(){
         });        
         chosen();
         $("#editType").trigger("liszt:updated");
-        $("#editName").val("");
         
-        $("#editAddress").val("");
-        $("#editLatitud").val("");
-        $("#editLongitud").val("");
+        
+        $("#editClass").empty();
+        var _sel='0';
+        $.ajax({
+            type: "POST",
+            async:false,
+            url: "module/master/crud/vehicle-class.php",
+            data: "action=consult&sel="+ _sel,
+            success: function (data) { $("#editClass").append('<option selected="true"> </option>'); $("#editClass").append(data); }        
+        });        
+        chosen();
+        $("#editClass").trigger("liszt:updated");
+        
+      
+        
+        $("#editCategory").empty();
+        var _sel='0';
+        $.ajax({
+            type: "POST",
+            async:false,
+            url: "module/master/crud/vehicle-category.php",
+            data: "action=consult&sel="+ _sel,
+            success: function (data) { $("#editCategory").append('<option selected="true"> </option>'); $("#editCategory").append(data); }        
+        });        
+        chosen();
+        $("#editCategory").trigger("liszt:updated");
+        
+        
+        
+        $("#editWeight").val("");
+               
+        
+        $("#editMeasureWeight").empty();
+        var _sel='0';
+        var _type='3';
+        $.ajax({
+            type: "POST",
+            async:false,
+            url: "module/master/crud/measure.php",
+            data: "action=consult&sel="+ _sel+"& type="+ _type,
+            success: function (data) { $("#editMeasureWeight").append('<option selected="true"> </option>'); $("#editMeasureWeight").append(data); }        
+        });        
+        chosen();
+        $("#editMeasureWeight").trigger("liszt:updated");
+        
+        
+        $("#editLength").val("");
+        $("#editWidth").val("");
+        $("#editHeight").val("");
+        
+        
+        $("#editMeasureHeight").empty();
+        var _sel='0';
+        var _type='1';
+        $.ajax({
+            type: "POST",
+            async:false,
+            url: "module/master/crud/measure.php",
+            data: "action=consult&sel="+ _sel+"& type="+ _type,
+            success: function (data) { $("#editMeasureHeight").append('<option selected="true"> </option>'); $("#editMeasureHeight").append(data); }        
+        });        
+        chosen();
+        $("#editMeasureHeight").trigger("liszt:updated");
+        
+        
+        
         $("#editStatus").removeAttr('checked');
         $("#editAction").val("insert");        
     });
@@ -152,25 +206,9 @@ var editar = function(){
     $(".edit").off().on('click', function (e) {
         e.preventDefault();
         var _id = $(this).data('id'); $("#editId").val(_id);
-        var _plate = $(this).data('plate'); $("#editPlate").val(_plate);
-        var _genre = $(this).data('genre'); $("#editGenre").val(_genre);
-        var _type = $(this).data('type');
-        var _class = $(this).data('class');
-        var _weight = $(this).data('weight'); $("#editWeight").val(_weight);
-        var _measure_weight = $(this).data('measure_weight'); $("#editMeasureWeight").val(_measure_weight);
-        var _length = $(this).data('length'); $("#editLength").val(_length);
-        var _width = $(this).data('width'); $("#editWidth").val(_width);
-        var _height = $(this).data('height'); $("#editHeight").val(_height);
-        var _measure_height = $(this).data('measure_height'); $("#editMeasureHeight").val(_measure_height); 
-        $.ajax({
-            type: "POST",
-            async: false,
-            url: "module/master/crud/vehicle-class.php",
-            data: "action=consult&sel="+ _class,
-            success: function (data) { $("#editClass").empty();$("#editClass").append(data); }        
-        });
-        chosen();
-        $("#editClass").trigger("liszt:updated");
+        var _plate = $(this).data('plate'); $("#editPlate").val(_plate);        
+        var _genre = $(this).data('genre'); $("#editGenre").val(_genre);   
+        
         var _type = $(this).data('type');
         $.ajax({
             type: "POST",
@@ -181,11 +219,63 @@ var editar = function(){
         });
         chosen();
         $("#editType").trigger("liszt:updated");
-        var _name = $(this).data('name'); $("#editName").val(_name);
         
-        var _address = $(this).data('address'); $("#editAddress").val(_address);
-        var _latitud = $(this).data('latitud'); $("#editLatitud").val(_latitud);        
-        var _longitud = $(this).data('longitud'); $("#editLongitud").val(_longitud);
+        
+        var _class = $(this).data('class');
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/vehicle-class.php",
+            data: "action=consult&sel="+ _class,
+            success: function (data) { $("#editClass").empty();$("#editClass").append(data); }        
+        });
+        chosen();
+        $("#editClass").trigger("liszt:updated");
+        
+              
+        var _category = $(this).data('category');
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/vehicle-category.php",
+            data: "action=consult&sel="+ _category,
+            success: function (data) { $("#editCategory").empty();$("#editCategory").append(data); }        
+        });
+        chosen();
+        $("#editCategory").trigger("liszt:updated");
+        
+       
+        var _weight = $(this).data('weight'); $("#editWeight").val(_weight);
+       
+        var _measure_weight = $(this).data('measure_weight');
+        var _typeMeasure = '3';
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/measure.php",
+            data: "action=consult&sel="+ _measure_weight+"& type="+ _typeMeasure,
+            success: function (data) { $("#editMeasureWeight").empty();$("#editMeasureWeight").append(data); }        
+        });
+        chosen();
+        $("#editMeasureWeight").trigger("liszt:updated");
+       
+        var _length = $(this).data('length'); $("#editLength").val(_length);
+        var _width = $(this).data('width'); $("#editWidth").val(_width);
+        var _height = $(this).data('height'); $("#editHeight").val(_height);
+       
+        var _measure_height = $(this).data('measure_height'); 
+        var _typeMeasure = '1';
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/measure.php",
+            data: "action=consult&sel="+ _measure_height+"& type="+ _typeMeasure,
+            success: function (data) { $("#editMeasureHeight").empty();$("#editMeasureHeight").append(data); }        
+        });
+        chosen();
+        $("#editMeasureHeight").trigger("liszt:updated");
+             
+             
         var _status = $(this).data('status');
         if(_status=="1"){
             $("#editStatus").attr('checked','checked');
@@ -240,27 +330,54 @@ var eliminar = function () {
 var guardar = function () {
     $("#save").off().on('click', function (e) {
         e.preventDefault();
-        $(".modal").modal("hide");
-        var _id = $("#editId").val();
-        var _plate = $("#editPlate").val();
-        var _genre = $("#editGenre").val();
-        var _type = $("#editType option:selected").val();
-        var _class = $("#editClass option:selected").val();
-        var _weight = $("#editWeight").val();
-        var _measure_weight = $("#editWeight").val();
-        var _length = $("#editLength").val();
-        var _width = $("#editWidth").val();
-        var _height = $("#editHeight").val();
-        var _measure_height = $("#editHeight").val();
-        var _status = $("#editStatus").is(':checked');
-        var _action = $("#editAction").val();
-        $.ajax({
-            type: "POST",
-            url: "module/master/crud/vehicle.php",
-            data: "action="+ _action +"& id="+ _id+"& plate="+ _plate +"& genre="+ _genre+"& type_id="+ _type+"& class_id="+ _class+"& weight="+ _weight+"& measure_weight="+ _measure_weight+"& length="+ _length+"& width="+ _width+"& height="+ _height+"& measure_height="+ _measure_height+"& status="+ _status,
-            success: function () {
-                load();            
-            }        
-        });
+        if($('#validation_form').validate({
+            onkeyup: false,
+            errorClass: 'error',
+            validClass: 'valid',
+            rules: {
+                editPlate: { required: true },
+                editGenre: { required: true },
+                editWeight: { required: true },
+                editLength: { required: true },
+                editWidth: { required: true },
+                editHeight: { required: true }
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass("f_error");
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass("f_error");    
+            },
+            errorPlacement: function(error, element) {
+                $(element).closest('.form-group').append(error);
+            }
+        }).form()){
+           $(".modal").modal("hide");
+            var _id = $("#editId").val();
+            var _plate = $("#editPlate").val();
+            var _genre = $("#editGenre").val();
+            var _type = $("#editType option:selected").val();
+            var _class = $("#editClass option:selected").val();
+            var _category = $("#editCategory option:selected").val();
+            var _weight = $("#editWeight").val();
+            var _measure_weight = $("#editMeasureWeight option:selected").val();
+            var _length = $("#editLength").val();
+            var _width = $("#editWidth").val();
+            var _height = $("#editHeight").val();
+            var _measure_height = $("#editMeasureHeight option:selected").val();
+            var _status = $("#editStatus").is(':checked');
+            var _action = $("#editAction").val();
+            $.ajax({
+                type: "POST",
+                url: "module/master/crud/vehicle.php",
+                data: "action="+ _action +"& id="+ _id+"& plate="+ _plate +"& genre="+ _genre+"& type_id="+ _type+"& class_id="+ _class+"& category_id="+ _category+"& weight="+ _weight+"& measure_weight="+ _measure_weight+"& length="+ _length+"& width="+ _width+"& height="+ _height+"& measure_height="+ _measure_height+"& status="+ _status,
+                success: function () {
+                    load();  
+                     $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
+                }        
+            });
+        }
+        return false;
+        
     });
-};
+};  

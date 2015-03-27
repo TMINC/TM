@@ -23,6 +23,8 @@ var load = function () {
             $('#dt_maintenance').dataTable().fnDestroy();
             $("#dt_maintenance tbody").append(response);
             table();
+            unistyle();
+            maskinput();
             popover();
             agregar();
             editar();
@@ -32,6 +34,12 @@ var load = function () {
             chosen();
         }        
     });
+};
+var unistyle = function (){
+    $(".uni_style").uniform();  
+};
+var maskinput = function (){
+    $("#editLicense").inputmask("A99999999");
 };
 var popover = function (){
     $(".pop_over").popover();
@@ -214,6 +222,26 @@ var eliminar = function () {
 var guardar = function () {
     $("#save").off().on('click', function (e) {
         e.preventDefault();
+        if($('#validation_form').validate({
+            onkeyup: false,
+            errorClass: 'error',
+            validClass: 'valid',
+            rules: {
+                editCarrier: { required: true },
+                editLicense: { required: true },
+                editFirstName: { required: true },
+                editLastName: { required: true }
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass("f_error");
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass("f_error");
+            },
+            errorPlacement: function(error, element) {
+                $(element).closest('.form-group').append(error);
+            }
+        }).form()){
         $(".modal").modal("hide");
         var _id = $("#editId").val();
         var _carrier = $("#editCarrier option:selected").val();
@@ -229,7 +257,11 @@ var guardar = function () {
             data: "action="+ _action +"& id="+ _id+"& carrier="+ _carrier +"& license="+ _license+"& fname="+ _fname+"& lname="+ _lname+"& type="+ _type+"& status="+ _status,
             success: function () {
                 load();            
+                $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
             }        
-        });
+        });    
+        }
+        return false;
+        
     });
 };

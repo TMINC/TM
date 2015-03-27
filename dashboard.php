@@ -34,12 +34,24 @@ include_once 'includes/functions.php';
     <link rel="stylesheet" href="img/flags/flags.css" />
     <!-- datatables -->
     <link rel="stylesheet" href="lib/datatables/extras/TableTools/media/css/TableTools.css">
-    <!-- hint.css -->
-    <link rel="stylesheet" href="lib/hint_css/hint.min.css" />
+    <!-- datepicker -->
+    <link rel="stylesheet" href="lib/datepicker/datepicker.css" />
+    <!-- datepicker -->
+    <link rel="stylesheet" href="lib/timepicker/css/bootstrap-timepicker.css" />
+    <!-- tag handler -->
+    <link rel="stylesheet" href="lib/tag_handler/css/jquery.taghandler.css" />
+    <!-- uniform -->
+    <link rel="stylesheet" href="lib/uniform/Aristo/uniform.aristo.css" />
+    <!-- multiselect -->
+    <link rel="stylesheet" href="lib/multi-select/css/multi-select.css" />
     <!-- chosen.css -->
     <link rel="stylesheet" href="lib/chosen/chosen.css" />
+    <!-- hint.css -->
+    <link rel="stylesheet" href="lib/hint_css/hint.min.css" />
     <!-- main styles -->
     <link rel="stylesheet" href="css/style.css" />
+    <!-- switch buttons -->
+    <link rel="stylesheet" href="lib/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" />
     <!-- theme color-->
     <link rel="stylesheet" href="css/blue.css" id="link_theme" />
     <!-- theme font -->
@@ -97,6 +109,7 @@ include_once 'includes/functions.php';
         <!--end main content-->
         <!--start sidebar-->
         <?php include("includes/menu-sidebar.php");?>
+        <?php include("includes/lock-screen.php");?>
         <!--end sidebar-->
     </div>    
 </body>

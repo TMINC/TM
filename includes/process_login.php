@@ -1,6 +1,7 @@
 <?php
 /**
   * Copyright (C) 2015 netpartners-international.com
+  * By: Johnny Moscoso Rossel
  **/
 
 include_once 'db_connect.php';

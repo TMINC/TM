@@ -26,8 +26,8 @@
                 $stmt->bind_result($center_id, $center_name, $center_address, $center_type, $center_latitud, $center_longitud, $customer_id, $customer_name, $center_status);
                 while($row = $stmt->fetch()) {
                     if($center_type=='1'){$type="CENTRO DE ACOPIO";}if($center_type=='2'){$type="PLANTA";}if($center_type=='3'){$type="PUERTO DESTINO";}
-                    if($center_status=='1'){$status='<a class="hint--left hint--success" style="float:right;cursor:pointer;" data-hint="Activo"><i class="glyphicon glyphicon-check" /></a>';}else{$status='<a class="hint--left hint--error" style="float:right;cursor:pointer;" data-hint="Inactivo"><i class="glyphicon glyphicon-unchecked" /></a>';}
-                    echo '<tr><td><input id="c'.$center_id.'" name="row_sel" type="checkbox" class="row_sel" data-id="'.$center_id.'"></td>'.
+                    if($center_status=='1'){$status='<a class="hint--left hint--success" style="float:right;cursor:pointer;" data-hint="Activo"><i class="glyphicon glyphicon-ok" /></a>';}else{$status='<a class="hint--left hint--error" style="float:right;cursor:pointer;" data-hint="Inactivo"><i class="glyphicon glyphicon-minus" /></a>';}
+                    echo '<tr><td><input id="c'.$center_id.'" name="row_sel" type="checkbox" class="row_sel uni_style" data-id="'.$center_id.'"></td>'.
                         '<td>'.$center_id.$status.'</td>'.
                         '<td>'.$customer_name.'</td>'.                            
                         '<td>'.$center_name.'</td>'.
@@ -54,7 +54,7 @@
                $mysqli->query("UPDATE tm_center SET cCenNam='".$center_name."' , cCenAdd='".$center_address."', iCenTyp='".$center_type."', cCenLat='".$center_latitud."', cCenLon='".$center_longitud."', iCusID='".$customer_id."', cCenSta='".$center_status."' WHERE iCenID='".$center_id."'");
            }
            if($action=='delete'){
-               $_id = explode(",", $customer_id);
+               $_id = explode(",", $center_id);
                for($i=0; $i< sizeof($_id) ;$i++){
                     $mysqli->query("DELETE FROM tm_center WHERE iCenID='".$_id[$i]."'");
                }

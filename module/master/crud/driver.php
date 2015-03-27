@@ -26,8 +26,8 @@
                 $stmt->bind_result($driver_id, $carrier_id, $carrier_name, $driver_license, $driver_first_name, $driver_last_name, $driver_type, $driver_status);
                 while($row = $stmt->fetch()) {
                     if($driver_type=='1'){$type="DEPENDIENTE";}if($driver_type=='2'){$type="INDEPENDIENTE";}if($driver_type=='3'){$type="DEPENDIENTE-INDEPENDIENTE";}
-                    if($driver_status=='1'){$status='<a class="hint--left hint--success" style="float:right;cursor:pointer;" data-hint="Activo"><i class="glyphicon glyphicon-check" /></a>';}else{$status='<a class="hint--left hint--error" style="float:right;cursor:pointer;" data-hint="Inactivo"><i class="glyphicon glyphicon-unchecked" /></a>';}
-                    echo '<tr><td><input id="c'.$driver_id.'" name="row_sel" type="checkbox" class="row_sel" data-id="'.$driver_id.'"></td>'.
+                    if($driver_status=='1'){$status='<a class="hint--left hint--success" style="float:right;cursor:pointer;" data-hint="Activo"><i class="glyphicon glyphicon-ok" /></a>';}else{$status='<a class="hint--left hint--error" style="float:right;cursor:pointer;" data-hint="Inactivo"><i class="glyphicon glyphicon-minus" /></a>';}
+                    echo '<tr><td><input id="c'.$driver_id.'" name="row_sel" type="checkbox" class="row_sel uni_style" data-id="'.$driver_id.'"></td>'.
                         '<td>'.$driver_id.$status.'</td>'.
                         '<td>'.$driver_license.'</td>'.    
                         '<td>'.$driver_first_name.' '.$driver_last_name.'</td>'.                            
@@ -53,7 +53,7 @@
                $mysqli->query("UPDATE tm_driver SET iCarID='".$carrier_id."', cDriLic='".$driver_license."' , cDriFirNam='".$driver_first_name."', cDriLasNam='".$driver_last_name."', cDriTyp='".$driver_type."', cDriSta='".$driver_status."' WHERE iDriID='".$driver_id."'");
            }
            if($action=='delete'){
-               $_id = explode(",", $customer_id);
+               $_id = explode(",", $driver_id);
                for($i=0; $i< sizeof($_id) ;$i++){
                     $mysqli->query("DELETE FROM tm_driver WHERE iDriID='".$_id[$i]."'");
                }
