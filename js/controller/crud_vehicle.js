@@ -118,7 +118,7 @@ var agregar = function(){
         e.preventDefault();
         $("#editId").val("");
         $("#editPlate").val("");
-        $("#editGenre").val("");  
+        $("#editTuc").val("");  
         
         $("#editType").empty();
         var _sel='0';
@@ -207,7 +207,7 @@ var editar = function(){
         e.preventDefault();
         var _id = $(this).data('id'); $("#editId").val(_id);
         var _plate = $(this).data('plate'); $("#editPlate").val(_plate);        
-        var _genre = $(this).data('genre'); $("#editGenre").val(_genre);   
+        var _tuc = $(this).data('tuc'); $("#editTuc").val(_tuc);   
         
         var _type = $(this).data('type');
         $.ajax({
@@ -283,7 +283,7 @@ var editar = function(){
             $("#editStatus").removeAttr('checked');
         }
         $("#editAction").val("update");        
-        $(".modal").modal("show");
+        $("#modal").modal("show");
     });
 };
 var eliminar = function () {
@@ -336,7 +336,7 @@ var guardar = function () {
             validClass: 'valid',
             rules: {
                 editPlate: { required: true },
-                editGenre: { required: true },
+                editTuc: { required: true },
                 editWeight: { required: true },
                 editLength: { required: true },
                 editWidth: { required: true },
@@ -352,10 +352,10 @@ var guardar = function () {
                 $(element).closest('.form-group').append(error);
             }
         }).form()){
-           $(".modal").modal("hide");
+           $("#modal").modal("hide");
             var _id = $("#editId").val();
             var _plate = $("#editPlate").val();
-            var _genre = $("#editGenre").val();
+            var _tuc = $("#editTuc").val();
             var _type = $("#editType option:selected").val();
             var _class = $("#editClass option:selected").val();
             var _category = $("#editCategory option:selected").val();
@@ -370,7 +370,7 @@ var guardar = function () {
             $.ajax({
                 type: "POST",
                 url: "module/master/crud/vehicle.php",
-                data: "action="+ _action +"& id="+ _id+"& plate="+ _plate +"& genre="+ _genre+"& type_id="+ _type+"& class_id="+ _class+"& category_id="+ _category+"& weight="+ _weight+"& measure_weight="+ _measure_weight+"& length="+ _length+"& width="+ _width+"& height="+ _height+"& measure_height="+ _measure_height+"& status="+ _status,
+                data: "action="+ _action +"& id="+ _id+"& plate="+ _plate +"& tuc="+ _tuc+"& type_id="+ _type+"& class_id="+ _class+"& category_id="+ _category+"& weight="+ _weight+"& measure_weight="+ _measure_weight+"& length="+ _length+"& width="+ _width+"& height="+ _height+"& measure_height="+ _measure_height+"& status="+ _status,
                 success: function () {
                     load();  
                      $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });

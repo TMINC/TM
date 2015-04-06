@@ -186,3 +186,33 @@ function esc_url($url) {
         return $url;
     }
 }
+
+function measure_char($iMeaID, $mysqli){
+    $stmt = $mysqli->prepare("SELECT cMeaAbr FROM tm_measure WHERE iMeaID = ?");
+    $stmt->bind_param('s', $iMeaID);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($measure);
+    $stmt->fetch();
+    return $measure;
+}
+
+function center_char($iCenID, $mysqli){
+    $stmt = $mysqli->prepare("SELECT cCenNam FROM tm_center WHERE iCenID = ?");
+    $stmt->bind_param('s', $iCenID);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($center);
+    $stmt->fetch();
+    return $center;
+}
+
+function detail_total($iOrdID, $mysqli){
+    $stmt = $mysqli->prepare("SELECT count(*) FROM tm_order_detail WHERE iOrdID = ?");
+    $stmt->bind_param('s', $iOrdID);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($total);
+    $stmt->fetch();
+    return $total;
+}

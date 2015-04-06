@@ -15,8 +15,9 @@
                         <li><div class="checkbox"><label class="" for="dt_col_2"><input type="checkbox" value="1" id="dt_col_2" name="toggle-cols" checked="checked" class="uni_style"/> ID</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> R. SOCIAL</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> RUC</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> REPRESENT.</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> R. LEGAL</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> CONTACTO</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
                     </ul>
                 </div>
                 <!-- actions for datatables -->
@@ -37,7 +38,8 @@
                         <th class="center" style="width: 120px;">ID</th>
                         <th class="center">RAZ&Oacute;N SOCIAL</th>
                         <th class="center">RUC</th>
-                        <th class="center">REPRESENTANTE</th>
+                        <th class="center">REPRESENTANTE LEGAL</th>
+                        <th class="center">CONTACTO</th>
                         <th class="center" style="width: 100px;">ACCI&Oacute;N</th>
                     </tr>
                 </thead>
@@ -65,20 +67,43 @@
                     <td class="form-group"><input class="form-control" type="text" id="editName" name="editName"></td>
                 </tr>
                 <tr>
+                     <td><b>DIRECCI&Oacute;N PROVEEDOR :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editAddress" name="editAddress"></td>
+                </tr>
+                <tr>
+                    <td><b>TEL&Eacute;FONO PROVEEDOR :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editPhoneName" name="editPhoneName"></td>
+                </tr>
+                <tr>
+                    <td><b>CORREO ELECTR&Oacute;NICO PROVEEDOR :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editEmailName" name="editEmailName"></td>
+                </tr>
+                <tr>
                     <td><b>RUC :</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editCode" name="editCode"></td>
                 </tr>
-                <tr>
-                    <td><b>REPRESENTANTE :</b></td>
+                    <td><b>REPRESENTANTE LEGAL :</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editAgent" name="editAgent"></td>
+                </tr> 
+                <tr>
+                    <td><b>TEL&Eacute;FONO R. LEGAL :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editPhoneAgent" name="editPhoneAgent"></td>
                 </tr>
                 <tr>
-                    <td><b>TEL&Eacute;FONO :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editPhone" name="editPhone"></td>
+                    <td><b>CORREO ELECTR&Oacute;NICO R. LEGAL :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editEmailAgent" name="editEmailAgent"></td>
                 </tr>
                 <tr>
-                    <td><b>CORREO ELECTR&Oacute;NICO :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editEmail" name="editEmail"></td>
+                    <td><b>CONTACTO :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editContact" name="editContact"></td>
+                </tr>
+                <tr>
+                    <td><b>TEL&Eacute;FONO CONTACTO :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editPhoneContact" name="editPhoneContact"></td>
+                </tr>
+                <tr>
+                    <td><b>CORREO ELECTR&Oacute;NICO CONTACTO :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editEmailContact" name="editEmailContact"></td>
                 </tr>
                 <tr>
                     <td><b>ESTADO :</b></td>

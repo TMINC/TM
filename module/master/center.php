@@ -13,11 +13,12 @@
                     <ul class="dropdown-menu tableMenu" id="dt_maintenance_nav">
                         <li><div class="checkbox"><label class="" for="dt_col_1"><input type="checkbox" value="0" id="dt_col_1" name="toggle-cols" checked="checked" class="uni_style"/> &check;</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_2"><input type="checkbox" value="1" id="dt_col_2" name="toggle-cols" checked="checked" class="uni_style"/> ID</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> CLIENTE</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> CENTRO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> TIPO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> DIRECCI&Oacute;N</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> NOMBRE</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> TIPO</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> DIRECCI&Oacute;N</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> CLIENTE</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> PROVEE.</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
                     </ul>
                 </div>
                 <!-- actions for datatables -->
@@ -37,10 +38,11 @@
                     <tr>
                         <th class="center"><input name="sel_row" class="sel_row uni_style" data-tableid="dt_maintenance" type="checkbox"></th>
                         <th class="center" style="width: 120px;">ID</th>
-                        <th class="center">CLIENTE</th>
-                        <th class="center">CENTRO</th>
+                        <th class="center">NOMBRE</th>
                         <th class="center">TIPO</th>
                         <th class="center">DIRECCI&Oacute;N</th>
+                        <th class="center">CLIENTE</th>
+                        <th class="center">PROVEEDOR</th>
                         <th class="center" style="width: 100px;">ACCI&Oacute;N</th>
                     </tr>
                 </thead>
@@ -64,11 +66,7 @@
                     <td class="form-group"><input class="form-control" readonly="true" type="text" id="editId" name="editId"></td>
                 </tr>
                 <tr>
-                    <td><b>CLIENTE :</b></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editCustomer" name="editCustomer" data-placeholder="SELECCIONE UNA EMPRESA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>CENTRO :</b></td>
+                    <td><b>NOMBRE :</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editName" name="editName"></td>
                 </tr>
                 <tr>
@@ -86,6 +84,14 @@
                 <tr>
                     <td><b>LONGITUD :</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editLongitud" name="editLongitud"></td>
+                </tr>
+                <tr>
+                    <td><b>CLIENTE :</b></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editCustomer" name="editCustomer" data-placeholder="SELECCIONE UNA EMPRESA..." /></td>
+                </tr>
+                <tr>
+                    <td><b>PROVEEDOR :</b></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editCarrier" name="editCarrier" data-placeholder="SELECCIONE UNA EMPRESA..." /></td>
                 </tr>
                 <tr>
                     <td><b>ESTADO :</b></td>

@@ -38,8 +38,10 @@ var load = function () {
 var unistyle = function (){
     $(".uni_style").uniform();  
 };
-var maskinput = function (){
+var maskinput = function (){ 
     $("#editLicense").inputmask("A99999999");
+    $("#editDni").inputmask("99999999");
+    $("#editDateBirth").inputmask("99/99/9999");
 };
 var popover = function (){
     $(".pop_over").popover();
@@ -116,6 +118,22 @@ var agregar = function(){
     $(".add").off().on('click', function (e) {
         e.preventDefault();
         $("#editId").val("");
+        $("#editLicense").val("");
+        $("#editFirstName").val("");
+        $("#editLastName").val("");
+        $("#editAddress").val("");
+        $("#editPhone").val("");
+        $("#editDateBirth").val("");
+        $("#editDni").val("");
+        $("#editBloodType").val("");
+        $("#editType").empty();
+        $("#editType").append('<option selected="true"> </option>');
+        $("#editType").append('<option value="1">DEPENDIENTE</option>');
+        $("#editType").append('<option value="2">INDEPENDIENTE</option>');
+        $("#editType").append('<option value="3">DEPENDIENTE-INDEPENDIENTE</option>');        
+        chosen();
+        $("#editType").trigger("liszt:updated");
+        
         $("#editCarrier").empty();
         var _sel='0';
         $.ajax({
@@ -127,16 +145,6 @@ var agregar = function(){
         });        
         chosen();
         $("#editCarrier").trigger("liszt:updated");
-        $("#editLicense").val("");
-        $("#editFirstName").val("");
-        $("#editLastName").val("");
-        $("#editType").empty();
-        $("#editType").append('<option selected="true"> </option>');
-        $("#editType").append('<option value="1">DEPENDIENTE</option>');
-        $("#editType").append('<option value="2">INDEPENDIENTE</option>');
-        $("#editType").append('<option value="3">DEPENDIENTE-INDEPENDIENTE</option>');        
-        chosen();
-        $("#editType").trigger("liszt:updated");
         $("#editStatus").removeAttr('checked');
         $("#editAction").val("insert");        
     });
@@ -145,19 +153,15 @@ var editar = function(){
     $(".edit").off().on('click', function (e) {
         e.preventDefault();
         var _id = $(this).data('id'); $("#editId").val(_id);
-        var _carrier = $(this).data('carrier');
-        $.ajax({
-            type: "POST",
-            async: false,
-            url: "module/master/crud/carrier.php",
-            data: "action=consult&sel="+ _carrier,
-            success: function (data) { $("#editCarrier").empty();$("#editCarrier").append(data); }        
-        });
-        chosen();
-        $("#editCarrier").trigger("liszt:updated");
         var _license = $(this).data('license'); $("#editLicense").val(_license);
         var _fname = $(this).data('fname'); $("#editFirstName").val(_fname);
         var _lname = $(this).data('lname'); $("#editLastName").val(_lname);
+        var _address = $(this).data('address'); $("#editAddress").val(_address);
+        var _phone = $(this).data('phone'); $("#editPhone").val(_phone);
+        var _date_birth = $(this).data('date_birth'); $("#editDateBirth").val(_date_birth);
+        var _dni = $(this).data('dni'); $("#editDni").val(_dni);
+        var _blood_type = $(this).data('blood_type'); $("#editBloodType").val(_blood_type);
+        
         var _type = $(this).data('type');var sel='selected';
         $("#editType").empty();
         for(i=1; i<4; i++){
@@ -168,6 +172,18 @@ var editar = function(){
         }  
         chosen();
         $("#editType").trigger("liszt:updated");
+        
+        var _carrier = $(this).data('carrier');
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/carrier.php",
+            data: "action=consult&sel="+ _carrier,
+            success: function (data) { $("#editCarrier").empty();$("#editCarrier").append(data); }        
+        });
+        chosen();
+        $("#editCarrier").trigger("liszt:updated");
+        
         var _status = $(this).data('status');
         if(_status=="1"){
             $("#editStatus").attr('checked','checked');
@@ -175,7 +191,7 @@ var editar = function(){
             $("#editStatus").removeAttr('checked');
         }
         $("#editAction").val("update");        
-        $(".modal").modal("show");
+        $("#modal").modal("show");
     });
 };
 var eliminar = function () {
@@ -230,7 +246,12 @@ var guardar = function () {
                 editCarrier: { required: true },
                 editLicense: { required: true },
                 editFirstName: { required: true },
-                editLastName: { required: true }
+                editLastName: { required: true },
+                editAddress: { required: true },
+                editPhone: { required: true, number: true },
+                editDateBirth: { required: true },
+                editDni: { required: true, number: true },
+                editBloodType: { required: true }
             },
             highlight: function(element) {
                 $(element).closest('.form-group').addClass("f_error");
@@ -242,19 +263,24 @@ var guardar = function () {
                 $(element).closest('.form-group').append(error);
             }
         }).form()){
-        $(".modal").modal("hide");
+        $("#modal").modal("hide");
         var _id = $("#editId").val();
-        var _carrier = $("#editCarrier option:selected").val();
         var _license = $("#editLicense").val();
         var _fname = $("#editFirstName").val();
         var _lname = $("#editLastName").val();
+        var _address = $("#editAddress").val();
+        var _phone = $("#editPhone").val();
+        var _date_birth = $("#editDateBirth").val();
+        var _dni = $("#editDni").val();
+        var _blood_type = $("#editBloodType").val();
         var _type = $("#editType option:selected").val();
+        var _carrier = $("#editCarrier option:selected").val();
         var _status = $("#editStatus").is(':checked');
         var _action = $("#editAction").val();
         $.ajax({
             type: "POST",
             url: "module/master/crud/driver.php",
-            data: "action="+ _action +"& id="+ _id+"& carrier="+ _carrier +"& license="+ _license+"& fname="+ _fname+"& lname="+ _lname+"& type="+ _type+"& status="+ _status,
+            data: "action="+ _action +"& id="+ _id+"& license="+ _license+"& fname="+ _fname+"& lname="+ _lname+"& address="+ _address+"& phone="+ _phone+"& date_birth="+ _date_birth+"& dni="+ _dni+"& blood_type="+ _blood_type+"& carrier="+ _carrier +"& type="+ _type+"& status="+ _status,
             success: function () {
                 load();            
                 $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });

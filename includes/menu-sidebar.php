@@ -30,6 +30,7 @@
                                     <li class="nav-header">Generales</li>
                                     <li id="other-measure"><a href="./?mod=19">&ShortRightArrow; U.Medida</a></li>
                                     <li id="info-route"><a href="./?mod=20">&ShortRightArrow; Ruta(s)</a></li>
+                                 
                                 </ul>
                             </div>
                         </div>
@@ -51,7 +52,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="#collapseThree" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-                                <i class="glyphicon glyphicon-user"></i> Transporte
+                                <i class="glyphicon glyphicon-road"></i> Transporte
                             </a>
                         </div>
                         <div class="accordion-body collapse" id="collapseThree">
@@ -73,7 +74,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="#collapseFour" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-                                <i class="glyphicon glyphicon-cog"></i> Reportes
+                                <i class="glyphicon glyphicon-list-alt"></i> Reportes
                             </a>
                         </div>
                         <div class="accordion-body collapse" id="collapseFour">
@@ -88,7 +89,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="#collapseFive" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-                                <i class="glyphicon glyphicon-user"></i> Configuraci&oacute;n
+                                <i class="glyphicon glyphicon-cog"></i> Configuraci&oacute;n
                             </a>
                         </div>
                         <div class="accordion-body collapse" id="collapseFive">

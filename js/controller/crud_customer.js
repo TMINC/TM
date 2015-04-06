@@ -26,6 +26,7 @@ var load = function () {
             table();
             unistyle();
             maskinput(); 
+            popover();
             agregar();
             editar();
             guardar();
@@ -39,6 +40,9 @@ var unistyle = function (){
 };
 var maskinput = function (){
     $("#editCode").inputmask("99999999999");
+};
+var popover = function (){
+    $(".pop_over").popover();
 };
 var multiseleccion = function () {
     $('.sel_row').off().on('click', function () {
@@ -110,7 +114,12 @@ var agregar = function(){
         $("#editId").val("");
         $("#editName").val("");
         $("#editCode").val("");
-        $("#editDescription").val("");
+        $("#editAddress").val("");
+        $("#editPhoneName").val("");
+        $("#editEmailName").val("");
+        $("#editContact").val("");
+        $("#editPhoneContact").val("");
+        $("#editEmailContact").val("");
         $("#editStatus").removeAttr('checked');
         $("#editAction").val("insert");        
     });
@@ -121,7 +130,12 @@ var editar = function(){
         var _id = $(this).data('id'); $("#editId").val(_id);
         var _name = $(this).data('name'); $("#editName").val(_name);
         var _code = $(this).data('code'); $("#editCode").val(_code);
-        var _description = $(this).data('description'); $("#editDescription").val(_description);
+        var _address = $(this).data('address'); $("#editAddress").val(_address);
+        var _phone_name = $(this).data('phone_name'); $("#editPhoneName").val(_phone_name);
+        var _email_name = $(this).data('email_name'); $("#editEmailName").val(_email_name);
+        var _contact = $(this).data('contact'); $("#editContact").val(_contact);
+        var _phone_contact = $(this).data('phone_contact'); $("#editPhoneContact").val(_phone_contact);
+        var _email_contact = $(this).data('email_contact'); $("#editEmailContact").val(_email_contact);
         var _status = $(this).data('status');
         if(_status=="1"){
             $("#editStatus").attr('checked','checked');
@@ -129,7 +143,7 @@ var editar = function(){
             $("#editStatus").removeAttr('checked');
         }
         $("#editAction").val("update");        
-        $(".modal").modal("show");
+        $("#modal").modal("show");
     });
 };
 var eliminar = function () {
@@ -183,7 +197,12 @@ var guardar = function () {
             rules: {
                 editName: { required: true, minlength: 3 },
                 editCode: { required: true, number: true },
-                editDescription: { required: true, minlength: 3 }
+                editAddress: { required: true },
+                editPhoneName: { required: true },
+                editEmailName: { required: true, email: true },
+                editContact: { required: true, minlength: 3 },
+                editPhoneContact: { required: true },
+                editEmailContact: { required: true, email: true }
             },
             highlight: function(element) {
                 $(element).closest('.form-group').addClass("f_error");                
@@ -195,17 +214,22 @@ var guardar = function () {
                 $(element).closest('.form-group').append(error);
             }
         }).form()){
-        $(".modal").modal("hide");
+        $("#modal").modal("hide");
         var _id = $("#editId").val();
         var _name = $("#editName").val();
         var _code = $("#editCode").val();
-        var _description = $("#editDescription").val();
+        var _address = $("#editAddress").val();
+        var _phone_name = $("#editPhoneName").val();
+        var _email_name = $("#editEmailName").val();
+        var _contact = $("#editContact").val();
+        var _phone_contact = $("#editPhoneContact").val();
+        var _email_contact = $("#editEmailContact").val();
         var _status = $("#editStatus").is(':checked');
         var _action = $("#editAction").val();
         $.ajax({
             type: "POST",
             url: "module/master/crud/customer.php",
-            data: "action="+ _action +"& id="+ _id+"& name="+ _name +"& code="+ _code+"& description="+ _description+"& status="+ _status,
+            data: "action="+ _action +"& id="+ _id+"& name="+ _name +"& code="+ _code+"& address="+ _address+"& phone_name="+ _phone_name+"& email_name="+ _email_name+"& contact="+ _contact+"& phone_contact="+ _phone_contact+"& email_contact="+ _email_contact+"& status="+ _status,
             success: function () {
                 load();    
                 $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });

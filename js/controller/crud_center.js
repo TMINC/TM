@@ -103,6 +103,7 @@ var table = function () {
                     { "sType": "string" },
                     { "sType": "string" },
                     { "sType": "string" },
+                    { "sType": "string" },
                     { "bSortable": false }
                 ],
             "sPaginationType": "bootstrap"
@@ -116,6 +117,20 @@ var agregar = function(){
     $(".add").off().on('click', function (e) {
         e.preventDefault();
         $("#editId").val("");
+        
+        $("#editName").val("");
+        $("#editType").empty();
+        $("#editType").append('<option value="" selected="true"> </option>');
+        $("#editType").append('<option value="1">CENTRO DE ACOPIO</option>');
+        $("#editType").append('<option value="2">PLANTA</option>');
+        $("#editType").append('<option value="3">PUERTO DESTINO</option>');        
+        chosen();
+        $("#editType").trigger("liszt:updated");
+        
+        $("#editAddress").val("");
+        $("#editLatitud").val("");
+        $("#editLongitud").val("");
+        
         $("#editCustomer").empty();
         var _sel='0';
         $.ajax({
@@ -127,17 +142,19 @@ var agregar = function(){
         });        
         chosen();
         $("#editCustomer").trigger("liszt:updated");
-        $("#editName").val("");
-        $("#editType").empty();
-        $("#editType").append('<option value="" selected="true"> </option>');
-        $("#editType").append('<option value="1">CENTRO DE ACOPIO</option>');
-        $("#editType").append('<option value="2">PLANTA</option>');
-        $("#editType").append('<option value="3">PUERTO DESTINO</option>');        
+        
+        $("#editCarrier").empty();
+        var _sel='0';
+        $.ajax({
+            type: "POST",
+            async:false,
+            url: "module/master/crud/carrier.php",
+            data: "action=consult&sel="+ _sel,
+            success: function (data) { $("#editCarrier").append('<option selected="true"> </option>'); $("#editCarrier").append(data); }        
+        });        
         chosen();
-        $("#editType").trigger("liszt:updated");
-        $("#editAddress").val("");
-        $("#editLatitud").val("");
-        $("#editLongitud").val("");
+        $("#editCarrier").trigger("liszt:updated");
+        
         $("#editStatus").removeAttr('checked');
         $("#editAction").val("insert");        
     });
@@ -146,16 +163,6 @@ var editar = function(){
     $(".edit").off().on('click', function (e) {
         e.preventDefault();
         var _id = $(this).data('id'); $("#editId").val(_id);
-        var _customer = $(this).data('customer');
-        $.ajax({
-            type: "POST",
-            async: false,
-            url: "module/master/crud/customer.php",
-            data: "action=consult&sel="+ _customer,
-            success: function (data) { $("#editCustomer").empty();$("#editCustomer").append(data); }        
-        });
-        chosen();
-        $("#editCustomer").trigger("liszt:updated");
         var _name = $(this).data('name'); $("#editName").val(_name);
         var _type = $(this).data('type');var sel='selected';
         $("#editType").empty();
@@ -167,9 +174,33 @@ var editar = function(){
         }  
         chosen();
         $("#editType").trigger("liszt:updated");
+        
         var _address = $(this).data('address'); $("#editAddress").val(_address);
         var _latitud = $(this).data('latitud'); $("#editLatitud").val(_latitud);        
         var _longitud = $(this).data('longitud'); $("#editLongitud").val(_longitud);
+        
+         var _customer = $(this).data('customer');
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/customer.php",
+            data: "action=consult&sel="+ _customer,
+            success: function (data) { $("#editCustomer").empty();$("#editCustomer").append(data); }        
+        });
+        chosen();
+        $("#editCustomer").trigger("liszt:updated");
+        
+         var _carrier = $(this).data('carrier');
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/carrier.php",
+            data: "action=consult&sel="+ _carrier,
+            success: function (data) { $("#editCarrier").empty();$("#editCarrier").append(data); }        
+        });
+        chosen();
+        $("#editCarrier").trigger("liszt:updated");
+        
         var _status = $(this).data('status');
         if(_status=="1"){
             $("#editStatus").attr('checked','checked');
@@ -177,7 +208,7 @@ var editar = function(){
             $("#editStatus").removeAttr('checked');
         }
         $("#editAction").val("update");        
-        $(".modal").modal("show");
+        $("#modal").modal("show");
     });
 };
 var eliminar = function () {
@@ -247,20 +278,21 @@ var guardar = function () {
                 $(element).closest('.form-group').append(error);
             }
         }).form()){
-            $(".modal").modal("hide");
+            $("#modal").modal("hide");
             var _id = $("#editId").val();
-            var _customer = $("#editCustomer option:selected").val();
             var _name = $("#editName").val();
             var _type = $("#editType option:selected").val();
             var _address = $("#editAddress").val();
             var _latitud = $("#editLatitud").val();
             var _longitud = $("#editLongitud").val();
+            var _customer = $("#editCustomer option:selected").val();
+            var _carrier = $("#editCarrier option:selected").val();
             var _status = $("#editStatus").is(':checked');
             var _action = $("#editAction").val();
             $.ajax({
                 type: "POST",
                 url: "module/master/crud/center.php",
-                data: "action="+ _action +"& id="+ _id+"& name="+ _name +"& address="+ _address+"& type="+ _type+"& latitud="+ _latitud+"& longitud="+ _longitud+"& customer="+ _customer+"& status="+ _status,
+                data: "action="+ _action +"& id="+ _id+"& name="+ _name +"& address="+ _address+"& type="+ _type+"& latitud="+ _latitud+"& longitud="+ _longitud+"& customer="+ _customer+"& carrier="+ _carrier+"& status="+ _status,
                 success: function () {
                     load();   
                     $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });

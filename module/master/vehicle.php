@@ -13,11 +13,11 @@
                     <ul class="dropdown-menu tableMenu" id="dt_maintenance_nav">
                         <li><div class="checkbox"><label class="" for="dt_col_1"><input type="checkbox" value="0" id="dt_col_1" name="toggle-cols" checked="checked" class="uni_style"/> &check;</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_2"><input type="checkbox" value="1" id="dt_col_2" name="toggle-cols" checked="checked" class="uni_style"/> ID</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> PLACA</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> TUC</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> TIPO</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> CLASE</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> CATEG.</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> CARACTER.</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> PLACA</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
                     </ul>
                 </div>
@@ -37,11 +37,11 @@
                     <tr>
                         <th class="center"><input name="sel_row" class="sel_row uni_style" data-tableid="dt_maintenance" type="checkbox"></th>
                         <th class="center" style="width: 120px;">ID</th>
-                        <th class="center">PLACA</th>
-                        <th class="center">TIPO VEH&Iacute;CULO</th>
-                        <th class="center">CLASE VEH&Iacute;CULO</th>
-                        <th class="center">CATEGOR&Iacute;A VEH&Iacute;CULO</th>
-                        <th class="center">CARACTER&Iacute;STICA</th>
+                        <th class="center">TUC</th>
+                        <th class="center">TIPO</th>
+                        <th class="center">CLASE</th>
+                        <th class="center">CATEGOR&Iacute;A</th>
+                        <th class="center" >PLACA</th>
                         <th class="center" style="width: 100px;">ACCI&Oacute;N</th>
                     </tr>
                 </thead>
@@ -69,8 +69,8 @@
                     <td class="form-group"><input class="form-control" type="text" id="editPlate" name="editPlate"></td>
                 </tr>
                   <tr>
-                    <td><b>GENERO :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editGenre" name="editGenre"></td>
+                    <td><b>TUC :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editTuc" name="editTuc"></td>
                 </tr>
                 <tr>
                     <td><b>TIPO :</b></td>
@@ -199,6 +199,10 @@
     <script src="lib/validation/localization/messages_es.js"></script>
     <!-- crud functions -->
     <script src="js/controller/crud_vehicle.js"></script>
+    <!-- lock screen-->    
+    <script src="js/np/idle-time.js"></script>
+    <script src="js/np/lock-screen.js"></script>
+    <script src="js/np/sha512.js"></script>
     <script>
         $(document).ready(function() {
             //* show all elements & remove preloader

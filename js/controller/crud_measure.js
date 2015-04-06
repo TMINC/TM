@@ -153,7 +153,7 @@ var editar = function(){
             $("#editStatus").removeAttr('checked');
         }
         $("#editAction").val("update");        
-        $(".modal").modal("show");
+        $("#modal").modal("show");
     });
 };
 var eliminar = function () {
@@ -219,7 +219,7 @@ var guardar = function () {
                 $(element).closest('.form-group').append(error);
             }
         }).form()){
-           $(".modal").modal("hide");
+           $("#modal").modal("hide");
         var _id = $("#editId").val();
         var _abbreviation = $("#editCode").val();
         var _description = $("#editDescription").val();

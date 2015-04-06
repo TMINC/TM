@@ -98,6 +98,7 @@ var table = function () {
                     { "sType": "string" },
                     { "sType": "string" },
                     { "sType": "string" },
+                    { "sType": "string" },
                     { "bSortable": false }
                 ],
             "sPaginationType": "bootstrap"
@@ -112,10 +113,16 @@ var agregar = function(){
         e.preventDefault();
         $("#editId").val("");
         $("#editName").val("");
+        $("#editAddress").val("");
+        $("#editPhoneName").val("");
+        $("#editEmailName").val("");
         $("#editCode").val("");
         $("#editAgent").val("");
-        $("#editPhone").val("");
-        $("#editEmail").val("");
+        $("#editPhoneAgent").val("");
+        $("#editEmailAgent").val("");
+        $("#editContact").val("");
+        $("#editPhoneContact").val("");
+        $("#editEmailContact").val("");
         $("#editStatus").removeAttr('checked');
         $("#editAction").val("insert");        
     });
@@ -125,10 +132,16 @@ var editar = function(){
         e.preventDefault();
         var _id = $(this).data('id'); $("#editId").val(_id);
         var _name = $(this).data('name'); $("#editName").val(_name);
+        var _address = $(this).data('address'); $("#editAddress").val(_address);
+        var _phone_name = $(this).data('phone_name'); $("#editPhoneName").val(_phone_name);
+        var _email_name = $(this).data('email_name'); $("#editEmailName").val(_email_name);
         var _code = $(this).data('code'); $("#editCode").val(_code);
         var _agent = $(this).data('agent'); $("#editAgent").val(_agent);
-        var _phone = $(this).data('phone'); $("#editPhone").val(_phone);
-        var _email = $(this).data('email'); $("#editEmail").val(_email);
+        var _phone_agent = $(this).data('phone_agent'); $("#editPhoneAgent").val(_phone_agent);
+        var _email_agent = $(this).data('email_agent'); $("#editEmailAgent").val(_email_agent);
+        var _contact = $(this).data('contact'); $("#editcontact").val(_contact);
+        var _phone_contact = $(this).data('phone_contact'); $("#editPhoneContact").val(_phone_contact);
+        var _email_contact = $(this).data('email_contact'); $("#editEmailContact").val(_email_contact);
         var _status = $(this).data('status');
         if(_status=="1"){
             $("#editStatus").attr('checked','checked');
@@ -136,7 +149,7 @@ var editar = function(){
             $("#editStatus").removeAttr('checked');
         }
         $("#editAction").val("update");        
-        $(".modal").modal("show");
+        $("#modal").modal("show");
     });
 };
 var eliminar = function () {
@@ -189,10 +202,16 @@ var guardar = function () {
             validClass: 'valid',
             rules: {
                 editName: { required: true, minlength: 3 },
+                editAddress: { required: true, minlength: 3 },
+                editPhoneName: { required: true },
+                editEmailName: { required: true, email: true },
                 editCode: { required: true, number: true },
                 editAgent: { required: true, minlength: 3 },
-                editPhone: { required: true },
-                editEmail: { required: true, email: true }
+                editPhoneAgent: { required: true },
+                editEmailAgent: { required: true, email: true },
+                editContact: { required: true, minlength: 3 },
+                editPhoneContact: { required: true },
+                editEmailContact: { required: true, email: true }
             },
             highlight: function(element) {
                 $(element).closest('.form-group').addClass("f_error");     
@@ -204,19 +223,25 @@ var guardar = function () {
                 $(element).closest('.form-group').append(error);
             }
         }).form()){
-        $(".modal").modal("hide");
+        $("#modal").modal("hide");
         var _id = $("#editId").val();
         var _name = $("#editName").val();
+        var _address = $("#editAddress").val();
+        var _phone_name = $("#editPhoneName").val();
+        var _email_name = $("#editEmailName").val();
         var _code = $("#editCode").val();
         var _agent = $("#editAgent").val();
-        var _phone = $("#editPhone").val();
-        var _email = $("#editEmail").val();
+        var _phone_agent = $("#editPhoneAgent").val();
+        var _email_agent = $("#editEmailAgent").val();
+        var _contact = $("#editContact").val();
+        var _phone_contact = $("#editPhoneContact").val();
+        var _email_contact = $("#editEmailContact").val();
         var _status = $("#editStatus").is(':checked');
         var _action = $("#editAction").val();
         $.ajax({
             type: "POST",
             url: "module/master/crud/carrier.php",
-            data: "action="+ _action +"& id="+ _id+"& name="+ _name +"& code="+ _code+"& agent="+ _agent+"& phone="+ _phone+"& email="+ _email+"& status="+ _status,
+            data: "action="+ _action +"& id="+ _id+"& name="+ _name+"& address="+ _address+"& phone_name="+ _phone_name+"& email_name="+ _email_name+"& code="+ _code+"& agent="+ _agent+"& phone_agent="+ _phone_agent+"& email_agent="+ _email_agent+"& contact="+ _contact+"& phone_contact="+ _phone_contact+"& email_contact="+ _email_contact+"& status="+ _status,
             success: function () {
                 load(); 
                 $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });

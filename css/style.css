@@ -532,7 +532,7 @@
 		.dataTables_scrollBody table{border-top:none}
 		.dataTables_processing{position:absolute;top:50%;margin-top:-24px;z-index:100;left:50%;width:250px;margin-left:-125px;border:1px solid #ddd;text-align:center;color:#000;background:#fff;font-size:15px!important;-webkit-box-shadow:0 0 4px rgba(0,0,0,0.2);-moz-box-shadow:0 0 4px rgba(0,0,0,0.2);-ms-box-shadow:0 0 4px rgba(0,0,0,0.2);box-shadow:0 0 4px rgba(0,0,0,0.2);padding:10px 0}
 		.dataTables_wrapper .center{text-align:center}
-		.dataTables_wrapper .details,.dataTables_wrapper .details:hover{background:#ddd!important}
+		.dataTables_wrapper .details,.dataTables_wrapper .details:hover{background:#DDD!important;padding: 14px 14px 1px 14px;}
 		.dataTables_wrapper .details table td{background:#fff!important}
 		.dataTables_scrollHeadInner table.table,.dataTables_wrapper .details table.table{margin:0!important}
         .dataTables_wrapper .dt_actions {float:left;margin-right:20px}

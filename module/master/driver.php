@@ -15,8 +15,8 @@
                         <li><div class="checkbox"><label class="" for="dt_col_2"><input type="checkbox" value="1" id="dt_col_2" name="toggle-cols" checked="checked" class="uni_style"/> ID</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> LICENCIA</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> NOM. Y APE.</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> PROVEED.</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> TIPO</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> TIPO</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> PROVEED.</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
                     </ul>
                 </div>
@@ -28,7 +28,7 @@
                             <li><a data-toggle="modal" data-backdrop="static" href="#modal" class="add" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-plus"></i> NUEVO</a></li>
                             <li><a href="javascript:void(0);" class="trash" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-trash"></i> ELIMINAR</a></li>
                         </ul>
-                    </div>
+                    </div> 
                 </div>
             </div>   
             <table class="table table-striped table-bordered dTableR" id="dt_maintenance" style="cursor:">
@@ -38,8 +38,8 @@
                         <th class="center" style="width: 120px;">ID</th>
                         <th class="center">LICENCIA</th>
                         <th class="center">NOMBRE(S) Y APELLIDO(S)</th>
-                        <th class="center">PROVEEDOR</th>
                         <th class="center">TIPO</th>
+                        <th class="center">PROVEEDOR</th>
                         <th class="center" style="width: 100px;">ACCI&Oacute;N</th>
                     </tr>
                 </thead>
@@ -63,10 +63,6 @@
                     <td class="form-group"><input class="form-control" readonly="true" type="text" id="editId" name="editId"></td>
                 </tr>
                 <tr>
-                    <td><b>PROVEEDOR :</b></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editCarrier" name="editCarrier" data-placeholder="SELECCIONE UNA EMPRESA DE TRANSPORTE..." /></td>
-                </tr>
-                <tr>
                     <td><b>LICENCIA :</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editLicense" name="editLicense"></td>
                 </tr>
@@ -79,8 +75,32 @@
                     <td class="form-group"><input class="form-control" type="text" id="editLastName" name="editLastName"></td>
                 </tr>
                 <tr>
+                    <td><b>DIRECCI&Oacute;N :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editAddress" name="editAddress"></td>
+                </tr>
+                <tr>
+                    <td><b>TEL&Eacute;FONO :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editPhone" name="editPhone"></td>
+                </tr>
+                <tr>
+                    <td><b>FECHA DE NACIMIENTO :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editDateBirth" name="editDateBirth"></td>
+                </tr>
+                <tr>
+                    <td><b>DNI :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editDni" name="editDni"></td>
+                </tr>
+                <tr>
+                    <td><b>TIPO DE SANGRE :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editBloodType" name="editBloodType"></td>
+                </tr>
+                <tr>
                     <td><b>TIPO :</b></td>
                     <td class="form-group"><select class="form-control chzn_edit" id="editType" name="editType" data-placeholder="SELECCIONE UN TIPO..." /></td>
+                </tr>
+                <tr>
+                    <td><b>PROVEEDOR :</b></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editCarrier" name="editCarrier" data-placeholder="SELECCIONE UNA EMPRESA DE TRANSPORTE..." /></td>
                 </tr>
                 <tr>
                     <td><b>ESTADO :</b></td>

@@ -26,8 +26,15 @@ switch($mod){
     case 19: include "module/master/measure$page.php"; break;
     case 20: include "module/master/route$page.php"; break;
     
-    
+    case 21: include "module/order/order$page.php"; break;
 
+    case 31: include "module/shipment/allocation-service$page.php"; break;
+    case 32: include "module/shipment/allocation-reasigment$page.php"; break;
+    case 33: include "module/shipment/allocation-auction$page.php"; break;
+    case 34: include "module/shipment/process-data-transport$page.php"; break;
+    case 35: include "module/shipment/process-state-control$page.php"; break;
+    case 36: include "module/shipment/track$page.php"; break;
+    
     default: include "includes/logout.php"; break;
 }
 ?>

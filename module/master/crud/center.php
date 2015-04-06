@@ -20,21 +20,22 @@
         }
     }else{
         if($action=='select'){
-            if ($stmt = $mysqli->prepare("SELECT iCenID, cCenNam, cCenAdd, iCenTyp, cCenLat, cCenLon, ct.iCusID, cCusDes, cCenSta FROM tm_center AS ct, tm_customer AS cs WHERE ct.iCusID=cs.iCusID")){
+            if ($stmt = $mysqli->prepare("SELECT iCenID, cCenNam, iCenTyp, cCenAdd, cCenLat, cCenLon, cs.iCusID, cs.cCusNam, rt.iCarID, rt.cCarNam, cCenSta FROM tm_center AS c, tm_customer AS cs, tm_carrier AS rt WHERE c.iCusID=cs.iCusID AND c.iCarID=rt.iCarID")){
                 $stmt->execute();
                 $stmt->store_result();
-                $stmt->bind_result($center_id, $center_name, $center_address, $center_type, $center_latitud, $center_longitud, $customer_id, $customer_name, $center_status);
+                $stmt->bind_result($center_id, $center_name, $center_type, $center_address, $center_latitud, $center_longitud, $customer_id, $customer_name, $carrier_id, $carrier_name, $center_status);
                 while($row = $stmt->fetch()) {
                     if($center_type=='1'){$type="CENTRO DE ACOPIO";}if($center_type=='2'){$type="PLANTA";}if($center_type=='3'){$type="PUERTO DESTINO";}
                     if($center_status=='1'){$status='<a class="hint--left hint--success" style="float:right;cursor:pointer;" data-hint="Activo"><i class="glyphicon glyphicon-ok" /></a>';}else{$status='<a class="hint--left hint--error" style="float:right;cursor:pointer;" data-hint="Inactivo"><i class="glyphicon glyphicon-minus" /></a>';}
                     echo '<tr><td><input id="c'.$center_id.'" name="row_sel" type="checkbox" class="row_sel uni_style" data-id="'.$center_id.'"></td>'.
                         '<td>'.$center_id.$status.'</td>'.
-                        '<td>'.$customer_name.'</td>'.                            
                         '<td>'.$center_name.'</td>'.
                         '<td>'.$type.'</td>'.
                         '<td>'.$center_address.'<a style="cursor:help;float:right;" class="pop_over hint--right hint--info" data-hint="Detalle" data-content="&measuredangle;: '.$center_latitud.', '.$center_longitud.'" title="'.$center_name.'" data-placement="left"><i class="glyphicon glyphicon-map-marker"/></a></td>'.
+                        '<td>'.$customer_name.'</td>'.
+                        '<td>'.$carrier_name.'</td>'.
                         '<td class="center">'.
-                            '<a style="cursor:pointer;" class="edit hint--left" data-hint="Editar" data-id="'.$center_id.'" data-name="'.$center_name.'" data-address="'.$center_address.'" data-type="'.$center_type.'" data-latitud="'.$center_latitud.'" data-longitud="'.$center_longitud.'" data-customer="'.$customer_id.'" data-status="'.$center_status.'"><i class="glyphicon glyphicon-edit" /></a>'.                            
+                            '<a style="cursor:pointer;" class="edit hint--left" data-hint="Editar" data-id="'.$center_id.'" data-name="'.$center_name.'" data-address="'.$center_address.'" data-type="'.$center_type.'" data-latitud="'.$center_latitud.'" data-longitud="'.$center_longitud.'" data-customer="'.$customer_id.'" data-carrier="'.$carrier_id.'" data-status="'.$center_status.'"><i class="glyphicon glyphicon-edit" /></a>'.                            
                         '</td></tr>';
                 }
             }
@@ -46,12 +47,13 @@
            $center_latitud = $_POST['latitud'];
            $center_longitud = $_POST['longitud'];
            $customer_id = $_POST['customer'];
+           $carrier_id = $_POST['carrier'];
            if($_POST['status']=='true'){$center_status=1;}else{$center_status=0;}
            if($action=='insert'){
-               $mysqli->query("INSERT INTO tm_center (cCenNam, cCenAdd, iCenTyp, cCenLat, cCenLon, iCusID, cCenSta) VALUES ('".$center_name."', '".$center_address."', '".$center_type."', '".$center_latitud."', '".$center_longitud."', '".$customer_id."', '".$center_status."')");
+               $mysqli->query("INSERT INTO tm_center (cCenNam, iCenTyp, cCenAdd, cCenLat, cCenLon, iCusID, iCarID, cCenSta) VALUES ('".$center_name."', '".$center_type."', '".$center_address."', '".$center_latitud."', '".$center_longitud."', '".$customer_id."', '".$carrier_id."', '".$center_status."')");
            } 
            if($action=='update'){
-               $mysqli->query("UPDATE tm_center SET cCenNam='".$center_name."' , cCenAdd='".$center_address."', iCenTyp='".$center_type."', cCenLat='".$center_latitud."', cCenLon='".$center_longitud."', iCusID='".$customer_id."', cCenSta='".$center_status."' WHERE iCenID='".$center_id."'");
+               $mysqli->query("UPDATE tm_center SET cCenNam='".$center_name."' , iCenTyp='".$center_type."', cCenAdd='".$center_address."', cCenLat='".$center_latitud."', cCenLon='".$center_longitud."', iCusID='".$customer_id."', iCarID='".$carrier_id."', cCenSta='".$center_status."' WHERE iCenID='".$center_id."'");
            }
            if($action=='delete'){
                $_id = explode(",", $center_id);

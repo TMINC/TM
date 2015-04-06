@@ -9,7 +9,7 @@
     $action = $_POST['action'];
     if($action=='consult'){
         $sel = $_POST['sel'];
-        if ($stmt = $mysqli->prepare("SELECT iCusID, CONCAT(cCusRuc,' - ',cCusDes) AS find FROM tm_customer WHERE cCusSta='1'")){
+        if ($stmt = $mysqli->prepare("SELECT iCusID, CONCAT(cCusRuc,' - ',cCusNam) AS find FROM tm_customer WHERE cCusSta='1'")){
             $stmt->execute();
             $stmt->store_result();
             $stmt->bind_result($customer_id, $customer);
@@ -20,19 +20,20 @@
         }
     }else{
         if($action=='select'){
-            if ($stmt = $mysqli->prepare("SELECT iCusID, cCusNam, cCusRuc, cCusDes, cCusSta FROM tm_customer")){
+            echo "SELECT iCusID, cCusNam, cCusRuc, cCusAdd, cCusPhoNam, cCusEmaNam, cCusCon, cCusPhoCon, cCusEmaCon, cCusSta FROM tm_customer";
+            if ($stmt = $mysqli->prepare("SELECT iCusID, cCusNam, cCusRuc, cCusAdd, cCusPhoNam, cCusEmaNam, cCusCon, cCusPhoCon, cCusEmaCon, cCusSta FROM tm_customer")){
                 $stmt->execute();
                 $stmt->store_result();
-                $stmt->bind_result($customer_id, $customer_name, $customer_ruc, $customer_description, $customer_status);
+                $stmt->bind_result($customer_id, $customer_name, $customer_ruc, $customer_address, $customer_phone_name, $customer_email_name, $customer_contact, $customer_phone_contact, $customer_email_contact, $customer_status);
                 while($row = $stmt->fetch()) {
                     if($customer_status=='1'){$status='<a class="hint--left hint--success" style="float:right;cursor:pointer;" data-hint="Activo"><i class="glyphicon glyphicon-ok" /></a>';}else{$status='<a class="hint--left hint--error" style="float:right;cursor:pointer;" data-hint="Inactivo"><i class="glyphicon glyphicon-minus" /></a>';}
                     echo '<tr><td><input id="c'.$customer_id.'" name="row_sel" type="checkbox" class="row_sel uni_style" data-id="'.$customer_id.'"></td>'.
                         '<td>'.$customer_id.$status.'</td>'.
-                        '<td>'.$customer_name.'</td>'.
+                        '<td>'.$customer_name.'<a style="cursor:help;float:right;" class="pop_over hint--right hint--info" data-hint="Detalle" data-content="&perp; '.$customer_address.'    &phone;'.$customer_phone_name.'    @&nbsp;'.$customer_email_name.'" title="'.$customer_name.'" data-placement="left"><i class="glyphicon glyphicon-book"/></a></td>'.
                         '<td>'.$customer_ruc.'</td>'.
-                        '<td>'.$customer_description.'</td>'.
+                        '<td>'.$customer_contact.'<a style="cursor:help;float:right;" class="pop_over hint--right hint--info" data-hint="Detalle" data-content="&phone;'.$customer_phone_contact.'    @&nbsp;'.$customer_email_contact.'" title="'.$customer_contact.'" data-placement="left"><i class="glyphicon glyphicon-user"/></a></td>'.
                         '<td class="center">'.
-                            '<a style="cursor:pointer;" class="edit hint--left" data-hint="Editar" data-id="'.$customer_id.'" data-name="'.$customer_name.'" data-code="'.$customer_ruc.'" data-description="'.$customer_description.'" data-status="'.$customer_status.'"><i class="glyphicon glyphicon-edit" /></a>'.                            
+                            '<a style="cursor:pointer;" class="edit hint--left" data-hint="Editar" data-id="'.$customer_id.'" data-name="'.$customer_name.'" data-code="'.$customer_ruc.'" data-address="'.$customer_address.'" data-phone_name="'.$customer_phone_name.'" data-email_name="'.$customer_email_name.'" data-contact="'.$customer_contact.'" data-phone_contact="'.$customer_phone_contact.'" data-email_contact="'.$customer_email_contact.'" data-status="'.$customer_status.'"><i class="glyphicon glyphicon-edit" /></a>'.                            
                         '</td></tr>';
                 }
             }
@@ -40,13 +41,18 @@
            $customer_id = $_POST['id'];
            $customer_name = $_POST['name'];
            $customer_ruc = $_POST['code'];
-           $customer_description = $_POST['description'];
+           $customer_address = $_POST['address'];
+           $customer_phone_name = $_POST['phone_name'];
+           $customer_email_name = $_POST['email_name'];
+           $customer_contact = $_POST['contact'];
+           $customer_phone_contact = $_POST['phone_contact'];
+           $customer_email_contact = $_POST['email_contact'];
            if($_POST['status']=='true'){$customer_status=1;}else{$customer_status=0;}
            if($action=='insert'){
-               $mysqli->query("INSERT INTO tm_customer (cCusNam, cCusRuc, cCusDes, cCusSta) VALUES ('".$customer_name."', '".$customer_ruc."', '".$customer_description."', '".$customer_status."')");
+           $mysqli->query("INSERT INTO tm_customer (cCusNam, cCusRuc, cCusAdd, cCusPhoNam, cCusEmaNam, cCusCon, cCusPhoCon, cCusEmaCon, cCusSta) VALUES ('".$customer_name."', '".$customer_ruc."', '".$customer_address."', '".$customer_phone_name."', '".$customer_email_name."', '".$customer_contact."', '".$customer_phone_contact."', '".$customer_email_contact."', '".$customer_status."')");
            } 
            if($action=='update'){
-               $mysqli->query("UPDATE tm_customer SET cCusNam='".$customer_name."' , cCusRuc='".$customer_ruc."', cCusDes='".$customer_description."', cCusSta='".$customer_status."' WHERE iCusID='".$customer_id."'");
+               $mysqli->query("UPDATE tm_customer SET cCusNam='".$customer_name."' , cCusRuc='".$customer_ruc."', cCusAdd='".$customer_address."', cCusPhoNam='".$customer_phone_name."', cCusEmaNam='".$customer_email_name."', cCusCon='".$customer_contact."', cCusPhoCon='".$customer_phone_contact."', cCusEmaCon='".$customer_email_contact."', cCusSta='".$customer_status."' WHERE iCusID='".$customer_id."'");
            }
            if($action=='delete'){
                $_id = explode(",", $customer_id);

@@ -36,7 +36,7 @@ include_once 'includes/functions.php';
     <link rel="stylesheet" href="lib/datatables/extras/TableTools/media/css/TableTools.css">
     <!-- datepicker -->
     <link rel="stylesheet" href="lib/datepicker/datepicker.css" />
-    <!-- datepicker -->
+    <!-- timepicker -->
     <link rel="stylesheet" href="lib/timepicker/css/bootstrap-timepicker.css" />
     <!-- tag handler -->
     <link rel="stylesheet" href="lib/tag_handler/css/jquery.taghandler.css" />
@@ -53,7 +53,7 @@ include_once 'includes/functions.php';
     <!-- switch buttons -->
     <link rel="stylesheet" href="lib/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" />
     <!-- theme color-->
-    <link rel="stylesheet" href="css/blue.css" id="link_theme" />
+    <link rel="stylesheet" href="css/eastern_blue.css" id="link_theme" />
     <!-- theme font -->
     <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
     <!-- favicon -->
