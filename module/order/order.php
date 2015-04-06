@@ -37,9 +37,9 @@
             <table class="table table-striped table-bordered dTableR" id="dt_maintenance">
                 <thead>
                     <tr>
-                        <th class="center" style="width: 90px;"><input name="sel_row" class="sel_row uni_style" data-tableid="dt_maintenance" type="checkbox"></th>
+                        <th class="center" style="width: 100px;"><input name="sel_row" class="sel_row uni_style" data-tableid="dt_maintenance" type="checkbox"></th>
                         <th class="center" style="width: 120px;">NRO.ORDEN</th>
-                        <th class="center">TIPO SERVICIO</th>
+                        <th class="center" style="width: 110px;">TIPO SERVICIO</th>
                         <th class="center">VOLUMEN</th>
                         <th class="center">PESO</th>
                         <th class="center">DISTANCIA</th>
@@ -61,39 +61,40 @@
                     <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
                 </div>
                 <div class="modal-body">
+                     <form id="validation_form">
                 <table class="table table-bordered">
                 <tr>
                     <td><b>NRO.ORDEN :</b></td>
-                    <td colspan="2"><input class="form-control" readonly="true" type="text" id="editId"></td>
+                    <td class="form-group" colspan="2"><input class="form-control" readonly="true" type="text" id="editId"></td>
                 </tr>
                 <tr>
                     <td><b>TIPO DE SERVICIO :</b></td>
-                    <td colspan="2"><select class="form-control chzn_edit" id="editType" data-placeholder="SELECCIONE TIPO DE SERVICIO..." /></td>
+                    <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editType" name="editType" data-placeholder="SELECCIONE TIPO DE SERVICIO..." /></td>
                 </tr>
                 <tr>
                     <td><b>VOLUMEN:</b></td>
-                    <td><input class="form-control" type="text" id="editVolume"></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editVolume" name="editVolume"></td>
                     <td><select class="form-control chzn_edit" id="editMeasureVolume" data-placeholder="SELECCIONE U.M. VOLUMEN..." /></td>
                 </tr>
                 <tr>
                     <td><b>PESO :</b></td>
-                    <td><input class="form-control" type="text" id="editWeight"></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editWeight" name="editWeight"></td>
                     <td><select class="form-control chzn_edit" id="editMeasureWeight" data-placeholder="SELECCIONE U.M. PESO..." /></td>
                 </tr>
                 <tr>
                     <td><b>DISTANCIA :</b></td>
-                    <td><input class="form-control" type="text" id="editDistance"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editDistance" name="editDistance"></td>
+                    <td><select class="form-control chzn_edit" id="editMeasureDistance" name="editMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                 </tr>
                 <tr>
                     <td><b>COSTO :</b></td>
-                    <td><input class="form-control" type="text" id="editPrice"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editPrice" name="editPrice"></td>
+                    <td><select class="form-control chzn_edit" id="editMeasurePrice" name="editMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
                 </tr>
                 <tr>
                     <td><b>PRECIO :</b></td>
-                    <td><input class="form-control" type="text" id="editRealPrice"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureRealPrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editRealPrice" name="editRealPrice"></td>
+                    <td><select class="form-control chzn_edit" id="editMeasureRealPrice" name="editMeasureRealPrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
                 </tr>
                 <tr class="hide">
                     <td><b>ESTADO :</b></td>
@@ -104,6 +105,7 @@
                     <td colspan="2"><input class="form-control" type="text" id="editAction"></td>
                 </tr> 
                 </table>
+                     </form>
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-primary" id="save"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
@@ -128,8 +130,7 @@
                             <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> DESTINO</label></div></li>
                             <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> COSTO</label></div></li>
                             <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> PRECIO</label></div></li>
-                            <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> NOTA</label></div></li>
-                            <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
+                            <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
                         </ul>
                     </div>
                     <div class="clearfix sepH_b">
@@ -153,7 +154,6 @@
                                 <th class="center">DESTINO</th>
                                 <th class="center">COSTO</th>
                                 <th class="center">PRECIO</th>
-                                <th class="center">NOTA</th>
                                 <th class="center" style="width: 80px;">ACCI&Oacute;N</th>
                             </tr>
                         </thead>
@@ -174,6 +174,7 @@
                     <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
                 </div>
                 <div class="modal-body">
+                    <form id="validation_detail_form">
                 <table class="table table-bordered">
                 <tr>
                     <td><b>NRO.ORDEN :</b></td>
@@ -185,61 +186,62 @@
                 </tr>
                 <tr>
                     <td><b>ORIGEN :</b></td>
-                    <td colspan="2"><select class="form-control chzn_edit" id="editDetailOrigin" data-placeholder="SELECCIONE ORIGEN..." /></td>
+                    <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editDetailOrigin" name="editDetailOrigin" data-placeholder="SELECCIONE ORIGEN..." /></td>
                 </tr>
                 <tr>
                     <td><b>FECHA - HORA (ORIGEN):</b></td>
-                    <td style="width: 50%;">
+                    <td class="form-group" style="width: 50%;">
                         <div id="detailOriginDate" class="input-group date">
-                            <input class="form-control" type="text" readonly="" id="editDetailOriginDate">
+                            <input class="form-control" type="text" readonly="" id="editDetailOriginDate" name="editDetailOriginDate">
                             <span class="input-group-addon"><i class="splashy-calendar_day_up"></i></span>
                         </div>
                     </td>
                     <td>                        
                         <div class="bootstrap-timepicker">
-                            <input class="form-control" id="editDetailOriginHour" type="text">
+                            <input class="form-control" id="editDetailOriginHour" name="editDetailOriginHour" type="text">
                         </div>
                         <span class="help-block">Ver dropdown (24h)</span>
                     </td>
                 </tr>
                 <tr>
                     <td><b>DESTINO :</b></td>
-                    <td colspan="2"><select class="form-control chzn_edit" id="editDetailDestination" data-placeholder="SELECCIONE DESTINO..." /></td>
+                    <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editDetailDestination" name="editDetailDestination" data-placeholder="SELECCIONE DESTINO..." /></td>
                 </tr>
                 <tr>
                     <td><b>FECHA - HORA (DESTINO):</b></td>
-                    <td>
+                    <td class="form-group">
                         <div id="detailDestinationDate" class="input-group date">
-                            <input class="form-control" type="text" readonly="" id="editDetailDestinationDate">
+                            <input class="form-control" type="text" readonly="" id="editDetailDestinationDate" name="editDetailDestinationDate">
                             <span class="input-group-addon"><i class="splashy-calendar_day_down"></i></span>
                         </div>
                     </td>
                     <td>                        
                         <div class="bootstrap-timepicker">
-                            <input class="form-control" id="editDetailDestinationHour" type="text">
+                            <input class="form-control" id="editDetailDestinationHour" name="editDetailDestinationHour" type="text">
                         </div>
                         <span class="help-block">Ver dropdown (24h)</span>
                     </td>
                 </tr>
                 <tr>
                     <td><b>COSTO :</b></td>
-                    <td><input class="form-control" type="text" id="editDetailPrice"></td>
-                    <td><select class="form-control chzn_edit" id="editDetailMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editDetailPrice" name="editDetailPrice"></td>
+                    <td><select class="form-control chzn_edit" id="editDetailMeasurePrice" name="editDetailMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
                 </tr>
                 <tr>
                     <td><b>PRECIO :</b></td>
-                    <td><input class="form-control" type="text" id="editDetailRealPrice"></td>
-                    <td><select class="form-control chzn_edit" id="editDetailMeasureRealPrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editDetailRealPrice" name="editDetailRealPrice"></td>
+                    <td><select class="form-control chzn_edit" id="editDetailMeasureRealPrice" name="editDetailMeasureRealPrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
                 </tr>
                 <tr>
                     <td><b>NOTA :</b></td>
-                    <td colspan="2"><input class="form-control" type="text" id="editDetailNote"></td>
+                    <td class="form-group" colspan="2"><input class="form-control" type="text" id="editDetailNote"></td>
                 </tr>
                 <tr class="hide">
                     <td><b>ACCI&Oacute;N :</b></td>
                     <td colspan="2"><input class="form-control" type="text" id="editDetailAction"></td>
                 </tr> 
                 </table>
+                        </form>
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-primary" id="save_detail"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
@@ -320,6 +322,9 @@
     <script src="lib/qtip2/jquery.qtip.min.js"></script>
     <!-- chosen -->
     <script src="lib/chosen/chosen.jquery.min.js"></script>
+     <!-- validations -->
+    <script src="lib/validation/jquery.validate.min.js"></script>
+    <script src="lib/validation/localization/messages_es.js"></script>
     <!-- crud functions -->
     <script src="js/controller/crud_order.js"></script>
     <!-- lock screen-->    

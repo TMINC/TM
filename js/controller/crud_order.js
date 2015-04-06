@@ -50,6 +50,7 @@ var load_detail =  function (id) {
             $("#dt_detail tbody").append(response);
             table_detail();
             popover();
+            unistyle();
             editar_detail();
             agregar_detail();
             guardar_detail();
@@ -221,7 +222,6 @@ var table_detail = function () {
             },
             "aoColumns": [
                     { "bSortable": false },
-                    { "sType": "string" },
                     { "sType": "string" },
                     { "sType": "string" },
                     { "sType": "string" },
@@ -434,6 +434,34 @@ var eliminar = function () {
 var guardar = function () {
     $("#save").off().on('click', function (e) {
         e.preventDefault();
+         if($('#validation_form').validate({
+            onkeyup: false,
+            errorClass: 'error',
+            validClass: 'valid',
+            rules: {
+                editType: { required: true },
+                editVolume: { required: true, number: true },
+                editMeasureVolume: { required: true },
+                editWeight: { required: true, number: true },
+                editMeasureWeight: { required: true },
+                editDistance: { required: true, number: true },
+                editMeasureDistance: { required: true },
+                editPrice: { required: true, number: true },
+                editMeasurePrice: { required: true },
+                editRealPrice: { required: true, number: true },
+                editMeasureRealPrice: { required: true }
+                
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass("f_error");
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass("f_error");    
+            },
+            errorPlacement: function(error, element) {
+                $(element).closest('.form-group').append(error);
+            }
+        }).form()){
         $("#modal").modal("hide");
         var _id = $("#editId").val();
         var _type = $("#editType option:selected").val();
@@ -455,11 +483,15 @@ var guardar = function () {
             url: "module/order/crud/order.php",
             data: "action="+ _action +"& id="+ _id+"& type="+ _type +"& volume="+ _volume+"& measure_volume="+ _measure_volume+"& weight="+ _weight+"& measure_weight="+ _measure_weight+"& distance="+ _distance+"& measure_distance="+ _measure_distance+"& price="+ _price+"& measure_price="+ _measure_price+"& real_price="+ _real_price+"& measure_real_price="+ _measure_real_price+"& status="+ _status,
             success: function () {
-                load();            
-            }        
-        });
+              load();  
+              $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
+                }        
+            });
+        }
+        return false;
+        
     });
-};
+}; 
 var detalle = function(){
     $(".detail").off().on('click', function (e) {
         e.preventDefault();
@@ -637,6 +669,33 @@ var eliminar_detail = function(){
 var guardar_detail = function(){
    $("#save_detail").off().on('click', function (e) {
         e.preventDefault();
+         if($('#validation_detail_form').validate({
+            onkeyup: false,
+            errorClass: 'error',
+            validClass: 'valid',
+            rules: {
+                editDetailOrigin: { required: true },
+                editDetailOriginDate: { required: true },
+                editDetailOriginHour: { required: true },
+                editDetailDestination: { required: true },
+                editDetailDestinationDate: { required: true },
+                editDetailDestinationHour: { required: true },
+                editDetailPrice: { required: true, number: true },
+                editDetailMeasurePrice: { required: true },
+                editDetailRealPrice: { required: true, number: true },
+                editDetailMeasureRealPrice: { required: true }
+                
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass("f_error");
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass("f_error");    
+            },
+            errorPlacement: function(error, element) {
+                $(element).closest('.form-group').append(error);
+            }
+        }).form()){
         $("#modal").modal("hide");
         var _order_id = $("#editDetailId").val();
         var _order_detail_id = $("#editOrderDetailId").val();
@@ -660,8 +719,11 @@ var guardar_detail = function(){
             success: function () {
                 load_detail(_order_id);
                 $("#modal_detail").modal("hide");
-                $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
-            }        
-        });
+                 $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
+                }        
+            });
+        }
+        return false;
+        
     });
-};
+}; 

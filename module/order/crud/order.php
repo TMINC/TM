@@ -5,6 +5,7 @@
  **/
     include_once '../../../includes/db_connect.php';
     include_once '../../../includes/psl-config.php';
+    include_once '../../../includes/functions.php';
     
     $action = $_POST['action'];
     if($action=='consult'){
@@ -25,41 +26,12 @@
                 $stmt->store_result();
                 $stmt->bind_result($order_id, $order_type, $order_volume, $measure_volume_id, $order_weight, $measure_weight_id, $order_distance, $measure_distance_id, $order_price, $measure_price_id, $order_real_price, $measure_real_price_id, $order_detail, $order_status);
                 while($row = $stmt->fetch()) { 
-                    $iMeaIDVol = $mysqli->prepare("SELECT cMeaAbr FROM tm_measure WHERE iMeaID = ?");
-                    $iMeaIDVol->bind_param('s', $measure_volume_id);
-                    $iMeaIDVol->execute();
-                    $iMeaIDVol->store_result();
-                    $iMeaIDVol->bind_result($measure_volume);
-                    $iMeaIDVol->fetch();
-                    
-                    $iMeaIDWei = $mysqli->prepare("SELECT cMeaAbr FROM tm_measure WHERE iMeaID = ?");
-                    $iMeaIDWei->bind_param('s', $measure_weight_id);
-                    $iMeaIDWei->execute();
-                    $iMeaIDWei->store_result();
-                    $iMeaIDWei->bind_result($measure_weight);
-                    $iMeaIDWei->fetch();
-                    
-                    $iMeaIDDis = $mysqli->prepare("SELECT cMeaAbr FROM tm_measure WHERE iMeaID = ?");
-                    $iMeaIDDis->bind_param('s', $measure_distance_id);
-                    $iMeaIDDis->execute();
-                    $iMeaIDDis->store_result();
-                    $iMeaIDDis->bind_result($measure_distance);
-                    $iMeaIDDis->fetch();
-                    
-                    $iMeaIDPri = $mysqli->prepare("SELECT cMeaAbr FROM tm_measure WHERE iMeaID = ?");
-                    $iMeaIDPri->bind_param('s', $measure_price_id);
-                    $iMeaIDPri->execute();
-                    $iMeaIDPri->store_result();
-                    $iMeaIDPri->bind_result($measure_price);
-                    $iMeaIDPri->fetch();
-                    
-                    $iMeaIDReaPri = $mysqli->prepare("SELECT cMeaAbr FROM tm_measure WHERE iMeaID = ?");
-                    $iMeaIDReaPri->bind_param('s', $measure_real_price_id);
-                    $iMeaIDReaPri->execute();
-                    $iMeaIDReaPri->store_result();
-                    $iMeaIDReaPri->bind_result($measure_real_price);
-                    $iMeaIDReaPri->fetch();
-                    
+                    $measure_volume = measure_char($measure_volume_id, $mysqli);
+                    $measure_weight = measure_char($measure_weight_id, $mysqli);
+                    $measure_distance = measure_char($measure_distance_id, $mysqli);
+                    $measure_price = measure_char($measure_price_id, $mysqli);
+                    $measure_real_price = measure_char($measure_real_price_id, $mysqli);
+                                      
                     if($order_type=='0'){$type='undefined';}else{$type='undefined';}                    
                     if($order_detail=='0'){$detail='<a class="hint--right hint--warning" style="float:right;cursor:pointer;" data-hint="Sin detalle registrado"><i class="glyphicon glyphicon-exclamation-sign" /></a>';}
                     if($order_detail=='1'){$detail='<a class="hint--right hint--info" style="float:right;cursor:pointer;" data-hint="Con detalle registrado"><i class="glyphicon glyphicon-ok-sign" /></a>';}
