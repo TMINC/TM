@@ -4,6 +4,13 @@
  **/
 $(document).ready(function() {
     driver.dt_maintenance();
+    $.validator.addMethod(
+        "chosen",
+        function(value, element) {
+            return (value === null ? false : (value.length === 0 ? false : true));
+        },
+        "Por favor, elige una opción válida."
+    );
 });
 
 driver = {    
@@ -238,6 +245,8 @@ var eliminar = function () {
 var guardar = function () {
     $("#save").off().on('click', function (e) {
         e.preventDefault();
+        $("[name='editType']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editCarrier']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         if($('#validation_form').validate({
             onkeyup: false,
             errorClass: 'error',
@@ -251,7 +260,9 @@ var guardar = function () {
                 editPhone: { required: true, number: true },
                 editDateBirth: { required: true },
                 editDni: { required: true, number: true },
-                editBloodType: { required: true }
+                editBloodType: { required: true },
+                editType: { chosen: true },
+                editCarrier: { chosen: true }
             },
             highlight: function(element) {
                 $(element).closest('.form-group').addClass("f_error");

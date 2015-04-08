@@ -4,6 +4,13 @@
  **/
 $(document).ready(function() {
     center.dt_maintenance();
+    $.validator.addMethod(
+        "chosen",
+        function(value, element) {
+            return (value === null ? false : (value.length === 0 ? false : true));
+        },
+        "Por favor, elige una opción válida."
+    );
 });
 
 center = {    
@@ -255,6 +262,9 @@ var eliminar = function () {
 var guardar = function () {
     $("#save").off().on('click', function (e) {
         e.preventDefault();
+        $("[name='editType']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editCustomer']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editCarrier']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         if($('#validation_form').validate({
             onkeyup: false,
             errorClass: 'error',
@@ -265,8 +275,11 @@ var guardar = function () {
                 editType: { required: true },
                 editAddress: { required: true, minlength: 3 },
                 editLatitud: { required: true, minlength: 3 },
-                editLongitud: { required: true, minlength: 3 }
-                
+                editLongitud: { required: true, minlength: 3 },
+                editType: { chosen: true },
+                editCustomer: { chosen: true },
+                editCarrier: { chosen: true }
+                      
             },
             highlight: function(element) {
                 $(element).closest('.form-group').addClass("f_error");                

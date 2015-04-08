@@ -3,7 +3,14 @@
  * By: Johnny Moscoso Rossel
  **/
 $(document).ready(function() {
-    description.dt_maintenance();    
+    description.dt_maintenance();  
+     $.validator.addMethod(
+        "chosen",
+        function(value, element) {
+            return (value === null ? false : (value.length === 0 ? false : true));
+        },
+        "Por favor, elige una opción válida."
+    );
 });
 
 description = {    
@@ -33,7 +40,8 @@ var load = function () {
             eliminar();
             detalle();
             multiseleccion();
-            chosen();            
+            chosen(); 
+            liberar();
         }        
     });
 };
@@ -177,6 +185,7 @@ var table = function () {
                     { "sType": "string" },
                     { "sType": "string" },
                     { "sType": "string" },
+                    { "sType": "string" },
                     { "bSortable": false }
                 ],
             "sPaginationType": "bootstrap"
@@ -227,6 +236,9 @@ var table_detail = function () {
                     { "sType": "string" },
                     { "sType": "string" },
                     { "sType": "string" },
+                    { "sType": "string" },
+                    { "sType": "string" },
+                    { "sType": "string" },
                     { "bSortable": false }
                 ],
             "sPaginationType": "bootstrap"
@@ -243,8 +255,8 @@ var agregar = function(){
         $("#editType").empty();
         $("#editType").append('<option selected="true"> </option>');
         for(i=1; i<4; i++){
-            if(i===1){$("#editType").append('<option value="' + i + '">SERVICIO 01</option>');}
-            if(i===2){$("#editType").append('<option value="' + i + '">SERVICIO 02</option>');}
+            if(i===1){$("#editType").append('<option value="' + i + '">TRANSPORTE FRESCO</option>');}
+            if(i===2){$("#editType").append('<option value="' + i + '">TRANSPORTE CONGELADO</option>');}
         }  
         chosen();
         $("#editType").trigger("liszt:updated");        
@@ -298,9 +310,69 @@ var agregar = function(){
         });
         chosen();
         $("#editMeasureRealPrice").trigger("liszt:updated");
+        
+        $("#editCustomer").empty();
+        var _sel='0';
+        $.ajax({
+            type: "POST",
+            async:false,
+            url: "module/master/crud/customer.php",
+            data: "action=consult&sel="+ _sel,
+            success: function (data) { $("#editCustomer").append('<option selected="true"> </option>'); $("#editCustomer").append(data); }        
+        });        
+        chosen();
+        $("#editCustomer").trigger("liszt:updated");
+        
         $("#editStatus").removeAttr('checked');
         $("#editAction").val("insert");        
     });
+};
+
+var liberar = function () {
+    $(".set_free").off().on('click', function (e) {
+        e.preventDefault();
+       var tableid = $(this).data('tableid');
+        if ($('input[name=row_sel]:checked', '#' + tableid).length) {
+            var _detail = $('input:checkbox:checked.row_sel').map(function () {
+                return $(this).data('detail');
+            }).get();
+            var _cntDetail = 0;
+            for(i=0; i<_detail.length; i++){
+                if(_detail[i]==0){_cntDetail++;}
+            }   
+            
+            $.colorbox({
+                initialHeight: '0',
+                initialWidth: '0',
+                href: "#set_free_dialog",
+                inline: true,
+                opacity: '0.3',
+                onComplete: function () {
+                    $('.set_free_yes').off().on('click', function (e) {
+                        e.preventDefault();
+                        //Implementacion eliminar en base de datos
+                        var _id = $('input:checkbox:checked.row_sel').map(function () {
+                            return $(this).data('id');
+                        }).get();
+                        $.colorbox.close();
+                        $.ajax({
+                            type: "POST",
+                            url: "module/order/crud/order.php",
+                            data: "action=status&status=2& id="+ _id,
+                            success: function () {
+                                load();    
+                                $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
+                            }        
+                        });
+                    });
+                    $('.set_free_no').off().on('click', function (e) {
+                        e.preventDefault();
+                        $.colorbox.close();
+             });
+            }
+        });        
+    };
+});
 };
 var editar = function(){
     $(".edit").off().on('click', function (e) {
@@ -313,10 +385,10 @@ var editar = function(){
         var _real_price = $(this).data('real_price'); $("#editRealPrice").val(_real_price);        
         var _type = $(this).data('type');var sel='selected';
         $("#editType").empty();
-        for(i=1; i<4; i++){
+        for(i=1; i<3; i++){
             if(i===_type){sel='selected';}else{sel='';}
-            if(i===1){$("#editType").append('<option value="' + i + '" ' + sel + '>SERVICIO 01</option>');}
-            if(i===2){$("#editType").append('<option value="' + i + '" ' + sel + '>SERVICIO 02</option>');}
+            if(i===1){$("#editType").append('<option value="' + i + '" ' + sel + '>TRANSPORTE FRESCO</option>');}
+            if(i===2){$("#editType").append('<option value="' + i + '" ' + sel + '>TRANSPORTE CONGELADO</option>');}
         }  
         chosen();
         $("#editType").trigger("liszt:updated");
@@ -386,6 +458,18 @@ var editar = function(){
         }else{
             $("#editStatus").removeAttr('checked');
         }
+        
+        var _customer = $(this).data('customer');
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/customer.php",
+            data: "action=consult&sel="+ _customer,
+            success: function (data) { $("#editCustomer").empty();$("#editCustomer").append(data); }        
+        });
+        chosen();
+        $("#editCustomer").trigger("liszt:updated");
+        
         $("#editAction").val("update");        
         $("#modal").modal("show");
     });
@@ -418,7 +502,8 @@ var eliminar = function () {
                             url: "module/order/crud/order.php",
                             data: "action=delete& id="+ _id,
                             success: function () {
-                                load();            
+                                load();  
+                                $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
                             }        
                         });
                     });
@@ -434,22 +519,31 @@ var eliminar = function () {
 var guardar = function () {
     $("#save").off().on('click', function (e) {
         e.preventDefault();
+        $("[name='editCustomer']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editType']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editMeasureVolume']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editMeasureWeight']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editMeasureDistance']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editMeasurePrice']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editMeasureRealPrice']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
          if($('#validation_form').validate({
             onkeyup: false,
             errorClass: 'error',
             validClass: 'valid',
             rules: {
-                editType: { required: true },
+                editCustomer: { chosen: true },
+                editType: { chosen: true },
                 editVolume: { required: true, number: true },
-                editMeasureVolume: { required: true },
+                editMeasureVolume: { chosen: true },
                 editWeight: { required: true, number: true },
-                editMeasureWeight: { required: true },
+                editMeasureWeight: { chosen: true },
                 editDistance: { required: true, number: true },
-                editMeasureDistance: { required: true },
+                editMeasureDistance: { chosen: true },
                 editPrice: { required: true, number: true },
-                editMeasurePrice: { required: true },
+                editMeasurePrice: { chosen: true },
                 editRealPrice: { required: true, number: true },
-                editMeasureRealPrice: { required: true }
+                editMeasureRealPrice: { chosen: true }
+              
                 
             },
             highlight: function(element) {
@@ -475,13 +569,14 @@ var guardar = function () {
         var _measure_price = $("#editMeasurePrice option:selected").val();
         var _real_price = $("#editRealPrice").val();
         var _measure_real_price = $("#editMeasureRealPrice option:selected").val();
+        var _customer = $("#editCustomer option:selected").val();
         var _status = $("#editStatus").is(':checked');
         var _action = $("#editAction").val();
                 
         $.ajax({
             type: "POST",
             url: "module/order/crud/order.php",
-            data: "action="+ _action +"& id="+ _id+"& type="+ _type +"& volume="+ _volume+"& measure_volume="+ _measure_volume+"& weight="+ _weight+"& measure_weight="+ _measure_weight+"& distance="+ _distance+"& measure_distance="+ _measure_distance+"& price="+ _price+"& measure_price="+ _measure_price+"& real_price="+ _real_price+"& measure_real_price="+ _measure_real_price+"& status="+ _status,
+            data: "action="+ _action +"& id="+ _id+"& type="+ _type +"& volume="+ _volume+"& measure_volume="+ _measure_volume+"& weight="+ _weight+"& measure_weight="+ _measure_weight+"& distance="+ _distance+"& measure_distance="+ _measure_distance+"& price="+ _price+"& measure_price="+ _measure_price+"& real_price="+ _real_price+"& measure_real_price="+ _measure_real_price+"& customer="+ _customer+"& status="+ _status,
             success: function () {
               load();  
               $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
@@ -537,6 +632,38 @@ var agregar_detail = function(){
         });
         chosen();
         $("#editDetailDestination").trigger("liszt:updated");        
+       
+        $("#editDetailVolume").val("");        
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/measure.php",
+            data: "action=consult&type=2&sel=0",
+            success: function (data) { $("#editDetailMeasureVolume").empty();$("#editDetailMeasureVolume").append('<option selected="true"> </option>');$("#editDetailMeasureVolume").append(data); }        
+        });
+        chosen();
+        $("#editDetailMeasureVolume").trigger("liszt:updated");
+        $("#editDetailWeight").val("");
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/measure.php",
+            data: "action=consult&type=3&sel=0",
+            success: function (data) { $("#editDetailMeasureWeight").empty();$("#editDetailMeasureWeight").append('<option selected="true"> </option>');$("#editDetailMeasureWeight").append(data); }        
+        });
+        chosen();
+        $("#editDetailMeasureWeight").trigger("liszt:updated"); 
+        $("#editDetailDistance").val("");
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/measure.php",
+            data: "action=consult&type=1&sel=0",
+            success: function (data) { $("#editDetailMeasureDistance").empty();$("#editDetailMeasureDistance").append('<option selected="true"> </option>');$("#editDetailMeasureDistance").append(data); }        
+        });
+        chosen();
+        $("#editDetailMeasureDistance").trigger("liszt:updated");
+        
         $("#editDetailPrice").val("");
         $.ajax({
             type: "POST",
@@ -596,6 +723,42 @@ var editar_detail = function(){
         $("#editDetailDestination").trigger("liszt:updated");  
         var _destination_date = $(this).data('destination_date'); $("#editDetailDestinationDate").val(_destination_date);
         var _destination_hour = $(this).data('destination_hour'); $("#editDetailDestinationHour").val(_destination_hour);        
+        var _detail_volume = $(this).data('volume'); $("#editDetailVolume").val(_detail_volume);
+        var _detail_weight = $(this).data('weight'); $("#editDetailWeight").val(_detail_weight);
+        var _detail_distance = $(this).data('distance'); $("#editDetailDistance").val(_detail_distance);
+        
+        var _detail_measure_volume = $(this).data('measure_volume');
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/measure.php",
+            data: "action=consult&type=2&sel="+ _detail_measure_volume,
+            success: function (data) { $("#editDetailMeasureVolume").empty();$("#editDetailMeasureVolume").append(data); }        
+        });
+        chosen();
+        $("#editDetailMeasureVolume").trigger("liszt:updated");       
+        var _detail_measure_weight = $(this).data('measure_weight');
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/measure.php",
+            data: "action=consult&type=3&sel="+ _detail_measure_weight,
+            success: function (data) { $("#editDetailMeasureWeight").empty();$("#editDetailMeasureWeight").append(data); }        
+        });
+        chosen();
+        $("#editDetailMeasureWeight").trigger("liszt:updated");        
+        var detail_measure_distance = $(this).data('measure_distance');
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/measure.php",
+            data: "action=consult&type=1&sel="+ detail_measure_distance,
+            success: function (data) { $("#editDetailMeasureDistance").empty();$("#editDetailMeasureDistance").append(data); }        
+        });
+        chosen();
+        $("#editDetailMeasureDistance").trigger("liszt:updated");
+        
+        
         var _detail_price = $(this).data('price'); $("#editDetailPrice").val(_detail_price);
         var _detail_measure_price = $(this).data('measure_price');
         $.ajax({
@@ -652,7 +815,8 @@ var eliminar_detail = function(){
                             url: "module/order/crud/order-detail.php",
                             data: "action=delete&order_detail_id="+_id+"& order_id="+ _order_number,
                             success: function () {
-                                load_detail(_order_number);            
+                                load_detail(_order_number);    
+                                $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
                             }        
                         });
                     });
@@ -669,21 +833,34 @@ var eliminar_detail = function(){
 var guardar_detail = function(){
    $("#save_detail").off().on('click', function (e) {
         e.preventDefault();
+        $("[name='editDetailOrigin']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editDetailDestination']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editDetailMeasureVolume']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editDetailMeasureWeight']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editDetailMeasureDistance']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editDetailMeasurePrice']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editDetailMeasureRealPrice']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
          if($('#validation_detail_form').validate({
             onkeyup: false,
             errorClass: 'error',
             validClass: 'valid',
             rules: {
-                editDetailOrigin: { required: true },
+                editDetailOrigin: { chosen: true },
                 editDetailOriginDate: { required: true },
                 editDetailOriginHour: { required: true },
-                editDetailDestination: { required: true },
+                editDetailDestination: { chosen: true },
                 editDetailDestinationDate: { required: true },
                 editDetailDestinationHour: { required: true },
+                editDetailVolume: { required: true },
+                editDetailMeasureVolume: { chosen: true },
+                editDetailWeight: { required: true },
+                editDetailMeasureWeight: { chosen: true },
+                editDetailDistance: { required: true },
+                editDetailMeasureDistance: { chosen: true },
                 editDetailPrice: { required: true, number: true },
-                editDetailMeasurePrice: { required: true },
+                editDetailMeasurePrice: { chosen: true },
                 editDetailRealPrice: { required: true, number: true },
-                editDetailMeasureRealPrice: { required: true }
+                editDetailMeasureRealPrice: { chosen: true }
                 
             },
             highlight: function(element) {
@@ -705,6 +882,12 @@ var guardar_detail = function(){
         var _destination = $("#editDetailDestination option:selected").val(); 
         var _destination_date = $("#editDetailDestinationDate").val();
         var _destination_hour = $("#editDetailDestinationHour").val();
+        var _detail_volume = $("#editDetailVolume").val(); 
+        var _detail_measure_volume = $("#editDetailMeasureVolume option:selected").val();
+        var _detail_weight = $("#editDetailWeight").val();
+        var _detail_measure_weight = $("#editDetailMeasureWeight option:selected").val();
+        var _detail_distance = $("#editDetailDistance").val();
+        var _detail_measure_distance = $("#editDetailMeasureDistance option:selected").val();
         var _detail_price = $("#editDetailPrice").val();
         var _detail_measure_price = $("#editDetailMeasurePrice option:selected").val();
         var _detail_real_price = $("#editDetailRealPrice").val();
@@ -715,7 +898,7 @@ var guardar_detail = function(){
         $.ajax({
             type: "POST",
             url: "module/order/crud/order-detail.php",
-            data: "action="+ _detail_action +"& order_id="+ _order_id+"& order_detail_id="+ _order_detail_id+"& origin="+ _origin+"& origin_date="+ _origin_date +"& origin_hour="+ _origin_hour+"& destination="+ _destination+"& destination_date="+ _destination_date+"& destination_hour="+ _destination_hour+"& detail_price="+ _detail_price+"& detail_measure_price="+ _detail_measure_price+"& detail_real_price="+ _detail_real_price+"& detail_measure_real_price="+ _detail_measure_real_price+"& detail_note="+ _detail_note,
+            data: "action="+ _detail_action +"& order_id="+ _order_id+"& order_detail_id="+ _order_detail_id+"& origin="+ _origin+"& origin_date="+ _origin_date +"& origin_hour="+ _origin_hour+"& destination="+ _destination+"& destination_date="+ _destination_date+"& destination_hour="+ _destination_hour+"& volume="+ _detail_volume+"& measure_volume="+ _detail_measure_volume+"& weight="+ _detail_weight+"& measure_weight="+ _detail_measure_weight+"& distance="+ _detail_distance+"& measure_distance="+ _detail_measure_distance+"& detail_price="+ _detail_price+"& detail_measure_price="+ _detail_measure_price+"& detail_real_price="+ _detail_real_price+"& detail_measure_real_price="+ _detail_measure_real_price+"& detail_note="+ _detail_note,
             success: function () {
                 load_detail(_order_id);
                 $("#modal_detail").modal("hide");

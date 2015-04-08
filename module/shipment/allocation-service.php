@@ -26,9 +26,9 @@
                     <div class="btn-group">
                         <button data-toggle="dropdown" class="btn dropdown-toggle btn-default">ACCIONES <span class="caret"></span></button>
                         <ul class="dropdown-menu">
-                            <li><a data-toggle="modal" data-backdrop="static" href="#modal" class="add" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-plus"></i> NUEVO</a></li>
-                            <li><a href="javascript:void(0);" class="set_free" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-share"></i> LIBERAR</a></li>
-                            <li><a href="javascript:void(0);" class="trash" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-trash"></i> ELIMINAR</a></li>
+                            <li><a href="javascript:void(0);" class="plan"><i class="glyphicon glyphicon-thumbs-up"></i> PLANIFICAR</a></li>
+                            <li><a href="javascript:void(0);" class="set_free" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-flag"></i> LIBERAR</a></li>
+                            <li><a href="javascript:void(0);" class="refuse" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-thumbs-down"></i> RECHAZAR</a></li>
                         </ul>
                     </div>
                 </div>

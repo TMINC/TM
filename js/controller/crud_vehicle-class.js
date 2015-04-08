@@ -4,6 +4,13 @@
  **/
 $(document).ready(function() {
     _class.dt_maintenance();
+    $.validator.addMethod(
+        "chosen",
+        function(value, element) {
+            return (value === null ? false : (value.length === 0 ? false : true));
+        },
+        "Por favor, elige una opción válida."
+    );
 });
 
 _class = {    
@@ -194,6 +201,7 @@ var eliminar = function () {
 var guardar = function () {
     $("#save").off().on('click', function (e) {
         e.preventDefault();
+        $("[name='editType']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         if($('#validation_form').validate({
             onkeyup: false,
             errorClass: 'error',
@@ -201,7 +209,8 @@ var guardar = function () {
             rules: {
                 editInfo: { required: true },
                 editName: { required: true },
-                editDescription: { required: true }
+                editDescription: { required: true },
+                editType: { chosen: true }
             },
             highlight: function(element) {
                 $(element).closest('.form-group').addClass("f_error");

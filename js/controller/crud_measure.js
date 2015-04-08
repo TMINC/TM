@@ -4,6 +4,13 @@
  **/
 $(document).ready(function() {
     measure.dt_maintenance();
+    $.validator.addMethod(
+        "chosen",
+        function(value, element) {
+            return (value === null ? false : (value.length === 0 ? false : true));
+        },
+        "Por favor, elige una opción válida."
+    );
 });
 
 measure = {    
@@ -200,13 +207,15 @@ var eliminar = function () {
 var guardar = function () {
     $("#save").off().on('click', function (e) {
         e.preventDefault();
+        $("[name='editType']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         if($('#validation_form').validate({
             onkeyup: false,
             errorClass: 'error',
             validClass: 'valid',
             rules: {
                 editCode: { required: true },
-                editDescription: { required: true, minlength: 3 }
+                editDescription: { required: true, minlength: 3 },
+                editType: { chosen: true }
                 
             },
             highlight: function(element) {

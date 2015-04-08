@@ -55,36 +55,36 @@
                 </div>
                 <div class="modal-body">
                     <form id="validation_form">
-                <table class="table table-bordered">
-                <tr>
-                    <td><b>ID :</b></td>
-                    <td class="form-group"><input class="form-control" readonly="true" type="text" id="editId" name="editId"></td>
-                </tr>
-                <tr>
-                    <td><b>INFO :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editInfo" name="editInfo"></td>
-                </tr>
-                <tr>
-                    <td><b>NOMBRE :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editName" name="editName"></td>
-                </tr>
-                <tr>
-                    <td><b>DESCRIPCI&Oacute;N :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editDescription" name="editDescription"></td>
-                </tr>
-                 <tr>
-                    <td><b>TIPO :</b></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editType" name="editType" data-placeholder="SELECCIONE UN TIPO..." /></td>
-                </tr>
-                <tr>
-                    <td><b>ESTADO :</b></td>
-                    <td class="form-group"><input type="checkbox" id="editStatus" class="uni_style"></td>
-                </tr> 
-                <tr class="hide">
-                    <td><b>ACCI&Oacute;N :</b></td>
-                    <td><input class="form-control" type="text" id="editAction"></td>
-                </tr> 
-                </table>
+                    <table class="table table-bordered" >
+                        <tr>
+                            <td><b>ID :</b></td>
+                            <td class="form-group"><input class="form-control" readonly="true" type="text" id="editId" name="editId"></td>
+                        </tr>
+                        <tr>
+                            <td><b>INFO :</b></td>
+                            <td class="form-group"><input class="form-control" type="text" id="editInfo" name="editInfo"></td>
+                        </tr>
+                        <tr>
+                            <td><b>NOMBRE :</b></td>
+                            <td class="form-group"><input class="form-control" type="text" id="editName" name="editName"></td>
+                        </tr>
+                        <tr>
+                            <td><b>DESCRIPCI&Oacute;N :</b></td>
+                            <td class="form-group"><input class="form-control" type="text" id="editDescription" name="editDescription"></td>
+                        </tr>
+                        <tr>
+                            <td><b>TIPO :</b></td>
+                            <td class="form-group"><select class="form-control chzn_edit" id="editType" name="editType" data-placeholder="SELECCIONE UN TIPO..." /></td>
+                        </tr>
+                        <tr>
+                            <td><b>ESTADO :</b></td>
+                            <td class="form-group"><input type="checkbox" id="editStatus" class="uni_style"></td>
+                        </tr> 
+                        <tr class="hide">
+                            <td><b>ACCI&Oacute;N :</b></td>
+                            <td><input class="form-control" type="text" id="editAction"></td>
+                        </tr> 
+                    </table>
                     </form>
                 </div>
                 <div class="modal-footer">

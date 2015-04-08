@@ -4,6 +4,13 @@
  **/
 $(document).ready(function() {
     description.dt_maintenance();
+    $.validator.addMethod(
+        "chosen",
+        function(value, element) {
+            return (value === null ? false : (value.length === 0 ? false : true));
+        },
+        "Por favor, elige una opción válida."
+    );
 });
 
 description = {    
@@ -39,7 +46,8 @@ var unistyle = function (){
     $(".uni_style").uniform();  
 };
 var maskinput = function (){
-    $("#editCode").inputmask("99999999999");
+    $("#editPlate").inputmask("A9A999");
+    $("#editTuc").inputmask("99999999999");
 };
 var popover = function (){
     $(".pop_over").popover();
@@ -162,39 +170,49 @@ var agregar = function(){
         
         
         $("#editWeight").val("");
-               
-        
-        $("#editMeasureWeight").empty();
-        var _sel='0';
-        var _type='3';
         $.ajax({
             type: "POST",
-            async:false,
+            async: false,
             url: "module/master/crud/measure.php",
-            data: "action=consult&sel="+ _sel+"& type="+ _type,
-            success: function (data) { $("#editMeasureWeight").append('<option selected="true"> </option>'); $("#editMeasureWeight").append(data); }        
-        });        
+            data: "action=consult&type=3&sel=0",
+            success: function (data) { $("#editMeasureWeight").empty();$("#editMeasureWeight").append('<option selected="true"> </option>');$("#editMeasureWeight").append(data); }        
+        });
         chosen();
-        $("#editMeasureWeight").trigger("liszt:updated");
+        $("#editMeasureWeight").trigger("liszt:updated"); 
         
         
-        $("#editLength").val("");
+        $("#editLenght").val("");
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/measure.php",
+            data: "action=consult&type=1&sel=0",
+            success: function (data) { $("#editMeasureLenght").empty();$("#editMeasureLenght").append('<option selected="true"> </option>');$("#editMeasureLenght").append(data); }        
+        });
+        chosen();
+        $("#editMeasureLenght").trigger("liszt:updated"); 
+        
         $("#editWidth").val("");
-        $("#editHeight").val("");
-        
-        
-        $("#editMeasureHeight").empty();
-        var _sel='0';
-        var _type='1';
         $.ajax({
             type: "POST",
-            async:false,
+            async: false,
             url: "module/master/crud/measure.php",
-            data: "action=consult&sel="+ _sel+"& type="+ _type,
-            success: function (data) { $("#editMeasureHeight").append('<option selected="true"> </option>'); $("#editMeasureHeight").append(data); }        
-        });        
+            data: "action=consult&type=1&sel=0",
+            success: function (data) { $("#editMeasureWidth").empty();$("#editMeasureWidth").append('<option selected="true"> </option>');$("#editMeasureWidth").append(data); }        
+        });
         chosen();
-        $("#editMeasureHeight").trigger("liszt:updated");
+        $("#editMeasureWidth").trigger("liszt:updated"); 
+        
+       $("#editHeight").val("");
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/measure.php",
+            data: "action=consult&type=1&sel=0",
+            success: function (data) { $("#editMeasureHeight").empty();$("#editMeasureHeight").append('<option selected="true"> </option>');$("#editMeasureHeight").append(data); }        
+        });
+        chosen();
+        $("#editMeasureHeight").trigger("liszt:updated"); 
         
         
         
@@ -248,28 +266,50 @@ var editar = function(){
         var _weight = $(this).data('weight'); $("#editWeight").val(_weight);
        
         var _measure_weight = $(this).data('measure_weight');
-        var _typeMeasure = '3';
         $.ajax({
             type: "POST",
             async: false,
             url: "module/master/crud/measure.php",
-            data: "action=consult&sel="+ _measure_weight+"& type="+ _typeMeasure,
+            data: "action=consult&type=3&sel="+ _measure_weight,
             success: function (data) { $("#editMeasureWeight").empty();$("#editMeasureWeight").append(data); }        
         });
         chosen();
-        $("#editMeasureWeight").trigger("liszt:updated");
+        $("#editMeasureWeight").trigger("liszt:updated");        
        
-        var _length = $(this).data('length'); $("#editLength").val(_length);
-        var _width = $(this).data('width'); $("#editWidth").val(_width);
-        var _height = $(this).data('height'); $("#editHeight").val(_height);
-       
-        var _measure_height = $(this).data('measure_height'); 
-        var _typeMeasure = '1';
+        var _lenght = $(this).data('lenght'); $("#editLenght").val(_lenght);
+        
+        var _measure_lenght = $(this).data('measure_lenght');
         $.ajax({
             type: "POST",
             async: false,
             url: "module/master/crud/measure.php",
-            data: "action=consult&sel="+ _measure_height+"& type="+ _typeMeasure,
+            data: "action=consult&type=1&sel="+ _measure_lenght,
+            success: function (data) { $("#editMeasureLenght").empty();$("#editMeasureLenght").append(data); }        
+        });
+        chosen();
+        $("#editMeasureLenght").trigger("liszt:updated");        
+        
+        var _width = $(this).data('width'); $("#editWidth").val(_width);
+        
+        var _measure_width = $(this).data('measure_width');
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/measure.php",
+            data: "action=consult&type=1&sel="+ _measure_width,
+            success: function (data) { $("#editMeasureWidth").empty();$("#editMeasureWidth").append(data); }        
+        });
+        chosen();
+        $("#editMeasureWidth").trigger("liszt:updated");
+        
+        var _height = $(this).data('height'); $("#editHeight").val(_height);
+       
+        var _measure_height = $(this).data('measure_height');
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/measure.php",
+            data: "action=consult&type=1&sel="+ _measure_height,
             success: function (data) { $("#editMeasureHeight").empty();$("#editMeasureHeight").append(data); }        
         });
         chosen();
@@ -330,6 +370,13 @@ var eliminar = function () {
 var guardar = function () {
     $("#save").off().on('click', function (e) {
         e.preventDefault();
+        $("[name='editType']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editClass']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editCategory']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editMeasureWeight']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editMeasureLenght']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show(); 
+        $("[name='editMeasureWidth']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editMeasureHeight']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         if($('#validation_form').validate({
             onkeyup: false,
             errorClass: 'error',
@@ -338,9 +385,16 @@ var guardar = function () {
                 editPlate: { required: true },
                 editTuc: { required: true },
                 editWeight: { required: true },
-                editLength: { required: true },
+                editLenght: { required: true },
                 editWidth: { required: true },
-                editHeight: { required: true }
+                editHeight: { required: true },
+                editType: { chosen: true },
+                editClass: { chosen: true },
+                editCategory: { chosen: true },
+                editMeasureWeight: { chosen: true },
+                editMeasureLenght: { chosen: true },
+                editMeasureWidth: { chosen: true },
+                editMeasureHeight: { chosen: true }
             },
             highlight: function(element) {
                 $(element).closest('.form-group').addClass("f_error");
@@ -361,8 +415,10 @@ var guardar = function () {
             var _category = $("#editCategory option:selected").val();
             var _weight = $("#editWeight").val();
             var _measure_weight = $("#editMeasureWeight option:selected").val();
-            var _length = $("#editLength").val();
+            var _lenght = $("#editLenght").val();
+            var _measure_lenght = $("#editMeasureLenght option:selected").val();
             var _width = $("#editWidth").val();
+            var _measure_width = $("#editMeasureWidth option:selected").val();
             var _height = $("#editHeight").val();
             var _measure_height = $("#editMeasureHeight option:selected").val();
             var _status = $("#editStatus").is(':checked');
@@ -370,7 +426,7 @@ var guardar = function () {
             $.ajax({
                 type: "POST",
                 url: "module/master/crud/vehicle.php",
-                data: "action="+ _action +"& id="+ _id+"& plate="+ _plate +"& tuc="+ _tuc+"& type_id="+ _type+"& class_id="+ _class+"& category_id="+ _category+"& weight="+ _weight+"& measure_weight="+ _measure_weight+"& length="+ _length+"& width="+ _width+"& height="+ _height+"& measure_height="+ _measure_height+"& status="+ _status,
+                data: "action="+ _action +"& id="+ _id+"& plate="+ _plate +"& tuc="+ _tuc+"& type_id="+ _type+"& class_id="+ _class+"& category_id="+ _category+"& weight="+ _weight+"& measure_weight="+ _measure_weight+"& lenght="+ _lenght+"& measure_lenght="+ _measure_lenght+"& width="+ _width+"& measure_width="+ _measure_width+"& height="+ _height+"& measure_height="+ _measure_height+"& status="+ _status,
                 success: function () {
                     load();  
                      $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });

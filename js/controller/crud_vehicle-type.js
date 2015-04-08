@@ -4,6 +4,13 @@
  **/
 $(document).ready(function() {
     type.dt_maintenance();
+    $.validator.addMethod(
+        "chosen",
+        function(value, element) {
+            return (value === null ? false : (value.length === 0 ? false : true));
+        },
+        "Por favor, elige una opción válida."
+    );
 });
 
 type = {    
@@ -194,6 +201,7 @@ var eliminar = function () {
 var guardar = function () {
     $("#save").off().on('click', function (e) {
         e.preventDefault();
+        $("[name='editType']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         if($('#validation_form').validate({
             onkeyup: false,
             errorClass: 'error',
@@ -201,7 +209,8 @@ var guardar = function () {
             rules: {
                 editInfo: { required: true },
                 editName: { required: true },
-                editDescription: { required: true }
+                editDescription: { required: true },
+                editType: { chosen: true}
             },
             highlight: function(element) {
                 $(element).closest('.form-group').addClass("f_error");
@@ -213,25 +222,24 @@ var guardar = function () {
                 $(element).closest('.form-group').append(error);
             }
         }).form()){
-             $("#modal").modal("hide");
-        var _id = $("#editId").val();
-        var _info = $("#editInfo").val();
-        var _name = $("#editName").val();
-        var _description = $("#editDescription").val();
-        var _type = $("#editType option:selected").val();
-        var _status = $("#editStatus").is(':checked');
-        var _action = $("#editAction").val();
-        $.ajax({
-            type: "POST",
-            url: "module/master/crud/vehicle-type.php",
-            data: "action="+ _action +"& id="+ _id+"& info="+ _info +"& name="+ _name +"& description="+ _description+"& type="+ _type+"& status="+ _status,
-            success: function () {
-                load();      
-                $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
-            }        
-        });
+            $("#modal").modal("hide");
+            var _id = $("#editId").val();
+            var _info = $("#editInfo").val();
+            var _name = $("#editName").val();
+            var _description = $("#editDescription").val();
+            var _type = $("#editType option:selected").val();
+            var _status = $("#editStatus").is(':checked');
+            var _action = $("#editAction").val();
+            $.ajax({
+                type: "POST",
+                url: "module/master/crud/vehicle-type.php",
+                data: "action="+ _action +"& id="+ _id+"& info="+ _info +"& name="+ _name +"& description="+ _description+"& type="+ _type+"& status="+ _status,
+                success: function () {
+                    load();      
+                    $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
+                }        
+            });
         }
         return false;
-       
     });
 };

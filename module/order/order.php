@@ -14,12 +14,13 @@
                         <li><div class="checkbox"><label class="" for="dt_col_1"><input type="checkbox" value="0" id="dt_col_1" name="toggle-cols" checked="checked" class="uni_style"/> &check;</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_2"><input type="checkbox" value="1" id="dt_col_2" name="toggle-cols" checked="checked" class="uni_style"/> ID</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> NRO.ORDEN</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> VOLUMEN</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> PESO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> DISTANCIA</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> COSTO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> PRECIO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_9"><input type="checkbox" value="8" id="dt_col_9" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> CLIENTE</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> VOLUMEN</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> PESO</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> DISTANCIA</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> COSTO</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_9"><input type="checkbox" value="8" id="dt_col_9" name="toggle-cols" checked="checked" class="uni_style"/> PRECIO</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_10"><input type="checkbox" value="9" id="dt_col_10" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
                     </ul>
                 </div>
                 <!-- actions for datatables -->
@@ -28,7 +29,7 @@
                         <button data-toggle="dropdown" class="btn dropdown-toggle btn-default">ACCIONES <span class="caret"></span></button>
                         <ul class="dropdown-menu">
                             <li><a data-toggle="modal" data-backdrop="static" href="#modal" class="add" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-plus"></i> NUEVO</a></li>
-                            <li><a href="javascript:void(0);" class="set_free" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-share"></i> LIBERAR</a></li>
+                            <li><a href="javascript:void(0);" class="set_free" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-flag"></i> LIBERAR</a></li>
                             <li><a href="javascript:void(0);" class="trash" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-trash"></i> ELIMINAR</a></li>
                         </ul>
                     </div>
@@ -39,6 +40,7 @@
                     <tr>
                         <th class="center" style="width: 100px;"><input name="sel_row" class="sel_row uni_style" data-tableid="dt_maintenance" type="checkbox"></th>
                         <th class="center" style="width: 120px;">NRO.ORDEN</th>
+                        <th class="center">CLIENTE</th>
                         <th class="center" style="width: 110px;">TIPO SERVICIO</th>
                         <th class="center">VOLUMEN</th>
                         <th class="center">PESO</th>
@@ -61,11 +63,15 @@
                     <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
                 </div>
                 <div class="modal-body">
-                     <form id="validation_form">
+                    <form id="validation_form">
                 <table class="table table-bordered">
                 <tr>
                     <td><b>NRO.ORDEN :</b></td>
                     <td class="form-group" colspan="2"><input class="form-control" readonly="true" type="text" id="editId"></td>
+                </tr>
+                <tr>
+                    <td><b>CLIENTE :</b></td>
+                    <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editCustomer" name="editCustomer" data-placeholder="SELECCIONE CLIENTE..." /></td>
                 </tr>
                 <tr>
                     <td><b>TIPO DE SERVICIO :</b></td>
@@ -74,27 +80,27 @@
                 <tr>
                     <td><b>VOLUMEN:</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editVolume" name="editVolume"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureVolume" data-placeholder="SELECCIONE U.M. VOLUMEN..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureVolume" data-placeholder="SELECCIONE U.M. VOLUMEN..." /></td>
                 </tr>
                 <tr>
                     <td><b>PESO :</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editWeight" name="editWeight"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureWeight" data-placeholder="SELECCIONE U.M. PESO..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureWeight" data-placeholder="SELECCIONE U.M. PESO..." /></td>
                 </tr>
                 <tr>
                     <td><b>DISTANCIA :</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editDistance" name="editDistance"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureDistance" name="editMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureDistance" name="editMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                 </tr>
                 <tr>
                     <td><b>COSTO :</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editPrice" name="editPrice"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasurePrice" name="editMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasurePrice" name="editMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
                 </tr>
                 <tr>
                     <td><b>PRECIO :</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editRealPrice" name="editRealPrice"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureRealPrice" name="editMeasureRealPrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureRealPrice" name="editMeasureRealPrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
                 </tr>
                 <tr class="hide">
                     <td><b>ESTADO :</b></td>
@@ -128,9 +134,12 @@
                             <li><div class="checkbox"><label class="" for="dt_col_2"><input type="checkbox" value="1" id="dt_col_2" name="toggle-cols" checked="checked" class="uni_style"/> NRO.</label></div></li>
                             <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> ORIGEN</label></div></li>
                             <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> DESTINO</label></div></li>
-                            <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> COSTO</label></div></li>
-                            <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> PRECIO</label></div></li>
-                            <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
+                            <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> VOLUMEN</label></div></li>
+                            <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> PESO</label></div></li>
+                            <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> DISTANCIA</label></div></li>
+                            <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> COSTO</label></div></li>
+                            <li><div class="checkbox"><label class="" for="dt_col_9"><input type="checkbox" value="8" id="dt_col_9" name="toggle-cols" checked="checked" class="uni_style"/> PRECIO</label></div></li>
+                            <li><div class="checkbox"><label class="" for="dt_col_10"><input type="checkbox" value="9" id="dt_col_10" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
                         </ul>
                     </div>
                     <div class="clearfix sepH_b">
@@ -152,6 +161,9 @@
                                 <th class="center">NRO.</th>
                                 <th class="center">ORIGEN</th>
                                 <th class="center">DESTINO</th>
+                                <th class="center">VOLUMEN</th>
+                                <th class="center">PESO</th>
+                                <th class="center">DISTANCIA</th>
                                 <th class="center">COSTO</th>
                                 <th class="center">PRECIO</th>
                                 <th class="center" style="width: 80px;">ACCI&Oacute;N</th>
@@ -223,6 +235,21 @@
                     </td>
                 </tr>
                 <tr>
+                    <td><b>VOLUMEN:</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editDetailVolume" name="editDetailVolume"></td>
+                    <td><select class="form-control chzn_edit" id="editDetailMeasureVolume" data-placeholder="SELECCIONE U.M. VOLUMEN..." /></td>
+                </tr>
+                <tr>
+                    <td><b>PESO :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editDetailWeight" name="editDetailWeight"></td>
+                    <td><select class="form-control chzn_edit" id="editDetailMeasureWeight" data-placeholder="SELECCIONE U.M. PESO..." /></td>
+                </tr>
+                <tr>
+                    <td><b>DISTANCIA :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editDetailDistance" name="editDetailDistance"></td>
+                    <td><select class="form-control chzn_edit" id="editDetailMeasureDistance" name="editDetailMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                </tr>
+                <tr>
                     <td><b>COSTO :</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editDetailPrice" name="editDetailPrice"></td>
                     <td><select class="form-control chzn_edit" id="editDetailMeasurePrice" name="editDetailMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
@@ -257,6 +284,13 @@
             <div class="tac">
                 <a href="#" class="btn btn-gebo confirm_yes btn-default">S&iacute;</a>
                 <a href="#" class="btn confirm_no btn-default">No</a>
+            </div>
+        </div>
+        <div id="set_free_dialog" class="cbox_content">
+            <div class="sepH_c tac"><strong>Esta seguro de liberar el(los) registro(s)?</strong></div>
+            <div class="tac">
+                <a href="#" class="btn btn-gebo set_free_yes btn-default">S&iacute;</a>
+                <a href="#" class="btn set_free_no btn-default">No</a>
             </div>
         </div>
     </div>
