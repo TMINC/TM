@@ -207,9 +207,29 @@ function center_char($iCenID, $mysqli){
     return $center;
 }
 
+function customer_char($iCusID, $mysqli){
+    $stmt = $mysqli->prepare("SELECT cCusNam FROM tm_customer WHERE iCusID = ?");
+    $stmt->bind_param('s', $iCusID);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($customer);
+    $stmt->fetch();
+    return $customer;
+}
+
 function detail_total($iOrdID, $mysqli){
     $stmt = $mysqli->prepare("SELECT count(*) FROM tm_order_detail WHERE iOrdID = ?");
     $stmt->bind_param('s', $iOrdID);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($total);
+    $stmt->fetch();
+    return $total;
+}
+
+function order_total($cOrdSta, $mysqli){
+    $stmt = $mysqli->prepare("SELECT count(*) FROM tm_order WHERE cOrdSta = ?");
+    $stmt->bind_param('s', $cOrdSta);
     $stmt->execute();
     $stmt->store_result();
     $stmt->bind_result($total);

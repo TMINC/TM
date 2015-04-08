@@ -1,3 +1,13 @@
+<?php
+/**
+ * Copyright (C) 2015 netpartners-international.com
+ * By: Johnny Moscoso Rossel
+ **/
+
+include_once 'db_connect.php';
+include_once 'functions.php';
+
+?>
     <a href="javascript:void(0)" class="sidebar_switch on_switch bs_ttip" data-placement="auto right" data-viewport="body" title="Ocultar Sidebar">Sidebar switch</a>
     <div class="sidebar">
         <div class="sidebar_inner_scroll">
@@ -111,17 +121,22 @@
             </div>					
             <div class="sidebar_info">
                 <ul class="list-unstyled">
+                    <li style="text-align: center;"><strong>ESTADO DE ORDEN(ES)</strong></li>
                     <li>
-                        <span class="act act-warning">65</span>
-                        <strong>Gu&iacute;a(s) por Atender</strong>
+                        <span class="act act-danger"><?php echo order_total("0", $mysqli);?></span>
+                        <strong>&blacksquare; Rechazada(s)</strong>
                     </li>
                     <li>
-                        <span class="act act-success">10</span>
-                        <strong>Gu&iacute;a(s) en Transporte</strong>
+                        <span class="act act-warning"><?php echo order_total("2", $mysqli);?></span>
+                        <strong>&blacksquare; Liberada(s)</strong>
                     </li>
                     <li>
-                        <span class="act act-danger">85</span>
-                        <strong>Gu&iacute;a(s) Finalizadas</strong>
+                        <span class="act act-info"><?php echo order_total("3", $mysqli);?></span>
+                        <strong>&blacksquare; Subastada(s)</strong>
+                    </li>
+                    <li>
+                        <span class="act act-success"><?php echo order_total("5", $mysqli);?></span>
+                        <strong>&blacksquare; En Transporte</strong>
                     </li>
                 </ul>
             </div>

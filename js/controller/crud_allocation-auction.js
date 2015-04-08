@@ -4,19 +4,26 @@
  **/
 $(document).ready(function() {
     shipment.dt_maintenance();
+    $.validator.addMethod(
+        "chosen",
+        function(value, element) {
+            console.log(element);
+            return (value === null ? false : (value.length === 0 ? false : true));
+        },
+        "Por favor, elige una opción válida."
+    );
 });
 
 shipment = {    
     dt_maintenance: function() {
-        load(); 
-        var _order_number = 0;
+        load();
     }
 };
 var load = function () {    
     $.ajax({
         type: "POST",
         url: "module/shipment/crud/shipment.php",
-        data: "action=select",
+        data: "action=select&option=2",
         success: function (response) {
             $("#dt_maintenance tbody").empty();
             $('#dt_maintenance').dataTable().fnDestroy();
@@ -27,8 +34,8 @@ var load = function () {
             unistyle();
             maskinput();
             popover();
-            multiseleccion();
-            chosen();            
+            chosen();
+            reassign();
         }        
     });
 };
@@ -45,12 +52,57 @@ var popover = function (){
 var chosen = function (){
     $(".chzn_edit").chosen();
 };
-var multiseleccion = function () {
-    $('.sel_row').off().on('click', function () {
-        var tableid = $(this).data('tableid');
-        $('#' + tableid).find('.row_sel').attr('checked', this.checked);
+var reassign = function(){
+    $(".reassign").off().on('click', function (e) {
+        e.preventDefault();
+        var _id = $('input:checkbox:checked.row_sel').map(function () {
+            return $(this).data('id');
+        }).get();
+        if(_id.length===0){
+            $.sticky("INFO<br>[Orden(es) no seleccionada(s).]", {autoclose : 5000, position: "top-right", type: "st-info" });
+        }else{
+            $.sticky("ERROR<br>[Las ordenes seleccionadas no pertenecen al mismo cliente.]", {autoclose : 5000, position: "top-right", type: "st-error" });
+        }
     });
 };
+
+var save_plan = function (){
+    $("#adjudication_save").off().on('click', function (e) {
+        e.preventDefault();
+        $("[name='editAdjudicationType']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        if($('#validation_adjudication').validate({
+            onkeyup: false,
+            errorClass: 'error',
+            validClass: 'valid',
+            rules: {
+                editAdjudicationType: { chosen: true }
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass("f_error");
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass("f_error");
+            },
+            errorPlacement: function(error, element) {
+                $(element).closest('.form-group').append(error);
+            }
+        }).form()){
+            $("#adjudication").modal("hide");
+            var _type = $("#editAdjudicationType option:selected").val();
+            var _id = $('input:checkbox:checked.row_sel').map(function () {
+                return $(this).data('id');
+            }).get();
+            if(_type==0){
+                $('#adjudicationDirect').modal('show');
+                $('#editDirectOrderId').val(_id);
+            }else{
+                alert("S");
+            }
+        }
+        return false;
+    });
+};
+
 var table = function () {
     function fnShowHide(iCol) {
         var oTable = $('#dt_maintenance').dataTable();
@@ -118,8 +170,7 @@ var table = function () {
                     { "sType": "string" },
                     { "sType": "string" },
                     { "sType": "string" },
-                    { "sType": "string" },
-                    { "sType": "string" }
+                    { "bSortable": false }
                 ],
             "sPaginationType": "bootstrap"
         });
@@ -135,38 +186,7 @@ var table = function () {
             }else{
                 this.src = "img/details_close.png";
                 oTable.fnOpen(nTr, fnFormatDetails($(this).data('id')), 'details');
-                table_detail();
             }
         });
     }
-};
-var table_detail = function (){
-    $('#order_detail').dataTable({
-            "sDom": "<'row'<'col-sm-6'><'col-sm-6'f>r>t<'row'<'col-sm-5'i><'col-sm-7'>S>",
-            "sScrollY": "80px",
-            "aaSorting": [[1, "asc"]],
-            "iDisplayLength": -1,
-            "aLengthMenu": [[-1, 100, 50, 25], ["[ * ]", 100, 50, 25]],
-            "oLanguage": {
-                "sSearch": "Buscar por: ",
-                "sLengthMenu": "Mostrar _MENU_ registro(s).",
-                "sEmptyTable": "No hay registros para mostrar",
-                "sInfo": "_START_ al _END_ de _TOTAL_ viaje(s)",
-                "sInfoEmpty": "0 al 0 de 0 viaje(s)",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sPrevious": "Último",
-                    "sNext": "Siguiente",
-                    "sLast": "Anterior"
-                }
-            },
-            "aoColumns": [
-                    { "sType": "string" },
-                    { "sType": "string" },
-                    { "sType": "string" },
-                    { "sType": "string" },
-                    { "sType": "string" },
-                    { "bSortable": false }
-                ]
-        });
 };

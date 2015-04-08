@@ -6,7 +6,7 @@
 ?>
     <div class="row">
         <div class="col-sm-12 col-md-12">
-            <h3 class="heading"><i class="glyphicon icon-truck"></i>SERVICIO(S)-TRANSPORTE</h3>
+            <h3 class="heading"><i class="glyphicon icon-truck"></i>SUBASTA(S)-TRANSPORTE</h3>
             <div class="clearfix sepH_b">
                 <div class="btn-group col_vis_menu">
                     <a href="#" data-toggle="dropdown" class="btn dropdown-toggle btn-default">COLUMNAS <span class="caret"></span></a>
@@ -15,10 +15,10 @@
                         <li><div class="checkbox"><label class="" for="dt_col_2"><input type="checkbox" value="1" id="dt_col_2" name="toggle-cols" checked="checked" class="uni_style"/> &check;</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> NRO.ORDEN</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> TIPO SERVICIO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> CLIENTE</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> VOLUMEN</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> PESO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> DISTANCIA</label></div></li>                        
+                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> VOLUMEN</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> PESO</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> DISTANCIA</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
                     </ul>
                 </div>
                 <!-- actions for datatables -->
@@ -26,9 +26,8 @@
                     <div class="btn-group">
                         <button data-toggle="dropdown" class="btn dropdown-toggle btn-default">ACCIONES <span class="caret"></span></button>
                         <ul class="dropdown-menu">
-                            <li><a href="javascript:void(0);" class="plan"><i class="glyphicon glyphicon-thumbs-up"></i> PLANIFICAR</a></li>
                             <li><a href="javascript:void(0);" class="set_free" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-flag"></i> LIBERAR</a></li>
-                            <li><a href="javascript:void(0);" class="refuse" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-thumbs-down"></i> RECHAZAR</a></li>
+                            <li><a href="javascript:void(0);" class="reassign" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-transfer"></i> ASIGNACI&Oacute;N DIRECTA</a></li>
                         </ul>
                     </div>
                 </div>
@@ -38,13 +37,13 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th></th>
+                        <th style="width: 100px;"></th>
                         <th class="center" style="width: 120px;">NRO.ORDEN</th>
-                        <th class="center">CLIENTE</th>
                         <th class="center">TIPO SERVICIO</th>
                         <th class="center">VOLUMEN</th>
                         <th class="center">&nbsp;&nbsp;&nbsp;PESO&nbsp;&nbsp;&nbsp;</th>
                         <th class="center">DISTANCIA</th>
+                        <th class="center" style="width: 80px;">ACCI&Oacute;N</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -444,7 +443,7 @@
     <script src="lib/validation/jquery.validate.min.js"></script>
     <script src="lib/validation/localization/messages_es.js"></script>
     <!-- crud functions -->
-    <script src="js/controller/crud_allocation-service.js"></script>
+    <script src="js/controller/crud_allocation-auction.js"></script>
     <!-- lock screen-->    
     <script src="js/np/idle-time.js"></script>
     <script src="js/np/lock-screen.js"></script>
@@ -454,6 +453,6 @@
             //* show all elements & remove preloader
             setTimeout('$("html").removeClass("js")',1000);
             $('#collapseThree').addClass(' in');
-            $('#allocation-service').addClass(' active');
+            $('#allocation-auction').addClass(' active');
         });
     </script>

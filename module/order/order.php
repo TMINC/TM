@@ -78,14 +78,14 @@
                     <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editType" name="editType" data-placeholder="SELECCIONE TIPO DE SERVICIO..." /></td>
                 </tr>
                 <tr>
-                    <td><b>VOLUMEN:</b></td>
+                    <td><b>VOLUMEN :</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editVolume" name="editVolume"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureVolume" data-placeholder="SELECCIONE U.M. VOLUMEN..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureVolume" name="editMeasureVolume" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                 </tr>
-                <tr>
+                 <tr>
                     <td><b>PESO :</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editWeight" name="editWeight"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureWeight" data-placeholder="SELECCIONE U.M. PESO..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureWeight" name="editMeasureWeight" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                 </tr>
                 <tr>
                     <td><b>DISTANCIA :</b></td>
@@ -209,7 +209,7 @@
                         </div>
                     </td>
                     <td>                        
-                        <div class="bootstrap-timepicker">
+                        <div class="form-group" class="bootstrap-timepicker">
                             <input class="form-control" id="editDetailOriginHour" name="editDetailOriginHour" type="text">
                         </div>
                         <span class="help-block">Ver dropdown (24h)</span>
@@ -228,36 +228,36 @@
                         </div>
                     </td>
                     <td>                        
-                        <div class="bootstrap-timepicker">
+                        <div class="form-group" class="bootstrap-timepicker">
                             <input class="form-control" id="editDetailDestinationHour" name="editDetailDestinationHour" type="text">
                         </div>
                         <span class="help-block">Ver dropdown (24h)</span>
                     </td>
                 </tr>
                 <tr>
-                    <td><b>VOLUMEN:</b></td>
+                    <td><b>VOLUMEN :</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editDetailVolume" name="editDetailVolume"></td>
-                    <td><select class="form-control chzn_edit" id="editDetailMeasureVolume" data-placeholder="SELECCIONE U.M. VOLUMEN..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasureVolume" name="editDetailMeasureVolume" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                 </tr>
                 <tr>
                     <td><b>PESO :</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editDetailWeight" name="editDetailWeight"></td>
-                    <td><select class="form-control chzn_edit" id="editDetailMeasureWeight" data-placeholder="SELECCIONE U.M. PESO..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasureWeight" name="editDetailMeasureWeight" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                 </tr>
                 <tr>
                     <td><b>DISTANCIA :</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editDetailDistance" name="editDetailDistance"></td>
-                    <td><select class="form-control chzn_edit" id="editDetailMeasureDistance" name="editDetailMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasureDistance" name="editDetailMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                 </tr>
                 <tr>
                     <td><b>COSTO :</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editDetailPrice" name="editDetailPrice"></td>
-                    <td><select class="form-control chzn_edit" id="editDetailMeasurePrice" name="editDetailMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasurePrice" name="editDetailMeasurePrice" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                 </tr>
                 <tr>
                     <td><b>PRECIO :</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editDetailRealPrice" name="editDetailRealPrice"></td>
-                    <td><select class="form-control chzn_edit" id="editDetailMeasureRealPrice" name="editDetailMeasureRealPrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasureRealPrice" name="editDetailMeasureRealPrice" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                 </tr>
                 <tr>
                     <td><b>NOTA :</b></td>

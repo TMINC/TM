@@ -6,7 +6,7 @@
 ?>
     <div class="row">
         <div class="col-sm-12 col-md-12">
-            <h3 class="heading"><i class="glyphicon icon-truck"></i>SERVICIO(S)-TRANSPORTE</h3>
+            <h3 class="heading"><i class="glyphicon icon-truck"></i>REASIGNACI&Oacute;N-TRANSPORTE</h3>
             <div class="clearfix sepH_b">
                 <div class="btn-group col_vis_menu">
                     <a href="#" data-toggle="dropdown" class="btn dropdown-toggle btn-default">COLUMNAS <span class="caret"></span></a>
@@ -26,9 +26,7 @@
                     <div class="btn-group">
                         <button data-toggle="dropdown" class="btn dropdown-toggle btn-default">ACCIONES <span class="caret"></span></button>
                         <ul class="dropdown-menu">
-                            <li><a href="javascript:void(0);" class="plan"><i class="glyphicon glyphicon-thumbs-up"></i> PLANIFICAR</a></li>
-                            <li><a href="javascript:void(0);" class="set_free" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-flag"></i> LIBERAR</a></li>
-                            <li><a href="javascript:void(0);" class="refuse" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-thumbs-down"></i> RECHAZAR</a></li>
+                            <li><a href="javascript:void(0);" class="reassign"><i class="glyphicon glyphicon-transfer"></i> REASIGNAR</a></li>                            
                         </ul>
                     </div>
                 </div>
@@ -169,206 +167,6 @@
             </div>
         </div>
     </div>
-    
-    
-    <!-- Selección datos Transporte -->
-    <div class="modal fade" id="directTransport">
-	    <div class="modal-dialog">
-		    <div class="modal-content">
-			    <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				    <h3 class="modal-title">Informaci&oacute;n Transporte</h3>
-			    </div>
-			    <div class="modal-body">
-				    <table class="table table-striped table-bordered table-condensed" id="table_edit">
-                        <tr>
-                            <td>Nro. Viaje</td>
-                            <td><input id="numberTransport" class="form-control" type="text" disabled /></td>
-                        </tr>
-                        <tr>
-                            <td>Nro. Cita Recojo</td>
-                            <td><input id="dateTransport" class="form-control" type="text" disabled /></td>
-                        </tr>
-                        <tr>
-                            <td>Proveedor de Transporte</td>
-                            <td><select id="supplier" data-placeholder="SELECCIONE PROVEEDOR DE TRANSPORTE..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>
-                        <tr>
-                            <td>Tipo de Veh&iacute;culo<br /> 
-                                <input id="newType" type="checkbox" style="float:left;"/><div style="font-size:11px;color:Blue;margin:3px 0 0 4px;float:left;">Solicitar Transporte Adicional</div>
-                            </td>
-                            <td><select id="typeVehicle" data-placeholder="SELECCIONE TIPO DE VEHICULO..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>                       
-                        <tr>
-                            <td>Clase de Veh&iacute;culo</td>
-                            <td><select id="classVehicle" data-placeholder="SELECCIONE CLASE DE VEHICULO..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>
-                        <tr class="trtransporte hide">
-                            <td>Tipo de Veh&iacute;culo II</td>
-                            <td><select id="typeVehicleII" data-placeholder="SELECCIONE TIPO DE VEHICULO..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>                       
-                        <tr class="trtransporte hide">
-                            <td>Clase de Veh&iacute;culo II</td>
-                            <td><select id="classVehicleII" data-placeholder="SELECCIONE CLASE DE VEHICULO..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>
-                        <tr>
-                            <td>Clase de Documento de Transporte</td>
-                            <td><select id="document" data-placeholder="SELECCIONE CLASE DE DOCUMENTO DE TRANSPORTE..." class="chzn_a form-control" style="width:330px;"></select></td>                                
-                        </tr> 
-                        <tr class="trorigen hide">
-                            <td>Seleccione Origen</td>
-                            <td><select id="origin" data-placeholder="SELECCIONE ORIGEN..." class="chzn_a form-control" style="width:330px;"/></td>                                
-                        </tr>
-                        <tr class="trdestino hide">
-                            <td>Seleccione Destino</td>
-                            <td><select id="destination" data-placeholder="SELECCIONE DESTINO..." class="chzn_a form-control" style="width:330px;"/></td>                                
-                        </tr>
-                        <tr class="trdestino hide">
-                            <td colspan="2">Cita Entrega Destino</td>
-                        </tr>
-                        <tr class="trdestino hide">
-                            <td colspan="2">
-                                <table id="dt_citaEntregaCD">
-                                <tbody></tbody>                                
-                                </table>                                
-                           </td>
-                        </tr>
-                        <tr class="trcitaEntrega hide">
-                            <td colspan="2">Registre hora y fecha para la(s) cita(s) de Entrega en Destino(s)</td>
-                        </tr>
-                        <tr class="trcitaEntrega hide">
-                            <td colspan="2">
-                                <table id="dt_citaEntrega">
-                                <tbody></tbody>                                
-                                </table>                                
-                           </td>                                
-                        </tr>                        
-                    </table>
-			    </div>
-			    <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-				    <button type="button" class="btn btn-primary" id="saveTransport">Guardar</button>
-			    </div>
-		    </div>
-	    </div>
-    </div>
-    <!-- Selección datos Subasta -->
-    <div class="modal fade" id="auctionTransport">
-	    <div class="modal-dialog">
-		    <div class="modal-content">
-			    <div class="modal-header">
-				    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				    <h3 class="modal-title">Informaci&oacute;n Subasta</h3>
-			    </div>
-			    <div class="modal-body">
-                    <table class="table table-striped table-bordered table-condensed">
-                        <tr>
-                            <td width="40%">Nro. Subasta</td>
-                            <td><input id="idSubasta" class="form-control" type="text" disabled /></td>
-                        </tr>
-                        <tr>
-                            <td>Nro. Viaje</td>
-                            <td><input id="numberTravel" class="form-control" type="text" disabled /></td>
-                        </tr>
-                        <tr>
-                            <td>Nro. Cita</td>
-                            <td><input id="numberDate" class="form-control" type="text" disabled /></td>
-                        </tr>
-                        <tr>
-                            <td>Proveedor de Transporte</td>
-                            <td><select id="supplierTransport" data-placeholder="SELECCIONE PARTICIPANTES..." class="chzn_a form-control" style="width:330px;" multiple="multiple"/></td>
-                        </tr>
-                        <tr>
-                            <td>Tipo de Veh&iacute;culo<br /> 
-                                <input id="newTypeSub" type="checkbox" style="float:left;"/><div style="font-size:11px;color:Blue;margin:3px 0 0 4px;float:left;">Solicitar Transporte Adicional</div>
-                            </td>
-                            <td><select id="typeVehSub" data-placeholder="SELECCIONE TIPO DE VEHICULO..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>
-                        <tr>
-                            <td>Clase de Veh&iacute;culo</td>
-                            <td><select id="classVehSub" data-placeholder="SELECCIONE CLASE DE VEHICULO..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>
-                        <tr class="trtransporteSub hide">
-                            <td>Tipo de Veh&iacute;culo II</td>
-                            <td><select id="typeVehSubII" data-placeholder="SELECCIONE TIPO DE VEHICULO..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>
-                        <tr class="trtransporteSub hide">
-                            <td>Clase de Veh&iacute;culo II</td>
-                            <td><select id="classVehSubII" data-placeholder="SELECCIONE CLASE DE VEHICULO..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>
-                        <tr>
-                            <td>Clase de Documento de Transporte</td>
-                            <td><select id="documentSub" data-placeholder="SELECCIONE CLASE DE DOCUMENTO DE TRANSPORTE..." class="chzn_a form-control" style="width:330px;"></select></td>                                
-                        </tr> 
-                        <tr class="trorigenSub hide">
-                            <td>Seleccione Origen</td>
-                            <td><select id="originSub" data-placeholder="SELECCIONE ORIGEN..." class="chzn_a form-control" style="width:330px;"/></td>                                
-                        </tr>
-                        <tr class="trdestinoSub hide">
-                            <td>Seleccione Destino</td>
-                            <td><select id="destinationSub" data-placeholder="SELECCIONE DESTINO..." class="chzn_a form-control" style="width:330px;"/></td>                                
-                        </tr>
-                        <tr class="trdestinoSub hide">
-                            <td colspan="2">Cita Entrega Destino</td>
-                        </tr>
-                        <tr class="trdestinoSub hide">
-                            <td colspan="2">
-                                <table id="dt_citaEntregaCDSub">
-                                <tbody></tbody>                                
-                                </table>                                
-                           </td>
-                        </tr>
-                        <tr class="trcitaEntregaSub hide">
-                            <td colspan="2">Registre hora y fecha para la(s) cita(s) de Entrega en Destino(s)</td>
-                        </tr>
-                        <tr class="trcitaEntregaSub hide">
-                            <td colspan="2">
-                                <table id="dt_citaEntregaSub">
-                                <tbody></tbody>                                
-                                </table>                                
-                           </td>                                
-                        </tr>
-                        <tr>
-                            <td>Descripci&oacute;n del Servicio</td>
-                            <td><input id="descriptionTravel" class="form-control" type="text" /></td>
-                        </tr>
-                        <tr>
-                            <td>Monto Base S/.</td>
-                            <td><input id="amountTravel" class="form-control" type="text" /></td>
-                        </tr>
-                        <tr>
-                            <td>Estado</td>
-                            <td><input type="checkbox" id="editStatus" checked disabled></td>
-                        </tr>
-                        <tr>
-                            <td>Fecha Fin de Subasta</td>
-                            <td>
-                                <div id="dateSelectTxt" class="input-group date">
-							        <input class="form-control" readonly="" type="text" id="dateSelectS">
-				                    <span class="input-group-addon"><i class="splashy-calendar_day"></i></span>
-						        </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Hora Fin de Subasta</td>
-                            <td>
-                                <div class="input-group bootstrap-timepicker">
-							        <input id="hourSelect" type="text" class="form-control detHour" value="">
-							        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i> Ajustar Hora</span>
-						        </div>
-                            </td>
-                        </tr>
-                    </table>				    
-			    </div>
-			    <div class="modal-footer">
-				    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-				    <button type="button" class="btn btn-primary" id="saveAuction">Guardar</button>
-			    </div>
-		    </div>
-	    </div>
-    </div>
-    
-    
     <!-- hide elements-->
     <div class="hide">           
         <!-- confirmation box -->
@@ -444,7 +242,7 @@
     <script src="lib/validation/jquery.validate.min.js"></script>
     <script src="lib/validation/localization/messages_es.js"></script>
     <!-- crud functions -->
-    <script src="js/controller/crud_allocation-service.js"></script>
+    <script src="js/controller/crud_allocation-reasigment.js"></script>
     <!-- lock screen-->    
     <script src="js/np/idle-time.js"></script>
     <script src="js/np/lock-screen.js"></script>
@@ -454,6 +252,6 @@
             //* show all elements & remove preloader
             setTimeout('$("html").removeClass("js")',1000);
             $('#collapseThree').addClass(' in');
-            $('#allocation-service').addClass(' active');
+            $('#allocation-reasigment').addClass(' active');
         });
     </script>
