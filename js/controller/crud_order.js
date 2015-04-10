@@ -283,34 +283,37 @@ var liberar = function () {
                 return $(this).data('detail');
             }).get();
             var _cntDetail = 0;
-            for(i=0; i<_detail.length; i++){ if(_detail[i]===0){_cntDetail++;} }
-            $.colorbox({
-                initialHeight: '0',
-                initialWidth: '0',
-                href: "#set_free_dialog",
-                inline: true,
-                opacity: '0.3',
-                onComplete: function () {
-                    $('.set_free_yes').off().on('click', function (e) {
-                        e.preventDefault();
-                        //Implementacion eliminar en base de datos
-                        var _id = $('input:checkbox:checked.row_sel').map(function () {
-                            return $(this).data('id');
-                        }).get();
-                        $.colorbox.close();
-                        $.ajax({ type: "POST", url: "module/order/crud/order.php", data: "action=status&status=2& id="+ _id,
-                            success: function () {
-                                load();    
-                                $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
-                            }        
+            for(i=0; i<_detail.length; i++){ if(_detail[i]===0){_cntDetail++;}}
+            if(_cntDetail){
+                $.sticky("ERROR<br>[Orden(es) no cuenta(n) con detalle.]", {autoclose : 5000, position: "top-right", type: "st-error" });
+            }else{
+                $.colorbox({
+                    initialHeight: '0',
+                    initialWidth: '0',
+                    href: "#set_free_dialog",
+                    inline: true,
+                    opacity: '0.3',
+                    onComplete: function () {
+                        $('.set_free_yes').off().on('click', function (e) {
+                            e.preventDefault();
+                            //Implementacion eliminar en base de datos
+                            var _id = $('input:checkbox:checked.row_sel').map(function () {
+                                return $(this).data('id');
+                            }).get();
+                            $.colorbox.close();
+                            $.ajax({ type: "POST", url: "module/order/crud/order.php", data: "action=status&status=2& id="+ _id,
+                                success: function () {
+                                    load(); $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                                }        
+                            });
                         });
-                    });
-                    $('.set_free_no').off().on('click', function (e) {
-                        e.preventDefault();
-                        $.colorbox.close();
-                    });
-                }
-            });        
+                        $('.set_free_no').off().on('click', function (e) {
+                            e.preventDefault();
+                            $.colorbox.close();
+                        });
+                    }
+                }); 
+            }    
         }
     });
 };
@@ -383,7 +386,7 @@ var eliminar = function () {
                         $.ajax({ type: "POST", url: "module/order/crud/order.php", data: "action=delete& id="+ _id,
                             success: function () {
                                 load();  
-                                $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
+                                $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
                             }        
                         });
                     });
@@ -451,7 +454,7 @@ var guardar = function () {
             var _action = $("#editAction").val();
             $.ajax({ type: "POST", url: "module/order/crud/order.php", data: "action="+ _action +"&id="+ _id+"&type="+ _type +"&volume="+ _volume+"&measure_volume="+ _measure_volume+"&weight="+ _weight+"&measure_weight="+ _measure_weight+"&distance="+ _distance+"&measure_distance="+ _measure_distance+"&price="+ _price+"&measure_price="+ _measure_price+"&real_price="+ _real_price+"&measure_real_price="+ _measure_real_price+"&customer="+ _customer,
                 success: function () {
-                    load();$.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
+                    load();$.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
                 }        
             });
         }
@@ -593,7 +596,7 @@ var eliminar_detail = function(){
                             data: "action=delete&order_detail_id="+_id+"& order_id="+ _order_number,
                             success: function () {
                                 load_detail(_order_number);    
-                                $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
+                                $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
                             }        
                         });
                     });
@@ -674,7 +677,7 @@ var guardar_detail = function(){
                 success: function () {
                     load_detail(_order_id);
                     $("#modal_detail").modal("hide");
-                    $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
+                    $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
                 }        
             });
         }
