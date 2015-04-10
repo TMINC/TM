@@ -30,8 +30,7 @@
                     $center_destination = center_char($center_destination_id, $mysqli);
                     $measure_distance = measure_char($measure_distance_id, $mysqli);
                     $measure_price = measure_char($measure_price_id, $mysqli);
-                    $measure_real_price = measure_char($measure_real_price_id, $mysqli);
-                    
+                    $measure_real_price = measure_char($measure_real_price_id, $mysqli);                    
                     if($route_status=='1'){$status='<a class="hint--left hint--success" style="float:right;cursor:pointer;" data-hint="Activo"><i class="glyphicon glyphicon-ok" /></a>';}else{$status='<a class="hint--left hint--error" style="float:right;cursor:pointer;" data-hint="Inactivo"><i class="glyphicon glyphicon-minus" /></a>';}
                     echo '<tr><td><input id="c'.$route_id.'" name="row_sel" type="checkbox" class="row_sel uni_style" data-id="'.$route_id.'"></td>'.
                         '<td>'.$route_id.$status.'</td>'.
@@ -60,8 +59,7 @@
            $route_real_price = $_POST['real_price']; 
            $measure_real_price_id = $_POST['measure_real_price'];
            if($_POST['status']=='true'){$route_status=1;}else{$route_status=0;}
-           if($action=='insert'){
-               
+           if($action=='insert'){               
                $mysqli->query("INSERT INTO tm_route (cRouNam, iCenIDOri, iCenIDDes, cRouDis, iMeaIDDis, cRouTim, cRouPri, iMeaIDPri, cRouReaPri, iMeaIDReaPri, cRouSta) VALUES ('".$route_name."', '".$center_origin_id."', '".$center_destination_id."', '".$route_distance."', '".$measure_distance_id."', '".$route_time."', '".$route_price."', '".$measure_price_id."', '".$route_real_price."', '".$measure_real_price_id."', '".$route_status."')");
            } 
            if($action=='update'){

@@ -61,53 +61,53 @@
                     <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
                 </div>
                 <div class="modal-body">
-                <form id="validation_form">
-                <table class="table table-bordered">
-                <tr>
-                    <td><b>ID :</b></td>
-                    <td class="form-group"><input class="form-control" readonly="true" type="text" id="editId" name="editId"></td>
-                </tr>
-                <tr>
-                    <td><b>NOMBRE :</b></td>
-                    <td class="form-group" colspan="2"><input class="form-control" type="text" id="editName" name="editName"></td>
-                </tr>
-                <tr>
-                    <td><b>ORIGEN :</b></td>
-                    <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editOrigin" name="editOrigin" data-placeholder="SELECCIONE ORIGEN..." /></td>
-                </tr>
-               <tr>
-                    <td><b>DESTINO :</b></td>
-                    <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editDestination" name="editDestination" data-placeholder="SELECCIONE DESTINO..." /></td>
-                </tr>
-               <tr>
-                    <td><b>DISTANCIA :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editDistance" name="editDistance"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureDistance" name="editMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
-                </tr>  
-                <tr>
-                    <td><b>TIEMPO :</b></td>
-                    <td class="form-group" colspan="2"><input class="form-control" type="text" id="editTime" name="editTime"></td>
-                </tr>
-                <tr>
-                    <td><b>COSTO :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editPrice" name="editPrice"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasurePrice" name="editMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>PRECIO :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editRealPrice" name="editRealPrice"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureRealPrice" name="editMeasureRealPrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>ESTADO :</b></td>
-                    <td class="form-group"><input type="checkbox" id="editStatus" class="uni_style"></td>
-                </tr> 
-                <tr class="hide">
-                    <td><b>ACCI&Oacute;N :</b></td>
-                    <td><input class="form-control" type="text" id="editAction"></td>
-                </tr> 
-                </table>
-                </form>
+                    <form id="validation_form">
+                        <table class="table table-bordered">
+                        <tr>
+                            <td><b>ID :</b></td>
+                            <td class="form-group"><input class="form-control" readonly="true" type="text" id="editId" name="editId"></td>
+                        </tr>
+                        <tr>
+                            <td><b>NOMBRE :</b></td>
+                            <td class="form-group" colspan="2"><input class="form-control" type="text" id="editName" name="editName"></td>
+                        </tr>
+                        <tr>
+                            <td><b>ORIGEN :</b></td>
+                            <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editOrigin" name="editOrigin" data-placeholder="SELECCIONE ORIGEN..." /></td>
+                        </tr>
+                       <tr>
+                            <td><b>DESTINO :</b></td>
+                            <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editDestination" name="editDestination" data-placeholder="SELECCIONE DESTINO..." /></td>
+                        </tr>
+                       <tr>
+                            <td><b>DISTANCIA :</b></td>
+                            <td class="form-group"><input class="form-control" type="text" id="editDistance" name="editDistance"></td>
+                            <td class="form-group"><select class="form-control chzn_edit" id="editMeasureDistance" name="editMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                        </tr>  
+                        <tr>
+                            <td><b>TIEMPO :</b></td>
+                            <td class="form-group" colspan="2"><input class="form-control" type="text" id="editTime" name="editTime"></td>
+                        </tr>
+                        <tr>
+                            <td><b>COSTO :</b></td>
+                            <td class="form-group"><input class="form-control" type="text" id="editPrice" name="editPrice"></td>
+                            <td class="form-group"><select class="form-control chzn_edit" id="editMeasurePrice" name="editMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
+                        </tr>
+                        <tr>
+                            <td><b>PRECIO :</b></td>
+                            <td class="form-group"><input class="form-control" type="text" id="editRealPrice" name="editRealPrice"></td>
+                            <td class="form-group"><select class="form-control chzn_edit" id="editMeasureRealPrice" name="editMeasureRealPrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
+                        </tr>
+                        <tr>
+                            <td><b>ESTADO :</b></td>
+                            <td class="form-group"><input type="checkbox" id="editStatus" class="uni_style"></td>
+                        </tr> 
+                        <tr class="hide">
+                            <td><b>ACCI&Oacute;N :</b></td>
+                            <td><input class="form-control" type="text" id="editAction"></td>
+                        </tr> 
+                        </table>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-primary" id="save"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>

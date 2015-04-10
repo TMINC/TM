@@ -59,60 +59,60 @@
                 </div>
                 <div class="modal-body">
                     <form id="validation_form">
-                <table class="table table-bordered">
-                <tr>
-                    <td><b>ID :</b></td>
-                    <td colspan="2"><input class="form-control" readonly="true" type="text" id="editId"></td>
-                </tr>
-                 <tr>
-                    <td><b>PLACA :</b></td>
-                    <td class="form-group" colspan="2"><input class="form-control" type="text" id="editPlate" name="editPlate"></td>
-                </tr>
-                 <tr>
-                    <td><b>TUC :</b></td>
-                    <td class="form-group" colspan="2"><input class="form-control" type="text" id="editTuc" name="editTuc"></td>
-                </tr>
-               <tr>
-                    <td><b>TIPO :</b></td>
-                    <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editType" name="editType" data-placeholder="SELECCIONE TIPO..." /></td>
-                </tr>
-                <tr>
-                    <td><b>CLASE :</b></td>
-                    <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editClass" name="editClass" data-placeholder="SELECCIONE TIPO..." /></td>
-                </tr>
-                <tr>
-                    <td><b>CATEGORIA :</b></td>
-                    <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editCategory" name="editCategory" data-placeholder="SELECCIONE TIPO..." /></td>
-                </tr>
-                  <tr>
-                    <td><b>PESO :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editWeight" name="editWeight"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureWeight" name="editMeasureWeight" data-placeholder="SELECCIONE U.M. PESO..." /></td>
-                </tr>
-                 <tr>
-                    <td><b>LONGITUD :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editLenght" name="editLenght"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureLenght" name="editMeasureLenght" data-placeholder="SELECCIONE U.M. LONGITUD..." /></td>
-                </tr>  
-                 <tr>
-                    <td><b>ANCHURA :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editWidth" name="editWidth"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureWidth" name="editMeasureWidth" data-placeholder="SELECCIONE U.M. ANCHURA..." /></td>
-                </tr>  
-                <tr>
-                    <td><b>ALTURA :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editHeight" name="editHeight"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureHeight" name="editMeasureHeight" data-placeholder="SELECCIONE U.M. ALTURA..." /></td>
-                </tr>  
-                 <tr>
-                    <td><b>ESTADO :</b></td>
-                    <td class="form-group"><input type="checkbox" id="editStatus" class="uni_style"></td>
-                </tr> 
-                <tr class="hide">
-                    <td><b>ACCI&Oacute;N :</b></td>
-                    <td><input class="form-control" type="text" id="editAction"></td>
-                </tr> 
-                </table>
+                        <table class="table table-bordered">
+                        <tr>
+                            <td><b>ID :</b></td>
+                            <td colspan="2"><input class="form-control" readonly="true" type="text" id="editId"></td>
+                        </tr>
+                         <tr>
+                            <td><b>PLACA :</b></td>
+                            <td class="form-group" colspan="2"><input class="form-control" type="text" id="editPlate" name="editPlate"></td>
+                        </tr>
+                         <tr>
+                            <td><b>TUC :</b></td>
+                            <td class="form-group" colspan="2"><input class="form-control" type="text" id="editTuc" name="editTuc"></td>
+                        </tr>
+                       <tr>
+                            <td><b>TIPO :</b></td>
+                            <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editType" name="editType" data-placeholder="SELECCIONE TIPO..." /></td>
+                        </tr>
+                        <tr>
+                            <td><b>CLASE :</b></td>
+                            <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editClass" name="editClass" data-placeholder="SELECCIONE TIPO..." /></td>
+                        </tr>
+                        <tr>
+                            <td><b>CATEGORIA :</b></td>
+                            <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editCategory" name="editCategory" data-placeholder="SELECCIONE TIPO..." /></td>
+                        </tr>
+                          <tr>
+                            <td><b>PESO :</b></td>
+                            <td class="form-group"><input class="form-control" type="text" id="editWeight" name="editWeight"></td>
+                            <td class="form-group"><select class="form-control chzn_edit" id="editMeasureWeight" name="editMeasureWeight" data-placeholder="SELECCIONE U.M. PESO..." /></td>
+                        </tr>
+                         <tr>
+                            <td><b>LONGITUD :</b></td>
+                            <td class="form-group"><input class="form-control" type="text" id="editLenght" name="editLenght"></td>
+                            <td class="form-group"><select class="form-control chzn_edit" id="editMeasureLenght" name="editMeasureLenght" data-placeholder="SELECCIONE U.M. LONGITUD..." /></td>
+                        </tr>  
+                         <tr>
+                            <td><b>ANCHURA :</b></td>
+                            <td class="form-group"><input class="form-control" type="text" id="editWidth" name="editWidth"></td>
+                            <td class="form-group"><select class="form-control chzn_edit" id="editMeasureWidth" name="editMeasureWidth" data-placeholder="SELECCIONE U.M. ANCHURA..." /></td>
+                        </tr>  
+                        <tr>
+                            <td><b>ALTURA :</b></td>
+                            <td class="form-group"><input class="form-control" type="text" id="editHeight" name="editHeight"></td>
+                            <td class="form-group"><select class="form-control chzn_edit" id="editMeasureHeight" name="editMeasureHeight" data-placeholder="SELECCIONE U.M. ALTURA..." /></td>
+                        </tr>  
+                         <tr>
+                            <td><b>ESTADO :</b></td>
+                            <td class="form-group"><input type="checkbox" id="editStatus" class="uni_style"></td>
+                        </tr> 
+                        <tr class="hide">
+                            <td><b>ACCI&Oacute;N :</b></td>
+                            <td><input class="form-control" type="text" id="editAction"></td>
+                        </tr> 
+                        </table>
                     </form>
                 </div>
                 <div class="modal-footer">

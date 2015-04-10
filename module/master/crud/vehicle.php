@@ -5,8 +5,7 @@
  **/
     include_once '../../../includes/db_connect.php';
     include_once '../../../includes/psl-config.php';
-    include_once '../../../includes/functions.php';
-    
+    include_once '../../../includes/functions.php';    
     $action = $_POST['action'];
     if($action=='consult'){
         $sel = $_POST['sel'];
@@ -30,8 +29,7 @@
                     $measure_weight = measure_char($measure_weight_id, $mysqli);
                     $measure_lenght = measure_char($measure_lenght_id, $mysqli);
                     $measure_width = measure_char($measure_width_id, $mysqli);
-                    $measure_height = measure_char($measure_height_id, $mysqli);
-                    
+                    $measure_height = measure_char($measure_height_id, $mysqli);                     
                     if($vehicle_status=='1'){$status='<a class="hint--left hint--success" style="float:right;cursor:pointer;" data-hint="Activo"><i class="glyphicon glyphicon-ok" /></a>';}else{$status='<a class="hint--left hint--error" style="float:right;cursor:pointer;" data-hint="Inactivo"><i class="glyphicon glyphicon-minus" /></a>';}
                     echo '<tr><td><input id="c'.$vehicle_id.'" name="row_sel" type="checkbox" class="row_sel uni_style" data-id="'.$vehicle_id.'"></td>'.
                         '<td>'.$vehicle_id.$status.'</td>'.
