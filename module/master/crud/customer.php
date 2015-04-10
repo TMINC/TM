@@ -29,7 +29,7 @@
                     if($customer_status=='1'){$status='<a class="hint--left hint--success" style="float:right;cursor:pointer;" data-hint="Activo"><i class="glyphicon glyphicon-ok" /></a>';}else{$status='<a class="hint--left hint--error" style="float:right;cursor:pointer;" data-hint="Inactivo"><i class="glyphicon glyphicon-minus" /></a>';}
                     echo '<tr><td><input id="c'.$customer_id.'" name="row_sel" type="checkbox" class="row_sel uni_style" data-id="'.$customer_id.'"></td>'.
                         '<td>'.$customer_id.$status.'</td>'.
-                        '<td>'.$customer_name.'<a style="cursor:help;float:right;" class="pop_over hint--right hint--info" data-hint="Detalle" data-content="&perp; '.$customer_address.'    &phone;'.$customer_phone_name.'    @&nbsp;'.$customer_email_name.'" title="'.$customer_name.'" data-placement="left"><i class="glyphicon glyphicon-book"/></a></td>'.
+                        '<td>'.$customer_name.'<a style="cursor:help;float:right;" class="pop_over hint--right hint--info" data-hint="Detalle" data-content="&perp; '.$customer_address.'    &phone;'.$customer_phone_name.'    @&nbsp;'.$customer_email_name.'" title="'.$customer_name.'" data-placement="left"><i class="glyphicon glyphicon-briefcase"/></a></td>'.
                         '<td>'.$customer_ruc.'</td>'.
                         '<td>'.$customer_contact.'<a style="cursor:help;float:right;" class="pop_over hint--right hint--info" data-hint="Detalle" data-content="&phone;'.$customer_phone_contact.'    @&nbsp;'.$customer_email_contact.'" title="'.$customer_contact.'" data-placement="left"><i class="glyphicon glyphicon-user"/></a></td>'.
                         '<td class="center">'.

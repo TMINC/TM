@@ -34,6 +34,7 @@ var load = function () {
             unistyle();
             maskinput();
             popover();
+            spinner();
             chosen();
             plan();
         }        
@@ -48,6 +49,9 @@ var maskinput = function (){
 };
 var popover = function (){
     $(".pop_over").popover();
+};
+var spinner = function(){
+    $("#editPlanQuantity").spinner({min: 1});
 };
 var chosen = function (){
     $(".chzn_edit").chosen();
@@ -86,8 +90,14 @@ var plan = function(){
             }
             if(_customerBool){
                 select_plan();
-                $('#adjudication').modal('show');
-                save_plan();
+                $('#plan').modal({ backdrop: 'static', keyboard: false });
+                popover();
+                spinner();
+                var _id = $('input:checkbox:checked.row_sel').map(function () {
+                    return $(this).data('id');
+                }).get();
+                $('#editDirectOrderId').val(_id);
+                //save_plan();
             }else{
                 $.sticky("ERROR<br>[Las ordenes seleccionadas no pertenecen al mismo cliente.]", {autoclose : 5000, position: "top-right", type: "st-error" });
             }
@@ -120,7 +130,7 @@ var save_plan = function (){
             var _id = $('input:checkbox:checked.row_sel').map(function () {
                 return $(this).data('id');
             }).get();
-            if(_type==0){
+            if(_type===0){
                 $('#adjudicationDirect').modal('show');
                 $('#editDirectOrderId').val(_id);
             }else{
@@ -130,8 +140,11 @@ var save_plan = function (){
         return false;
     });
 };
-var direct = function (){
-       
+var plan_trip = function (){
+    $(".plan_trip").off().on('click', function (e) {
+        e.preventDefault();
+        alert();
+    });   
 };
 var table = function () {
     function fnShowHide(iCol) {

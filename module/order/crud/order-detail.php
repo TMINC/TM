@@ -25,9 +25,9 @@
                 $measure_real_price = measure_char($measure_real_price_id, $mysqli); 
                 $cnt++;
                 echo '<tr><td><input id="c'.$order_detail_id.'" name="row_sel_detail" type="checkbox" class="row_sel_detail uni_style" data-id="'.$order_detail_id.'" ></td>'.
-                    '<td>'.$cnt.'<a style="cursor:help;float:right;" class="pop_over hint--right hint--info" data-hint="Nota" data-content="'.$order_note.'" title="NOTA: '.$cnt.'" data-placement="right"><i class="glyphicon glyphicon-book"/></a></td>'.
-                    '<td>'.$center_origin.'<a style="cursor:help;float:right;" class="pop_over hint--right hint--info" data-hint="Cita Origen" data-content="&perp; '.$order_origin_date.'    &perp;'.$order_origin_hour.' " title="'.$center_origin.'" data-placement="left"><i class="glyphicon glyphicon-book"/></a></td>'.
-                    '<td>'.$center_destination.'<a style="cursor:help;float:right;" class="pop_over hint--right hint--info" data-hint="Cita Destino" data-content="&perp; '.$order_destination_date.'    &perp;'.$order_destination_hour.' " title="'.$center_destination.'" data-placement="left"><i class="glyphicon glyphicon-book"/></a></td>'.
+                    '<td>'.$cnt.'<a style="cursor:help;float:right;" class="pop_over hint--left hint--info" data-hint="Nota" data-content="'.$order_note.'" title="NOTA: '.$cnt.'" data-placement="right"><i class="glyphicon glyphicon-comment"/></a></td>'.
+                    '<td>'.$center_origin.'<a style="cursor:help;float:right;" class="pop_over hint--left hint--info" data-hint="Cita Origen" data-content="'.$order_origin_date.' '.$order_origin_hour.'" title="'.$center_origin.'" data-placement="right"><i class="glyphicon glyphicon-calendar"/></a></td>'.
+                    '<td>'.$center_destination.'<a style="cursor:help;float:right;" class="pop_over hint--left hint--info" data-hint="Cita Destino" data-content="'.$order_destination_date.' '.$order_destination_hour.'" title="'.$center_destination.'" data-placement="right"><i class="glyphicon glyphicon-calendar"/></a></td>'.
                     '<td>'.$order_volume.' '.$measure_volume.'</td>'.                            
                     '<td>'.$order_weight.' '.$measure_weight.'</td>'.
                     '<td>'.$order_distance.' '.$measure_distance.'</td>'.

@@ -48,7 +48,7 @@ include_once 'functions.php';
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="#collapseTwo" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-                                <i class="glyphicon glyphicon-th"></i> Generador de Pedido
+                                <i class="glyphicon glyphicon-file"></i> Generador de Pedido
                             </a>
                         </div>
                         <div class="accordion-body collapse" id="collapseTwo">
