@@ -16,8 +16,10 @@
                         <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> NOMBRE</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> ORIGEN</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> DESTINO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> KM.</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> DISTANCIA.</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> TIEMPO</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> COSTO</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_9"><input type="checkbox" value="8" id="dt_col_9" name="toggle-cols" checked="checked" class="uni_style"/> PRECIO</label></div></li>
                     </ul>
                 </div>
                 <!-- actions for datatables -->
@@ -39,8 +41,10 @@
                         <th class="center">NOMBRE</th>
                         <th class="center">ORIGEN</th>
                         <th class="center">DESTINO</th>
-                        <th class="center">KIL&Oacute;METROS</th>
+                        <th class="center">DISTANCIA</th>
                         <th class="center">TIEMPO</th>
+                        <th class="center">COSTO</th>
+                        <th class="center">PRECIO</th>
                         <th class="center" style="width: 100px;">ACCI&Oacute;N</th>
                     </tr>
                 </thead>
@@ -65,23 +69,34 @@
                 </tr>
                 <tr>
                     <td><b>NOMBRE :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editName" name="editName"></td>
+                    <td class="form-group" colspan="2"><input class="form-control" type="text" id="editName" name="editName"></td>
                 </tr>
                 <tr>
                     <td><b>ORIGEN :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editOrigin" name="editOrigin"></td>
+                    <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editOrigin" name="editOrigin" data-placeholder="SELECCIONE ORIGEN..." /></td>
                 </tr>
-                <tr>
+               <tr>
                     <td><b>DESTINO :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editDestination" name="editDestination"></td>
+                    <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editDestination" name="editDestination" data-placeholder="SELECCIONE DESTINO..." /></td>
                 </tr>
-                <tr>
-                    <td><b>KIL&Oacute;METROS :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editKilometers" name="editKilometers"></td>
-                </tr>
+               <tr>
+                    <td><b>DISTANCIA :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editDistance" name="editDistance"></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureDistance" name="editMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                </tr>  
                 <tr>
                     <td><b>TIEMPO :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editTime" name="editTime"></td>
+                    <td class="form-group" colspan="2"><input class="form-control" type="text" id="editTime" name="editTime"></td>
+                </tr>
+                <tr>
+                    <td><b>COSTO :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editPrice" name="editPrice"></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasurePrice" name="editMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
+                </tr>
+                <tr>
+                    <td><b>PRECIO :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editRealPrice" name="editRealPrice"></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureRealPrice" name="editMeasureRealPrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
                 </tr>
                 <tr>
                     <td><b>ESTADO :</b></td>
@@ -167,6 +182,8 @@
     <script src="js/pages/tm_datatables.js"></script>
     <!-- tooltips -->
     <script src="lib/qtip2/jquery.qtip.min.js"></script>
+    <!-- chosen -->
+    <script src="lib/chosen/chosen.jquery.min.js"></script>
     <!-- validations -->
     <script src="lib/validation/jquery.validate.min.js"></script>
     <script src="lib/validation/localization/messages_es.js"></script>

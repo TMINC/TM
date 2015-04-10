@@ -77,6 +77,77 @@
             </div>
         </div>
     </div>
+    <!-- Editar Citas -->
+     <div class="modal" id="modal_date">
+        <div class="modal-dialog">
+            <div class="modal-content">        
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">×</button>
+                    <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="validation_detail_form">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><b>NRO.ORDEN :</b></td>
+                                <td colspan="2"><input class="form-control" readonly="true" type="text" id="editDateId"></td>
+                            </tr>
+                            <tr class="hidden">
+                                <td><b>ID :</b></td>
+                                <td colspan="2"><input class="form-control" readonly="true" type="text" id="editOrderDateId"></td>
+                            </tr>
+                            <tr>
+                                <td><b>ORIGEN :</b></td>
+                                <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editDateOrigin" name="editDateOrigin" data-placeholder="SELECCIONE ORIGEN..." /></td>
+                            </tr>
+                            <tr>
+                                <td><b>FECHA - HORA (ORIGEN):</b></td>
+                                <td class="form-group" style="width: 50%;">
+                                    <div id="dateOriginDate" class="input-group date">
+                                        <input class="form-control" type="text" readonly="" id="editDateOriginDate" name="editDateOriginDate">
+                                        <span class="input-group-addon"><i class="splashy-calendar_day_up"></i></span>
+                                    </div>
+                                </td>
+                                <td class="form-group">                        
+                                    <div class="input-group bootstrap-timepicker">
+                                        <input class="form-control" type="text" id="editDateOriginHour" name="editDateOriginHour" readonly="true">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>DESTINO :</b></td>
+                                <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editDateDestination" name="editDateDestination" data-placeholder="SELECCIONE DESTINO..." /></td>
+                            </tr>
+                            <tr>
+                                <td><b>FECHA - HORA (DESTINO):</b></td>
+                                <td class="form-group">
+                                    <div id="dateDestinationDate" class="input-group date">
+                                        <input class="form-control" type="text" readonly="" id="editDateDestinationDate" name="editDetailDestinationDate">
+                                        <span class="input-group-addon"><i class="splashy-calendar_day_down"></i></span>
+                                    </div>
+                                </td>
+                                <td class="form-group">                        
+                                    <div class="input-group bootstrap-timepicker">
+                                        <input class="form-control" type="text" id="editDetailDestinationHour" name="editDetailDestinationHour" readonly="true">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hide">
+                                <td><b>ACCI&Oacute;N :</b></td>
+                                <td colspan="2"><input class="form-control" type="text" id="editDetailAction"></td>
+                            </tr> 
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary" id="save_detail"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- Selección datos Transporte -->
     <div class="modal" id="adjudicationDirect">
         <div class="modal-dialog">
