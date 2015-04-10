@@ -105,13 +105,16 @@ include_once 'functions.php';
                         <div class="accordion-body collapse" id="collapseFive">
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
+                                    <li class="nav-header">Mantenimiento</li>
+                                        <li id="configuration-profile"><a href="./?mod=37">&ShortRightArrow; Perfil(es)</a></li>
+                                        <li id="configuration-rol"><a href="./?mod=38">&ShortRightArrow; Rol(es)</a></li>
                                     <li class="nav-header">Asignaci&oacute;n</li>
-                                    <li id="allocation-service"><a href="./?mod=31">&ShortRightArrow; Servicio(s)</a></li>
-                                    <li id="allocation-auction"><a href="./?mod=33">&ShortRightArrow; Subasta(s)</a></li>
+                                        <li id="allocation-service"><a href="./?mod=31">&ShortRightArrow; Servicio(s)</a></li>
+                                        <li id="allocation-auction"><a href="./?mod=33">&ShortRightArrow; Subasta(s)</a></li>
                                     <li class="nav-header">Proceso</li>
-                                    <li id="process-data-transport"><a href="./?mod=34">&ShortRightArrow; Registro Transportista</a></li>
-                                    <li class="divider"></li>
-                                    <li id="track"><a href="javascript:void(0)">&ShortRightArrow; Ayuda</a></li>
+                                        <li id="process-data-transport"><a href="./?mod=34">&ShortRightArrow; Registro Transportista</a></li>
+                                        <li class="divider"></li>
+                                        <li id="track"><a href="javascript:void(0)">&ShortRightArrow; Ayuda</a></li>
                                 </ul>
                             </div>
                         </div>
