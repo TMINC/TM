@@ -187,88 +187,88 @@
                 </div>
                 <div class="modal-body">
                     <form id="validation_detail_form">
-                <table class="table table-bordered">
-                <tr>
-                    <td><b>NRO.ORDEN :</b></td>
-                    <td colspan="2"><input class="form-control" readonly="true" type="text" id="editDetailId"></td>
-                </tr>
-                <tr class="hidden">
-                    <td><b>ID :</b></td>
-                    <td colspan="2"><input class="form-control" readonly="true" type="text" id="editOrderDetailId"></td>
-                </tr>
-                <tr>
-                    <td><b>ORIGEN :</b></td>
-                    <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editDetailOrigin" name="editDetailOrigin" data-placeholder="SELECCIONE ORIGEN..." /></td>
-                </tr>
-                <tr>
-                    <td><b>FECHA - HORA (ORIGEN):</b></td>
-                    <td class="form-group" style="width: 50%;">
-                        <div id="detailOriginDate" class="input-group date">
-                            <input class="form-control" type="text" readonly="" id="editDetailOriginDate" name="editDetailOriginDate">
-                            <span class="input-group-addon"><i class="splashy-calendar_day_up"></i></span>
-                        </div>
-                    </td>
-                    <td>                        
-                        <div class="form-group" class="bootstrap-timepicker">
-                            <input class="form-control" id="editDetailOriginHour" name="editDetailOriginHour" type="text">
-                        </div>
-                        <span class="help-block">Ver dropdown (24h)</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>DESTINO :</b></td>
-                    <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editDetailDestination" name="editDetailDestination" data-placeholder="SELECCIONE DESTINO..." /></td>
-                </tr>
-                <tr>
-                    <td><b>FECHA - HORA (DESTINO):</b></td>
-                    <td class="form-group">
-                        <div id="detailDestinationDate" class="input-group date">
-                            <input class="form-control" type="text" readonly="" id="editDetailDestinationDate" name="editDetailDestinationDate">
-                            <span class="input-group-addon"><i class="splashy-calendar_day_down"></i></span>
-                        </div>
-                    </td>
-                    <td>                        
-                        <div class="form-group" class="bootstrap-timepicker">
-                            <input class="form-control" id="editDetailDestinationHour" name="editDetailDestinationHour" type="text">
-                        </div>
-                        <span class="help-block">Ver dropdown (24h)</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>VOLUMEN :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editDetailVolume" name="editDetailVolume"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasureVolume" name="editDetailMeasureVolume" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>PESO :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editDetailWeight" name="editDetailWeight"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasureWeight" name="editDetailMeasureWeight" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>DISTANCIA :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editDetailDistance" name="editDetailDistance"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasureDistance" name="editDetailMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>COSTO :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editDetailPrice" name="editDetailPrice"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasurePrice" name="editDetailMeasurePrice" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>PRECIO :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editDetailRealPrice" name="editDetailRealPrice"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasureRealPrice" name="editDetailMeasureRealPrice" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>NOTA :</b></td>
-                    <td class="form-group" colspan="2"><input class="form-control" type="text" id="editDetailNote"></td>
-                </tr>
-                <tr class="hide">
-                    <td><b>ACCI&Oacute;N :</b></td>
-                    <td colspan="2"><input class="form-control" type="text" id="editDetailAction"></td>
-                </tr> 
-                </table>
-                        </form>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><b>NRO.ORDEN :</b></td>
+                                <td colspan="2"><input class="form-control" readonly="true" type="text" id="editDetailId"></td>
+                            </tr>
+                            <tr class="hidden">
+                                <td><b>ID :</b></td>
+                                <td colspan="2"><input class="form-control" readonly="true" type="text" id="editOrderDetailId"></td>
+                            </tr>
+                            <tr>
+                                <td><b>ORIGEN :</b></td>
+                                <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editDetailOrigin" name="editDetailOrigin" data-placeholder="SELECCIONE ORIGEN..." /></td>
+                            </tr>
+                            <tr>
+                                <td><b>FECHA - HORA (ORIGEN):</b></td>
+                                <td class="form-group" style="width: 50%;">
+                                    <div id="detailOriginDate" class="input-group date">
+                                        <input class="form-control" type="text" readonly="" id="editDetailOriginDate" name="editDetailOriginDate">
+                                        <span class="input-group-addon"><i class="splashy-calendar_day_up"></i></span>
+                                    </div>
+                                </td>
+                                <td class="form-group">                        
+                                    <div class="input-group bootstrap-timepicker">
+                                        <input class="form-control" type="text" id="editDetailOriginHour" name="editDetailOriginHour" readonly="true">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>DESTINO :</b></td>
+                                <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editDetailDestination" name="editDetailDestination" data-placeholder="SELECCIONE DESTINO..." /></td>
+                            </tr>
+                            <tr>
+                                <td><b>FECHA - HORA (DESTINO):</b></td>
+                                <td class="form-group">
+                                    <div id="detailDestinationDate" class="input-group date">
+                                        <input class="form-control" type="text" readonly="" id="editDetailDestinationDate" name="editDetailDestinationDate">
+                                        <span class="input-group-addon"><i class="splashy-calendar_day_down"></i></span>
+                                    </div>
+                                </td>
+                                <td class="form-group">                        
+                                    <div class="input-group bootstrap-timepicker">
+                                        <input class="form-control" type="text" id="editDetailDestinationHour" name="editDetailDestinationHour" readonly="true">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>VOLUMEN :</b></td>
+                                <td class="form-group"><input class="form-control" type="text" id="editDetailVolume" name="editDetailVolume"></td>
+                                <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasureVolume" name="editDetailMeasureVolume" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                            </tr>
+                            <tr>
+                                <td><b>PESO :</b></td>
+                                <td class="form-group"><input class="form-control" type="text" id="editDetailWeight" name="editDetailWeight"></td>
+                                <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasureWeight" name="editDetailMeasureWeight" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                            </tr>
+                            <tr>
+                                <td><b>DISTANCIA :</b></td>
+                                <td class="form-group"><input class="form-control" type="text" id="editDetailDistance" name="editDetailDistance"></td>
+                                <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasureDistance" name="editDetailMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                            </tr>
+                            <tr>
+                                <td><b>COSTO :</b></td>
+                                <td class="form-group"><input class="form-control" type="text" id="editDetailPrice" name="editDetailPrice"></td>
+                                <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasurePrice" name="editDetailMeasurePrice" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                            </tr>
+                            <tr>
+                                <td><b>PRECIO :</b></td>
+                                <td class="form-group"><input class="form-control" type="text" id="editDetailRealPrice" name="editDetailRealPrice"></td>
+                                <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasureRealPrice" name="editDetailMeasureRealPrice" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                            </tr>
+                            <tr>
+                                <td><b>NOTA :</b></td>
+                                <td class="form-group" colspan="2"><input class="form-control" type="text" id="editDetailNote"></td>
+                            </tr>
+                            <tr class="hide">
+                                <td><b>ACCI&Oacute;N :</b></td>
+                                <td colspan="2"><input class="form-control" type="text" id="editDetailAction"></td>
+                            </tr> 
+                        </table>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-primary" id="save_detail"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
