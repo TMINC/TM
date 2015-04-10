@@ -27,11 +27,11 @@
         }
     }else{        
         $order_detail_id = $_POST['date_id'];
-        $order_origin_date = $_POST['origin_date']; 
-        $order_origin_hour = $_POST['origin_hour'];
-        $order_destination_date = $_POST['destination_date'];
-        $order_destination_hour = $_POST['destination_hour'];        
+        $order_origin_date = $_POST['date_origin_date']; 
+        $order_origin_hour = $_POST['date_origin_hour'];
+        $order_destination_date = $_POST['date_destination_date'];
+        $order_destination_hour = $_POST['date_destination_hour'];        
         if($action=='update'){
-            $mysqli->query("UPDATE tm_order_detail SET cOrdColDat='".$order_origin_date."', cOrdColHou='".$order_origin_hour."', cOrdArrDat='".$order_destination_date."', cOrdArrHou='".$order_destination_hour."' WHERE iOrdDetID='".date_id."'");                         
+            $mysqli->query("UPDATE tm_order_detail SET cOrdColDat='".$order_origin_date."', cOrdColHou='".$order_origin_hour."', cOrdArrDat='".$order_destination_date."', cOrdArrHou='".$order_destination_hour."' WHERE iOrdDetID='".$order_detail_id."'");                         
         }        
     }

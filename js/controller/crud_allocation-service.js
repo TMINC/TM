@@ -286,6 +286,7 @@ var table = function () {
                 this.src = "img/details_close.png";
                 oTable.fnOpen(nTr, fnFormatDetails($(this).data('id')), 'details');
                 table_detail();
+                date();
             }
         });
     }
@@ -356,6 +357,7 @@ var save_date = function (){
                 success: function () {
                     $("#modal_date").modal("hide"); 
                     $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                    load();
                 }        
             });
         }

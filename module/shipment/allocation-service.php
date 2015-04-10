@@ -56,7 +56,7 @@
         <div class="modal-dialog">
             <div class="modal-content">        
                 <div class="modal-header">
-                    <button class="close" data-dismiss="modal">Ã—</button>
+                    <button class="close" data-dismiss="modal">×</button>
                     <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
                 </div>
                 <div class="modal-body">
