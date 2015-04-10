@@ -385,8 +385,7 @@ var eliminar = function () {
                         $.colorbox.close();
                         $.ajax({ type: "POST", url: "module/order/crud/order.php", data: "action=delete& id="+ _id,
                             success: function () {
-                                load();  
-                                $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                                load(); $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
                             }        
                         });
                     });
@@ -454,7 +453,7 @@ var guardar = function () {
             var _action = $("#editAction").val();
             $.ajax({ type: "POST", url: "module/order/crud/order.php", data: "action="+ _action +"&id="+ _id+"&type="+ _type +"&volume="+ _volume+"&measure_volume="+ _measure_volume+"&weight="+ _weight+"&measure_weight="+ _measure_weight+"&distance="+ _distance+"&measure_distance="+ _measure_distance+"&price="+ _price+"&measure_price="+ _measure_price+"&real_price="+ _real_price+"&measure_real_price="+ _measure_real_price+"&customer="+ _customer,
                 success: function () {
-                    load();$.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                    load(); $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
                 }        
             });
         }
@@ -595,8 +594,7 @@ var eliminar_detail = function(){
                             url: "module/order/crud/order-detail.php",
                             data: "action=delete&order_detail_id="+_id+"& order_id="+ _order_number,
                             success: function () {
-                                load_detail(_order_number);    
-                                $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                                load_detail(_order_number); $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
                             }        
                         });
                     });
@@ -676,8 +674,7 @@ var guardar_detail = function(){
             $.ajax({ type: "POST", url: "module/order/crud/order-detail.php", data: "action="+ _detail_action +"& order_id="+ _order_id+"& order_detail_id="+ _order_detail_id+"& origin="+ _origin+"& origin_date="+ _origin_date +"& origin_hour="+ _origin_hour+"& destination="+ _destination+"& destination_date="+ _destination_date+"& destination_hour="+ _destination_hour+"& volume="+ _detail_volume+"& measure_volume="+ _detail_measure_volume+"& weight="+ _detail_weight+"& measure_weight="+ _detail_measure_weight+"& distance="+ _detail_distance+"& measure_distance="+ _detail_measure_distance+"& detail_price="+ _detail_price+"& detail_measure_price="+ _detail_measure_price+"& detail_real_price="+ _detail_real_price+"& detail_measure_real_price="+ _detail_measure_real_price+"& detail_note="+ _detail_note,
                 success: function () {
                     load_detail(_order_id);
-                    $("#modal_detail").modal("hide");
-                    $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                    $("#modal_detail").modal("hide"); $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
                 }        
             });
         }
