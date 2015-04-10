@@ -51,6 +51,68 @@
             </table>
         </div>
     </div>
+<!-- Editar Citas -->
+    <div class="modal" id="modal_date">
+        <div class="modal-dialog">
+            <div class="modal-content">        
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">Ã—</button>
+                    <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="validation_date_form">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><b>NRO.SOLICITUD :</b></td>
+                                <td colspan="2"><input class="form-control" readonly="true" type="text" id="editDateId"></td>
+                            </tr>
+                            <tr class="hidden">
+                                <td><b>ID :</b></td>
+                                <td colspan="2"><input class="form-control" readonly="true" type="text" id="editOrderDateId"></td>
+                            </tr>                            
+                            <tr>
+                                <td><b>FECHA - HORA (ORIGEN):</b></td>
+                                <td class="form-group" style="width: 50%;">
+                                    <div id="dateOriginDate" class="input-group date">
+                                        <input class="form-control" type="text" readonly="" id="editDateOriginDate" name="editDateOriginDate">
+                                        <span class="input-group-addon"><i class="splashy-calendar_day_up"></i></span>
+                                    </div>
+                                </td>
+                                <td class="form-group">                        
+                                    <div class="input-group bootstrap-timepicker">
+                                        <input class="form-control" type="text" id="editDateOriginHour" name="editDateOriginHour" readonly="true">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div>
+                                </td>
+                            </tr>                            
+                            <tr>
+                                <td><b>FECHA - HORA (DESTINO):</b></td>
+                                <td class="form-group">
+                                    <div id="dateDestinationDate" class="input-group date">
+                                        <input class="form-control" type="text" readonly="" id="editDateDestinationDate" name="editDateDestinationDate">
+                                        <span class="input-group-addon"><i class="splashy-calendar_day_down"></i></span>
+                                    </div>
+                                </td>
+                                <td class="form-group">                        
+                                    <div class="input-group bootstrap-timepicker">
+                                        <input class="form-control" type="text" id="editDateDestinationHour" name="editDateDestinationHour" readonly="true">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hide">
+                                <td><b>ACCI&Oacute;N :</b></td>
+                                <td colspan="2"><input class="form-control" type="text" id="editDateAction"></td>
+                            </tr> 
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary" id="save_date"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Modal -->
     <div class="modal" id="plan">
         <div class="modal-dialog" style="width:80%;">
@@ -72,7 +134,11 @@
                             </tr>
                             <tr>
                                 <td><b>CANTIDAD DE TRANSPORTE(S) :</b></td>
-                                <td class="form-group"><input class="form-control" id="editPlanQuantity" name="editPlanQuantity" value="1" type="text"><img src="img/gCons/van.png" alt="" /></td>
+                                <td>
+                                    <select id="searchable" multiple="multiple">
+                                        <optgroup label="Africa"><option value="DZ">Algeria</option><option value="AO">Angola</option><option value="BJ">Benin</option><option value="BW">Botswana</option><option value="BF">Burkina Faso</option><option value="BI">Burundi</option><option value="CM">Cameroon</option><option value="CV">Cape Verde</option><option value="CF">Central African Republic</option><option value="TD">Chad</option><option value="KM">Comoros</option><option value="CD">Congo [DRC]</option><option value="CG">Congo [Republic]</option><option value="DJ">Djibouti</option><option value="EG">Egypt</option><option value="GQ">Equatorial Guinea</option><option value="ER">Eritrea</option><option value="ET">Ethiopia</option><option value="GA">Gabon</option><option value="GM">Gambia</option><option value="GH">Ghana</option><option value="GN">Guinea</option><option value="GW">Guinea-Bissau</option><option value="CI">Ivory Coast</option><option value="KE">Kenya</option><option value="LS">Lesotho</option><option value="LR">Liberia</option><option value="LY">Libya</option><option value="MG">Madagascar</option><option value="MW">Malawi</option><option value="ML">Mali</option><option value="MR">Mauritania</option><option value="MU">Mauritius</option><option value="YT">Mayotte</option><option value="MA">Morocco</option><option value="MZ">Mozambique</option><option value="NA">Namibia</option><option value="NE">Niger</option><option value="NG">Nigeria</option><option value="RW">Rwanda</option><option value="RE">Réunion</option><option value="SH">Saint Helena</option><option value="SN">Senegal</option><option value="SC">Seychelles</option><option value="SL">Sierra Leone</option><option value="SO">Somalia</option><option value="ZA">South Africa</option><option value="SD">Sudan</option><option value="SZ">Swaziland</option><option value="ST">São Tomé and Príncipe</option><option value="TZ">Tanzania</option><option value="TG">Togo</option><option value="TN">Tunisia</option><option value="UG">Uganda</option><option value="EH">Western Sahara</option><option value="ZM">Zambia</option><option value="ZW">Zimbabwe</option></optgroup><optgroup label="Antarctica"><option value="AQ">Antarctica</option><option value="BV">Bouvet Island</option><option value="TF">French Southern Territories</option><option value="HM">Heard Island and McDonald Island</option><option value="GS">South Georgia and the South Sandwich Islands</option></optgroup><optgroup label="Asia"><option value="AF">Afghanistan</option><option value="AM">Armenia</option><option value="AZ">Azerbaijan</option><option value="BH">Bahrain</option><option value="BD">Bangladesh</option><option value="BT">Bhutan</option><option value="IO">British Indian Ocean Territory</option><option value="BN">Brunei</option><option value="KH">Cambodia</option><option value="CN">China</option><option value="CX">Christmas Island</option><option value="CC">Cocos [Keeling] Islands</option><option value="GE">Georgia</option><option value="HK">Hong Kong</option><option value="IN">India</option><option value="ID">Indonesia</option><option value="IR">Iran</option><option value="IQ">Iraq</option><option value="IL">Israel</option><option value="JP">Japan</option><option value="JO">Jordan</option><option value="KZ">Kazakhstan</option><option value="KW">Kuwait</option><option value="KG">Kyrgyzstan</option><option value="LA">Laos</option><option value="LB">Lebanon</option><option value="MO">Macau</option><option value="MY">Malaysia</option><option value="MV">Maldives</option><option value="MN">Mongolia</option><option value="MM">Myanmar [Burma]</option><option value="NP">Nepal</option><option value="KP">North Korea</option><option value="OM">Oman</option><option value="PK">Pakistan</option><option value="PS">Palestinian Territories</option><option value="PH">Philippines</option><option value="QA">Qatar</option><option value="SA">Saudi Arabia</option><option value="SG">Singapore</option><option value="KR">South Korea</option><option value="LK">Sri Lanka</option><option value="SY">Syria</option><option value="TW">Taiwan</option><option value="TJ">Tajikistan</option><option value="TH">Thailand</option><option value="TR">Turkey</option><option value="TM">Turkmenistan</option><option value="AE">United Arab Emirates</option><option value="UZ">Uzbekistan</option><option value="VN">Vietnam</option><option value="YE">Yemen</option></optgroup><optgroup label="Europe"><option value="AL">Albania</option><option value="AD">Andorra</option><option value="AT">Austria</option><option value="BY">Belarus</option><option value="BE">Belgium</option><option value="BA">Bosnia and Herzegovina</option><option value="BG">Bulgaria</option><option value="HR">Croatia</option><option value="CY">Cyprus</option><option value="CZ">Czech Republic</option><option value="DK">Denmark</option><option value="EE">Estonia</option><option value="FO">Faroe Islands</option><option value="FI">Finland</option><option value="FR">France</option><option value="DE">Germany</option><option value="GI">Gibraltar</option><option value="GR">Greece</option><option value="GG">Guernsey</option><option value="HU">Hungary</option><option value="IS">Iceland</option><option value="IE">Ireland</option><option value="IM">Isle of Man</option><option value="IT">Italy</option><option value="JE">Jersey</option><option value="XK">Kosovo</option><option value="LV">Latvia</option><option value="LI">Liechtenstein</option><option value="LT">Lithuania</option><option value="LU">Luxembourg</option><option value="MK">Macedonia</option><option value="MT">Malta</option><option value="MD">Moldova</option><option value="MC">Monaco</option><option value="ME">Montenegro</option><option value="NL">Netherlands</option><option value="NO">Norway</option><option value="PL">Poland</option><option value="PT">Portugal</option><option value="RO">Romania</option><option value="RU">Russia</option><option value="SM">San Marino</option><option value="RS">Serbia</option><option value="CS">Serbia and Montenegro</option><option value="SK">Slovakia</option><option value="SI">Slovenia</option><option value="ES">Spain</option><option value="SJ">Svalbard and Jan Mayen</option><option value="SE">Sweden</option><option value="CH">Switzerland</option><option value="UA">Ukraine</option><option value="GB">United Kingdom</option><option value="VA">Vatican City</option><option value="AX">Åland Islands</option></optgroup><optgroup label="North America"><option value="AI">Anguilla</option><option value="AG">Antigua and Barbuda</option><option value="AW">Aruba</option><option value="BS">Bahamas</option><option value="BB">Barbados</option><option value="BZ">Belize</option><option value="BM">Bermuda</option><option value="BQ">Bonaire, Saint Eustatius and Saba</option><option value="VG">British Virgin Islands</option><option value="CA">Canada</option><option value="KY">Cayman Islands</option><option value="CR">Costa Rica</option><option value="CU">Cuba</option><option value="CW">Curacao</option><option value="DM">Dominica</option><option value="DO">Dominican Republic</option><option value="SV">El Salvador</option><option value="GL">Greenland</option><option value="GD">Grenada</option><option value="GP">Guadeloupe</option><option value="GT">Guatemala</option><option value="HT">Haiti</option><option value="HN">Honduras</option><option value="JM">Jamaica</option><option value="MQ">Martinique</option><option value="MX">Mexico</option><option value="MS">Montserrat</option><option value="AN">Netherlands Antilles</option><option value="NI">Nicaragua</option><option value="PA">Panama</option><option value="PR">Puerto Rico</option><option value="BL">Saint Barthélemy</option><option value="KN">Saint Kitts and Nevis</option><option value="LC">Saint Lucia</option><option value="MF">Saint Martin</option><option value="PM">Saint Pierre and Miquelon</option><option value="VC">Saint Vincent and the Grenadines</option><option value="SX">Sint Maarten</option><option value="TT">Trinidad and Tobago</option><option value="TC">Turks and Caicos Islands</option><option value="VI">U.S. Virgin Islands</option><option value="US">United States</option></optgroup><optgroup label="South America"><option value="AR">Argentina</option><option value="BO">Bolivia</option><option value="BR">Brazil</option><option value="CL">Chile</option><option value="CO">Colombia</option><option value="EC">Ecuador</option><option value="FK">Falkland Islands</option><option value="GF">French Guiana</option><option value="GY">Guyana</option><option value="PY">Paraguay</option><option value="PE">Peru</option><option value="SR">Suriname</option><option value="UY">Uruguay</option><option value="VE">Venezuela</option></optgroup><optgroup label="Oceania"><option value="AS">American Samoa</option><option value="AU">Australia</option><option value="CK">Cook Islands</option><option value="TL">East Timor</option><option value="FJ">Fiji</option><option value="PF">French Polynesia</option><option value="GU">Guam</option><option value="KI">Kiribati</option><option value="MH">Marshall Islands</option><option value="FM">Micronesia</option><option value="NR">Nauru</option><option value="NC">New Caledonia</option><option value="NZ">New Zealand</option><option value="NU">Niue</option><option value="NF">Norfolk Island</option><option value="MP">Northern Mariana Islands</option><option value="PW">Palau</option><option value="PG">Papua New Guinea</option><option value="PN">Pitcairn Islands</option><option value="WS">Samoa</option><option value="SB">Solomon Islands</option><option value="TK">Tokelau</option><option value="TO">Tonga</option><option value="TV">Tuvalu</option><option value="UM">U.S. Minor Outlying Islands</option><option value="VU">Vanuatu</option><option value="WF">Wallis and Futuna</option></optgroup>
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
                                 <td colspan="2">
@@ -156,102 +222,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    
-    
-    <!-- Selección datos Transporte -->
-    <div class="modal" id="adjudicationDirect">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal">×</button>
-                    <h3><i class="glyphicon glyphicon-tasks" style="margin-top: 3px;font-size:15px;"></i> ASIGNACI&Oacute;N TRANSPORTE</h3>
-                </div>
-                <div class="modal-body">
-                    <form id="validation_adjudication_direct">
-                        <table class="table table-bordered">
-                            <tr>
-                                <td><b>NRO.VIAJE :</b></td>
-                                <td class="form-group"><input class="form-control" readonly="true" type="text" id="editDirectId" name="editDirectId"></td>
-                            </tr>
-                            <tr>
-                                <td><b>NRO.PEDIDO(S) :</b></td>
-                                <td class="form-group"><input class="form-control" readonly="true" type="text" id="editDirectOrderId" name="editDirectOrderId"></td>
-                            </tr>
-                            <tr>
-                                <td><b>PROVEEDOR TRANSPORTE :</b></td>
-                                <td class="form-group"><select class="form-control chzn_edit" id="editDirectCarrier" name="editDirectCarrier" data-placeholder="SELECCIONE UN PROVEEDOR..." /></td>
-                            </tr>
-                        </table>
-                    </form> 
-                </div>
-                <div class="modal-footer">
-                    <a href="JavaScript:void(0);" class="btn btn-default" id="adjudication_direct_close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> CANCELAR</a>
-                    <a href="JavaScript:void(0);" class="btn btn-primary" id="adjudication_direct_save"><i class="glyphicon glyphicon-save"></i> GUARDAR</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="modal" id="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">        
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal">×</button>
-                    <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
-                </div>
-                <div class="modal-body">
-                <table class="table table-bordered">
-                <tr>
-                    <td><b>NRO.ORDEN :</b></td>
-                    <td colspan="2"><input class="form-control" readonly="true" type="text" id="editId"></td>
-                </tr>
-                <tr>
-                    <td><b>TIPO DE SERVICIO :</b></td>
-                    <td colspan="2"><select class="form-control chzn_edit" id="editType" data-placeholder="SELECCIONE TIPO DE SERVICIO..." /></td>
-                </tr>
-                <tr>
-                    <td><b>VOLUMEN:</b></td>
-                    <td><input class="form-control" type="text" id="editVolume"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureVolume" data-placeholder="SELECCIONE U.M. VOLUMEN..." /></td>
-                </tr>
-                <tr>
-                    <td><b>PESO :</b></td>
-                    <td><input class="form-control" type="text" id="editWeight"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureWeight" data-placeholder="SELECCIONE U.M. PESO..." /></td>
-                </tr>
-                <tr>
-                    <td><b>DISTANCIA :</b></td>
-                    <td><input class="form-control" type="text" id="editDistance"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>COSTO :</b></td>
-                    <td><input class="form-control" type="text" id="editPrice"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>PRECIO :</b></td>
-                    <td><input class="form-control" type="text" id="editRealPrice"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureRealPrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
-                </tr>
-                <tr class="hide">
-                    <td><b>ESTADO :</b></td>
-                    <td colspan="2"><input type="checkbox" id="editStatus" class="uni_style"></td>
-                </tr> 
-                <tr class="hide">
-                    <td><b>ACCI&Oacute;N :</b></td>
-                    <td colspan="2"><input class="form-control" type="text" id="editAction"></td>
-                </tr> 
-                </table>
-                </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn btn-primary" id="save"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+    </div>    
     <!-- hide elements-->
     <div class="hide">           
         <!-- confirmation box -->
@@ -323,6 +294,9 @@
     <script src="lib/qtip2/jquery.qtip.min.js"></script>
     <!-- chosen -->
     <script src="lib/chosen/chosen.jquery.min.js"></script>
+    <!-- multiselect -->
+    <script src="lib/multi-select/js/jquery.multi-select.js"></script>
+    <script src="lib/multi-select/js/jquery.quicksearch.js"></script>
     <!-- validations -->
     <script src="lib/validation/jquery.validate.min.js"></script>
     <script src="lib/validation/localization/messages_es.js"></script>

@@ -37,6 +37,8 @@ var load = function () {
             spinner();
             chosen();
             plan();
+            date();
+            save_date();
         }        
     });
 };
@@ -50,11 +52,64 @@ var maskinput = function (){
 var popover = function (){
     $(".pop_over").popover();
 };
+var chosen = function (){
+    $(".chzn_edit").chosen();
+};
 var spinner = function(){
     $("#editPlanQuantity").spinner({min: 1});
 };
-var chosen = function (){
-    $(".chzn_edit").chosen();
+var date_detail = function (){
+    $('#dateOriginDate').datepicker();
+    $('#dateDestinationDate').datepicker();
+    var $dp_start = $('#dateOriginDate'),$dp_end = $('#dateDestinationDate');
+    $dp_start.datepicker({ format: "dd/mm/yyyy" }).off().on('changeDate', function(){
+        var dateText = $(this).data('date');
+        var endDateTextBox = $dp_end.children('input');
+        if (endDateTextBox.val() !== '') {
+            var testStartDate = new Date(dateText);
+            var testEndDate = new Date(endDateTextBox.val());
+            if (testStartDate > testEndDate) { endDateTextBox.val(dateText); }
+        }else{ endDateTextBox.val(dateText); }
+        $dp_end.datepicker('setStartDate', dateText);
+        $dp_start.datepicker('hide');
+    });
+    $dp_end.datepicker({format: "dd/mm/yyyy"}).off().on('changeDate', function(){
+        var dateText = $(this).data('date');
+        var startDateTextBox = $dp_start.children('input');
+        if (startDateTextBox.val() !== '') {
+            var testStartDate = new Date(startDateTextBox.val());
+            var testEndDate = new Date(dateText);
+            if (testStartDate > testEndDate) { startDateTextBox.val(dateText); }
+        }else{ startDateTextBox.val(dateText); }
+        $dp_start.datepicker('setEndDate', dateText);
+        $dp_end.datepicker('hide');
+    }); 
+};  
+var hour_detail = function(){
+    $("#editDateOriginHour, #editDateDestinationHour").timepicker({
+        defaultTime: 'current',
+        minuteStep: 1,
+        disableFocus: true,
+        template: 'dropdown',
+        showMeridian: false
+    });
+};
+var multiselectable = function(){
+    if($('#searchable').length) {
+        $('#searchable').multiSelect({
+            selectableHeader: '<div class="search-header"><input type="text" class="form-control" id="ms-search" autocomplete="off" placeholder="Ingrese t&eacute;rmino de b&uacute;squeda.."></div>',
+            selectionHeader: "<div class='search-selected'></div>"
+        });
+    }
+    if($('#ms-search').length) {  
+        $('#ms-search').quicksearch($('.ms-elem-selectable', '#ms-searchable' )).on('keydown', function(e){
+            if (e.keyCode === 40){
+                $(this).trigger('focusout');
+                $('#ms-searchable').focus();
+                return false;
+            }
+        });
+    }
 };
 var select_plan = function () {
     $('#editAdjudicationType').empty();
@@ -93,6 +148,7 @@ var plan = function(){
                 $('#plan').modal({ backdrop: 'static', keyboard: false });
                 popover();
                 spinner();
+                multiselectable();
                 var _id = $('input:checkbox:checked.row_sel').map(function () {
                     return $(this).data('id');
                 }).get();
@@ -263,4 +319,60 @@ var table_detail = function (){
                     { "bSortable": false }
                 ]
         });
+};
+var save_date = function (){
+    $("#save_date").off().on('click', function (e) {
+        e.preventDefault();        
+        if($('#validation_date_form').validate({
+            onkeyup: false,
+            errorClass: 'error',
+            validClass: 'valid',
+            rules: {                
+                editDateOriginDate: { required: true },
+                editDateOriginHour: { required: true },
+                editDateDestinationDate: { required: true },
+                editDateDestinationHour: { required: true }                             
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass("f_error");
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass("f_error");    
+            },
+            errorPlacement: function(error, element) {
+                $(element).closest('.form-group').append(error);
+            }
+        }).form()){
+            $("#modal_date").modal('hide');            
+            var _date_id = $("#editDateId").val();
+            var _date_origin_date = $("#editDateOriginDate").val();
+            var _date_origin_hour = $("#editDateOriginHour").val(); 
+            var _date_destination_date = $("#editDateDestinationDate").val();
+            var _date_destination_hour = $("#editDateDestinationHour").val(); 
+            var _date_action = $("#editDateAction").val(); 
+            $.ajax({ type: "POST", 
+                     url: "module/shipment/crud/shipment-detail.php", 
+                     data: "action="+ _date_action +"& date_id="+ _date_id+"& date_origin_date="+ _date_origin_date+"& date_origin_hour="+ _date_origin_hour +"& date_destination_date="+ _date_destination_date+"& date_destination_hour="+ _date_destination_hour,
+                success: function () {
+                    $("#modal_date").modal("hide"); 
+                    $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                }        
+            });
+        }
+        return false;
+    });
+};
+var date = function (){
+    $(".edit_date").off().on('click', function (e) {
+        e.preventDefault();
+        var _order_date_id = $(this).data('id'); $("#editDateId").val(_order_date_id);        
+        var _date_origin_date = $(this).data('origin_date'); $("#editDateOriginDate").val(_date_origin_date);
+        var _date_origin_hour = $(this).data('origin_hour'); $("#editDateOriginHour").val(_date_origin_hour);        
+        var _date_destination_date = $(this).data('destination_date'); $("#editDateDestinationDate").val(_date_destination_date);
+        var _date_destination_hour = $(this).data('destination_hour'); $("#editDateDestinationHour").val(_date_destination_hour);
+        $("#editDateAction").val("update");        
+        $("#modal_date").modal("show");
+        date_detail();
+        hour_detail();
+    });   
 };
