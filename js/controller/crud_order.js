@@ -10,6 +10,8 @@ $(document).ready(function() {
             console.log(element); return (value === null ? false : (value.length === 0 ? false : true));
         }, "Por favor, elige una opción válida."
     ); 
+    var _status = '0';
+    console.log(_status);
 });
 
 description = {    
@@ -65,7 +67,8 @@ var load_detail =  function (id) {
             eliminar_detail();
             date_detail();
             hour_detail();
-            chosen();       
+            chosen();
+            show_edit_detail();
         }        
     });
 };
@@ -355,7 +358,10 @@ var editar = function(){
         var _customer = $(this).data('customer');
         $.ajax({ type: "POST", async: false, url: "module/master/crud/customer.php", data: "action=consult&sel="+ _customer,
             success: function (data) { $("#editCustomer").empty();$("#editCustomer").append(data); }        
-        }); chosen(); $("#editCustomer").trigger("liszt:updated");
+        }); chosen(); $("#editCustomer").trigger("liszt:updated");        
+        _status = $(this).data('status');
+        if(_status>1){$(".save").addClass('hide');}
+        else{$(".save").removeClass('hide');}        
         $("#editAction").val("update");        
         $("#modal").modal("show");
     });
@@ -465,13 +471,17 @@ var detalle = function(){
         e.preventDefault();
         _order_number = $(this).data('id');
         $("#detail_order_number").text(_order_number);
+        _status = $(this).data('status');
         load_detail(_order_number);
         exit_detail();
         $('#detail').modal({ backdrop: 'static', keyboard: false });
         $("#editDetailId").val(_order_number);
     });
 };
-
+var show_edit_detail = function(){
+    if(_status>1){$(".accciones").addClass('hide');$(".saveD").addClass('hide');$(".edit_detail").addClass('hide');}
+        else{$(".accciones").removeClass('hide');$(".saveD").removeClass('hide');$(".edit_detail").removeClass('hide');}  
+};
 var exit_detail = function (){
     $("#exit_detail").off().on('click', function (e) {
         e.preventDefault();
@@ -565,7 +575,6 @@ var editar_detail = function(){
         $("#modal_detail").modal("show");
     });   
 };
-
 var eliminar_detail = function(){
   $(".trash_detail").off().on('click', function (e) {
         e.preventDefault();        

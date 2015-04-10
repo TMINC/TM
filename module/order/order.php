@@ -113,7 +113,7 @@
                 </table>
                      </form>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer save hide">
                     <a href="#" class="btn btn-primary" id="save"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
                 </div>
             </div>
@@ -139,13 +139,13 @@
                             <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> DISTANCIA</label></div></li>
                             <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> COSTO</label></div></li>
                             <li><div class="checkbox"><label class="" for="dt_col_9"><input type="checkbox" value="8" id="dt_col_9" name="toggle-cols" checked="checked" class="uni_style"/> PRECIO</label></div></li>
-                            <li><div class="checkbox"><label class="" for="dt_col_10"><input type="checkbox" value="9" id="dt_col_10" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
+                            <li><div class="checkbox ddt_col_10 hide"><label class="" for="dt_col_10"><input type="checkbox" value="9" id="dt_col_10" name="toggle-cols" checked="checked"/> ACCI&Oacute;N</label></div></li>
                         </ul>
                     </div>
                     <div class="clearfix sepH_b">
                         <!-- actions for datatables -->
                         <div class="dt_detail_actions pull-left">
-                            <div class="btn-group">
+                            <div class="btn-group accciones hide">
                                 <button data-toggle="dropdown" class="btn dropdown-toggle btn-default">ACCIONES <span class="caret"></span></button>
                                 <ul class="dropdown-menu">
                                     <li><a data-toggle="modal" data-backdrop="static" href="#modal_detail" class="add_detail" data-tableid="dt_detail"><i class="glyphicon glyphicon-plus"></i> NUEVO</a></li>
@@ -167,9 +167,10 @@
                                 <th class="center">COSTO</th>
                                 <th class="center">PRECIO</th>
                                 <th class="center" style="width: 80px;">ACCI&Oacute;N</th>
-                            </tr>
+                            </tr>                            
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+                        </tbody>
                     </table>
                 </div>
                 <div class="modal-footer">
@@ -270,7 +271,7 @@
                         </table>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer saveD hide">
                     <a href="#" class="btn btn-primary" id="save_detail"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
                 </div>
             </div>
