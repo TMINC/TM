@@ -91,7 +91,7 @@ include_once 'includes/functions.php';
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user_avatar.png" alt="" class="user_avatar"><?php echo htmlentities($_SESSION['username']);?><b class="caret"></b></a>
                             <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a href="./?mod=8">Mi Perfil</a></li>
+                                <li><a href="./?mod=7">Mi Perfil</a></li>
                                 <li><a href="javascrip:void(0)">Acerca de...</a></li>
                                 <li class="divider"></li>
                                 <li><a href="includes/logout.php">Cerrar Sesi&oacute;n</a></li>

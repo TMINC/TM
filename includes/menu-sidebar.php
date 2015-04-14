@@ -35,11 +35,12 @@ include_once 'functions.php';
                                     <li id="vehicle-type"><a href="./?mod=15">&ShortRightArrow; Tipo(s)</a></li>
                                     <li id="vehicle-class"><a href="./?mod=16">&ShortRightArrow; Clase(s)</a></li>
                                     <li id="vehicle-category"><a href="./?mod=17">&ShortRightArrow; Categor&iacute;a(s)</a></li>
+                                    <li id="vehicle-group"><a href="./?mod=18">&ShortRightArrow; Grupo(s)</a></li>
                                     <li class="nav-header">Traslado</li>
-                                    <li id="transfer-center"><a href="./?mod=18">&ShortRightArrow; Centro(s)</a></li>
+                                    <li id="transfer-center"><a href="./?mod=19">&ShortRightArrow; Centro(s)</a></li>
                                     <li class="nav-header">Generales</li>
-                                    <li id="other-measure"><a href="./?mod=19">&ShortRightArrow; U.Medida</a></li>
-                                    <li id="info-route"><a href="./?mod=20">&ShortRightArrow; Ruta(s)</a></li>
+                                    <li id="other-measure"><a href="./?mod=20">&ShortRightArrow; U.Medida</a></li>
+                                    <li id="info-route"><a href="./?mod=21">&ShortRightArrow; Ruta(s)</a></li>
                                  
                                 </ul>
                             </div>
@@ -54,7 +55,7 @@ include_once 'functions.php';
                         <div class="accordion-body collapse" id="collapseTwo">
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li id="order"><a href="./?mod=21">&ShortRightArrow; Pedido(s)</a></li>
+                                    <li id="order"><a href="./?mod=22">&ShortRightArrow; Pedido(s)</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -105,16 +106,17 @@ include_once 'functions.php';
                         <div class="accordion-body collapse" id="collapseFive">
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li class="nav-header">Mantenimiento</li>
-                                        <li id="configuration-profile"><a href="./?mod=37">&ShortRightArrow; Perfil(es)</a></li>
-                                        <li id="configuration-rol"><a href="./?mod=38">&ShortRightArrow; Rol(es)</a></li>
-                                    <li class="nav-header">Asignaci&oacute;n</li>
-                                        <li id="allocation-service"><a href="./?mod=31">&ShortRightArrow; Servicio(s)</a></li>
-                                        <li id="allocation-auction"><a href="./?mod=33">&ShortRightArrow; Subasta(s)</a></li>
-                                    <li class="nav-header">Proceso</li>
-                                        <li id="process-data-transport"><a href="./?mod=34">&ShortRightArrow; Registro Transportista</a></li>
+                                    <li class="nav-header">Usuario</li>
+                                        <li id="configuration-profile"><a href="./?mod=51">&ShortRightArrow; Perfil(es)</a></li>
+                                        <li id="configuration-rol"><a href="./?mod=52">&ShortRightArrow; Rol(es)</a></li>
+                                        <li id="configuration-user"><a href="./?mod=53">&ShortRightArrow; Usuario(s)</a></li>
+                                    <li class="nav-header">Sistema</li>
+                                        <li id="configuration-form"><a href="./?mod=54">&ShortRightArrow; Form(s)</a></li>
+                                    <li class="nav-header">Ayuda</li>
+                                        <li id="configuration-tutor"><a href="./?mod=55">&ShortRightArrow; Tutorial(es)</a></li>
+                                        <li id="configuration-manual"><a href="./?mod=56">&ShortRightArrow; Manual(es)</a></li>
                                         <li class="divider"></li>
-                                        <li id="track"><a href="javascript:void(0)">&ShortRightArrow; Ayuda</a></li>
+                                        <li id="configuration-help"><a href="./?mod=57">&ShortRightArrow; Ayuda</a></li>
                                 </ul>
                             </div>
                         </div>
