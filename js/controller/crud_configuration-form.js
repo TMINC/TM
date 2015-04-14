@@ -2,6 +2,7 @@
  * Copyright (C) 2015 netpartners-international.com
  * By: Angel Silva
  **/
+
 $(document).ready(function() {
     _form.dt_maintenance();
 });

@@ -6,6 +6,7 @@
     include_once '../../../includes/db_connect.php';
     include_once '../../../includes/psl-config.php';
     include_once '../../../includes/functions.php';    
+    
     $action = $_POST['action'];
     if($action=='consult'){
         $sel = $_POST['sel'];

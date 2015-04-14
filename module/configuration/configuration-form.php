@@ -3,6 +3,7 @@
  * Copyright (C) 2015 netpartners-international.com
  * By: Angel Silva Figueroa
  **/
+
 ?>
     <div class="row">
         <div class="col-sm-12 col-md-12">

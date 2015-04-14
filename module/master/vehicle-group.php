@@ -164,4 +164,5 @@
             $('#collapseOne').addClass(' in');
             $('#vehicle-group').addClass(' active');
         });
+        
     </script>
