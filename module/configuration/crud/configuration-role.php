@@ -18,7 +18,21 @@
                 echo '<option value="'.$perfil_id.'" '.$selected.'>'.$perfil_dsc.'</option>';
             }            
         }
-    }else{
+    }
+    else if($action=='consultRole'){
+        $sel = $_POST['sel'];
+        $profile = $_POST['prof'];
+        if ($stmt = $mysqli->prepare("SELECT iRolID, cRolDsc AS find FROM tm_user_role WHERE iPerID='".$profile."'")){
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($perfil_id, $perfil_dsc);
+            while($row = $stmt->fetch()) {
+                if($sel==$perfil_dsc){$selected = " selected";}else{$selected = "";}
+                echo '<option value="'.$perfil_id.'" '.$selected.'>'.$perfil_dsc.'</option>';
+            }            
+        }
+    }
+    else{
         if($action=='select'){
             echo "SELECT r.iRolID,r.iPerID,r.cRolDsc,p.cPerDsc,r.cRolSta FROM tm_user_role as r, tm_user_profile as p WHERE p.iPerID=r.iPerID";
             if ($stmt = $mysqli->prepare("SELECT r.iRolID,r.iPerID,r.cRolDsc,p.cPerDsc,r.cRolSta FROM tm_user_role as r, tm_user_profile as p WHERE p.iPerID=r.iPerID")){
