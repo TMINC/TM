@@ -77,7 +77,7 @@ include_once 'functions.php';
                                     <li id="process-data-transport"><a href="./?mod=34">&ShortRightArrow; Registro Transportista</a></li>
                                     <li id="process-state-control"><a href="./?mod=35">&ShortRightArrow; Control de Estado(s)</a></li>
                                     <li class="divider"></li>
-                                    <li id="track"><a href="javascript:void(0)">&ShortRightArrow; Ubicaci&oacute;n de Transporte(s)</a></li>
+                                    <li id="track"><a href="./?mod=36">&ShortRightArrow; Ubicaci&oacute;n de Transporte(s)</a></li>
                                 </ul>
                             </div>
                         </div>

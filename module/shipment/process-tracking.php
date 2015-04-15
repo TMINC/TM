@@ -1,12 +1,12 @@
 <?php
 /** 
  * Copyright (C) 2015 netpartners-international.com
- * By: Johnny Moscoso Rossel
+ * By: Angel Silva Figueroa
  **/
 ?>
     <div class="row">
         <div class="col-sm-12 col-md-12">
-            <h3 class="heading"><i class="glyphicon icon-truck"></i>REASIGNACI&Oacute;N-TRANSPORTE</h3>
+            <h3 class="heading"><i class="glyphicon icon-truck"></i>UBICACI&Oacute;N DE TRANSPORTE</h3>
             <div class="clearfix sepH_b">
                 <div class="btn-group col_vis_menu">
                     <a href="#" data-toggle="dropdown" class="btn dropdown-toggle btn-default">COLUMNAS <span class="caret"></span></a>
@@ -22,14 +22,7 @@
                     </ul>
                 </div>
                 <!-- actions for datatables -->
-                <div class="dt_maintenance_actions pull-left">
-                    <div class="btn-group">
-                        <button data-toggle="dropdown" class="btn dropdown-toggle btn-default">ACCIONES <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a href="javascript:void(0);" class="reassign"><i class="glyphicon glyphicon-transfer"></i> REASIGNAR</a></li>                            
-                        </ul>
-                    </div>
-                </div>
+            
             </div>
             
             <table class="table table-striped table-bordered dTableR" id="dt_maintenance">
@@ -50,33 +43,9 @@
         </div>
     </div>
     <!-- Modal -->
-    <!-- Adjudication Type-->
-    <div class="modal" id="adjudication">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal">×</button>
-                    <h3><i class="glyphicon glyphicon-tasks" style="margin-top: 3px;font-size:15px;"></i> ADJUDICACI&Oacute;N</h3>
-                </div>
-                <div class="modal-body">
-                    <form id="validation_adjudication">
-                        <table class="table table-bordered" >
-                            <tr>
-                                <td><b>TIPO :</b></td>
-                                <td class="form-group"><select class="form-control chzn_edit" id="editAdjudicationType" name="editAdjudicationType" data-placeholder="SELECCIONE TIPO DE ADJUDICACION..."></select></td>
-                            </tr>
-                        </table>                        
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <a href="JavaScript:void(0);" class="btn btn-default" id="adjudication_close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> CANCELAR</a>
-                    <a href="JavaScript:void(0);" class="btn btn-primary" id="adjudication_save"><i class="glyphicon glyphicon-ok"></i> CONTINUAR</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Selección datos Transporte -->
-    <div class="modal" id="adjudicationDirect">
+  
+    <!-- Detalle Tracking -->
+    <div class="modal" id="detailTracking">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

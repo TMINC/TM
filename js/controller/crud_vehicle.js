@@ -112,6 +112,7 @@ var table = function () {
                     { "sType": "string" },
                     { "sType": "string" },
                     { "sType": "string" },
+                    { "sType": "string" },
                     { "bSortable": false }
                 ],
             "sPaginationType": "bootstrap"
@@ -167,7 +168,17 @@ var agregar = function(){
         chosen();
         $("#editCategory").trigger("liszt:updated");
         
-        
+        $("#editGroup").empty();
+        var _sel='0';
+        $.ajax({
+            type: "POST",
+            async:false,
+            url: "module/master/crud/vehicle-group.php",
+            data: "action=consult&sel="+ _sel,
+            success: function (data) { $("#editGroup").append('<option selected="true"> </option>'); $("#editGroup").append(data); }        
+        });        
+        chosen();
+        $("#editGroup").trigger("liszt:updated");
         
         $("#editWeight").val("");
         $.ajax({
@@ -262,6 +273,16 @@ var editar = function(){
         chosen();
         $("#editCategory").trigger("liszt:updated");
         
+        var _group = $(this).data('group');
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/vehicle-group.php",
+            data: "action=consult&sel="+ _group,
+            success: function (data) { $("#editGroup").empty();$("#editGroup").append(data); }        
+        });
+        chosen();
+        $("#editGroup").trigger("liszt:updated");
        
         var _weight = $(this).data('weight'); $("#editWeight").val(_weight);
        
@@ -373,6 +394,7 @@ var guardar = function () {
         $("[name='editType']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         $("[name='editClass']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         $("[name='editCategory']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        $("[name='editGroup']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         $("[name='editMeasureWeight']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         $("[name='editMeasureLenght']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show(); 
         $("[name='editMeasureWidth']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
@@ -391,6 +413,7 @@ var guardar = function () {
                 editType: { chosen: true },
                 editClass: { chosen: true },
                 editCategory: { chosen: true },
+                editGroup: { chosen: true },
                 editMeasureWeight: { chosen: true },
                 editMeasureLenght: { chosen: true },
                 editMeasureWidth: { chosen: true },
@@ -413,6 +436,7 @@ var guardar = function () {
             var _type = $("#editType option:selected").val();
             var _class = $("#editClass option:selected").val();
             var _category = $("#editCategory option:selected").val();
+            var _group = $("#editGroup option:selected").val();
             var _weight = $("#editWeight").val();
             var _measure_weight = $("#editMeasureWeight option:selected").val();
             var _lenght = $("#editLenght").val();
@@ -426,7 +450,7 @@ var guardar = function () {
             $.ajax({
                 type: "POST",
                 url: "module/master/crud/vehicle.php",
-                data: "action="+ _action +"& id="+ _id+"& plate="+ _plate +"& tuc="+ _tuc+"& type_id="+ _type+"& class_id="+ _class+"& category_id="+ _category+"& weight="+ _weight+"& measure_weight="+ _measure_weight+"& lenght="+ _lenght+"& measure_lenght="+ _measure_lenght+"& width="+ _width+"& measure_width="+ _measure_width+"& height="+ _height+"& measure_height="+ _measure_height+"& status="+ _status,
+                data: "action="+ _action +"& id="+ _id+"& plate="+ _plate +"& tuc="+ _tuc+"& type_id="+ _type+"& class_id="+ _class+"& category_id="+ _category+"& group_id="+ _group+"& weight="+ _weight+"& measure_weight="+ _measure_weight+"& lenght="+ _lenght+"& measure_lenght="+ _measure_lenght+"& width="+ _width+"& measure_width="+ _measure_width+"& height="+ _height+"& measure_height="+ _measure_height+"& status="+ _status,
                 success: function () {
                     load();  
                      $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });

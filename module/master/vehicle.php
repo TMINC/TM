@@ -17,8 +17,9 @@
                         <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> TIPO</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> CLASE</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> CATEG.</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> PLACA</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> GRUPO</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> PLACA</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_9"><input type="checkbox" value="8" id="dt_col_9" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
                     </ul>
                 </div>
                 <!-- actions for datatables -->
@@ -41,6 +42,7 @@
                         <th class="center">TIPO</th>
                         <th class="center">CLASE</th>
                         <th class="center">CATEGOR&Iacute;A</th>
+                        <th class="center">GRUPO</th>
                         <th class="center" >PLACA</th>
                         <th class="center" style="width: 100px;">ACCI&Oacute;N</th>
                     </tr>
@@ -84,6 +86,10 @@
                             <td><b>CATEGORIA :</b></td>
                             <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editCategory" name="editCategory" data-placeholder="SELECCIONE TIPO..." /></td>
                         </tr>
+                        <tr>
+                            <td><b>GRUPO :</b></td>
+                            <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editGroup" name="editGroup" data-placeholder="SELECCIONE GRUPO..." /></td>
+                        </tr>
                           <tr>
                             <td><b>PESO :</b></td>
                             <td class="form-group"><input class="form-control" type="text" id="editWeight" name="editWeight"></td>
@@ -106,7 +112,7 @@
                         </tr>  
                          <tr>
                             <td><b>ESTADO :</b></td>
-                            <td class="form-group"><input type="checkbox" id="editStatus" class="uni_style"></td>
+                            <td class="form-group"><input type="checkbox" id="editStatus"></td>
                         </tr> 
                         <tr class="hide">
                             <td><b>ACCI&Oacute;N :</b></td>

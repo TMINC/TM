@@ -154,7 +154,7 @@
                 </tr>
                 <tr class="hide">
                     <td><b>ESTADO :</b></td>
-                    <td colspan="2"><input type="checkbox" id="editStatus" class="uni_style"></td>
+                    <td colspan="2"><input type="checkbox" id="editStatus"></td>
                 </tr> 
                 <tr class="hide">
                     <td><b>ACCI&Oacute;N :</b></td>

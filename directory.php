@@ -13,9 +13,7 @@ switch($mod){
     case 5: include "controller/activate.js"; break;
     case 6: include "controller/help.php"; break;
     case 7: include "module/controller/user.php"; break;
-    case 8: include "module/profile/profile$page.php"; break;
     
-
     case 11: include "module/master/customer$page.php"; break;
     case 12: include "module/master/carrier$page.php"; break;
     case 13: include "module/master/driver$page.php"; break;

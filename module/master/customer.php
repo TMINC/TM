@@ -94,7 +94,7 @@
                 </tr>
                 <tr>
                     <td><b>ESTADO :</b></td>
-                    <td class="form-group"><input type="checkbox" id="editStatus" class="uni_style"></td>
+                    <td class="form-group"><input type="checkbox" id="editStatus"></td>
                 </tr> 
                 <tr class="hide">
                     <td><b>ACCI&Oacute;N :</b></td>
