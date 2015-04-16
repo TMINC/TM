@@ -95,17 +95,17 @@ var hour_detail = function(){
     });
 };
 var multiselectable = function(){
-    if($('#searchable').length) {
-        $('#searchable').multiSelect({
+    if($('#vehicle_select').length) {
+        $('#vehicle_select').multiSelect({
             selectableHeader: '<div class="search-header"><input type="text" class="form-control" id="ms-search" autocomplete="off" placeholder="Ingrese t&eacute;rmino de b&uacute;squeda.."></div>',
             selectionHeader: "<div class='search-selected'></div>"
         });
     }
     if($('#ms-search').length) {  
-        $('#ms-search').quicksearch($('.ms-elem-selectable', '#ms-searchable' )).on('keydown', function(e){
+        $('#ms-search').quicksearch($('.ms-elem-selectable', '#ms-vehicle_select' )).on('keydown', function(e){
             if (e.keyCode === 40){
                 $(this).trigger('focusout');
-                $('#ms-searchable').focus();
+                $('#ms-vehicle_select').focus();
                 return false;
             }
         });
@@ -149,6 +149,7 @@ var plan = function(){
                 popover();
                 spinner();
                 multiselectable();
+                vehicle();
                 var _id = $('input:checkbox:checked.row_sel').map(function () {
                     return $(this).data('id');
                 }).get();
@@ -194,6 +195,35 @@ var save_plan = function (){
             }
         }
         return false;
+    });
+};
+var vehicle = function(){
+    $("#vehicle_selection").off().on('click', function (e) {
+        e.preventDefault();
+        wizard();
+        wizard_titles();
+        $("#vehicle_selection_modal").modal("show");
+   });   
+};
+var wizard = function(){
+    $('#vehicle_wizard').stepy({
+        titleClick	: true,
+        nextLabel:      'Siguiente <i class="glyphicon glyphicon-chevron-right"></i>',
+        backLabel:      '<i class="glyphicon glyphicon-chevron-left"></i> Anterior',
+        block		: true,
+        errorImage	: true,
+        validate	: true,
+        next: function() {
+            if ($("#vehicle_select").val().length > 0) {}else{}
+        }
+    });
+};
+var wizard_titles = function (){
+    $('.stepy-titles').each(function(){
+        $(this).children('li').each(function(index){
+            var myIndex = index + 1;
+            $(this).append('<span class="stepNb">'+myIndex+'</span>');
+        });
     });
 };
 var plan_trip = function (){

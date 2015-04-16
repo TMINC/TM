@@ -52,6 +52,8 @@ include_once 'includes/functions.php';
     <link rel="stylesheet" href="css/style.css" />
     <!-- switch buttons -->
     <link rel="stylesheet" href="lib/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" />
+    <!-- wizard -->
+    <link rel="stylesheet" href="lib/stepy/css/jquery.stepy.css" />
     <!-- theme color-->
     <link rel="stylesheet" href="css/eastern_blue.css" id="link_theme" />
     <!-- theme font -->
