@@ -192,11 +192,12 @@ var editar = function(){
         var _profile = $(this).data('profile');
         var _role = $(this).data('rol');
         var _type = $(this).data('type');
+        var _pass = $(this).data('password');
         
         $("#editId").val(_id);
         $("#editUser").val(_user);
         $("#editName").val(_name);
-        $("#editPassword").val("");
+        $("#editPassword").val(_pass);
         $("#editDescription").val(_description);
         $("#editEmail").val(_mail);
         
@@ -289,7 +290,11 @@ var guardar = function () {
             errorClass: 'error',
             validClass: 'valid',
             rules: {
-                editDescription: { required: true, minlength: 3 }                
+                editDescription: { required: true, minlength: 3 },
+                editUser: { required: true, minlength: 3 },
+                editName: { required: true, minlength: 3 },
+                editPassword: { required: true, minlength: 3 },
+                editEmail: { required: true, minlength: 3, email:true }                
             },
             highlight: function(element) {
                 $(element).closest('.form-group').addClass("f_error");    

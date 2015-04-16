@@ -9,14 +9,14 @@
     $action = $_POST['action'];
     if($action=='select'){
         echo "SELECT u.iUseID, u.cUseUse, u.cUseNam, u.cUseDes, u.cUseEma, u.cUseTyp,p.cPerDsc,r.cRolDsc,u.cUseSta FROM tm_user AS u, tm_user_profile AS p, tm_user_role as r WHERE u.iProID=p.iPerID AND u.iRolID=r.iRolID";
-        if ($stmt = $mysqli->prepare("SELECT u.iUseID, u.cUseUse, u.cUseNam, u.cUseDes, u.cUseEma, u.cUseTyp,p.cPerDsc,r.cRolDsc,u.cUseSta FROM tm_user AS u, tm_user_profile AS p, tm_user_role as r WHERE u.iProID=p.iPerID AND u.iRolID=r.iRolID")){
+        if ($stmt = $mysqli->prepare("SELECT u.iUseID, u.cUseUse, u.cUseNam, u.cUseDes, u.cUseEma, u.cUseTyp,p.cPerDsc,r.cRolDsc,u.cUseSta,u.cUsePas FROM tm_user AS u, tm_user_profile AS p, tm_user_role as r WHERE u.iProID=p.iPerID AND u.iRolID=r.iRolID")){
             $stmt->execute();
             $stmt->store_result();
-            $stmt->bind_result($user_id, $user_user, $user_name, $user_description, $user_email, $user_type, $user_profile,$user_rol,$user_status);
+            $stmt->bind_result($user_id, $user_user, $user_name, $user_description, $user_email, $user_type, $user_profile,$user_rol,$user_status,$user_pass);
             while($row = $stmt->fetch()) {
                 echo $user_status;
                     if($user_status=='1'){$dsc_status='Activo'; $status='<a class="hint--left hint--success" style="float:right;cursor:pointer;" data-hint="Activo"><i class="glyphicon glyphicon-ok" /></a>';}else{$dsc_status='Inactivo';$status='<a class="hint--left hint--error" style="float:right;cursor:pointer;" data-hint="Inactivo"><i class="glyphicon glyphicon-minus" /></a>';}
-                    echo '<tr><td><input id="c'.$user_id.'" name="row_sel" type="checkbox" class="row_sel uni_style" data-id="'.$user_id.'"  data-user="'.$user_user.'"  data-name="'.$user_name.'"  data-description="'.$user_description.'"  data-mail="'.$user_email.'"  data-type="'.$user_type.'"  data-profile="'.$user_profile.'"  data-rol="'.$user_rol.'" data-status="'.$user_status.'"></td>'.
+                    echo '<tr><td><input id="c'.$user_id.'" name="row_sel" type="checkbox" class="row_sel uni_style" data-id="'.$user_id.'"  data-user="'.$user_user.'"  data-name="'.$user_name.'"  data-description="'.$user_description.'"  data-mail="'.$user_email.'"  data-type="'.$user_type.'"  data-password="'.$user_pass.'"  data-profile="'.$user_profile.'"  data-rol="'.$user_rol.'" data-status="'.$user_status.'"></td>'.
                        '<td>'.$user_user.'</td>'.
                         '<td>'.$user_name.'</td>'.
                         '<td>'.$user_description.'</td>'.
@@ -26,7 +26,7 @@
                         '<td>'.$user_type.'</td>'.
                         '<td>'.$status.'</td>'.
                         '<td class="center">'.
-                            '<a style="cursor:pointer;" class="edit hint--left" data-hint="Editar" data-id="'.$user_id.'"  data-user="'.$user_user.'"  data-name="'.$user_name.'"  data-description="'.$user_description.'"  data-mail="'.$user_email.'"  data-type="'.$user_type.'"  data-profile="'.$user_profile.'"  data-rol="'.$user_rol.'" data-status="'.$user_status.'"><i class="glyphicon glyphicon-edit" /></a>'.                            
+                            '<a style="cursor:pointer;" class="edit hint--left" data-hint="Editar" data-id="'.$user_id.'"  data-user="'.$user_user.'"  data-name="'.$user_name.'"  data-description="'.$user_description.'"  data-mail="'.$user_email.'"  data-type="'.$user_type.'"  data-profile="'.$user_profile.'"  data-password="'.$user_pass.'"  data-rol="'.$user_rol.'" data-status="'.$user_status.'"><i class="glyphicon glyphicon-edit" /></a>'.                            
                         '</td></tr>';
                 }
         }
