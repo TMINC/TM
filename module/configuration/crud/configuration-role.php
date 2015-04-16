@@ -22,7 +22,8 @@
     else if($action=='consultRole'){
         $sel = $_POST['sel'];
         $profile = $_POST['prof'];
-        if ($stmt = $mysqli->prepare("SELECT iRolID, cRolDsc AS find FROM tm_user_role WHERE iPerID='".$profile."'")){
+        echo $profile;
+        if ($stmt = $mysqli->prepare("SELECT iRolID, cRolDsc FROM tm_user_role WHERE iPerID='".$profile."'")){
             $stmt->execute();
             $stmt->store_result();
             $stmt->bind_result($perfil_id, $perfil_dsc);
