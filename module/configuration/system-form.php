@@ -69,7 +69,7 @@
                 </tr>
                 <tr>
                     <td><b>ESTADO :</b></td>
-                    <td class="form-group"><input type="checkbox" id="editStatus" class="uni_style"></td>
+                    <td class="form-group"><input type="checkbox" id="editStatus"></td>
                 </tr> 
                 <tr class="hide">
                     <td><b>ACCI&Oacute;N :</b></td>
@@ -79,7 +79,7 @@
                 </form>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn btn-primary" id="save"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
+                    <a href="JavaScript:void(0);" class="btn btn-primary" id="save"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
                 </div>
             </div>
         </div>
@@ -90,8 +90,8 @@
         <div id="confirm_dialog" class="cbox_content">
             <div class="sepH_c tac"><strong>Esta seguro de eliminar el(los) registro(s)?</strong></div>
             <div class="tac">
-                <a href="#" class="btn btn-gebo confirm_yes btn-default">S&iacute;</a>
-                <a href="#" class="btn confirm_no btn-default">No</a>
+                <a href="JavaScript:void(0);" class="btn btn-gebo confirm_yes btn-default">S&iacute;</a>
+                <a href="JavaScript:void(0);" class="btn confirm_no btn-default">No</a>
             </div>
         </div>
     </div>
@@ -155,12 +155,12 @@
     <script src="lib/validation/jquery.validate.min.js"></script>
     <script src="lib/validation/localization/messages_es.js"></script>
     <!-- crud functions -->
-    <script src="js/controller/crud_configuration-form.js"></script>
+    <script src="js/controller/crud_system-form.js"></script>
     <script>
         $(document).ready(function() {
             //* show all elements & remove preloader
             setTimeout('$("html").removeClass("js")',1000);
-            $('#collapseOne').addClass(' in');
-            $('#configuration-profile').addClass(' active');
+            $('#collapseFive').addClass(' in');
+            $('#system-form').addClass(' active');
         });
     </script>

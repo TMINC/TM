@@ -77,7 +77,7 @@ include_once 'functions.php';
                                     <li id="process-data-transport"><a href="./?mod=34">&ShortRightArrow; Registro Transportista</a></li>
                                     <li id="process-state-control"><a href="./?mod=35">&ShortRightArrow; Control de Estado(s)</a></li>
                                     <li class="divider"></li>
-                                    <li id="track"><a href="./?mod=36">&ShortRightArrow; Ubicaci&oacute;n de Transporte(s)</a></li>
+                                    <li id="process-tracking"><a href="./?mod=36">&ShortRightArrow; Ubicaci&oacute;n de Transporte(s)</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -111,12 +111,12 @@ include_once 'functions.php';
                                         <li id="configuration-rol"><a href="./?mod=52">&ShortRightArrow; Rol(es)</a></li>
                                         <li id="configuration-user"><a href="./?mod=53">&ShortRightArrow; Usuario(s)</a></li>
                                     <li class="nav-header">Sistema</li>
-                                        <li id="configuration-form"><a href="./?mod=54">&ShortRightArrow; Form(s)</a></li>
+                                        <li id="system-form"><a href="./?mod=54">&ShortRightArrow; Form(s)</a></li>
                                     <li class="nav-header">Ayuda</li>
-                                        <li id="configuration-tutor"><a href="./?mod=55">&ShortRightArrow; Tutorial(es)</a></li>
-                                        <li id="configuration-manual"><a href="./?mod=56">&ShortRightArrow; Manual(es)</a></li>
+                                        <li id="help-tutor"><a href="./?mod=55">&ShortRightArrow; Tutorial(es)</a></li>
+                                        <li id="help-manual"><a href="./?mod=56">&ShortRightArrow; Manual(es)</a></li>
                                         <li class="divider"></li>
-                                        <li id="configuration-help"><a href="./?mod=57">&ShortRightArrow; Ayuda</a></li>
+                                        <li id="help"><a href="./?mod=57">&ShortRightArrow; Ayuda</a></li>
                                 </ul>
                             </div>
                         </div>

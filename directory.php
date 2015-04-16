@@ -33,12 +33,12 @@ switch($mod){
     case 33: include "module/shipment/allocation-auction$page.php"; break;
     case 34: include "module/shipment/process-data-transport$page.php"; break;
     case 35: include "module/shipment/process-state-control$page.php"; break;
-    case 36: include "module/shipment/track$page.php"; break;
+    case 36: include "module/shipment/process-tracking$page.php"; break;
     
     case 51: include "module/configuration/configuration-profile$page.php"; break;
     case 52: include "module/configuration/configuration-rol$page.php"; break;
     case 53: include "module/configuration/configuration-user$page.php"; break;
-    case 54: include "module/configuration/configuration-form$page.php"; break;
+    case 54: include "module/configuration/system-form$page.php"; break;
     
     default: include "includes/logout.php"; break;
 }

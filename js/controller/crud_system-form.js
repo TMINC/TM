@@ -15,19 +15,16 @@ _form = {
 var load = function () {    
     $.ajax({
         type: "POST",
-        url: "module/configuration/crud/configuration-form.php",
+        url: "module/configuration/crud/system-form.php",
         data: "action=select",
         success: function (response) {
             $("#dt_maintenance tbody").empty();
             $('#dt_maintenance').dataTable().fnDestroy();
             $("#dt_maintenance tbody").empty();
             $('#dt_maintenance').dataTable().fnDestroy();
-            //$("#dt_maintenance tbody tr").remove();
             $("#dt_maintenance tbody").append(response);
             table();
             unistyle();
-            maskinput(); 
-            popover();
             agregar();
             editar();
             guardar();
@@ -38,12 +35,6 @@ var load = function () {
 };
 var unistyle = function (){
     $(".uni_style").uniform();  
-};
-var maskinput = function (){
-    $("#editCode").inputmask("99999999999");
-};
-var popover = function (){
-    $(".pop_over").popover();
 };
 var multiseleccion = function () {
     $('.sel_row').off().on('click', function () {
@@ -159,10 +150,11 @@ var eliminar = function () {
                         $.colorbox.close();
                         $.ajax({
                             type: "POST",
-                            url: "module/configuration/crud/configuration-form.php",
+                            url: "module/configuration/crud/system-form.php",
                             data: "action=delete& id="+ _id,
                             success: function () {
-                                load();            
+                                load();
+                                $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
                             }        
                         });
                     });
@@ -184,8 +176,7 @@ var guardar = function () {
             validClass: 'valid',
             rules: {
                 editName: { required: true, minlength: 3 },
-                editCode: { required: true, number: true },
-                
+                editCode: { required: true, minlength:4 }                
             },
             highlight: function(element) {
                 $(element).closest('.form-group').addClass("f_error");                
@@ -198,20 +189,20 @@ var guardar = function () {
             }
         }).form()){
         $("#modal").modal("hide");
-        var _id = $("#editId").val();
-        var _name = $("#editName").val();
-        var _code = $("#editCode").val();
-        var _status = $("#editStatus").is(':checked');
-        var _action = $("#editAction").val();
-        $.ajax({
-            type: "POST",
-            url: "module/configuration/crud/configuration-form.php",
-            data: "action="+ _action +"& id="+ _id+"& name="+ _name +"& code="+ _code+"& status="+ _status,
-            success: function () {
-                load();    
-                $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
-            }        
-        });  
+            var _id = $("#editId").val();
+            var _name = $("#editName").val();
+            var _code = $("#editCode").val();
+            var _status = $("#editStatus").is(':checked');
+            var _action = $("#editAction").val();
+            $.ajax({
+                type: "POST",
+                url: "module/configuration/crud/system-form.php",
+                data: "action="+ _action +"& id="+ _id+"& name="+ _name +"& code="+ _code+"& status="+ _status,
+                success: function () {
+                    load();    
+                    $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                }        
+            });  
         }
         return false;
       

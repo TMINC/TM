@@ -45,39 +45,7 @@
     <!-- Modal -->
   
     <!-- Detalle Tracking -->
-    <div class="modal" id="detailTracking">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal">×</button>
-                    <h3><i class="glyphicon glyphicon-tasks" style="margin-top: 3px;font-size:15px;"></i> ASIGNACI&Oacute;N TRANSPORTE</h3>
-                </div>
-                <div class="modal-body">
-                    <form id="validation_adjudication_direct">
-                        <table class="table table-bordered">
-                            <tr>
-                                <td><b>NRO.VIAJE :</b></td>
-                                <td class="form-group"><input class="form-control" readonly="true" type="text" id="editDirectId" name="editDirectId"></td>
-                            </tr>
-                            <tr>
-                                <td><b>NRO.PEDIDO(S) :</b></td>
-                                <td class="form-group"><input class="form-control" readonly="true" type="text" id="editDirectOrderId" name="editDirectOrderId"></td>
-                            </tr>
-                            <tr>
-                                <td><b>PROVEEDOR TRANSPORTE :</b></td>
-                                <td class="form-group"><select class="form-control chzn_edit" id="editDirectCarrier" name="editDirectCarrier" data-placeholder="SELECCIONE UN PROVEEDOR..." /></td>
-                            </tr>
-                        </table>
-                    </form> 
-                </div>
-                <div class="modal-footer">
-                    <a href="JavaScript:void(0);" class="btn btn-default" id="adjudication_direct_close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> CANCELAR</a>
-                    <a href="JavaScript:void(0);" class="btn btn-primary" id="adjudication_direct_save"><i class="glyphicon glyphicon-save"></i> GUARDAR</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+  
     <div class="modal" id="modal">
         <div class="modal-dialog">
             <div class="modal-content">        
@@ -130,23 +98,32 @@
                 </tr> 
                 </table>
                 </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn btn-primary" id="save"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
-                </div>
+                                                                                    
             </div>
         </div>
     </div>
-    <!-- hide elements-->
-    <div class="hide">           
-        <!-- confirmation box -->
-        <div id="confirm_dialog" class="cbox_content">
-            <div class="sepH_c tac"><strong>Esta seguro de eliminar el(los) registro(s)?</strong></div>
-            <div class="tac">
-                <a href="#" class="btn btn-gebo confirm_yes btn-default">S&iacute;</a>
-                <a href="#" class="btn confirm_no btn-default">No</a>
+       <!-- Mapa --> 
+    <div class="row">
+        <div class="col-sm-3 col-md-3 hide" id="g-map-top">
+            <div class="well">
+                <form class="input-group" id="gmap_search">
+                    <input autocomplete="off" class="form-control" type="text" placeholder="Buscar una ubicaci&oacute;n...">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><i class="splashy-marker_rounded_add"></i></button>
+                    </span>
+                </form>
+            </div>
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="well">
+                <div id="g_map" style="width:100%;height:400px"></div>
             </div>
         </div>
     </div>
+    
+
     <!-- JQuery Implementation -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate.min.js"></script>
@@ -210,8 +187,10 @@
     <!-- validations -->
     <script src="lib/validation/jquery.validate.min.js"></script>
     <script src="lib/validation/localization/messages_es.js"></script>
+     <!-- maps functions -->
+    <script src="js/gmap3.min.js"></script>
     <!-- crud functions -->
-    <script src="js/controller/crud_allocation-reasigment.js"></script>
+    <script src="js/controller/crud_process-tracking.js"></script>
     <!-- lock screen-->    
     <script src="js/np/idle-time.js"></script>
     <script src="js/np/lock-screen.js"></script>
@@ -221,6 +200,6 @@
             //* show all elements & remove preloader
             setTimeout('$("html").removeClass("js")',1000);
             $('#collapseThree').addClass(' in');
-            $('#allocation-reasigment').addClass(' active');
+            $('#process-tracking').addClass(' active');
         });
     </script>
