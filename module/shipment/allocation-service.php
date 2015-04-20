@@ -14,8 +14,8 @@
                         <li><div class="checkbox"><label class="" for="dt_col_1"><input type="checkbox" value="0" id="dt_col_1" name="toggle-cols" checked="checked" class="uni_style"/> &hookrightarrow;</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_2"><input type="checkbox" value="1" id="dt_col_2" name="toggle-cols" checked="checked" class="uni_style"/> &check;</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> NRO.ORDEN</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> TIPO SERVICIO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> CLIENTE</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> CLIENTE</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> TIPO SERVICIO</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> VOLUMEN</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> PESO</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> DISTANCIA</label></div></li>                        
@@ -139,7 +139,7 @@
                                         <li>
                                             <a style="position:relative;cursor:pointer;" id="vehicle_selection">
                                                 <img alt="vehicle-selection" src="img/gCons/van.png">
-                                                <span class="label label-success" id="vehicle_selection_number" style="position: absolute;right: -12px;text-shadow: none;top: -18px;">2</span>
+                                                <span class="label label-success" id="vehicle_selection_number" style="position: absolute;right: -12px;text-shadow: none;top: -18px;">0</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -147,7 +147,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <table class="table table-striped table-bordered">
+                                    <table class="table table-striped table-bordered" id="dt_detail_maintenance">
                                         <thead>
                                             <tr>
                                                 <th style="text-align: center;width: 80px;">ASIG.TRANS.</th>
@@ -159,7 +159,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <!--<tr>
                                                 <td style="text-align: center;">
                                                     <a class="plan_trip hint--left hint--info" data-hint="Asignaci&oacute;n de Transporte" ><i class="glyphicon glyphicon-pencil"></i></a>
                                                 </td>
@@ -188,7 +188,7 @@
                                                 <td>AREQUIPA</td>
                                                 <td>SUBASTA <a class="pop_over hint--left hint--info" data-placement="right" data-content="PESO: 100 ton. LONGITUD: 200 m. ANCHURA: 300 m. ALTURA: 400 m." data-hint="Caracter&iacute;sticas del Transporte" style="cursor:help;float:right;" data-original-title="D2D494"><i class="glyphicon glyphicon-list"></i></a></td>
                                                 <td>9 PARTICIPANTE(S)</td>                                                
-                                            </tr>
+                                            </tr>-->
                                         </tbody>
                                     </table>
                                 </td>
@@ -219,7 +219,7 @@
                                     <legend class="hide">Veh&iacute;culo(s) a utilizar…</legend>
                                     <div class="formSep form-group">
                                         <select id="vehicle_select" name="vehicle_select" multiple="multiple">
-                                            <optgroup label="C001-FURGÓN">
+                                            <!--<optgroup label="C001-FURGÓN">
                                                 <option value="1-5">T2 MATPEL [L7]</option>
                                                 <option value="1-4">T3 MATPEL [L4]</option>                                            
                                             </optgroup>
@@ -230,7 +230,7 @@
                                             <optgroup label="C003-DOBLE NIVEL">
                                                 <option value="3-5">T2 MATPEL [L7]</option>
                                                 <option value="3-4">T3 MATPEL [L4]</option>                                          
-                                            </optgroup>
+                                            </optgroup>-->
                                         </select>
                                     </div>
                                 </fieldset>
@@ -240,7 +240,7 @@
                                         <table id="vehicle_table_number" class="table table-bordered"></table>    
                                     </div>
                                 </fieldset>
-                                <a href="JavaScript:void(0);" class="finish btn btn-primary" id="vehicle_save"><i class="glyphicon glyphicon-ok"></i> CONTINUAR</a>                                
+                                <a href="JavaScript:void(o);" class="finish btn btn-primary" id="vehicle_save"><i class="glyphicon glyphicon-ok"></i> CONTINUAR</a>                                
                             </form>
                         </div>
                     </div>

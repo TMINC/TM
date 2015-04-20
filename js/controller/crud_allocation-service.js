@@ -38,6 +38,7 @@ var load = function () {
             chosen();
             plan();
             date();
+            load_vehicle();
             save_date();
         }        
     });
@@ -153,8 +154,22 @@ var plan = function(){
                 var _id = $('input:checkbox:checked.row_sel').map(function () {
                     return $(this).data('id');
                 }).get();
-                $('#editDirectOrderId').val(_id);
-                //save_plan();
+                $('#editPlanOrderId').val(_id);//editDirectOrderId
+                //Cargando la data de planificación
+                $.ajax({
+                    type: "POST",
+                    url: "module/shipment/crud/shipment.php",
+                    data: "action=select&option=1&id="+ _id,
+                    success: function (response) {
+                        $("#dt_detail_maintenance tbody").empty();
+                        $('#dt_detail_maintenance').dataTable().fnDestroy();
+                        $("#dt_detail_maintenance tbody").empty();
+                        $('#dt_detail_maintenance').dataTable().fnDestroy();
+                        $("#dt_detail_maintenance tbody").append(response);
+                        popover();
+                    }        
+                });
+                save_plan();
             }else{
                 $.sticky("ERROR<br>[Las ordenes seleccionadas no pertenecen al mismo cliente.]", {autoclose : 5000, position: "top-right", type: "st-error" });
             }
@@ -197,22 +212,35 @@ var save_plan = function (){
         return false;
     });
 };
+var load_vehicle = function(){
+   $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/shipment/crud/shipment.php",
+            data: "action=select&option=6",
+            success: function (data) {
+               $("#vehicle_select").append(data);
+                
+            }        
+        }); 
+};
 var vehicle = function(){
     $("#vehicle_selection").off().on('click', function (e) {
         e.preventDefault();
-        wizard();
+        
+       wizard();
         wizard_titles();
         $("#vehicle_selection_modal").modal("show");
    });   
 };
 var wizard = function(){
     $('#vehicle_wizard').stepy({
-        titleClick	: true,
+        titleClick : true,
         nextLabel:      'Siguiente <i class="glyphicon glyphicon-chevron-right"></i>',
         backLabel:      '<i class="glyphicon glyphicon-chevron-left"></i> Anterior',
-        block		: true,
-        errorImage	: true,
-        validate	: true,
+        block  : true,
+        errorImage : true,
+        validate : true,
         next: function() {
             if ($("#vehicle_select").val().length > 0) {vehicle_table_number();}else{}
         }
@@ -245,6 +273,25 @@ var wizard_titles = function (){
             $(this).append('<span class="stepNb">'+myIndex+'</span>');
         });
     });
+};
+var vehicle_table_number = function (){
+    var sOut = "";
+    var names =  [];
+    var values = [];
+    $("#vehicle_select option:selected").each(function() {   
+        values.push($(this).val().toString());
+        names.push($(this).text().toString()); 
+    });
+    $.ajax({
+        type: "POST",
+        url: "includes/draw.php",
+        async: false,
+        data: "action=drawVehicle&value="+ values +"&name="+ names,
+        success: function (response) {
+            sOut += response;                
+        }        
+    });
+    $("#vehicle_table_number").html(sOut);
 };
 var vehicle_table_number = function (){
     var sOut = "";
@@ -360,6 +407,7 @@ var table = function () {
         });
     }
 };
+
 var table_detail = function (){
     $('#order_detail').dataTable({
             "sDom": "<'row'<'col-sm-6'><'col-sm-6'f>r>t<'row'<'col-sm-5'i><'col-sm-7'>S>",

@@ -237,6 +237,16 @@ function order_total($cOrdSta, $mysqli){
     return $total;
 }
 
+function get_vehicles_total($vehcla_id, $mysqli){
+    $stmt = $mysqli->prepare("SELECT count(*) FROM tm_vehicle WHERE cVehSta='1' AND iVehClaID = ?");
+    $stmt->bind_param('s', $vehcla_id);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($total);
+    $stmt->fetch();
+    return $total;
+}
+
 function gps_all($order_id, $mysqli){
     $stmt = $mysqli->prepare("SELECT iTraID, cTraLatLon, tm_track.iOrdDetID, cTraStaGps FROM tm_track, tm_order_detail WHERE tm_track.iOrdDetID = tm_order_detail.iOrdDetID AND iOrdID = ?");
     $stmt->bind_param('i', $order_id);
