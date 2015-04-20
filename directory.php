@@ -39,6 +39,7 @@ switch($mod){
     case 52: include "module/configuration/configuration-rol$page.php"; break;
     case 53: include "module/configuration/configuration-user$page.php"; break;
     case 54: include "module/configuration/system-form$page.php"; break;
+    case 57: include "module/configuration/help$page.php"; break;
     
     default: include "includes/logout.php"; break;
 }

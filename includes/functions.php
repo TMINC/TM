@@ -217,6 +217,16 @@ function customer_char($iCusID, $mysqli){
     return $customer;
 }
 
+function user_char($iUseID, $mysqli){
+    $stmt = $mysqli->prepare("SELECT cUseNam FROM tm_user WHERE iUseID = ?");
+    $stmt->bind_param('i', $iUseID);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($name);
+    $stmt->fetch();
+    return $name;
+}
+
 function detail_total($iOrdID, $mysqli){
     $stmt = $mysqli->prepare("SELECT count(*) FROM tm_order_detail WHERE iOrdID = ?");
     $stmt->bind_param('s', $iOrdID);
