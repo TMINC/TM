@@ -214,8 +214,28 @@ var wizard = function(){
         errorImage	: true,
         validate	: true,
         next: function() {
-            if ($("#vehicle_select").val().length > 0) {}else{}
+            if ($("#vehicle_select").val().length > 0) {vehicle_table_number();}else{}
         }
+    });
+    stepy_validation = $('#vehicle_wizard').validate({
+        onfocusout: false,
+        highlight: function(element) {
+            $(element).closest('.form-group').addClass("f_error");
+        },
+        unhighlight: function(element) {
+            $(element).closest('.form-group').removeClass("f_error");
+        },
+        errorPlacement: function(error, element) {
+            $(element).closest('.form-group').append(error);
+        },
+        rules: {
+            'editNumber' : {
+                required    : true,
+                number      : true,
+                minlength   : 1
+            }
+        },
+        ignore  : ':hidden'
     });
 };
 var wizard_titles = function (){
@@ -226,6 +246,25 @@ var wizard_titles = function (){
         });
     });
 };
+var vehicle_table_number = function (){
+    var sOut = "";
+    var names =  [];
+    var values = [];
+    $("#vehicle_select option:selected").each(function() {			
+        values.push($(this).val().toString());
+        names.push($(this).text().toString());	
+    });
+    $.ajax({
+        type: "POST",
+        url: "includes/draw.php",
+        async: false,
+        data: "action=drawVehicle&value="+ values +"&name="+ names,
+        success: function (response) {
+            sOut += response;                
+        }        
+    });
+    $("#vehicle_table_number").html(sOut);
+}
 var plan_trip = function (){
     $(".plan_trip").off().on('click', function (e) {
         e.preventDefault();

@@ -236,3 +236,51 @@ function order_total($cOrdSta, $mysqli){
     $stmt->fetch();
     return $total;
 }
+
+function gps_all($order_id, $mysqli){
+    $stmt = $mysqli->prepare("SELECT iTraID, cTraLatLon, tm_track.iOrdDetID, cTraStaGps FROM tm_track, tm_order_detail WHERE tm_track.iOrdDetID = tm_order_detail.iOrdDetID AND iOrdID = ?");
+    $stmt->bind_param('i', $order_id);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($track_id, $track_latitud_longitude, $track_detail_id, $track_gps);
+    $gps = "";
+    while($row = $stmt->fetch()) {
+        $gps .= $track_latitud_longitude.'/';
+    }
+    $gps = trim($gps, '/');
+    return $gps;
+}
+
+function gps_table($iOrdDetID, $mysqli){
+    $stmt = $mysqli->prepare("SELECT iTraID, cTraLatLon, cTraStaGPS, cTraSta FROM tm_track WHERE iOrdDetID = ?");
+    $stmt->bind_param('i', $iOrdDetID);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($track_id, $track_latitud_longitude, $track_gps, $track_status);
+    $gps = "";
+    if($stmt->num_rows()>1){
+        $coordinate = '<td>';
+        $status = '<td>';
+        $graphic = '<td class="center">';
+        while($row = $stmt->fetch()) {
+            $_coordinate = explode(",", $track_latitud_longitude);
+            $coordinate .= '<div class="formSep">LAT: '.$_coordinate[0].' - LON:'.$_coordinate[1].'</div>';
+            $status .= '<div class="formSep">'.$track_gps.'</div>';
+            $graphic .= '<div class="formSep"><a style="cursor:pointer;" class="signal_gps gps_'.$track_id.' hint--left" data-hint="Ver en Mapa" data-coordinate="'.$track_latitud_longitude.'"><i class="glyphicon glyphicon-globe"></i></a></div>';
+        }
+        $coordinate .= '</td>';
+        $status .= '</td>';
+        $graphic .= '</td>';
+        $gps .= $coordinate.$status.$graphic;
+    }else{
+        while($row = $stmt->fetch()) {
+            $_coordinate = explode(",", $track_latitud_longitude);
+            $gps .= '<td>LAT: '.$_coordinate[0].' - LON:'.$_coordinate[1].'</td>'.
+                '<td>'.$track_gps.'</td>'.
+                '<td class="center">'.
+                    '<a style="cursor:pointer;" class="signal_gps gps_'.$track_id.' hint--left" data-hint="Ver en Mapa" data-coordinate="'.$track_latitud_longitude.'"><i class="glyphicon glyphicon-globe" /></a>'.
+                '</td>';
+        }
+    }
+    return $gps;
+}

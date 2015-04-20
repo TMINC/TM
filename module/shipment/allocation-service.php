@@ -237,22 +237,7 @@
                                 <fieldset title="CANTIDAD">
                                     <legend class="hide">Cantidad por Veh&iacute;culo(s)…</legend>
                                     <div class="formSep form-group">
-                                        <label for="s_street" class="col-md-2 control-label">Street Address:</label>
-                                        <div class="col-md-10">
-                                            <input type="text" name="s_street" id="s_street" class="input-sm form-control">
-                                        </div>
-                                    </div>
-                                    <div class="formSep form-group">
-                                        <label for="s_city" class="col-md-2 control-label">City:</label>
-                                        <div class="col-md-10">
-                                            <input type="text" name="s_city" id="s_city" class="input-sm form-control">
-                                        </div>
-                                    </div>
-                                    <div class="sepH_c form-group">
-                                        <label for="s_country" class="col-md-2 control-label">Country:</label>
-                                        <div class="col-md-10">
-                                            <input type="text" name="s_country" id="s_country" class="input-sm form-control">
-                                        </div>
+                                        <table id="vehicle_table_number" class="table table-bordered"></table>    
                                     </div>
                                 </fieldset>
                                 <a href="JavaScript:void(0);" class="finish btn btn-primary" id="vehicle_save"><i class="glyphicon glyphicon-ok"></i> CONTINUAR</a>                                

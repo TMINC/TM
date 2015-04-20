@@ -2,8 +2,13 @@
 /** 
  * Copyright (C) 2015 netpartners-international.com
  * By: Angel Silva Figueroa
+ * Rv: Johnny Moscoso Rossel
  **/
 ?>
+    <style>
+      .gmap3{ margin: 20px auto; border: 1px dashed #C0C0C0; width: 800px; height: 800px; }
+      .infow{ width:250px; height:150px; }
+    </style>
     <div class="row">
         <div class="col-sm-12 col-md-12">
             <h3 class="heading"><i class="glyphicon icon-truck"></i>UBICACI&Oacute;N DE TRANSPORTE</h3>
@@ -16,15 +21,10 @@
                         <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> NRO.ORDEN</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> TIPO SERVICIO</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> CLIENTE</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> VOLUMEN</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> PESO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> DISTANCIA</label></div></li>                        
+                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> UBICAR</label></div></li>                          
                     </ul>
-                </div>
-                <!-- actions for datatables -->
-            
-            </div>
-            
+                </div>            
+            </div>            
             <table class="table table-striped table-bordered dTableR" id="dt_maintenance">
                 <thead>
                     <tr>
@@ -33,97 +33,21 @@
                         <th class="center" style="width: 120px;">NRO.ORDEN</th>
                         <th class="center">CLIENTE</th>
                         <th class="center">TIPO SERVICIO</th>
-                        <th class="center">VOLUMEN</th>
-                        <th class="center">&nbsp;&nbsp;&nbsp;PESO&nbsp;&nbsp;&nbsp;</th>
-                        <th class="center">DISTANCIA</th>
+                        <th class="center">UBICAR</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
         </div>
     </div>
-    <!-- Modal -->
-  
-    <!-- Detalle Tracking -->
-  
-    <div class="modal" id="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">        
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal">×</button>
-                    <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
-                </div>
-                <div class="modal-body">
-                <table class="table table-bordered">
-                <tr>
-                    <td><b>NRO.ORDEN :</b></td>
-                    <td colspan="2"><input class="form-control" readonly="true" type="text" id="editId"></td>
-                </tr>
-                <tr>
-                    <td><b>TIPO DE SERVICIO :</b></td>
-                    <td colspan="2"><select class="form-control chzn_edit" id="editType" data-placeholder="SELECCIONE TIPO DE SERVICIO..." /></td>
-                </tr>
-                <tr>
-                    <td><b>VOLUMEN:</b></td>
-                    <td><input class="form-control" type="text" id="editVolume"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureVolume" data-placeholder="SELECCIONE U.M. VOLUMEN..." /></td>
-                </tr>
-                <tr>
-                    <td><b>PESO :</b></td>
-                    <td><input class="form-control" type="text" id="editWeight"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureWeight" data-placeholder="SELECCIONE U.M. PESO..." /></td>
-                </tr>
-                <tr>
-                    <td><b>DISTANCIA :</b></td>
-                    <td><input class="form-control" type="text" id="editDistance"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>COSTO :</b></td>
-                    <td><input class="form-control" type="text" id="editPrice"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>PRECIO :</b></td>
-                    <td><input class="form-control" type="text" id="editRealPrice"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureRealPrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
-                </tr>
-                <tr class="hide">
-                    <td><b>ESTADO :</b></td>
-                    <td colspan="2"><input type="checkbox" id="editStatus"></td>
-                </tr> 
-                <tr class="hide">
-                    <td><b>ACCI&Oacute;N :</b></td>
-                    <td colspan="2"><input class="form-control" type="text" id="editAction"></td>
-                </tr> 
-                </table>
-                </div>
-                                                                                    
-            </div>
-        </div>
-    </div>
-       <!-- Mapa --> 
-    <div class="row">
-        <div class="col-sm-3 col-md-3 hide" id="g-map-top">
-            <div class="well">
-                <form class="input-group" id="gmap_search">
-                    <input autocomplete="off" class="form-control" type="text" placeholder="Buscar una ubicaci&oacute;n...">
-                    <span class="input-group-btn">
-                        <button type="submit" class="btn btn-default"><i class="splashy-marker_rounded_add"></i></button>
-                    </span>
-                </form>
-            </div>
-        </div>        
-    </div>
+    <!-- Maps -->
     <div class="row">
         <div class="col-sm-12 col-md-12">
             <div class="well">
                 <div id="g_map" style="width:100%;height:400px"></div>
             </div>
         </div>
-    </div>
-    
-
+    </div>  
     <!-- JQuery Implementation -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate.min.js"></script>
@@ -188,6 +112,7 @@
     <script src="lib/validation/jquery.validate.min.js"></script>
     <script src="lib/validation/localization/messages_es.js"></script>
      <!-- maps functions -->
+    <script src="http://maps.google.com/maps/api/js?sensor=false&language=es"></script>
     <script src="js/gmap3.min.js"></script>
     <!-- crud functions -->
     <script src="js/controller/crud_process-tracking.js"></script>
@@ -202,4 +127,33 @@
             $('#collapseThree').addClass(' in');
             $('#process-tracking').addClass(' active');
         });
+        function Panorama(){
+            var p,  marker, infowindow, map;
+            this.setMap = function(obj){
+                map = obj;
+            };
+            this.setMarker = function(obj){
+                marker = obj;
+            };
+            this.setInfowindow = function(obj){
+                infowindow = obj;
+            };
+            this.open = function(){
+                infowindow.open(map, marker);
+            };
+            this.run = function(id){
+                if (!marker) { return; }
+                p = new google.maps.StreetViewPanorama(
+                    document.getElementById(id), 
+                    {   navigationControl: true,
+                        navigationControlOptions: {style: google.maps.NavigationControlStyle.ANDROID},
+                        enableCloseButton: false,
+                        addressControl: false,
+                        linksControl: false
+                    }
+                );
+                p.bindTo("position", marker);
+                p.setVisible(true);
+            };
+        };
     </script>
