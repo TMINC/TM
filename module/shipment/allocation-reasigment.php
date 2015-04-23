@@ -12,30 +12,18 @@
                     <a href="#" data-toggle="dropdown" class="btn dropdown-toggle btn-default">COLUMNAS <span class="caret"></span></a>
                     <ul class="dropdown-menu tableMenu" id="dt_maintenance_nav">
                         <li><div class="checkbox"><label class="" for="dt_col_1"><input type="checkbox" value="0" id="dt_col_1" name="toggle-cols" checked="checked" class="uni_style"/> &hookrightarrow;</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_2"><input type="checkbox" value="1" id="dt_col_2" name="toggle-cols" checked="checked" class="uni_style"/> &check;</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> NRO.ORDEN</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> TIPO SERVICIO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> CLIENTE</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> VOLUMEN</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> PESO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> DISTANCIA</label></div></li>                        
+                        <li><div class="checkbox"><label class="" for="dt_col_2"><input type="checkbox" value="1" id="dt_col_2" name="toggle-cols" checked="checked" class="uni_style"/> NRO.ORDEN</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> TIPO SERVICIO</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> CLIENTE</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> VOLUMEN</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> PESO</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> DISTANCIA</label></div></li>                        
                     </ul>
                 </div>
-                <!-- actions for datatables -->
-                <div class="dt_maintenance_actions pull-left">
-                    <div class="btn-group">
-                        <button data-toggle="dropdown" class="btn dropdown-toggle btn-default">ACCIONES <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a href="javascript:void(0);" class="reassign"><i class="glyphicon glyphicon-transfer"></i> REASIGNAR</a></li>                            
-                        </ul>
-                    </div>
-                </div>
             </div>
-            
             <table class="table table-striped table-bordered dTableR" id="dt_maintenance">
                 <thead>
                     <tr>
-                        <th></th>
                         <th></th>
                         <th class="center" style="width: 120px;">NRO.ORDEN</th>
                         <th class="center">CLIENTE</th>
@@ -50,60 +38,45 @@
         </div>
     </div>
     <!-- Modal -->
-    <!-- Adjudication Type-->
+    <!-- Selección datos Transporte -->
     <div class="modal" id="adjudication">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button class="close" data-dismiss="modal">×</button>
-                    <h3><i class="glyphicon glyphicon-tasks" style="margin-top: 3px;font-size:15px;"></i> ADJUDICACI&Oacute;N</h3>
+                    <h3><i class="glyphicon glyphicon-tasks" style="margin-top: 3px;font-size:15px;"></i> REASIGNACI&Oacute;N TRANSPORTE</h3>
                 </div>
                 <div class="modal-body">
                     <form id="validation_adjudication">
-                        <table class="table table-bordered" >
-                            <tr>
-                                <td><b>TIPO :</b></td>
-                                <td class="form-group"><select class="form-control chzn_edit" id="editAdjudicationType" name="editAdjudicationType" data-placeholder="SELECCIONE TIPO DE ADJUDICACION..."></select></td>
-                            </tr>
-                        </table>                        
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <a href="JavaScript:void(0);" class="btn btn-default" id="adjudication_close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> CANCELAR</a>
-                    <a href="JavaScript:void(0);" class="btn btn-primary" id="adjudication_save"><i class="glyphicon glyphicon-ok"></i> CONTINUAR</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Selección datos Transporte -->
-    <div class="modal" id="adjudicationDirect">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal">×</button>
-                    <h3><i class="glyphicon glyphicon-tasks" style="margin-top: 3px;font-size:15px;"></i> ASIGNACI&Oacute;N TRANSPORTE</h3>
-                </div>
-                <div class="modal-body">
-                    <form id="validation_adjudication_direct">
                         <table class="table table-bordered">
                             <tr>
-                                <td><b>NRO.VIAJE :</b></td>
-                                <td class="form-group"><input class="form-control" readonly="true" type="text" id="editDirectId" name="editDirectId"></td>
+                                <td><b>NRO.SERVICIO :</b></td>
+                                <td class="form-group"><input class="form-control" readonly="true" type="text" id="editId" name="editId"></td>
                             </tr>
                             <tr>
-                                <td><b>NRO.PEDIDO(S) :</b></td>
-                                <td class="form-group"><input class="form-control" readonly="true" type="text" id="editDirectOrderId" name="editDirectOrderId"></td>
+                                <td><b>SERVICIOS RELACIONADOS :</b></td>
+                                <td class="form-group"><input class="form-control" readonly="true" type="text" id="editOrderDetail" name="editOrderDetail"></td>
                             </tr>
                             <tr>
-                                <td><b>PROVEEDOR TRANSPORTE :</b></td>
-                                <td class="form-group"><select class="form-control chzn_edit" id="editDirectCarrier" name="editDirectCarrier" data-placeholder="SELECCIONE UN PROVEEDOR..." /></td>
+                                <td><b>PROVEEDOR TRANSPORTE ACTUAL :</b></td>
+                                <td class="form-group"><input class="form-control" readonly="true" type="text" id="editCarrierCurrent" name="editCarrierCurrent"></td>
+                            </tr>
+                            <tr>
+                                <td><b>PROVEEDOR TRANSPORTE NUEVO :</b></td>
+                                <td class="form-group"><select class="form-control chzn_edit" id="editCarrierNew" name="editCarrierNew" data-placeholder="SELECCIONE UN PROVEEDOR..." /></td>
+                            </tr>
+                            <tr>
+                                <td><b>MOTIVO :</b></td>
+                                <td class="form-group">
+                                    <textarea rows="2" id="editReason" name="editReason" class="form-control autosize"></textarea>
+                                </td>
                             </tr>
                         </table>
                     </form> 
                 </div>
                 <div class="modal-footer">
-                    <a href="JavaScript:void(0);" class="btn btn-default" id="adjudication_direct_close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> CANCELAR</a>
-                    <a href="JavaScript:void(0);" class="btn btn-primary" id="adjudication_direct_save"><i class="glyphicon glyphicon-save"></i> GUARDAR</a>
+                    <a href="JavaScript:void(0);" class="btn btn-default" id="adjudication_close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> CANCELAR</a>
+                    <a href="JavaScript:void(0);" class="btn btn-primary" id="adjudication_save"><i class="glyphicon glyphicon-save"></i> GUARDAR</a>
                 </div>
             </div>
         </div>
@@ -162,7 +135,7 @@
                 </table>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn btn-primary" id="save"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
+                    <a href="JavaScript:void(0);" class="btn btn-primary" id="save"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
                 </div>
             </div>
         </div>
@@ -173,8 +146,8 @@
         <div id="confirm_dialog" class="cbox_content">
             <div class="sepH_c tac"><strong>Esta seguro de eliminar el(los) registro(s)?</strong></div>
             <div class="tac">
-                <a href="#" class="btn btn-gebo confirm_yes btn-default">S&iacute;</a>
-                <a href="#" class="btn confirm_no btn-default">No</a>
+                <a href="JavaScript:void(0);" class="btn btn-gebo confirm_yes btn-default">S&iacute;</a>
+                <a href="JavaScript:void(0);" class="btn confirm_no btn-default">No</a>
             </div>
         </div>
     </div>

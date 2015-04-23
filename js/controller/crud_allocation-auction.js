@@ -22,8 +22,8 @@ shipment = {
 var load = function () {    
     $.ajax({
         type: "POST",
-        url: "module/shipment/crud/shipment.php",
-        data: "action=select&option=2",
+        url: "module/shipment/crud/shipment-auction.php",
+        data: "action=select",
         success: function (response) {
             $("#dt_maintenance tbody").empty();
             $('#dt_maintenance').dataTable().fnDestroy();
@@ -47,7 +47,7 @@ var maskinput = function (){
    //$("#editTime").inputmask("99:99:99");
 };
 var popover = function (){
-    $(".pop_over").popover();
+    $(".pop_over").popover({ html:true });
 };
 var chosen = function (){
     $(".chzn_edit").chosen();
@@ -164,7 +164,6 @@ var table = function () {
             },
             "aoColumns": [
                     { "bSortable": false },
-                    { "bSortable": false },
                     { "sType": "string" },
                     { "sType": "string" },
                     { "sType": "string" },
@@ -186,6 +185,7 @@ var table = function () {
             }else{
                 this.src = "img/details_close.png";
                 oTable.fnOpen(nTr, fnFormatDetails($(this).data('id')), 'details');
+                $(".details").css("padding", "0 0 0 36px");
             }
         });
     }

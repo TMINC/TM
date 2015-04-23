@@ -64,7 +64,7 @@ var table = function () {
     /* Formating function for row details */
     function fnFormatDetails(help_id){
         var sOut = '<table class="table table-striped table-bordered dTableR" id="help_reply">';
-        sOut += '<thead><tr><th class="center">ADMINISTRADOR</th><th class="center">DESCRIPCI&Oacute;N</th><th class="center">REVIEWS</th><th class="center">ACCI&Oacute;N</th></tr></thead><tbody>';
+        sOut += '<thead><tr><th class="center">SOPORTE TM</th><th class="center">REVIEWS</th><th class="center">DESCRIPCI&Oacute;N</th><th class="center"><a style="cursor:pointer;" class="add_review hint--left hint--info" data-hint="Agregar Respuesta" data-id="'+help_id+'"><i class="glyphicon glyphicon-comment" /></a></th></tr></thead><tbody>';
         $.ajax({
             type: "POST",
             url: "module/configuration/crud/help.php",
@@ -122,7 +122,6 @@ var table = function () {
                     { "sType": "string" },
                     { "sType": "string" },
                     { "sType": "string" },
-                    { "sType": "string" },
                     { "bSortable": false }
                 ],
             "sPaginationType": "bootstrap"
@@ -140,10 +139,61 @@ var table = function () {
                 this.src = "img/details_close.png";
                 oTable.fnOpen(nTr, fnFormatDetails($(this).data('id')), 'details');
                 $(".details").css("padding", "0 0 0 36px");
+                like();
+                agregar_comentario();
+                guardar_comentario();
             }
         });
     }
 };
+var agregar_comentario = function(){
+    $(".add_review").off().on('click', function (e) {
+        e.preventDefault();
+        $("#editDescription").empty();
+        var help_id = $(this).data('id');$("#editHelpId").val(help_id);
+        $("#editActionComment").val("insert");   
+        $("#modal_comment").modal("show");
+    });
+};
+var guardar_comentario = function () {
+    $("#save_comment").off().on('click', function (e) {
+        e.preventDefault();
+        if($('#validation_form_comment').validate({
+            onkeyup: false,
+            errorClass: 'error',
+            validClass: 'valid',
+            rules: {
+                editDescription: { required: true }
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass("f_error");    
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass("f_error");
+            },
+            errorPlacement: function(error, element) {
+                $(element).closest('.form-group').append(error);
+            }
+        }).form()){
+            var _id = $("#editId").val();
+            var _help_id = $("#editHelpId").val();
+            var _description = $("#editDescription").val();
+            var _action = $("#editActionComment").val();
+            $.ajax({
+                type: "POST",
+                url: "module/configuration/crud/help-reply.php",
+                data: "action="+_action +"&id="+ _id+"&help="+ _help_id+"&description="+ _description,
+                success: function () {
+                    $("#modal_comment").modal("hide");load();       
+                    $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
+                }        
+            });  
+        }
+        return false;        
+    });
+};
+
+
 var agregar = function(){
     $(".add").off().on('click', function (e) {
         e.preventDefault();
@@ -157,19 +207,33 @@ var agregar = function(){
             success: function (data) { $("#editForm").append('<option selected="true"> </option>'); $("#editForm").append(data); }        
         });        
         chosen();
-        $("#editForm").trigger("liszt:updated");
-   
+        $("#editForm").trigger("liszt:updated");   
         $("#editLevel").empty(); $("#editForm").append('<option selected="true"></option>');
         for(i=1; i<5; i++){
             if(i===1){$("#editLevel").append('<option value="' + i + '">BAJA</option>');}
             if(i===2){$("#editLevel").append('<option value="' + i + '">NORNAL</option>');}
             if(i===3){$("#editLevel").append('<option value="' + i + '">ALTA</option>');}
             if(i===4){$("#editLevel").append('<option value="' + i + '">URGENTE</option>');}
-        } chosen(); $("#editLevel").trigger("liszt:updated");        
-        
+        } chosen(); $("#editLevel").trigger("liszt:updated");
         $("#editText").val("");  
         $("#editStatus").removeAttr('checked');
         $("#editAction").val("insert");        
+    });
+};
+var like = function(){
+   $(".like").off().on('click', function (e) {
+        e.preventDefault();
+        var _id = $(this).data('id');
+        var _count = $(this).data('review');
+        _count = _count+1;
+        $.ajax({
+            type: "POST",
+            url: "module/configuration/crud/help.php",
+            data: "action=review&reply_id="+ _id+"&count="+ _count,
+            success: function () {
+                load();$.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
+            }        
+        });
     });
 };
 var editar = function(){
@@ -187,8 +251,7 @@ var editar = function(){
             success: function (data) { $("#editForm").empty();$("#editForm").append(data); }        
         });
         chosen();
-        $("#editForm").trigger("liszt:updated");
-        
+        $("#editForm").trigger("liszt:updated");        
          var _level = $(this).data('level');var sel='selected'; $("#editLevel").empty();
         for(i=1; i<5; i++){
             if(i===_level){sel='selected';}else{sel='';}
@@ -196,15 +259,11 @@ var editar = function(){
             if(i===2){$("#editLevel").append('<option value="' + i + '" ' + sel + '>NORMAL</option>');}
             if(i===3){$("#editLevel").append('<option value="' + i + '" ' + sel + '>ALTA</option>');}
             if(i===4){$("#editLevel").append('<option value="' + i + '" ' + sel + '>URGENTE</option>');}
-        } chosen(); $("#editLevel").trigger("liszt:updated");
-        
+        } chosen(); $("#editLevel").trigger("liszt:updated");        
         var _text = $(this).data('text'); $("#editText").val(_text);  
         var _status = $(this).data('status');
-        if(_status=="1"){
-            $("#editStatus").attr('checked','checked');
-        }else{
-            $("#editStatus").removeAttr('checked');
-        }
+        if(_status=="1"){ $("#editStatus").attr('checked','checked');}
+        else{ $("#editStatus").removeAttr('checked'); }
         $("#editAction").val("update");        
         $("#modal").modal("show");
     });

@@ -207,6 +207,16 @@ function center_char($iCenID, $mysqli){
     return $center;
 }
 
+function center_type_char($iCenID, $mysqli){
+    $stmt = $mysqli->prepare("SELECT iCenTyp FROM tm_center WHERE iCenID = ?");
+    $stmt->bind_param('i', $iCenID);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($center);
+    $stmt->fetch();
+    return $center;
+}
+
 function customer_char($iCusID, $mysqli){
     $stmt = $mysqli->prepare("SELECT cCusNam FROM tm_customer WHERE iCusID = ?");
     $stmt->bind_param('s', $iCusID);
@@ -304,3 +314,23 @@ function gps_table($iOrdDetID, $mysqli){
     }
     return $gps;
 }
+function views($help_id, $mysqli){
+    $stmt = $mysqli->prepare("SELECT count(*) FROM tm_help_reply WHERE iHelID = ?");
+    $stmt->bind_param('s', $help_id);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($total);
+    $stmt->fetch();
+    return $total;
+}
+function format($number){
+    if($number<9){return "00000000".$number;}
+    else if($number<99){return "0000000".$number;}
+    else if($number<999){return "000000".$number;}
+    else if($number<9999){return "00000".$number;}
+    else if($number<99999){return "0000".$number;}
+    else if($number<999999){return "000".$number;}
+    else if($number<9999999){return "00".$number;}
+    else if($number<99999999){return "0".$number;}
+    else {return $number;}
+ }

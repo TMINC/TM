@@ -227,13 +227,13 @@ var load_vehicle = function(){
 var vehicle = function(){
     $("#vehicle_selection").off().on('click', function (e) {
         e.preventDefault();
-        
-       wizard();
+        wizard();
         wizard_titles();
         $("#vehicle_selection_modal").modal("show");
    });   
 };
 var wizard = function(){
+    
     $('#vehicle_wizard').stepy({
         titleClick : true,
         nextLabel:      'Siguiente <i class="glyphicon glyphicon-chevron-right"></i>',
@@ -243,6 +243,11 @@ var wizard = function(){
         validate : true,
         next: function() {
             if ($("#vehicle_select").val().length > 0) {vehicle_table_number();}else{}
+            $('form').stepy('destroy');
+        },
+        finish: function() {
+            alert('Canceling...');
+            return false;
         }
     });
     stepy_validation = $('#vehicle_wizard').validate({

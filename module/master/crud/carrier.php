@@ -8,15 +8,29 @@
     
     $action = $_POST['action'];
     if($action=='consult'){
+        $exclude = $_POST['task'];
         $sel = $_POST['sel'];
-        if ($stmt = $mysqli->prepare("SELECT iCarID, CONCAT(cCarRuc,' - ',cCarNam) AS find FROM tm_carrier WHERE cCarSta='1'")){
-            $stmt->execute();
-            $stmt->store_result();
-            $stmt->bind_result($carrier_id, $carrier);
-            while($row = $stmt->fetch()) {
-                if($sel==$carrier){$selected = " selected";}else{$selected = "";}
-                echo '<option value="'.$carrier_id.'" '.$selected.'>'.$carrier.'</option>';
-            }            
+        if($exclude=='exclude'){
+            if ($stmt = $mysqli->prepare("SELECT iCarID, CONCAT(cCarRuc,' - ',cCarNam) AS find FROM tm_carrier WHERE cCarSta='1'")){
+                $stmt->execute();
+                $stmt->store_result();
+                $stmt->bind_result($carrier_id, $carrier);
+                while($row = $stmt->fetch()) {
+                    if($sel==$carrier_id){}else{
+                        echo '<option value="'.$carrier_id.'">'.$carrier.'</option>';
+                    }
+                }            
+            }
+        }else{
+            if ($stmt = $mysqli->prepare("SELECT iCarID, CONCAT(cCarRuc,' - ',cCarNam) AS find FROM tm_carrier WHERE cCarSta='1'")){
+                $stmt->execute();
+                $stmt->store_result();
+                $stmt->bind_result($carrier_id, $carrier);
+                while($row = $stmt->fetch()) {
+                    if($sel==$carrier_id){$selected = " selected";}else{$selected = "";}
+                    echo '<option value="'.$carrier_id.'" '.$selected.'>'.$carrier.'</option>';
+                }            
+            }
         }
     }else{
         if($action=='select'){

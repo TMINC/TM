@@ -23,7 +23,7 @@ var load = function () {
     $.ajax({
         type: "POST",
         url: "module/shipment/crud/shipment.php",
-        data: "action=select&option=1",
+        data: "action=select&option=2",
         success: function (response) {
             $("#dt_maintenance tbody").empty();
             $('#dt_maintenance').dataTable().fnDestroy();
@@ -35,7 +35,6 @@ var load = function () {
             maskinput();
             popover();
             chosen();
-            reassign();
         }        
     });
 };
@@ -55,16 +54,58 @@ var chosen = function (){
 var reassign = function(){
     $(".reassign").off().on('click', function (e) {
         e.preventDefault();
-        var _id = $('input:checkbox:checked.row_sel').map(function () {
-            return $(this).data('id');
-        }).get();
-        if(_id.length===0){
-            $.sticky("INFO<br>[Orden no seleccionada.]", {autoclose : 5000, position: "top-right", type: "st-info" });
-        }else if(_id.length>1){
-            $.sticky("INFO<br>[Solo es posible reasignar una orden.]", {autoclose : 5000, position: "top-right", type: "st-info" });
-        }else{
-            $.sticky("ERROR<br>[Las ordenes seleccionadas no pertenecen al mismo cliente.]", {autoclose : 5000, position: "top-right", type: "st-error" });
+        var _id = $(this).data('id');$("#editId").val(_id);
+        var _ids = $(this).data('ids');$("#editOrderDetail").val(_ids);
+        var _carrier_current_id = $(this).data('current_id');
+        var _carrier_current = $(this).data('current_name');$("#editCarrierCurrent").val(_carrier_current);
+        $("#editCarrierNew").empty();
+        $.ajax({
+            type: "POST",
+            async:false,
+            url: "module/master/crud/carrier.php",
+            data: "action=consult&task=exclude&sel="+ _carrier_current_id,
+            success: function (data) { $("#editCarrierNew").append('<option selected="true"> </option>'); $("#editCarrierNew").append(data); }        
+        });        
+        chosen();
+        $("#editCarrierNew").trigger("liszt:updated");
+        $("#adjudication").modal("show");
+    });
+};
+var reassign_save = function (){
+    $("#adjudication_save").off().on('click', function (e) {
+        e.preventDefault();
+        $("[name='editCarrierNew']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        if($('#validation_form').validate({
+            onkeyup: false,
+            errorClass: 'error',
+            validClass: 'valid',
+            rules: {
+                editCarrierNew: { chosen: true }
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass("f_error");
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass("f_error");    
+            },
+            errorPlacement: function(error, element) {
+                $(element).closest('.form-group').append(error);
+            }
+        }).form()){
+            var _ids = $("#editOrderDetail").val();
+            var _carrier_current_id = $("#editCarrierNew option:selected").val();
+            var _reason = $("#editReason").val();
+            $.ajax({
+                type: "POST",
+                url: "module/shipment/crud/shipment.php",
+                data: "action=reasigment&id="+_ids+"&carrier="+_carrier_current_id+"&reason="+_reason,
+                success: function () {
+                    $("#adjudication").modal("hide");
+                    $.sticky("INFO<br>[Su solicitud ha sido procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                }        
+            });
         }
+        return false;
     });
 };
 var table = function () {
@@ -76,12 +117,12 @@ var table = function () {
     /* Formating function for row details */
     function fnFormatDetails(order_id){
         var sOut = '<table class="table table-striped table-bordered dTableR">';
-        sOut += '<thead><tr><th class="center">ORIGEN</th><th class="center">DESTINO</th><th class="center">VOLUMEN</th><th class="center">PESO</th><th class="center">DISTANCIA</th><th class="center">ACCI&Oacute;N</th></tr></thead><tbody>';
+        sOut += '<thead><tr><th class="center" style="width: 106px;">SERVICIO</th><th class="center">ORIGEN</th><th class="center">DESTINO</th><th class="center">VOLUMEN</th><th class="center">PESO</th><th class="center">DISTANCIA</th><th class="center">ACCI&Oacute;N</th></tr></thead><tbody>';
         $.ajax({
             type: "POST",
             url: "module/shipment/crud/shipment.php",
             async: false,
-            data: "action=detail&order="+ order_id,
+            data: "action=reassign&type=2&order="+ order_id,
             success: function (response) {
                 sOut += response;                
             }        
@@ -128,7 +169,6 @@ var table = function () {
             },
             "aoColumns": [
                     { "bSortable": false },
-                    { "bSortable": false },
                     { "sType": "string" },
                     { "sType": "string" },
                     { "sType": "string" },
@@ -151,6 +191,9 @@ var table = function () {
                 this.src = "img/details_close.png";
                 oTable.fnOpen(nTr, fnFormatDetails($(this).data('id')), 'details');
                 $(".details").css("padding", "0 0 0 36px");
+                popover();
+                reassign();
+                reassign_save(); 
             }
         });
     }

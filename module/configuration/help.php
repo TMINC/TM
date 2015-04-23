@@ -16,9 +16,8 @@
                         <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> ID</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> USUARIO</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> FORM</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> NIVEL</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> TEXTO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> PREGUNTA</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
                     </ul>
                 </div>
                 <!-- actions for datatables -->
@@ -41,8 +40,7 @@
                         <th class="center" style="width: 120px;">ID</th>
                         <th class="center">USUARIO</th>
                         <th class="center">FORMULARIO</th>
-                        <th class="center">NIVEL</th>
-                        <th class="center">TEXTO</th>
+                        <th class="center">PREGUNTA</th>
                         <th class="center" style="width: 80px;">ACCI&Oacute;N</th>
                     </tr>
                 </thead>
@@ -61,9 +59,12 @@
                 <div class="modal-body">
                     <form id="validation_form">
                         <table class="table table-bordered">
-                            <tr>
+                            <tr class="hidden">
                                 <td><b>ID :</b></td>
-                                <td colspan="2"><input class="form-control" readonly="true" type="text" id="editId" value="<?php echo $_SESSION['user_id'];?>"></td>
+                                <td colspan="2">
+                                    <input class="form-control" readonly="true" type="text" id="editId" value="<?php echo $_SESSION['user_id'];?>">
+                                    <input class="form-control" readonly="true" type="text" id="editHelpId">
+                                </td>
                             </tr>
                             <tr>
                                 <td><b>USUARIO :</b></td>
@@ -80,7 +81,7 @@
                              </tr>
                             <tr>
                                 <td><b>TEXTO :</b></td>
-                                <td class="form-group" colspan="2"><input class="form-control autosize" type="text" id="editText" name="editText"></td>
+                                <td class="form-group" colspan="2"><textarea rows="2" id="editText" name="editText" class="form-control autosize"></textarea></td>
                             </tr>
                             <tr>
                                 <td><b>ESTADO :</b></td>
@@ -99,6 +100,40 @@
             </div>
         </div>
     </div>
+    
+     <!-- Comentario -->
+    <div class="modal" id="modal_comment">
+        <div class="modal-dialog">
+            <div class="modal-content">        
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">×</button>
+                    <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="validation_form_comment">
+                        <table class="table table-bordered">
+                           <tr>
+                                <td><b>ADMINISTRADOR :</b></td>
+                                <td class="form-group" colspan="2"><input class="form-control" readonly="true" type="text" id="editAdministrator" name="editAdministrator" value="<?php echo $_SESSION['username'];?>"></td>
+                            </tr>
+                            <tr>
+                                <td><b>DESCRIPCI&Oacute;N :</b></td>
+                                <td class="form-group" colspan="2"><textarea rows="2" id="editDescription" name="editDescription" class="form-control autosize"></textarea></td>
+                            </tr>
+                            <tr class="hide">
+                                <td><b>ACCI&Oacute;N :</b></td>
+                                <td><input class="form-control" type="text" id="editActionComment"></td>
+                            </tr> 
+                        </table> 
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="JavaScript:void(0);" class="btn btn-primary" id="save_comment"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- hide elements-->
     <div class="hide">           
         <!-- confirmation box -->

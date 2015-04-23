@@ -11,14 +11,16 @@
                 <div class="btn-group col_vis_menu">
                     <a href="#" data-toggle="dropdown" class="btn dropdown-toggle btn-default">COLUMNAS <span class="caret"></span></a>
                     <ul class="dropdown-menu tableMenu" id="dt_maintenance_nav">
-                        <li><div class="checkbox"><label class="" for="dt_col_1"><input type="checkbox" value="0" id="dt_col_1" name="toggle-cols" checked="checked" class="uni_style"/> &hookrightarrow;</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_2"><input type="checkbox" value="1" id="dt_col_2" name="toggle-cols" checked="checked" class="uni_style"/> &check;</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_1"><input type="checkbox" value="0" id="dt_col_1" name="toggle-cols" checked="checked" class="uni_style"/> &check;</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_2"><input type="checkbox" value="1" id="dt_col_2" name="toggle-cols" checked="checked" class="uni_style"/> NRO.SERVICIO</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> NRO.ORDEN</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> TIPO SERVICIO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> VOLUMEN</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> PESO</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> DISTANCIA</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> INFORMACI&Oacute;N</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> ORIGEN</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> DESTINO</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> PRECIO</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_8"><input type="checkbox" value="8" id="dt_col_9" name="toggle-cols" checked="checked" class="uni_style"/> FINALIZA</label></div></li>
+                        <li><div class="checkbox"><label class="" for="dt_col_9"><input type="checkbox" value="9" id="dt_col_10" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
                     </ul>
                 </div>
                 <!-- actions for datatables -->
@@ -36,13 +38,12 @@
             <table class="table table-striped table-bordered dTableR" id="dt_maintenance">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th style="width: 100px;"></th>
-                        <th class="center" style="width: 120px;">NRO.ORDEN</th>
+                        <th class="center" style="width: 12px;"><input name="sel_row" class="sel_row" data-tableid="dt_maintenance" type="checkbox"></th>
+                        <th class="center" style="width: 120px;">NRO.SERVICIO</th>
                         <th class="center">TIPO SERVICIO</th>
-                        <th class="center">VOLUMEN</th>
-                        <th class="center">&nbsp;&nbsp;&nbsp;PESO&nbsp;&nbsp;&nbsp;</th>
-                        <th class="center">DISTANCIA</th>
+                        <th class="center">ORIGEN</th>
+                        <th class="center">DESTINO</th>
+                        <th class="center">PRECIO</th>
                         <th class="center" style="width: 80px;">ACCI&Oacute;N</th>
                     </tr>
                 </thead>
