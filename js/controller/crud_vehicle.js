@@ -50,7 +50,7 @@ var maskinput = function (){
     $("#editTuc").inputmask("99999999999");
 };
 var popover = function (){
-    $(".pop_over").popover();
+    $(".pop_over").popover({ html:true });
 };
 var chosen = function (){
     $(".chzn_edit").chosen();
@@ -190,14 +190,12 @@ var agregar = function(){
         });
         chosen();
         $("#editMeasureWeight").trigger("liszt:updated"); 
-        
-        
         $("#editLenght").val("");
         $.ajax({
             type: "POST",
             async: false,
             url: "module/master/crud/measure.php",
-            data: "action=consult&type=1&sel=0",
+            data: "action=consult&type=2&sel=0",
             success: function (data) { $("#editMeasureLenght").empty();$("#editMeasureLenght").append('<option selected="true"> </option>');$("#editMeasureLenght").append(data); }        
         });
         chosen();
@@ -304,7 +302,7 @@ var editar = function(){
             type: "POST",
             async: false,
             url: "module/master/crud/measure.php",
-            data: "action=consult&type=1&sel="+ _measure_lenght,
+            data: "action=consult&type=2&sel="+ _measure_lenght,
             success: function (data) { $("#editMeasureLenght").empty();$("#editMeasureLenght").append(data); }        
         });
         chosen();
@@ -397,8 +395,8 @@ var guardar = function () {
         $("[name='editGroup']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         $("[name='editMeasureWeight']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         $("[name='editMeasureLenght']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show(); 
-        $("[name='editMeasureWidth']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
-        $("[name='editMeasureHeight']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        //$("[name='editMeasureWidth']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        //$("[name='editMeasureHeight']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         if($('#validation_form').validate({
             onkeyup: false,
             errorClass: 'error',
@@ -416,8 +414,8 @@ var guardar = function () {
                 editGroup: { chosen: true },
                 editMeasureWeight: { chosen: true },
                 editMeasureLenght: { chosen: true },
-                editMeasureWidth: { chosen: true },
-                editMeasureHeight: { chosen: true }
+                //editMeasureWidth: { chosen: true },
+                //editMeasureHeight: { chosen: true }
             },
             highlight: function(element) {
                 $(element).closest('.form-group').addClass("f_error");

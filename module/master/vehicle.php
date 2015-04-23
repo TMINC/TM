@@ -96,16 +96,16 @@
                             <td class="form-group"><select class="form-control chzn_edit" id="editMeasureWeight" name="editMeasureWeight" data-placeholder="SELECCIONE U.M. PESO..." /></td>
                         </tr>
                          <tr>
-                            <td><b>LONGITUD :</b></td>
+                            <td><b>VOLUMEN :</b></td>
                             <td class="form-group"><input class="form-control" type="text" id="editLenght" name="editLenght"></td>
                             <td class="form-group"><select class="form-control chzn_edit" id="editMeasureLenght" name="editMeasureLenght" data-placeholder="SELECCIONE U.M. LONGITUD..." /></td>
                         </tr>  
-                         <tr>
+                        <tr class="hide">
                             <td><b>ANCHURA :</b></td>
                             <td class="form-group"><input class="form-control" type="text" id="editWidth" name="editWidth"></td>
                             <td class="form-group"><select class="form-control chzn_edit" id="editMeasureWidth" name="editMeasureWidth" data-placeholder="SELECCIONE U.M. ANCHURA..." /></td>
                         </tr>  
-                        <tr>
+                        <tr class="hide">
                             <td><b>ALTURA :</b></td>
                             <td class="form-group"><input class="form-control" type="text" id="editHeight" name="editHeight"></td>
                             <td class="form-group"><select class="form-control chzn_edit" id="editMeasureHeight" name="editMeasureHeight" data-placeholder="SELECCIONE U.M. ALTURA..." /></td>

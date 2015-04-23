@@ -31,8 +31,8 @@
                     if($measure_type=='1'){$type='LONGITUD';}if($measure_type=='2'){$type='VOLUMEN';}if($measure_type=='3'){$type='MASA';}if($measure_type=='4'){$type='TIEMPO';}if($measure_type=='5'){$type='SUPERFICIE';}if($measure_type=='6'){$type='MONEDA';}
                     echo '<tr><td><input id="c'.$measure_id.'" name="row_sel" type="checkbox" class="row_sel uni_style" data-id="'.$measure_id.'"></td>'.
                         '<td>'.$measure_id.$status.'</td>'.
-                        '<td>'.$measure_abbreviation.'</td>'.
                         '<td>'.$measure_description.'</td>'.
+                        '<td>'.$measure_abbreviation.'</td>'.
                         '<td>'.$type.'</td>'.
                         '<td class="center">'.
                             '<a style="cursor:pointer;" class="edit hint--left" data-hint="Editar" data-id="'.$measure_id.'" data-abbreviation="'.$measure_abbreviation.'" data-description="'.$measure_description.'" data-type="'.$measure_type.'" data-status="'.$measure_status.'"><i class="glyphicon glyphicon-edit" /></a>'.                            

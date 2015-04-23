@@ -31,14 +31,15 @@
                     $measure_width = measure_char($measure_width_id, $mysqli);
                     $measure_height = measure_char($measure_height_id, $mysqli);                     
                     if($vehicle_status=='1'){$status='<a class="hint--left hint--success" style="float:right;cursor:pointer;" data-hint="Activo"><i class="glyphicon glyphicon-ok" /></a>';}else{$status='<a class="hint--left hint--error" style="float:right;cursor:pointer;" data-hint="Inactivo"><i class="glyphicon glyphicon-minus" /></a>';}
+                    $class="style='float:right;'";
                     echo '<tr><td><input id="c'.$vehicle_id.'" name="row_sel" type="checkbox" class="row_sel uni_style" data-id="'.$vehicle_id.'"></td>'.
-                        '<td>'.$vehicle_id.$status.'</td>'.
+                        '<td>'.format($vehicle_id).$status.'</td>'.
                         '<td>'.$vehicle_tuc.'</td>'.                            
                         '<td>'.$vehicle_type_info.'-'.$vehicle_type_name.'</td>'.
                         '<td>'.$vehicle_class_info.'-'.$vehicle_class_name.'</td>'.
                         '<td>'.$vehicle_category_info.'-'.$vehicle_category_name.'</td>'.
                         '<td>'.$vehicle_group_name.'-'.$vehicle_group_designation.'</td>'.
-                        '<td>'.$vehicle_plate.'<a style="cursor:help;float:right;" class="pop_over hint--right hint--info" data-hint="Detalle" data-content="PESO: '.$vehicle_weight.' '.$measure_weight.'. LONGITUD: '.$vehicle_lenght.' '.$measure_lenght.'. ANCHURA: '.$vehicle_width.' '.$measure_width.'. ALTURA: '.$vehicle_height.' '.$measure_height.'." title="'.$vehicle_plate.'" data-placement="left"><i class="glyphicon glyphicon-list"/></a></td>'.
+                        '<td>'.$vehicle_plate.'<a style="cursor:help;float:right;" class="pop_over hint--right hint--info" data-hint="Detalle" data-content="<b>PESO:</b> <span '.$class.'>'.$vehicle_weight.' '.$measure_weight.'</span> <br /><b>VOLUMEN:</b> <span '.$class.'>'.$vehicle_lenght.' '.$measure_lenght.'</span>" title="'.$vehicle_plate.'" data-placement="left"><i class="glyphicon glyphicon-list"/></a></td>'.
                         '<td class="center">'.
                             '<a style="cursor:pointer;" class="edit hint--left" data-hint="Editar" data-id="'.$vehicle_id.'" data-plate="'.$vehicle_plate.'" data-tuc="'.$vehicle_tuc.'" data-type="'.$vehicle_type_id.'" data-class="'.$vehicle_class_id.'" data-category="'.$vehicle_category_id.'" data-group="'.$vehicle_group_id.'" data-weight="'.$vehicle_weight.'" data-measure_weight="'.$measure_weight_id.'" data-lenght="'.$vehicle_lenght.'" data-measure_lenght="'.$measure_lenght_id.'" data-width="' .$vehicle_width.'" data-measure_width="'.$measure_width_id.'" data-height="'.$vehicle_height.'" data-measure_height="'.$measure_height_id.'" data-status="'.$vehicle_status.'"><i class="glyphicon glyphicon-edit" /></a>'.                            
                         '</td></tr>';

@@ -244,6 +244,7 @@ var table_detail = function () {
 var agregar = function(){
     $(".add").off().on('click', function (e) {
         e.preventDefault();
+        $(".save").removeClass('hide');
         $("#editId").val("");
         $("#editType").empty(); $("#editType").append('<option selected="true" />');
         for(i=1; i<3; i++){

@@ -9,7 +9,7 @@
     $action = $_POST['action'];
     if($action=='consult'){
         $sel = $_POST['sel'];
-        if ($stmt = $mysqli->prepare("SELECT iVehTypID, CONCAT(cVehTypInf,' - ',cVehTypNam) AS find FROM tm_vehicle_type WHERE cVehTypSta='1'")){
+        if ($stmt = $mysqli->prepare("SELECT iVehTypID, cVehTypInf AS find FROM tm_vehicle_type WHERE cVehTypSta='1'")){
             $stmt->execute();
             $stmt->store_result();
             $stmt->bind_result($type_id, $type);
