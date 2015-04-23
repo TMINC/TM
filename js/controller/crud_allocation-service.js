@@ -40,6 +40,8 @@ var load = function () {
             date();
             load_vehicle();
             save_date();
+            wizard();
+            wizard_titles();
         }        
     });
 };
@@ -51,7 +53,7 @@ var maskinput = function (){
    //$("#editTime").inputmask("99:99:99");
 };
 var popover = function (){
-    $(".pop_over").popover();
+    $(".pop_over").popover({ html:true });
 };
 var chosen = function (){
     $(".chzn_edit").chosen();
@@ -185,7 +187,6 @@ var load_truck_number = function (){
         url: "module/shipment/crud/shipment-detail.php",
         data: "action=detail&option=3&id="+_id,
         success: function (data) {
-            alert(data);
             $("#vehicle_selection_number").text(data);
         }        
     });
@@ -228,25 +229,22 @@ var save_plan = function (){
 };
 var load_vehicle = function(){
    $.ajax({
-            type: "POST",
-            async: false,
-            url: "module/shipment/crud/shipment-detail.php",
-            data: "action=detail&option=2",
-            success: function (data) {
-               $("#vehicle_select").append(data);                
-            }        
-        }); 
+        type: "POST",
+        async: false,
+        url: "module/shipment/crud/shipment-detail.php",
+        data: "action=detail&option=2",
+        success: function (data) {
+           $("#vehicle_select").append(data);                
+        }        
+    });
 };
 var vehicle = function(){
     $("#vehicle_selection").off().on('click', function (e) {
         e.preventDefault();
-        wizard();
-        wizard_titles();
         $("#vehicle_selection_modal").modal("show");
    });   
 };
 var wizard = function(){
-    
     $('#vehicle_wizard').stepy({
         titleClick : true,
         nextLabel:      'Siguiente <i class="glyphicon glyphicon-chevron-right"></i>',
@@ -256,7 +254,6 @@ var wizard = function(){
         validate : true,
         next: function() {
             if ($("#vehicle_select").val().length > 0) {vehicle_table_number();}else{}
-            $('form').stepy('destroy');
         },
         finish: function() {
             alert('Canceling...');

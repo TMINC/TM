@@ -37,7 +37,7 @@
             <table class="table table-striped table-bordered dTableR" id="dt_maintenance">
                 <thead>
                     <tr>
-                        <th></th>
+                        <th style="width: 40px;"></th>
                         <th></th>
                         <th class="center" style="width: 120px;">NRO.ORDEN</th>
                         <th class="center">CLIENTE</th>
@@ -151,9 +151,9 @@
                                         <thead>
                                             <tr>
                                                 <th style="text-align: center;width: 80px;">ASIG.TRANS.</th>
-                                                <th style="text-align: center;">NRO.</th>
-                                                <th style="text-align: center;">ORIGEN</th>
-                                                <th style="text-align: center;">DESTINO</th>
+                                                <th style="text-align: center;">NRO.SERVICIO</th>
+                                                <th style="text-align: center;">&nbsp;&nbsp;ORIGEN&nbsp;&nbsp;</th>
+                                                <th style="text-align: center;">&nbsp;DESTINO&nbsp;</th>
                                                 <th style="text-align: center;">TRANSPORTISTA</th>
                                                 <th style="text-align: center;">ADJUDICACI&Oacute;N</th>
                                             </tr>
