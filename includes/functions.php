@@ -278,10 +278,21 @@ function get_vehicles_details($vehcla_id, $mysqli){
     $stmt->bind_result($vehtyp_id,$vehcat_id,$veh_dsc);
     $valor = "";$i=0;
     while($row = $stmt->fetch()) {
-        $valor .= '<option value='.$i.'-'.$vehtyp_id.'-'.$vehcat_id.'>'.$veh_dsc.'</option>';
+        $valor .= '<option value='.$i.'-'.$vehcla_id.'-'.$vehtyp_id.'-'.$vehcat_id.'>'.$veh_dsc.'</option>';
         $i++;
     }    
     return $valor;
+}
+function get_dsc_cla_veh($vehcla_id, $mysqli){
+     $stmt = $mysqli->prepare("SELECT CONCAT(cVehClaInf,' - ',cVehClaNam) "
+            . "FROM tm_vehicle_class "
+            . "WHERE iVehClaID = ?");
+    $stmt->bind_param('i', $vehcla_id);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($veh_dsc);
+    $stmt->fetch();
+    return $veh_dsc;
 }
 
 function gps_all($order_id, $mysqli){

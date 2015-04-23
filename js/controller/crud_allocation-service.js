@@ -186,7 +186,8 @@ var load_truck_number = function (){
         url: "module/shipment/crud/shipment-detail.php",
         data: "action=detail&option=3&id="+_id,
         success: function (data) {
-            $("#vehicle_selection_number").text(data);
+            if(data==""){$("#vehicle_selection_number").text("0");}
+            else{$("#vehicle_selection_number").text(data);}            
         }        
     });
 };
@@ -240,7 +241,11 @@ var load_vehicle = function(){
 var vehicle = function(){
     $("#vehicle_selection").off().on('click', function (e) {
         e.preventDefault();
-        $("#vehicle_selection_modal").modal("show");
+        var _cntTruck = $("#vehicle_selection_number").text();
+        if(_cntTruck==0)
+        {
+            $("#vehicle_selection_modal").modal("show");
+        }
    });   
 };
 var wizard = function(){
@@ -256,7 +261,9 @@ var wizard = function(){
             spinner();}else{}
         },
         finish: function() {
-            alert('Canceling...');
+            save_transport_allocation();
+            $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+            $("#vehicle_wizard").modal('hide');
             return false;
         }
     });
@@ -280,6 +287,26 @@ var wizard = function(){
         },
         ignore  : ':hidden'
     });
+};
+var save_transport_allocation = function(){
+    var _orders = $("#editPlanOrderId").val();
+    var values = [];
+    var veh_id = [];
+    $(".editPlanQuantity ").each(function() {	
+        values.push($(this).val().toString());
+        veh_id.push($(this).data('id').toString());	
+    });
+    for(var x=0;x<values.length;x++){
+        $.ajax({
+            type: "POST",
+            url: "module/shipment/crud/shipment-detail.php",
+            async: false,
+            data: "action=saveAllocTransp&id="+ _orders +"&cnt="+ values[x]+"&veh_id="+ veh_id[x],
+            success: function (response) {                             
+            }        
+        });
+    }
+    
 };
 var wizard_titles = function (){
     $('.stepy-titles').each(function(){

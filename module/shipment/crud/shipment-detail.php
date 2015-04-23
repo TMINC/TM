@@ -27,7 +27,7 @@
                 }
         }     
     }
-    else if($action='detail'){
+    else if($action=='detail'){
         $option = $_POST['option'];
         if($option=='1'){
                 $order_id = $_POST['id'];
@@ -89,10 +89,26 @@
                 $stmt->execute();
                 $stmt->store_result();
                 $stmt->bind_result($nro_transp);
+                $stmt->fetch();
                 echo $nro_transp;
             }
         }        
-    }else if($action=='AllocTransport'){
+    }
+    else if($action == 'saveAllocTransp'){
+        $order_id = $_POST['id']; 
+        $cnt = $_POST['cnt'];
+        $veh_id = $_POST['veh_id']; 
+        $_veh_id = explode("-",$veh_id);
+        for($i=0; $i< $cnt ;$i++){ 
+            $vehcla_id = $_veh_id[1];
+            $vehtyp_id = $_veh_id[2];
+            $vehcat_id = $_veh_id[3];
+            $mysqli->query("INSERT INTO tm_allocation_transport (cAllTraOrd, iVehClaID, iVehTypID, iVehCatID, iAllTraQtyVeh, iAllTraStaVeh)"
+                        . "VALUES ('".$order_id."', '".$vehcla_id."', '".$vehtyp_id."', '".$vehcat_id."', '1', '0')");
+            
+        }
+    }
+    else if($action=='AllocTransport'){
             $order = $_POST['order'];
             $id = $_POST['id'];
             $cnt = $_POST['val'];
