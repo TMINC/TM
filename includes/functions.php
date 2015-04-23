@@ -266,6 +266,23 @@ function get_vehicles_total($vehcla_id, $mysqli){
     $stmt->fetch();
     return $total;
 }
+function get_vehicles_details($vehcla_id, $mysqli){
+    $stmt = $mysqli->prepare("SELECT v.iVehTypID,v.iVehCatID , Concat(vt.cVehTypNam,' [',vc.cVehCatInf,']') "
+            . "FROM tm_vehicle v "
+            . "JOIN tm_vehicle_type vt ON v.iVehTypID = vt.iVehTypID  "
+            . "JOIN tm_vehicle_category vc ON v.iVehCatID = vc.iVehCatID "
+            . "WHERE v.cVehSta='1' AND v.iVehClaID = ?");
+    $stmt->bind_param('i', $vehcla_id);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($vehtyp_id,$vehcat_id,$veh_dsc);
+    $valor = "";$i=0;
+    while($row = $stmt->fetch()) {
+        $valor .= '<option value='.$i.'-'.$vehtyp_id.'-'.$vehcat_id.'>'.$veh_dsc.'</option>';
+        $i++;
+    }    
+    return $valor;
+}
 
 function gps_all($order_id, $mysqli){
     $stmt = $mysqli->prepare("SELECT iTraID, cTraLatLon, tm_track.iOrdDetID, cTraStaGps FROM tm_track, tm_order_detail WHERE tm_track.iOrdDetID = tm_order_detail.iOrdDetID AND iOrdID = ?");

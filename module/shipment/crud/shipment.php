@@ -54,44 +54,7 @@
                     }
                 }
             }
-            if($option=='1'){
-                $order_id = $_POST['id'];
-                $_id = explode(",", $order_id);
-                $_Typeadj="";
-                echo "SELECT det.iOrdDetID, det.iOrdID,c.cCenNam, det.cOrdColDat,det.cOrdColHou,c1.cCenNam, det.cOrdArrDat, det.cOrdArrHou, carr.cCarNam, p.cPlaniAdjType 
-                        FROM tm_order_detail as det 
-                        JOIN tm_center as c ON det.iCenIDOri=c.iCenID 
-                        JOIN tm_center as c1 ON det.iCenIDDes=c1.iCenID 
-                        LEFT JOIN tm_planification as p ON det.IOrdDetID=p.iOrdDetID 
-                        LEFT JOIN tm_carrier as carr ON p.iCarID = carr.iCarID
-                        WHERE det.iOrdID='".$order_id."'";
-                
-                for($i=0; $i< sizeof($_id) ;$i++){
-                    if ($stmt = $mysqli->prepare("SELECT det.iOrdDetID, c.cCenNam, det.cOrdColDat,det.cOrdColHou,c1.cCenNam, det.cOrdArrDat, det.cOrdArrHou, carr.cCarNam, p.cPlaniAdjType "
-                                    . "FROM tm_order_detail as det "
-                                    . "JOIN tm_center as c ON det.iCenIDOri=c.iCenID "
-                                    . "JOIN tm_center as c1 ON det.iCenIDDes=c1.iCenID "
-                                    . "LEFT JOIN tm_planification as p ON det.IOrdDetID=p.iOrdDetID "
-                                    . "LEFT JOIN tm_carrier as carr ON p.iCarID = carr.iCarID "
-                                    . "WHERE det.iOrdID='".$_id[$i]."'")){
-                        $stmt->execute();
-                        $stmt->store_result();
-                        $stmt->bind_result($orderdet_id, $orderdet_orig, $ordendet_dataO, $orderdet_hourO, $orderdet_dest, $orderdet_dataD, $orderdet_hourD,$orderdet_transp,$orderdet_AdjType);
-                        while($row = $stmt->fetch()) { 
-                            if($orderdet_AdjType=='0'){$_Typeadj="Directa";}else if($orderdet_AdjType=='1'){$_Typeadj="Subasta";}
-                            echo 
-                            '<tr><td style="text-align: center;">'.
-                                '<a href="JavaScript:void(0);" style="cursor:pointer;" class="plan_trip hint--left" data-hint="Viaje" data-origin="'.$orderdet_orig.'" data-destination="'.$orderdet_dest.'" data-adjudication="'.$orderdet_AdjType.'" data-carrier="'.$orderdet_transp.'"><i class="glyphicon glyphicon-pencil"></i></a>'.                       
-                            '</td>'.
-                            '<td>'.$orderdet_id.'</td>'.
-                            '<td>'.$orderdet_orig.'<a class="pop_over hint--left hint--info" data-placement="right" data-content="'.$ordendet_dataO." ".$orderdet_hourO.'" data-hint="Cita Recojo" style="cursor:help;float:right;" data-original-title="'.$orderdet_orig.'"><i class="glyphicon glyphicon-calendar"></i></a></td>'.
-                            '<td>'.$orderdet_dest.'<a class="pop_over hint--left hint--info" data-placement="right" data-content="'.$orderdet_dataD." ".$orderdet_hourD.'" data-hint="Cita Llegada" style="cursor:help;float:right;" data-original-title="'.$orderdet_dest.'"><i class="glyphicon glyphicon-calendar"></i></a></td>'.
-                            '<td>'.$orderdet_transp.'</td>'. 
-                            '<td>'.$_Typeadj.'</td></tr>';
-                        }
-                    }
-                }
-            }
+            
             if($option=='2'){
                 if ($stmt = $mysqli->prepare("SELECT iOrdID, iOrdTyp, iCusID, cOrdVol, iMeaIDVol, cOrdWei, iMeaIDWei, cOrdDis, iMeaIDDis, cOrdPri, iMeaIDPri, cOrdReaPri, iMeaIDReaPri, cOrdDet, cOrdSta FROM tm_order WHERE cOrdSta='4'")){
                     $stmt->execute();

@@ -158,14 +158,15 @@ var plan = function(){
                 //Cargando la data de planificación
                 $.ajax({
                     type: "POST",
-                    url: "module/shipment/crud/shipment.php",
-                    data: "action=select&option=1&id="+ _id,
+                    url: "module/shipment/crud/shipment-detail.php",
+                    data: "action=detail&option=1&id="+ _id,
                     success: function (response) {
                         $("#dt_detail_maintenance tbody").empty();
                         $('#dt_detail_maintenance').dataTable().fnDestroy();
                         $("#dt_detail_maintenance tbody").empty();
                         $('#dt_detail_maintenance').dataTable().fnDestroy();
                         $("#dt_detail_maintenance tbody").append(response);
+                        load_truck_number();
                         popover();
                     }        
                 });
@@ -174,6 +175,19 @@ var plan = function(){
                 $.sticky("ERROR<br>[Las ordenes seleccionadas no pertenecen al mismo cliente.]", {autoclose : 5000, position: "top-right", type: "st-error" });
             }
         }
+    });
+};
+var load_truck_number = function (){
+    var _id = $('#editPlanOrderId').val();
+    $.ajax({
+        type: "POST",
+        async: false,
+        url: "module/shipment/crud/shipment-detail.php",
+        data: "action=detail&option=3&id="+_id,
+        success: function (data) {
+            alert(data);
+            $("#vehicle_selection_number").text(data);
+        }        
     });
 };
 var save_plan = function (){
@@ -216,11 +230,10 @@ var load_vehicle = function(){
    $.ajax({
             type: "POST",
             async: false,
-            url: "module/shipment/crud/shipment.php",
-            data: "action=select&option=6",
+            url: "module/shipment/crud/shipment-detail.php",
+            data: "action=detail&option=2",
             success: function (data) {
-               $("#vehicle_select").append(data);
-                
+               $("#vehicle_select").append(data);                
             }        
         }); 
 };
