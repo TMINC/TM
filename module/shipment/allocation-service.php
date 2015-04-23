@@ -158,38 +158,7 @@
                                                 <th style="text-align: center;">ADJUDICACI&Oacute;N</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <!--<tr>
-                                                <td style="text-align: center;">
-                                                    <a class="plan_trip hint--left hint--info" data-hint="Asignaci&oacute;n de Transporte" ><i class="glyphicon glyphicon-pencil"></i></a>
-                                                </td>
-                                                <td>0001</td>
-                                                <td>LIMA <a class="pop_over hint--left hint--info" data-placement="right" data-content="21/10/2015 04:00" data-hint="Cita Recojo" style="cursor:help;float:right;" data-original-title="LIMA"><i class="glyphicon glyphicon-calendar"></i></a></td>
-                                                <td>TRUJILLO <a class="pop_over hint--left hint--info" data-placement="right" data-content="21/10/2015 04:00" data-hint="Cita Llegada" style="cursor:help;float:right;" data-original-title="TRUJILLO"><i class="glyphicon glyphicon-calendar"></i></a></td>
-                                                <td>JAD SERVICIOS S.A.C <a class="pop_over hint--left hint--info" data-placement="right" data-content="PESO: 100 ton. LONGITUD: 200 m. ANCHURA: 300 m. ALTURA: 400 m." data-hint="Caracter&iacute;sticas del Transporte" style="cursor:help;float:right;" data-original-title="D2D494"><i class="glyphicon glyphicon-list"></i></a></td>
-                                                <td>DIRECTA</td>                                                
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: center;">
-                                                    <a href="JavaScript:void(0);" style="cursor:pointer;" class="plan_trip hint--left" data-hint="Viaje" data-origin="" data-destination="" data-adjudication="" data-carrier=""><i class="glyphicon glyphicon-pencil"></i></a>
-                                                </td>
-                                                <td>0002</td>
-                                                <td>LIMA <a class="pop_over hint--left hint--info" data-placement="right" data-content="21/10/2015 04:00" data-hint="Cita Recojo" style="cursor:help;float:right;" data-original-title="LIMA"><i class="glyphicon glyphicon-calendar"></i></a></td>
-                                                <td>TRUJILLO <a class="pop_over hint--left hint--info" data-placement="right" data-content="21/10/2015 04:00" data-hint="Cita Llegada" style="cursor:help;float:right;" data-original-title="TRUJILLO"><i class="glyphicon glyphicon-calendar"></i></a></td>
-                                                <td>JAD SERVICIOS S.A.C <a class="pop_over hint--left hint--info" data-placement="right" data-content="PESO: 100 ton. LONGITUD: 200 m. ANCHURA: 300 m. ALTURA: 400 m." data-hint="Caracter&iacute;sticas del Transporte" style="cursor:help;float:right;" data-original-title="D2D494"><i class="glyphicon glyphicon-list"></i></a></td>
-                                                <td>DIRECTA</td>                                                
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: center;">
-                                                    <a href="JavaScript:void(0);" style="cursor:pointer;" class="plan_trip hint--left" data-hint="Viaje"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                </td>
-                                                <td>0003</td>
-                                                <td>LIMA</td>
-                                                <td>AREQUIPA</td>
-                                                <td>SUBASTA <a class="pop_over hint--left hint--info" data-placement="right" data-content="PESO: 100 ton. LONGITUD: 200 m. ANCHURA: 300 m. ALTURA: 400 m." data-hint="Caracter&iacute;sticas del Transporte" style="cursor:help;float:right;" data-original-title="D2D494"><i class="glyphicon glyphicon-list"></i></a></td>
-                                                <td>9 PARTICIPANTE(S)</td>                                                
-                                            </tr>-->
-                                        </tbody>
+                                        <tbody></tbody>
                                     </table>
                                 </td>
                             </tr>    
@@ -218,20 +187,7 @@
                                 <fieldset title="CARACTER&Iacute;STICAS">
                                     <legend class="hide">Veh&iacute;culo(s) a utilizar…</legend>
                                     <div class="formSep form-group">
-                                        <select id="vehicle_select" name="vehicle_select" multiple="multiple">
-                                            <!--<optgroup label="C001-FURGÓN">
-                                                <option value="1-5">T2 MATPEL [L7]</option>
-                                                <option value="1-4">T3 MATPEL [L4]</option>                                            
-                                            </optgroup>
-                                            <optgroup label="C002-PLATAFORMA">
-                                                <option value="2-5">T2 MATPEL [L7]</option>
-                                                <option value="2-4">T3 MATPEL [L4]</option>                                            
-                                            </optgroup>
-                                            <optgroup label="C003-DOBLE NIVEL">
-                                                <option value="3-5">T2 MATPEL [L7]</option>
-                                                <option value="3-4">T3 MATPEL [L4]</option>                                          
-                                            </optgroup>-->
-                                        </select>
+                                        <select id="vehicle_select" name="vehicle_select" multiple="multiple"></select>
                                     </div>
                                 </fieldset>
                                 <fieldset title="CANTIDAD">
@@ -248,25 +204,30 @@
     </div>
     <!-- Adjudication Type-->
     <div class="modal" id="adjudication">
-        <div class="modal-dialog">
+        <div class="modal-dialog" style="width:60%;">
             <div class="modal-content">
                 <div class="modal-header">
                     <button class="close" data-dismiss="modal">×</button>
                     <h3><i class="glyphicon glyphicon-tasks" style="margin-top: 3px;font-size:15px;"></i> ADJUDICACI&Oacute;N</h3>
                 </div>
                 <div class="modal-body">
-                    <form id="validation_adjudication">
-                        <table class="table table-bordered" >
-                            <tr>
-                                <td><b>TIPO :</b></td>
-                                <td class="form-group"><select class="form-control chzn_edit" id="editAdjudicationType" name="editAdjudicationType" data-placeholder="SELECCIONE TIPO DE ADJUDICACION..."></select></td>
-                            </tr>
-                        </table>                        
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <a href="JavaScript:void(0);" class="btn btn-default" id="adjudication_close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> CANCELAR</a>
-                    <a href="JavaScript:void(0);" class="btn btn-primary" id="adjudication_save"><i class="glyphicon glyphicon-ok"></i> CONTINUAR</a>
+                    <div class="row">
+			<div class="col-sm-12 col-md-12">
+                            <form id="adjudication_wizard" class="stepy-wizzard form-horizontal">
+                                <fieldset title="ASIGNAR CANTIDAD">
+                                    <legend class="hide">Veh&iacute;culo(s) a utilizar…</legend>
+                                    <div class="formSep form-group">
+                                        <select id="vehicle_select_adjudication" name="vehicle_select_adjudication" multiple="multiple"></select>
+                                    </div>
+                                </fieldset>
+                                <fieldset title="CANTIDAD">
+                                    <legend class="hide">Cantidad por Veh&iacute;culo(s)…</legend>
+                                    <table id="vehicle_table_number_adjudication" class="table table-bordered"></table>    
+                                </fieldset>
+                                <a href="JavaScript:void(o);" class="finish btn btn-primary" id="vehicle_save_trip"><i class="glyphicon glyphicon-ok"></i> GUARDAR</a>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -277,8 +238,8 @@
         <div id="confirm_dialog" class="cbox_content">
             <div class="sepH_c tac"><strong>Esta seguro de eliminar el(los) registro(s)?</strong></div>
             <div class="tac">
-                <a href="#" class="btn btn-gebo confirm_yes btn-default">S&iacute;</a>
-                <a href="#" class="btn confirm_no btn-default">No</a>
+                <a href="JavaScript:void(0);" class="btn btn-gebo confirm_yes btn-default">S&iacute;</a>
+                <a href="JavaScript:void(0);" class="btn confirm_no btn-default">No</a>
             </div>
         </div>
     </div>

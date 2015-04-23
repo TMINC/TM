@@ -41,6 +41,7 @@ var load = function () {
             save_date();
             wizard();
             wizard_titles();
+            wizard_two();
         }        
     });
 };
@@ -114,12 +115,40 @@ var multiselectable = function(){
     }
 };
 var select_plan = function () {
-    $('#editAdjudicationType').empty();
-    $('#editAdjudicationType').append('<option selected="selected"></option>');
-    $('#editAdjudicationType').append('<option value="0">DIRECTA</option>');
-    $('#editAdjudicationType').append('<option value="1">SUBASTA</option>');
-    $('#editAdjudicationType').chosen();
-    $("#editAdjudicationType").trigger("liszt:updated");
+    $('.editAdjudicationType').empty();
+    $('.editAdjudicationType').append('<option selected="selected"></option>');
+    $('.editAdjudicationType').append('<option value="0">DIRECTA</option>');
+    $('.editAdjudicationType').append('<option value="1">SUBASTA</option>');
+    $('.editAdjudicationType').chosen();
+    $(".editAdjudicationType").trigger("liszt:updated");
+};
+var carrier_data = function (carrier, filtro){
+    $("#"+carrier).empty();
+    $.ajax({
+        type: "POST",
+        async: false,
+        url: "module/master/crud/carrier.php",
+        data: "action=consult&sel="+ filtro,
+        success: function (data) { $("#"+carrier).append('<option selected="true"> </option>'); $("#"+carrier).append(data); }        
+    });        
+    chosen();
+    $("#"+carrier).trigger("liszt:updated");
+};
+var select_plan_change = function(){
+    $(".editAdjudicationType").change(function() {
+        var _id = $(this).data('id');
+        var _carrier = $(this).data('carrier');
+        var _search = $(this).data('search');
+        var _value = $("#"+_id+" option:selected").val();
+        alert(_value);
+        if(_value=='0'){
+            $('#'+_carrier).removeAttr('multiple'); 
+        }else{
+            $('#'+_carrier).attr('multiple', 'multiple'); 
+        }       
+        carrier_data(_carrier, '');
+    });
+    
 };
 var plan = function(){
     $(".plan").off().on('click', function (e) {
@@ -168,6 +197,7 @@ var plan = function(){
                         $('#dt_detail_maintenance').dataTable().fnDestroy();
                         $("#dt_detail_maintenance tbody").append(response);
                         load_truck_number();
+                        plan_trip();
                         popover();
                     }        
                 });
@@ -177,6 +207,61 @@ var plan = function(){
             }
         }
     });
+};
+var plan_reload = function(){
+   var _id = $('input:checkbox:checked.row_sel').map(function () {
+        return $(this).data('id');
+    }).get();
+    var _customer = $('input:checkbox:checked.row_sel').map(function () {
+        return $(this).data('customer');
+    }).get();
+    var _customerBool = true;
+    if(_id.length===0){
+        $.sticky("INFO<br>[Orden(es) no seleccionada(s).]", {autoclose : 5000, position: "top-right", type: "st-info" });
+    }else{
+        var _nroCustomer = [];
+        for(v = 0; v < _customer.length; v++){
+            if (_nroCustomer.length > 0) {
+                for (i = 0; i < _nroCustomer.length; i++) {
+                    if (_nroCustomer[i] !== _customer[v]) { _customerBool = false; }
+                }
+                if (_customerBool) { _nroCustomer.push(_customer[v]); }
+            } else {
+                _nroCustomer.push(_customer[v]);
+            }
+        }
+        if(_customerBool){
+            select_plan();
+            $('#plan').modal({ backdrop: 'static', keyboard: false });
+            popover();
+            spinner();
+            multiselectable();
+            vehicle();
+            var _id = $('input:checkbox:checked.row_sel').map(function () {
+                return $(this).data('id');
+            }).get();
+            $('#editPlanOrderId').val(_id);//editDirectOrderId
+            //Cargando la data de planificación
+            $.ajax({
+                type: "POST",
+                url: "module/shipment/crud/shipment-detail.php",
+                data: "action=detail&option=1&id="+ _id,
+                success: function (response) {
+                    $("#dt_detail_maintenance tbody").empty();
+                    $('#dt_detail_maintenance').dataTable().fnDestroy();
+                    $("#dt_detail_maintenance tbody").empty();
+                    $('#dt_detail_maintenance').dataTable().fnDestroy();
+                    $("#dt_detail_maintenance tbody").append(response);
+                    load_truck_number();
+                    plan_trip();
+                    popover();
+                }        
+            });
+            save_plan();
+        }else{
+            $.sticky("ERROR<br>[Las ordenes seleccionadas no pertenecen al mismo cliente.]", {autoclose : 5000, position: "top-right", type: "st-error" });
+        }
+    } 
 };
 var load_truck_number = function (){
     var _id = $('#editPlanOrderId').val();
@@ -242,8 +327,7 @@ var vehicle = function(){
     $("#vehicle_selection").off().on('click', function (e) {
         e.preventDefault();
         var _cntTruck = $("#vehicle_selection_number").text();
-        if(_cntTruck==0)
-        {
+        if(_cntTruck==0){
             $("#vehicle_selection_modal").modal("show");
         }
    });   
@@ -263,7 +347,8 @@ var wizard = function(){
         finish: function() {
             save_transport_allocation();
             $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
-            $("#vehicle_wizard").modal('hide');
+            $("#vehicle_selection_modal").modal('hide');
+            plan_reload();
             return false;
         }
     });
@@ -316,6 +401,46 @@ var wizard_titles = function (){
         });
     });
 };
+var wizard_two = function(){
+    $('#adjudication_wizard').stepy({
+        titleClick : true,
+        nextLabel:      'Siguiente <i class="glyphicon glyphicon-chevron-right"></i>',
+        backLabel:      '<i class="glyphicon glyphicon-chevron-left"></i> Anterior',
+        block  : true,
+        errorImage : true,
+        validate : true,
+        next: function() {
+            if ($("#vehicle_select_adjudication").val().length > 0) {vehicle_table_number_two();}else{}
+        },
+        finish: function() {
+            //save_transport_allocation();
+            $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+            $("#adjudication").modal('hide');
+            plan_reload();
+            return false;
+        }
+    });
+    stepy_validation = $('#adjudication_wizard').validate({
+        onfocusout: false,
+        highlight: function(element) {
+            $(element).closest('.form-group').addClass("f_error");
+        },
+        unhighlight: function(element) {
+            $(element).closest('.form-group').removeClass("f_error");
+        },
+        errorPlacement: function(error, element) {
+            $(element).closest('.form-group').append(error);
+        },
+        rules: {
+            'editNumber' : {
+                required    : true,
+                number      : true,
+                minlength   : 1
+            }
+        },
+        ignore  : ':hidden'
+    });
+};
 var vehicle_table_number = function (){
     var sOut = "";
     var names =  [];
@@ -335,11 +460,51 @@ var vehicle_table_number = function (){
     });
     $("#vehicle_table_number").html(sOut);
 };
-var vehicle_table_number = function (){
+var plan_trip = function (){
+    $(".plan_trip").off().on('click', function (e) {
+        e.preventDefault();
+        var _cntTruck = $("#vehicle_selection_number").text();
+        if(_cntTruck==0){}else{
+            load_vehicle_trip();
+            multiselectable_trip();
+            wizard_titles();
+            $("#adjudication").modal("show");
+        }
+    });   
+};
+var multiselectable_trip = function(){
+    if($('#vehicle_select_adjudication').length) {
+        $('#vehicle_select_adjudication').multiSelect({
+            selectableHeader: '<div class="search-header"><input type="text" class="form-control" id="ms-search_adjudication" autocomplete="off" placeholder="Ingrese t&eacute;rmino de b&uacute;squeda.."></div>',
+            selectionHeader: "<div class='search-selected'></div>"
+        });
+    }
+    if($('#ms-search_adjudication').length) {  
+        $('#ms-search_adjudication').quicksearch($('.ms-elem-selectable', '#ms-vehicle_select_adjudication' )).on('keydown', function(e){
+            if (e.keyCode === 40){
+                $(this).trigger('focusout');
+                $('#ms-vehicle_select_adjudication').focus();
+                return false;
+            }
+        });
+    }
+};
+var load_vehicle_trip = function(){
+   $.ajax({
+        type: "POST",
+        async: false,
+        url: "module/shipment/crud/shipment-detail.php",
+        data: "action=detail&option=2",
+        success: function (data) {
+           $("#vehicle_select_adjudication").append(data);                
+        }        
+    });
+};
+var vehicle_table_number_two = function (){
     var sOut = "";
     var names =  [];
     var values = [];
-    $("#vehicle_select option:selected").each(function() {			
+    $("#vehicle_select_adjudication option:selected").each(function() {			
         values.push($(this).val().toString());
         names.push($(this).text().toString());	
     });
@@ -347,18 +512,14 @@ var vehicle_table_number = function (){
         type: "POST",
         url: "includes/draw.php",
         async: false,
-        data: "action=drawVehicle&value="+ values +"&name="+ names,
+        data: "action=drawAdjudication&value="+ values +"&name="+ names,
         success: function (response) {
             sOut += response;                
         }        
     });
-    $("#vehicle_table_number").html(sOut);
-}
-var plan_trip = function (){
-    $(".plan_trip").off().on('click', function (e) {
-        e.preventDefault();
-        alert();
-    });   
+    $("#vehicle_table_number_adjudication").html(sOut);
+    select_plan();
+    select_plan_change();    
 };
 var table = function () {
     function fnShowHide(iCol) {
@@ -449,7 +610,6 @@ var table = function () {
         });
     }
 };
-
 var table_detail = function (){
     $('#order_detail').dataTable({
             "sDom": "<'row'<'col-sm-6'><'col-sm-6'f>r>t<'row'<'col-sm-5'i><'col-sm-7'>S>",
