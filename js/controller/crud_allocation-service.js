@@ -34,7 +34,6 @@ var load = function () {
             unistyle();
             maskinput();
             popover();
-            spinner();
             chosen();
             plan();
             date();
@@ -59,7 +58,7 @@ var chosen = function (){
     $(".chzn_edit").chosen();
 };
 var spinner = function(){
-    $("#editPlanQuantity").spinner({min: 1});
+    $(".editPlanQuantity").spinner({min: 1});
 };
 var date_detail = function (){
     $('#dateOriginDate').datepicker();
@@ -253,7 +252,8 @@ var wizard = function(){
         errorImage : true,
         validate : true,
         next: function() {
-            if ($("#vehicle_select").val().length > 0) {vehicle_table_number();}else{}
+            if ($("#vehicle_select").val().length > 0) {vehicle_table_number();
+            spinner();}else{}
         },
         finish: function() {
             alert('Canceling...');

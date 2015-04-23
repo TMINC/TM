@@ -267,7 +267,7 @@ function get_vehicles_total($vehcla_id, $mysqli){
     return $total;
 }
 function get_vehicles_details($vehcla_id, $mysqli){
-    $stmt = $mysqli->prepare("SELECT v.iVehTypID, v.iVehCatID, CONCAT(vt.cVehTypNam,' [',vc.cVehCatInf,']') "
+    $stmt = $mysqli->prepare("SELECT DISTINCT(v.iVehTypID), v.iVehCatID, CONCAT(vt.cVehTypNam,' [',vc.cVehCatInf,']') "
             . "FROM tm_vehicle v "
             . "JOIN tm_vehicle_type vt ON v.iVehTypID = vt.iVehTypID  "
             . "JOIN tm_vehicle_category vc ON v.iVehCatID = vc.iVehCatID "

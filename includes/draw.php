@@ -16,8 +16,8 @@ $action = $_POST['action'];
         for($i=0; $i< sizeof($_values) ;$i++){
             echo $_values[$i];
             echo '<tr>
-                <td><b>'.$_names[$i].' :</b></td>
-                <td class="form-group"><input class="form-control" type="text" id="editNumber_'.$_values[$i].'" name="editNumber"></td>
+                <td style="width:50%;"><b>'.$_names[$i].' :</b></td>
+                <td class="form-group"><input class="form-control editPlanQuantity" type="text" id="editNumber_'.$_values[$i].'" name="editNumber" value="1"></td>
             </tr>';
         }
     }

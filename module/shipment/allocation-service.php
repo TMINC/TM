@@ -236,9 +236,7 @@
                                 </fieldset>
                                 <fieldset title="CANTIDAD">
                                     <legend class="hide">Cantidad por Veh&iacute;culo(s)…</legend>
-                                    <div class="formSep form-group">
-                                        <table id="vehicle_table_number" class="table table-bordered"></table>    
-                                    </div>
+                                    <table id="vehicle_table_number" class="table table-bordered"></table>    
                                 </fieldset>
                                 <a href="JavaScript:void(o);" class="finish btn btn-primary" id="vehicle_save"><i class="glyphicon glyphicon-ok"></i> CONTINUAR</a>                                
                             </form>
