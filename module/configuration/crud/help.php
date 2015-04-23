@@ -35,7 +35,7 @@
                     $help_reply = '<a class="hint--right hint--info" style="float:right;cursor:pointer;" data-hint="'.views($help_id,$mysqli).'"><i class="glyphicon glyphicon-comment" /></a>';
                     echo'<tr><td><img src="img/details_open.png" style="cursor:pointer;" data-id="'.$help_id.'"></td>'. 
                         '<td><input id="c'.$help_id.'" name="row_sel" type="checkbox" class="row_sel uni_style" data-id="'.$help_id.'"></td>'.
-                        '<td>'.$help_id.$status.'</td>'.
+                        '<td>'.format($help_id).$status.'</td>'.
                         '<td>'.$help_user.'</td>'.                            
                         '<td>'.$help_form_id.'-'.$help_form_name.$level.'</td>'.
                         '<td>'.$help_text.$help_reply.'</td>'.
@@ -83,7 +83,10 @@
                         '<td>'.$help_reply_date.'</td>'.
                         '<td>'.$help_reply_description.'</td>'.
                         '<td class="center">'.
-                            '<a style="cursor:pointer;" class="like hint--left hint--info" data-hint="Votos" data-id="'.$help_reply_id.'" data-review="'.$help_reply_reviews.'"><i class="glyphicon glyphicon-thumbs-up"></i></a><span class="label label-info" style="margin-left:5px;font-size:10px;">'.$help_reply_reviews.'</span>'.                            
+                            '<button class="btn btn-primary btn-sm like" type="button" data-id="'.$help_reply_id.'" data-review="'.$help_reply_reviews.'">'.
+                                'Me gusta <i class="glyphicon glyphicon-thumbs-up"></i> <span class="badge">'.$help_reply_reviews.'</span>'.
+                            '</button>'.
+                            
                         '</td></tr>';                  
                 }
             }

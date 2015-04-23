@@ -13,7 +13,6 @@
     $help_id = $_POST['help']; 
     $user_id = $_POST['id']; 
     $help_reply_description = $_POST['description'];  
-    echo "INSERT INTO tm_help_reply (iHelID, cHelRepDes, iUseID) VALUES ('".$help_id."', '".$help_reply_description."', '".$user_id."')";
     if($action=='insert'){   
         $mysqli->query("INSERT INTO tm_help_reply (iHelID, cHelRepDes, iUseID) VALUES ('".$help_id."', '".$help_reply_description."', '".$user_id."')");
        } 
