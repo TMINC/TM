@@ -311,6 +311,16 @@ function get_dsc_cla_veh($vehcla_id, $mysqli){
     $stmt->fetch();
     return $veh_dsc;
 }
+function get_order_details($order_id,$mysqli){
+    $stmt = $mysqli->prepare("SELECT iOrdDetID "
+            . "FROM tm_order_detail "
+            . "WHERE iOrdID in ('".$order_id."')");
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($orderDet_id);
+    $stmt->fetch();
+    return $orderDet_id;
+}
 function get_Allocation_Transport_ID($vehcla_id,$vehtyp_id,$vehcat_id,$mysqli){
     $stmt = $mysqli->prepare("SELECT iAllTraID "
             . "FROM tm_allocation_transport "
