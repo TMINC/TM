@@ -3,7 +3,7 @@
  * By: Angel Silva Figueroa
  **/
 $(document).ready(function() {
-    Estados.dt_maintenance();
+    Transport.dt_maintenance();
     $.validator.addMethod(
         "chosen",
         function(value, element) {
@@ -13,7 +13,7 @@ $(document).ready(function() {
     );
 });
 
-Estados = {    
+Transport = {    
     dt_maintenance: function() {
         load();             
     }
@@ -21,7 +21,7 @@ Estados = {
 var load = function () {    
     $.ajax({
         type: "POST",
-        url: "module/shipment/crud/process-state-control.php",
+        url: "module/shipment/crud/process-data-transport.php",
         data: "action=select",
         success: function (response) {
             $("#dt_maintenance tbody").empty();
@@ -33,9 +33,8 @@ var load = function () {
             unistyle();
             popover();
             exit_state();
-            exit_transport();
+            agregar_datos ();
             agregar_estados();
-            agregar_datos();
         }        
     });
 };
@@ -112,11 +111,13 @@ var exit_state = function (){
     });
 };
 
-var exit_transport = function (){
-    $("#exit_transport").off().on('click', function (e) {
+var agregar_datos = function(){
+    $(".add_transport").off().on('click', function (e) {
         e.preventDefault();
-        $("#modal_transport").modal("hide");
-        load();
+       $("#editDriver").val("");
+        $("#editPlate").val("");
+        $("#editIMEI").val("");
+        $("#modal_transport").modal("show");
     });
 };
 
@@ -132,18 +133,6 @@ var agregar_estados = function(){
         $("#modal_state").modal("show");
     });
 };
-
-var agregar_datos = function(){
-    $(".add_transport").off().on('click', function (e) {
-        e.preventDefault();
-        
-        $("#editDriver").val("");
-        $("#editPlate").val("");
-        $("#editIMEI").val("");
-        $("#modal_transport").modal("show");
-    });
-};
-
 var editar = function(){
    
 };

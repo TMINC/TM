@@ -6,7 +6,7 @@
 ?>
     <div class="row">
         <div class="col-sm-12 col-md-12">
-            <h3 class="heading">CONTROL DE ESTADOS</h3>
+            <h3 class="heading">DATOS TRANSPORTE</h3>
             <div class="clearfix sepH_b">
                 <div class="btn-group col_vis_menu">
                     <a href="#" data-toggle="dropdown" class="btn dropdown-toggle btn-default">COLUMNAS <span class="caret"></span></a>
@@ -39,74 +39,7 @@
             </table>
         </div>
     </div>
-    <!-- Modal Estados -->
-    <div class="modal" id="modal_state">
-        <div class="modal-dialog">
-            <div class="modal-content">        
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal">×</button>
-                    <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
-                </div>
-                <div class="modal-body">
-                    <form id="validation_state">
-                        <table class="table table-bordered">
-                         <tr class="centerStart">
-                             <td><b>INICIO DE CARGA :</b></td>
-                            <td> 
-                                <input id="cchargingStart" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" /> 
-                                <input id="chargingStart" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                            </td>
-                        </tr>
-                         <tr class="centerStart">
-                             <td><b>FIN DE CARGA :</b></td>
-                            <td> 
-                                <input id="cchargingEnd" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" /> 
-                                <input id="chargingEnd" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                            </td>
-                        </tr>
-                       <tr class="centerStart">
-                           <td><b>EN TR&Aacute;NSITO :</b></td>
-                            <td> 
-                                <input id="ctransit" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" /> 
-                                <input id="transit" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                            </td>
-                        </tr>
-                        <tr class="centerEnd">
-                             <td><b>LLEGADA DESTINO :</b></td>
-                            <td> 
-                                <input id="cArrivalDestination" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" /> 
-                                <input id="ArrivalDestination" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                            </td>
-                        </tr>
-                        <tr class="centerEnd">
-                             <td><b>INICIO DESCARGA :</b></td>
-                            <td> 
-                                <input id="cStartDownload" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" /> 
-                                <input id="StartDownload" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                            </td>
-                        </tr>
-                        <tr class="centerEnd">
-                            <td><b>FIN DE TRANSPORTE :</b></td>
-                            <td> 
-                                <input id="cEndTransportation" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" /> 
-                                <input id="EndTransportation" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                            </td>
-                        </tr>
-                        <tr class="hide">
-                            <td><b>ACCI&Oacute;N :</b></td>
-                            <td><input class="form-control" type="text" id="editAction"></td>
-                        </tr> 
-                        </table>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <a href="JavaScript:void(0);" class="btn btn-primary" id="exit_state"><i class="glyphicon glyphicon-log-out"></i> SALIR</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-     <!-- Modal Datos T-->
+    <!-- Modal Datos T-->
    <div class="modal" id="modal_transport">
         <div class="modal-dialog">
             <div class="modal-content">        
@@ -127,15 +60,15 @@
                 </tr>
                 <tr>
                     <td><b>CHOFER :</b></td>
-                    <td class="form-group"><select class="form-control chzn_edit" disabled="true" id="editDriver" name="editDriver" data-placeholder="SELECCIONE UN CHOFER..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editDriver" name="editDriver" data-placeholder="SELECCIONE UN CHOFER..." /></td>
                 </tr>
                 <tr>
                     <td><b>PLACA :</b></td>
-                    <td class="form-group"><select class="form-control chzn_edit" disabled="true" id="editPlate" name="editPlate" data-placeholder="SELECCIONE UNA PLACA..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" id="editPlate" name="editPlate" data-placeholder="SELECCIONE UNA PLACA..." /></td>
                 </tr>
                 <tr>
                     <td><b>IMEI :</b></td>
-                    <td class="form-group"><input class="form-control" readonly="true" type="text" id="editIMEI" name="editIMEI"></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editIMEI" name="editIMEI"></td>
                 </tr>   
                 <tr class="hide">
                     <td><b>ACCI&Oacute;N :</b></td>
@@ -145,7 +78,74 @@
                 </form>
                 </div>
                 <div class="modal-footer">
-                    <a href="JavaScript:void(0);" class="btn btn-primary" id="exit_transport"><i class="glyphicon glyphicon-log-out"></i> SALIR</a>
+                    <a href="#" class="btn btn-primary" id="save_transport"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Estados -->
+    <div class="modal" id="modal_state">
+        <div class="modal-dialog">
+            <div class="modal-content">        
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">×</button>
+                    <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="validation_state">
+                        <table class="table table-bordered">
+                         <tr class="centerStart">
+                             <td><b>INICIO DE CARGA :</b></td>
+                            <td> 
+                                <input id="cchargingStart" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" disabled="true"/> 
+                                <input id="chargingStart" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
+                            </td>
+                        </tr>
+                         <tr class="centerStart">
+                             <td><b>FIN DE CARGA :</b></td>
+                            <td> 
+                                <input id="cchargingEnd" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" disabled="true"/> 
+                                <input id="chargingEnd" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
+                            </td>
+                        </tr>
+                       <tr class="centerStart">
+                           <td><b>EN TR&Aacute;NSITO :</b></td>
+                            <td> 
+                                <input id="ctransit" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" disabled="true"/> 
+                                <input id="transit" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
+                            </td>
+                        </tr>
+                        <tr class="centerEnd">
+                             <td><b>LLEGADA DESTINO :</b></td>
+                            <td> 
+                                <input id="cArrivalDestination" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" disabled="true"/> 
+                                <input id="ArrivalDestination" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
+                            </td>
+                        </tr>
+                        <tr class="centerEnd">
+                             <td><b>INICIO DESCARGA :</b></td>
+                            <td> 
+                                <input id="cStartDownload" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" disabled="true"/> 
+                                <input id="StartDownload" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
+                            </td>
+                        </tr>
+                        <tr class="centerEnd">
+                            <td><b>FIN DE TRANSPORTE :</b></td>
+                            <td> 
+                                <input id="cEndTransportation" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" disabled="true"/> 
+                                <input id="EndTransportation" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
+                            </td>
+                        </tr>
+                        <tr class="hide">
+                            <td><b>ACCI&Oacute;N :</b></td>
+                            <td><input class="form-control" type="text" id="editAction"></td>
+                        </tr> 
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="JavaScript:void(0);" class="btn btn-primary" id="exit_state"><i class="glyphicon glyphicon-log-out"></i> SALIR</a>
                 </div>
             </div>
         </div>
@@ -217,7 +217,7 @@
     <script src="lib/validation/jquery.validate.min.js"></script>
     <script src="lib/validation/localization/messages_es.js"></script>
     <!-- crud functions -->
-    <script src="js/controller/crud_process-state-control.js"></script>
+    <script src="js/controller/crud_process-data-transport.js"></script>
     <!-- lock screen-->    
     <script src="js/np/idle-time.js"></script>
     <script src="js/np/lock-screen.js"></script>
@@ -227,6 +227,6 @@
             //* show all elements & remove preloader
             setTimeout('$("html").removeClass("js")',1000);
             $('#collapseThree').addClass(' in');
-            $('#process-state-control').addClass(' active');
+            $('#process-data-transport').addClass(' active');
         });
     </script>
