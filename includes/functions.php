@@ -283,8 +283,25 @@ function get_vehicles_details($vehcla_id, $mysqli){
     }    
     return $valor;
 }
+function get_vehicles_details_adjudication($xi,$vehcla_id,$vehtyp_id,$vehcat_id, $mysqli){
+    $stmt = $mysqli->prepare("SELECT DISTINCT(at.iVehTypID), at.iVehCatID, CONCAT(vt.cVehTypNam,' [',vc.cVehCatInf,']') "
+            . "FROM tm_allocation_transport at "
+            . "JOIN tm_vehicle_type vt ON at.iVehTypID = vt.iVehTypID  "
+            . "JOIN tm_vehicle_category vc ON at.iVehCatID = vc.iVehCatID "
+            . "WHERE at.iAllTraStaVeh not in (1) AND at.iVehClaID=".$vehcla_id." AND at.iVehTypID=".$vehtyp_id." AND at.iVehCatID=".$vehcat_id." ");
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($vehtyp_id,$vehcat_id,$veh_dsc);
+    $valor = "";$i=0;
+    while($row = $stmt->fetch()) {
+        $valor .= '<option value='.$xi.'_'.$i.'-'.$vehcla_id.'-'.$vehtyp_id.'-'.$vehcat_id.'>'.$veh_dsc.'</option>';
+        $i++;
+    }    
+    return $valor;
+}
+
 function get_dsc_cla_veh($vehcla_id, $mysqli){
-     $stmt = $mysqli->prepare("SELECT CONCAT(cVehClaInf,' - ',cVehClaNam) "
+    $stmt = $mysqli->prepare("SELECT CONCAT(cVehClaInf,' - ',cVehClaNam) "
             . "FROM tm_vehicle_class "
             . "WHERE iVehClaID = ?");
     $stmt->bind_param('i', $vehcla_id);
@@ -293,6 +310,17 @@ function get_dsc_cla_veh($vehcla_id, $mysqli){
     $stmt->bind_result($veh_dsc);
     $stmt->fetch();
     return $veh_dsc;
+}
+function get_Allocation_Transport_ID($vehcla_id,$vehtyp_id,$vehcat_id,$mysqli){
+    $stmt = $mysqli->prepare("SELECT iAllTraID "
+            . "FROM tm_allocation_transport "
+            . "WHERE iAllTraStaVeh = 0 AND iVehClaID=".$vehcla_id." AND iVehTypID=".$vehtyp_id." AND iVehCatID=".$vehcat_id." "
+            . "LIMIT 1");
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($alltra_id);
+    $stmt->fetch();
+    return $alltra_id;    
 }
 
 function gps_all($order_id, $mysqli){

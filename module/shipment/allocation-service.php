@@ -183,6 +183,7 @@
                 <div class="modal-body">
                     <div class="row">
 			<div class="col-sm-12 col-md-12">
+                            <input class="form-control hide" readonly="true" type="text" id="OrderDetail_Id" name="OrderDetail_Id">
                             <form id="vehicle_wizard" class="stepy-wizzard form-horizontal">
                                 <fieldset title="CARACTER&Iacute;STICAS">
                                     <legend class="hide">Veh&iacute;culo(s) a utilizar…</legend>
