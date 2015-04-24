@@ -288,7 +288,7 @@ function get_vehicles_details_adjudication($xi,$vehcla_id,$vehtyp_id,$vehcat_id,
             . "FROM tm_allocation_transport at "
             . "JOIN tm_vehicle_type vt ON at.iVehTypID = vt.iVehTypID  "
             . "JOIN tm_vehicle_category vc ON at.iVehCatID = vc.iVehCatID "
-            . "WHERE at.iAllTraStaVeh not in (1) AND at.iVehClaID=".$vehcla_id." AND at.iVehTypID=".$vehtyp_id." AND at.iVehCatID=".$vehcat_id." ");
+            . "WHERE at.iAllTraStaVeh not in (1,2) AND at.iVehClaID=".$vehcla_id." AND at.iVehTypID=".$vehtyp_id." AND at.iVehCatID=".$vehcat_id." ");
     $stmt->execute();
     $stmt->store_result();
     $stmt->bind_result($vehtyp_id,$vehcat_id,$veh_dsc);
