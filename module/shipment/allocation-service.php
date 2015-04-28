@@ -27,6 +27,7 @@
                         <button data-toggle="dropdown" class="btn dropdown-toggle btn-default">ACCIONES <span class="caret"></span></button>
                         <ul class="dropdown-menu">
                             <li><a href="javascript:void(0);" class="plan"><i class="glyphicon glyphicon-thumbs-up"></i> PLANIFICAR</a></li>
+                            <li><a href="javascript:void(0);" class="plan_delete"><i class="glyphicon glyphicon-fullscreen"></i> CANCELAR PRE-PLANIFICACI&Oacute;N</a></li>
                             <li><a href="javascript:void(0);" class="set_free" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-flag"></i> LIBERAR</a></li>
                             <li><a href="javascript:void(0);" class="refuse" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-thumbs-down"></i> RECHAZAR</a></li>
                         </ul>
@@ -124,7 +125,7 @@
                 <div class="modal-body">
                     <form id="validation_adjudication_direct">
                         <table class="table table-bordered">
-                            <tr>
+                            <tr class="hide">
                                 <td><b>NRO.PLANIFICACI&Oacute;N :</b></td>
                                 <td class="form-group"><input class="form-control" readonly="true" type="text" id="editPlanId" name="editPlanId"></td>
                             </tr>
@@ -139,7 +140,7 @@
                                         <li>
                                             <a style="position:relative;cursor:pointer;" id="vehicle_selection">
                                                 <img alt="vehicle-selection" src="img/gCons/van.png">
-                                                <span class="label label-success" id="vehicle_selection_number" style="position: absolute;right: -12px;text-shadow: none;top: -18px;">0</span>
+                                                <span class="label label-success" id="vehicle_selection_number" style="position: absolute;right: -9px;text-shadow: none;top: -18px;">0</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -167,7 +168,7 @@
                 </div>
                 <div class="modal-footer">
                     <a href="JavaScript:void(0);" class="btn btn-default" id="plan_close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> CANCELAR</a>
-                    <a href="JavaScript:void(0);" class="btn btn-primary" id="plan_save"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
+                    <a href="JavaScript:void(0);" class="btn btn-primary" id="plan_save"><i class="glyphicon glyphicon-saved"></i> GENERAR PLANIFICACI&Oacute;N</a>
                 </div>
             </div>
         </div>
@@ -237,7 +238,7 @@
     <div class="hide">           
         <!-- confirmation box -->
         <div id="confirm_dialog" class="cbox_content">
-            <div class="sepH_c tac"><strong>Esta seguro de eliminar el(los) registro(s)?</strong></div>
+            <div class="sepH_c tac"><strong>Esta seguro de quitar la asignaci&oacute;n?</strong></div>
             <div class="tac">
                 <a href="JavaScript:void(0);" class="btn btn-gebo confirm_yes btn-default">S&iacute;</a>
                 <a href="JavaScript:void(0);" class="btn confirm_no btn-default">No</a>
@@ -265,7 +266,7 @@
     <!-- code prettifier -->
     <script src="lib/google-code-prettify/prettify.min.js"></script>
     <!-- sticky messages -->
-    <script src="lib/sticky/sticky.min.js"></script>
+    <script src="lib/sticky/sticky.js"></script>
     <!-- lightbox -->
     <script src="lib/colorbox/jquery.colorbox.min.js"></script>
     <!-- jBreadcrumbs -->

@@ -317,9 +317,13 @@ function get_order_details($order_id,$mysqli){
             . "WHERE iOrdID in ('".$order_id."')");
     $stmt->execute();
     $stmt->store_result();
-    $stmt->bind_result($orderDet_id);
-    $stmt->fetch();
-    return $orderDet_id;
+    $stmt->bind_result($detail_id);
+    $order_detail_id = "";
+    while($row = $stmt->fetch()) {
+        $order_detail_id .= $detail_id.',';
+    }
+    $order_detail_id = trim($order_detail_id, ',');
+    return $order_detail_id;
 }
 function get_Allocation_Transport_ID($vehcla_id,$vehtyp_id,$vehcat_id,$mysqli){
     $stmt = $mysqli->prepare("SELECT iAllTraID "
@@ -400,3 +404,29 @@ function format($number){
     else if($number<99999999){return "0".$number;}
     else {return $number;}
  }
+ 
+ function ship_char($detail_id, $mysqli){
+    $stmt = $mysqli->prepare("SELECT td.iAllTraID, CONCAT(vc.cVehClaInf,' ',vc.cVehClaNam) AS vClass, vt.cVehTypInf, va.cVehCatInf, td.cAllTraDetAdjTyp FROM tm_allocation_transport_detail AS td, tm_allocation_transport AS t, tm_vehicle_class AS vc, tm_vehicle_type AS vt, tm_vehicle_category AS va WHERE vc.iVehClaID=t.iVehClaID AND vt.iVehTypID=t.iVehTypID AND va.iVehCatID=t.iVehCatID AND t.iAllTraID=td.iAllTraID AND td.cAllTraDetOrdDet = ?");
+    $stmt->bind_param('i', $detail_id);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($vehicle_code, $vehicle_class, $vehicle_type, $vehicle_category, $vehicle_status);
+    $ship = "";
+    while($row = $stmt->fetch()) {
+        if($vehicle_status=="1"){$status="S";$style="class='act-info' style='font-size:10px;bold:bolder;'";}else{$status="D";$style="class='act-success' style='font-size:10px;bold:bolder;'";}
+        $ship.= "<span ".$style.">".$vehicle_code."[".$status."] - ".$vehicle_class." / ".$vehicle_type." / ".$vehicle_category."</span><br />";
+    }
+    return $ship;
+ }
+ 
+ function get_ship_id($iAllTraDetID, $mysqli){
+    $stmt = $mysqli->prepare("SELECT iAllTraID FROM tm_allocation_transport_detail WHERE cAllTraDetOrdDet = ?");
+    $stmt->bind_param('s', $iAllTraDetID);
+    $stmt->execute();
+    $stmt->bind_result($allocation_transport_id);
+    $ship_id = "";
+    while($row = $stmt->fetch()) {
+        $ship_id.= $allocation_transport_id;
+    }
+    return $ship_id;
+}

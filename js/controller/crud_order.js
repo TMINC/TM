@@ -7,18 +7,16 @@ $(document).ready(function() {
     $.validator.addMethod(
         "chosen",
         function(value, element) {
-            console.log(element); return (value === null ? false : (value.length === 0 ? false : true));
+            return (value === null ? false : (value.length === 0 ? false : true));
         }, "Por favor, elige una opción válida."
     ); 
     var _status = '0';
-    console.log(_status);
 });
 
 description = {    
     dt_maintenance: function() {
         load(); 
         var _order_number = 0;
-        console.log(_order_number);
     }
 };
 var load = function () {    

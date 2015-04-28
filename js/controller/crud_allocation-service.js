@@ -13,13 +13,12 @@ $(document).ready(function() {
         "Por favor, elige una opción válida."
     );
 });
-
 shipment = {    
     dt_maintenance: function() {
         load();
     }
 };
-var load = function () {    
+var load = function (key) {    
     $.ajax({
         type: "POST",
         url: "module/shipment/crud/shipment.php",
@@ -36,16 +35,20 @@ var load = function () {
             popover();
             chosen();
             plan();
+            plan_save();
+            plan_delete();
             date();
             load_vehicle();
             save_date();
-            wizard();
-            wizard_titles();
-            wizard_two();
+            if(key){                
+            }else{
+                wizard();
+                wizard_titles();
+                wizard_two();
+            }
         }        
     });
 };
-
 var unistyle = function (){
     $(".uni_style").uniform();  
 };
@@ -140,16 +143,83 @@ var select_plan_change = function(){
         var _carrier = $(this).data('carrier');
         var _search = $(this).data('search');
         var _value = $("#"+_id+" option:selected").val();
-        //alert(_carrier); NP
         if(_value=='0'){
             $('#'+_carrier).removeAttr('multiple'); 
         }else{
             $('#'+_carrier).attr('multiple', 'multiple'); 
         }       
         carrier_data(_carrier, '');
-    });
-    
+    });    
 };
+var plan_delete = function(){
+    $(".plan_delete").off().on('click', function (e) {
+        e.preventDefault();
+        var _id = $('input:checkbox:checked.row_sel').map(function () {
+            return $(this).data('id');
+        }).get();
+        var _customer = $('input:checkbox:checked.row_sel').map(function () {
+            return $(this).data('customer');
+        }).get();
+        var _status = $('input:checkbox:checked.row_sel').map(function () {
+            return $(this).data('status');
+        }).get();
+        var _customerBool = true;
+        if(_id.length===0){
+            $.sticky("INFO<br>[Orden(es) no seleccionada(s).]", {autoclose : 5000, position: "top-right", type: "st-info" });
+        }else{
+            if(_status.indexOf(4) == 0) {
+                $.sticky("ERROR<br>[Las ordenes seleccionadas tienen un estado no v&aacute;lido.]", {autoclose : 5000, position: "top-right", type: "st-error" });
+            }else{
+                var _nroCustomer = [];
+                for(v = 0; v < _customer.length; v++){
+                    if (_nroCustomer.length > 0) {
+                        for (i = 0; i < _nroCustomer.length; i++) {
+                            if (_nroCustomer[i] !== _customer[v]) { _customerBool = false; }
+                        }
+                        if (_customerBool) { _nroCustomer.push(_customer[v]); }
+                    } else {
+                        _nroCustomer.push(_customer[v]);
+                    }
+                }
+                if(_customerBool){
+                    var _id = $('input:checkbox:checked.row_sel').map(function () {
+                        return $(this).data('id');
+                    }).get();
+                    $('#editPlanOrderId').val(_id);//editDirectOrderId
+                    //Cargando la data de planificación
+                    $.ajax({
+                        type: "POST",
+                        url: "module/shipment/crud/shipment-detail.php",
+                        data: "action=delete&date_id="+ _id,
+                        success: function () {        
+                            $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success"});
+                            load(true);
+                        }        
+                    });
+                }else{
+                    $.sticky("ERROR<br>[Las ordenes seleccionadas no pertenecen al mismo cliente.]", {autoclose : 5000, position: "top-right", type: "st-error" });
+                }
+            }
+        }
+    });
+};
+var plan_save = function(){
+    $("#plan_save").off().on('click', function (e) {
+        e.preventDefault();        
+        var order_id=$("#editPlanOrderId").val();
+        $.ajax({
+            type: "POST",
+            url: "module/order/crud/order.php",
+            data: "action=status&status=4&id="+order_id,
+            success: function () {
+                $("#plan").modal('hide');
+                $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                load();           
+            }        
+        });
+        
+    });
+};    
 var plan = function(){
     $(".plan").off().on('click', function (e) {
         e.preventDefault();
@@ -159,9 +229,75 @@ var plan = function(){
         var _customer = $('input:checkbox:checked.row_sel').map(function () {
             return $(this).data('customer');
         }).get();
+        var _status = $('input:checkbox:checked.row_sel').map(function () {
+            return $(this).data('status');
+        }).get();
         var _customerBool = true;
         if(_id.length===0){
             $.sticky("INFO<br>[Orden(es) no seleccionada(s).]", {autoclose : 5000, position: "top-right", type: "st-info" });
+        }else{
+            if(_status.indexOf(4) == 0) {
+                $.sticky("ERROR<br>[Las ordenes seleccionadas tienen un estado no v&aacute;lido.]", {autoclose : 5000, position: "top-right", type: "st-error" });
+            }else{
+                var _nroCustomer = [];
+                for(v = 0; v < _customer.length; v++){
+                    if (_nroCustomer.length > 0) {
+                        for (i = 0; i < _nroCustomer.length; i++) {
+                            if (_nroCustomer[i] !== _customer[v]) { _customerBool = false; }
+                        }
+                        if (_customerBool) { _nroCustomer.push(_customer[v]); }
+                    } else {
+                        _nroCustomer.push(_customer[v]);
+                    }
+                }
+                if(_customerBool){
+                    select_plan();
+                    $('#plan').modal({ backdrop: 'static', keyboard: false });
+                    popover();
+                    spinner();
+                    multiselectable();
+                    vehicle();
+                    var _id = $('input:checkbox:checked.row_sel').map(function () {
+                        return $(this).data('id');
+                    }).get();
+                    $('#editPlanOrderId').val(_id);//editDirectOrderId
+                    //Cargando la data de planificación
+                    $.ajax({
+                        type: "POST",
+                        url: "module/shipment/crud/shipment-detail.php",
+                        data: "action=detail&option=1&id="+ _id,
+                        success: function (response) {
+                            $("#dt_detail_maintenance tbody").empty();
+                            $('#dt_detail_maintenance').dataTable().fnDestroy();
+                            $("#dt_detail_maintenance tbody").empty();
+                            $('#dt_detail_maintenance').dataTable().fnDestroy();
+                            $("#dt_detail_maintenance tbody").append(response);
+                            load_truck_number();
+                            plan_trip();
+                            plan_trip_delete();
+                            popover();
+                        }        
+                    });
+                }else{
+                    $.sticky("ERROR<br>[Las ordenes seleccionadas no pertenecen al mismo cliente.]", {autoclose : 5000, position: "top-right", type: "st-error" });
+                }
+            }
+        }
+    });
+};
+var plan_reload = function(){
+   var _id = $('input:checkbox:checked.row_sel').map(function () {
+        return $(this).data('id');
+    }).get();
+    var _customer = $('input:checkbox:checked.row_sel').map(function () {
+        return $(this).data('customer');
+    }).get();
+    var _customerBool = true;
+    if(_id.length===0){
+        $.sticky("INFO<br>[Orden(es) no seleccionada(s).]", {autoclose : 5000, position: "top-right", type: "st-info" });
+    }else{
+        if(_status.indexOf(4) == 0) {
+            $.sticky("ERROR<br>[Las ordenes seleccionadas tienen un estado no v&aacute;lido.]", {autoclose : 5000, position: "top-right", type: "st-error" });
         }else{
             var _nroCustomer = [];
             for(v = 0; v < _customer.length; v++){
@@ -198,68 +334,13 @@ var plan = function(){
                         $("#dt_detail_maintenance tbody").append(response);
                         load_truck_number();
                         plan_trip();
+                        plan_trip_delete();
                         popover();
                     }        
                 });
-                save_plan();
             }else{
                 $.sticky("ERROR<br>[Las ordenes seleccionadas no pertenecen al mismo cliente.]", {autoclose : 5000, position: "top-right", type: "st-error" });
             }
-        }
-    });
-};
-var plan_reload = function(){
-   var _id = $('input:checkbox:checked.row_sel').map(function () {
-        return $(this).data('id');
-    }).get();
-    var _customer = $('input:checkbox:checked.row_sel').map(function () {
-        return $(this).data('customer');
-    }).get();
-    var _customerBool = true;
-    if(_id.length===0){
-        $.sticky("INFO<br>[Orden(es) no seleccionada(s).]", {autoclose : 5000, position: "top-right", type: "st-info" });
-    }else{
-        var _nroCustomer = [];
-        for(v = 0; v < _customer.length; v++){
-            if (_nroCustomer.length > 0) {
-                for (i = 0; i < _nroCustomer.length; i++) {
-                    if (_nroCustomer[i] !== _customer[v]) { _customerBool = false; }
-                }
-                if (_customerBool) { _nroCustomer.push(_customer[v]); }
-            } else {
-                _nroCustomer.push(_customer[v]);
-            }
-        }
-        if(_customerBool){
-            select_plan();
-            $('#plan').modal({ backdrop: 'static', keyboard: false });
-            popover();
-            spinner();
-            multiselectable();
-            vehicle();
-            var _id = $('input:checkbox:checked.row_sel').map(function () {
-                return $(this).data('id');
-            }).get();
-            $('#editPlanOrderId').val(_id);//editDirectOrderId
-            //Cargando la data de planificación
-            $.ajax({
-                type: "POST",
-                url: "module/shipment/crud/shipment-detail.php",
-                data: "action=detail&option=1&id="+ _id,
-                success: function (response) {
-                    $("#dt_detail_maintenance tbody").empty();
-                    $('#dt_detail_maintenance').dataTable().fnDestroy();
-                    $("#dt_detail_maintenance tbody").empty();
-                    $('#dt_detail_maintenance').dataTable().fnDestroy();
-                    $("#dt_detail_maintenance tbody").append(response);
-                    load_truck_number();
-                    plan_trip();
-                    popover();
-                }        
-            });
-            save_plan();
-        }else{
-            $.sticky("ERROR<br>[Las ordenes seleccionadas no pertenecen al mismo cliente.]", {autoclose : 5000, position: "top-right", type: "st-error" });
         }
     } 
 };
@@ -274,42 +355,6 @@ var load_truck_number = function (){
             if(data==""){$("#vehicle_selection_number").text("0");}
             else{$("#vehicle_selection_number").text(data);}            
         }        
-    });
-};
-var save_plan = function (){
-    $("#adjudication_save").off().on('click', function (e) {
-        e.preventDefault();
-        $("[name='editAdjudicationType']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
-        if($('#validation_adjudication').validate({
-            onkeyup: false,
-            errorClass: 'error',
-            validClass: 'valid',
-            rules: {
-                editAdjudicationType: { chosen: true }
-            },
-            highlight: function(element) {
-                $(element).closest('.form-group').addClass("f_error");
-            },
-            unhighlight: function(element) {
-                $(element).closest('.form-group').removeClass("f_error");
-            },
-            errorPlacement: function(error, element) {
-                $(element).closest('.form-group').append(error);
-            }
-        }).form()){
-            $("#adjudication").modal("hide");
-            var _type = $("#editAdjudicationType option:selected").val();
-            var _id = $('input:checkbox:checked.row_sel').map(function () {
-                return $(this).data('id');
-            }).get();
-            if(_type===0){
-                $('#adjudicationDirect').modal('show');
-                $('#editDirectOrderId').val(_id);
-            }else{
-                alert("S");
-            }
-        }
-        return false;
     });
 };
 var load_vehicle = function(){
@@ -329,6 +374,8 @@ var vehicle = function(){
         var _cntTruck = $("#vehicle_selection_number").text();
         if(_cntTruck==0){
             $("#vehicle_selection_modal").modal("show");
+        }else{
+            $.sticky("WARNING<br>[La selecci&oacute;n de veh&iacute;culos ya fue procesada.]", {autoclose : 5000, position: "top-center", type: "st-warning"}, "", "modal");
         }
    });   
 };
@@ -341,12 +388,11 @@ var wizard = function(){
         errorImage : true,
         validate : true,
         next: function() {
-            if ($("#vehicle_select").val().length > 0) {vehicle_table_number();
-            spinner();}else{}
+            if ($("#vehicle_select").val().length > 0) {vehicle_table_number();spinner();}else{}
         },
         finish: function() {
             save_transport_allocation();
-            $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+            $.sticky("&Eacute;XITO<br>[Selecci&oacute;n de veh&iacute;culos procesada.]", {autoclose : 5000, position: "top-center", type: "st-success"}, "", "modal");
             $("#vehicle_selection_modal").modal('hide');
             plan_reload();
             return false;
@@ -441,7 +487,7 @@ var wizard_two = function(){
         },
         finish: function() {
             save_transport_allocation_detail();
-            $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+            $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-center", type: "st-success"}, "", "modal");
             $("#adjudication").modal('hide');
             plan_reload();
             return false;
@@ -491,13 +537,46 @@ var plan_trip = function (){
     $(".plan_trip").off().on('click', function (e) {
         e.preventDefault();
         var _cntTruck = $("#vehicle_selection_number").text();
-        if(_cntTruck==0){}else{
+        if(_cntTruck==0){
+            $.sticky("WARNING<br>[La selecci&oacute;n de veh&iacute;culos a&uacute;n no es procesada.]", {autoclose : 5000, position: "top-center", type: "st-warning"}, "", "modal");
+        }else{
             load_vehicle_trip();
             multiselectable_trip();
             wizard_titles();
             $("#OrderDetail_Id").val($(this).data('id'));
             $("#adjudication").modal("show");
         }
+    });   
+};
+var plan_trip_delete = function (){
+    $(".plan_trip_delete").off().on('click', function (e) {
+        e.preventDefault();
+        var order_id = $(this).data('id');
+        $.colorbox({
+            initialHeight: '0',
+            initialWidth: '0',
+            href: "#confirm_dialog",
+            inline: true,
+            opacity: '0.3',
+            onComplete: function () {
+                $('.confirm_yes').off().on('click', function (e) {
+                    e.preventDefault();                   
+                    $.colorbox.close();
+                    $.ajax({
+                        type: "POST",
+                        url: "module/shipment/crud/shipment-detail.php",
+                        data: "action=truncate&date_id="+order_id,
+                        success: function () {
+                            plan_reload();           
+                        }        
+                    });
+                });
+                $('.confirm_no').off().on('click', function (e) {
+                    e.preventDefault();
+                    $.colorbox.close();
+                });
+            }
+        });
     });   
 };
 var multiselectable_trip = function(){

@@ -1,7 +1,7 @@
 <?php 
 /** 
  * Copyright (C) 2015 netpartners-international.com
- * By: Angel SIlva Figueroa
+ * By: Johnny Moscoso Rossel
  **/
     include_once '../../../includes/db_connect.php';
     include_once '../../../includes/psl-config.php';
@@ -33,7 +33,7 @@
                 $order_id = $_POST['id'];
                 $_id = explode(",", $order_id);
                 $_Typeadj="";
-                $mysqli->prepare("SELECT iOrdDetID FROM tm_order_detail WHERE 1");
+                $mysqli->prepare("SELECT iOrdDetID FROM tm_order_detail");
                 /*echo "SELECT det.iOrdDetID, det.iOrdID,c.cCenNam, det.cOrdColDat,det.cOrdColHou,c1.cCenNam, det.cOrdArrDat, det.cOrdArrHou, carr.cCarNam, p.cPlaniAdjType 
                         FROM tm_order_detail as det 
                         JOIN tm_center as c ON det.iCenIDOri=c.iCenID 
@@ -44,10 +44,8 @@
                 
                 for($i=0; $i< sizeof($_id) ;$i++){
                     $orderdet_id = get_order_details($_id[$i],$mysqli);
-                    echo $orderdet_id;
                     $_detid = explode(",",$orderdet_id);
-                    for($j=0;$j < sizeof($_detid) ;$j++)
-                    {
+                    for($j=0;$j < sizeof($_detid) ;$j++){
                         if ($stmt = $mysqli->prepare("SELECT det.iOrdDetID,c.cCenNam, det.cOrdColDat,det.cOrdColHou, "
                                         . " c1.cCenNam, det.cOrdArrDat, det.cOrdArrHou,det.cOrdVol, "
                                         . " det.iMeaIDVol, det.cOrdWei, det.iMeaIDWei,(SELECT GROUP_CONCAT(c.cCarNam)  "
@@ -69,21 +67,25 @@
                             $stmt->bind_result($orderdet_id, $orderdet_orig, $ordendet_dataO, $orderdet_hourO, $orderdet_dest, $orderdet_dataD, $orderdet_hourD, $order_detail_volume, $order_detail_volume_id, $order_detail_weight, $order_detail_weight_id, $orderdet_transp,$orderdet_AdjType);
                             while($row = $stmt->fetch()) { 
                                 $_type = explode(",",$orderdet_AdjType);
+                                $_Typeadj=" ";
                                 for($z=0;$z<sizeof($_type);$z++){
-                                    if($_type[$z]=='0'){$_Typeadj.=" DIRECTA / ";}
-                                    else if($_type[$z]=='1'){$_Typeadj.=" SUBASTA / ";}
+                                    if($_type[$z]=='0'){$_Typeadj.=" DIRECTA /";}
+                                    else if($_type[$z]=='1'){$_Typeadj.=" SUBASTA /";}
                                 }
+                                $_Typeadj = substr($_Typeadj, 0, -1);
                                 //if($orderdet_AdjType=='1'){$_Typeadj="DIRECTA";}else if($orderdet_AdjType=='2'){$_Typeadj="SUBASTA";}
                                 $weight = measure_char($order_detail_weight_id, $mysqli);
                                 $volume = measure_char($order_detail_volume_id, $mysqli);
+                                $ship = ship_char($orderdet_id, $mysqli);
                                 echo 
                                 '<tr><td style="text-align: center;">'.
-                                    '<a href="JavaScript:void(0);" style="cursor:pointer;" class="plan_trip hint--left" data-hint="Viaje" data-id="'.format($orderdet_id).'" data-origin="'.$orderdet_orig.'" data-destination="'.$orderdet_dest.'" data-adjudication="'.$orderdet_AdjType.'" data-carrier="'.$orderdet_transp.'"><i class="glyphicon glyphicon-pencil"></i></a>'.                       
+                                    '<a href="JavaScript:void(0);" style="cursor:pointer;" class="plan_trip hint--left hint--success" data-hint="Asignar Veh&iacute;culo" data-id="'.$orderdet_id.'" data-origin="'.$orderdet_orig.'" data-destination="'.$orderdet_dest.'" data-adjudication="'.$orderdet_AdjType.'" data-carrier="'.$orderdet_transp.'"><i class="glyphicon glyphicon-resize-small"></i></a>'.
+                                    '<a href="JavaScript:void(0);" style="cursor:pointer;margin-left:20px;" class="plan_trip_delete hint--right hint--error" data-hint="Denegar Veh&iacute;culo" data-id="'.$orderdet_id.'"><i class="glyphicon glyphicon-resize-full"></i></a>'.
                                 '</td>'.
                                 '<td>'.format($orderdet_id).'<a class="pop_over hint--left hint--info" data-placement="right" data-content="<b>VOLUMEN</b>: '.$order_detail_volume." ".$volume.' <br /> <b>PESO</b>: '.$order_detail_weight." ".$weight.'" data-hint="Caracter&iacute;sticas" style="cursor:help;float:right;" data-original-title="Caracter&iacute;sticas '.format($orderdet_id).'"><i class="glyphicon glyphicon-list-alt"></i></a></td>'.
                                 '<td>'.$orderdet_orig.'<a class="pop_over hint--left hint--info" data-placement="right" data-content="'.$ordendet_dataO." ".$orderdet_hourO.'" data-hint="Cita Recojo" style="cursor:help;float:right;" data-original-title="'.$orderdet_orig.'"><i class="glyphicon glyphicon-calendar"></i></a></td>'.
                                 '<td>'.$orderdet_dest.'<a class="pop_over hint--left hint--info" data-placement="right" data-content="'.$orderdet_dataD." ".$orderdet_hourD.'" data-hint="Cita Llegada" style="cursor:help;float:right;" data-original-title="'.$orderdet_dest.'"><i class="glyphicon glyphicon-calendar"></i></a></td>'.
-                                '<td>'.$orderdet_transp.'</td>'. 
+                                '<td>'.$orderdet_transp.'<a class="pop_over hint--left hint--info" data-placement="right" data-content="'.$ship.'" data-hint="Transporte Asignado" style="cursor:help;float:right;" data-original-title="Transporte Asignado"><i class="glyphicon glyphicon-comment"></i></a></td>'. 
                                 '<td>'.$_Typeadj.'</td></tr>';
                             }
                         }
@@ -274,4 +276,26 @@
         if($action=='update'){
             $mysqli->query("UPDATE tm_order_detail SET cOrdColDat='".$order_origin_date."', cOrdColHou='".$order_origin_hour."', cOrdArrDat='".$order_destination_date."', cOrdArrHou='".$order_destination_hour."' WHERE iOrdDetID='".$order_detail_id."'");                         
         }        
+        if($action=='delete'){
+            $_id = explode(",", $order_detail_id);
+            $order_detail=get_order_details($order_detail_id, $mysqli);
+            $_detail_id = explode(",", $order_detail);
+            for($i=0; $i< sizeof($_id) ;$i++){
+                $mysqli->query("DELETE FROM tm_allocation_transport WHERE cAllTraOrd='".$_id[$i]."'");
+            }
+            for($c=0; $c< sizeof($_detail_id) ;$c++){
+                $mysqli->query("DELETE FROM tm_allocation_transport_detail WHERE cAllTraDetOrdDet='".$_detail_id[$c]."'");
+            }
+        }
+        if($action=='truncate'){
+            $_id = explode(",", $order_detail_id);
+            $detail=get_ship_id($order_detail_id, $mysqli);
+            $_detail_id = explode(",", $detail);
+            for($i=0; $i< sizeof($_id) ;$i++){
+                $mysqli->query("DELETE FROM tm_allocation_transport_detail WHERE cAllTraDetOrdDet='".$_id[$i]."'");
+            }
+            for($c=0; $c< sizeof($_detail_id) ;$c++){
+                $mysqli->query("UPDATE tm_allocation_transport SET iAllTraStaVeh='0' WHERE iAllTraID='".$_detail_id[$c]."'");
+            }
+        }
     }
