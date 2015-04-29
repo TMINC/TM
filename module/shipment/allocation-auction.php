@@ -445,6 +445,8 @@
     <script src="lib/validation/localization/messages_es.js"></script>
     <!-- crud functions -->
     <script src="js/controller/crud_allocation-auction.js"></script>
+    <!-- countdown -->
+    <script src="js/jquery.countdown.min.js"></script>
     <!-- lock screen-->    
     <script src="js/np/idle-time.js"></script>
     <script src="js/np/lock-screen.js"></script>

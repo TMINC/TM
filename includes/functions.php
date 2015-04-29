@@ -504,3 +504,16 @@ function ship_char_extreme($detail_id, $mysqli){
     }
     return $ship;
  }
+ 
+ function ship_char_extreme_auction($detail_id, $mysqli){
+    $stmt = $mysqli->prepare("SELECT td.iAllTraID, CONCAT(vc.cVehClaInf,' ',vc.cVehClaNam) AS vClass, vt.cVehTypInf, va.cVehCatInf, td.cAllTraDetAdjTyp, td.cAllTraDetCarrID FROM tm_allocation_transport_detail AS td, tm_allocation_transport AS t, tm_vehicle_class AS vc, tm_vehicle_type AS vt, tm_vehicle_category AS va WHERE vc.iVehClaID=t.iVehClaID AND vt.iVehTypID=t.iVehTypID AND va.iVehCatID=t.iVehCatID AND t.iAllTraID=td.iAllTraID AND td.cAllTraDetAdjTyp='1' AND td.cAllTraDetOrdDet = ?");
+    $stmt->bind_param('i', $detail_id);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($vehicle_code, $vehicle_class, $vehicle_type, $vehicle_category, $vehicle_status, $current_id);
+    $ship = "";
+    while($row = $stmt->fetch()) {
+        $ship .= format($vehicle_code).' - '.$vehicle_class.' / '.$vehicle_type.' / '.$vehicle_category.$status.'<br />';
+    }
+    return $ship;
+ }
