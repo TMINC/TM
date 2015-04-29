@@ -277,24 +277,6 @@
             </div>
         </div>
     </div>
-    <!-- hide elements-->
-    <div class="hide">           
-        <!-- confirmation box -->
-        <div id="confirm_dialog" class="cbox_content">
-            <div class="sepH_c tac"><strong>Esta seguro de eliminar el(los) registro(s)?</strong></div>
-            <div class="tac">
-                <a href="#" class="btn btn-gebo confirm_yes btn-default">S&iacute;</a>
-                <a href="#" class="btn confirm_no btn-default">No</a>
-            </div>
-        </div>
-        <div id="set_free_dialog" class="cbox_content">
-            <div class="sepH_c tac"><strong>Esta seguro de liberar el(los) registro(s)?</strong></div>
-            <div class="tac">
-                <a href="#" class="btn btn-gebo set_free_yes btn-default">S&iacute;</a>
-                <a href="#" class="btn set_free_no btn-default">No</a>
-            </div>
-        </div>
-    </div>
     <!-- JQuery Implementation -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate.min.js"></script>

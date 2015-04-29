@@ -77,7 +77,7 @@
                                 <p>El manejo de este m&oacute;dulo es de nivel general…</p>
                                 <small class="help-block">Administrator TMPanel</small>
                             </blockquote>
-                            <img src="../../img/manual/" />
+                            <img src="img/manual/nuevo-eliminar.jpg" />
                         </p>
                     </div>
                     <div class="tab-pane" id="tab_customer">
@@ -114,6 +114,83 @@
                                 <p>El manejo de este m&oacute;dulo es de nivel general…</p>
                                 <small class="help-block">Administrator TMPanel</small>
                             </blockquote>
+                        <br>        
+                        <br>        
+                        <br>        
+                        <br>        
+                        <br>        
+                        <h3> Definici&oacute;n </h3><br>
+                        <p>El siguiente manual hace referencia a los veh&iacute;culos que se utilizar&aacute;n en el transporte de carga de un centro a otro.</p>
+                        <p>El mantenimiento de veh&iacute;culos se encuentra dentro del m&oacute;dulo de Maestros/Transporte/Veh&iacute;culos. A continuaci&oacute;n se presenta una imagen de la vista al maestro de veh&iacute;culos:</p><br>
+                         
+                        <h3>Descripci&oacute;n de Pantalla:</h3><br>
+                        <img src="img/manual/vista-veh.jpg" />
+                        <br>
+                        <p>La tabla mantenimiento de veh&iacute;culos cuenta con 9 columnas de datos. A continuaci&oacute;n describimos cada una:</p>
+                        <ul>
+                            <li><b>Caja Multiselecci&oacute;n:</b> Se presenta en forma de checkbox o caja seleccionadora. Es un elemento de interacci&oacute;n de la interfaz gr&aacute;fica de usuario que permite hacer selecciones m&uacute;ltiples. </li>
+                            <li><b>ID:</b> C&oacute;digo autogenerado por el sistema que identifica de forma &uacute;nica a cada registro</li>
+                            <li><b>TUC:</b> Tarjeta &Uacute;nico de Circulaci&oacute;n. El usuario debe ingresar c&oacute;digo compuesto por 11 d&iacute;gitos alfanum&eacute;ricos</li>
+                            <li><b>TIPO:</b> Se presenta en forma de lista desplegable. El usuario deberá escoger entre las opciones de la lista seg&uacute;n el criterio de tipo de veh&iacute;culo dado por la empresa (Para mayor referencia ....)</li>
+                            <li><b>CLASE:</b> Se presenta en forma de lista desplegable. El usuario deberá escoger entre las opciones de la lista seg&uacute;n el criterio de clase de veh&iacute;culo dado por la empresa (Para mayor referencia ....)</li>
+                            <li><b>CATEGOR&Iacute;A:</b> Se presenta en forma de lista desplegable. El usuario deberá escoger entre las opciones de la lista seg&uacute;n el criterio de categor&iacute;a de veh&iacute;culo dado por la empresa (Para mayor referencia ....)</li>
+                            <li><b>GRUPO:</b> Se presenta en forma de lista desplegable. El usuario deberá escoger entre las opciones de la lista seg&uacute;n el criterio de grupo de veh&iacute;culo dado por la empresa (Para mayor referencia ....)</li>
+                            <li><b>PLACA:</b> C&oacute;digo ingresado por el usuario que que individualiza el veh&iacute;culo respecto a los dem&aacute;s. El c&oacute;digo est&aacute; compuesto por 7 d&iacute;gitos alfanum&eacute;ricos (La placa empieza con una letra, seguido de un n&uacute;mero, otra letra y termia con 3 n&uacute;meros).</li>    
+                            <li><b>ACCI&Oacute;N:</b> Se presenta en forma de bot&oacute;n. Al hacer click sobre &eacute;ste, el usuario podr&aacute; editar registro a través de una ventana de edici&oacute;n</li>
+                        </ul>
+                        <br>
+                        <h3> Otros Elementos </h3><br>
+                        <ul>
+                            <li><b>ESTADO:</b> Se presenta en forma de imagen dentro del campo ID. Existen 2 estados activo e inactivo.</li>
+                            <br>
+                            <img src="img/manual/estado-activo-veh.jpg" /> <img src="img/manual/estado-inactivo-veh.jpg" />
+                            <br>
+                            <li><b>DETALLE:</b> Se presenta en forma de imagen dentro del campo PLACA. Al hacer click sobre el s&iacute;mbolo se muestra un cuadro con la información de PESO y VOLUMEN del veh&iacute;culo.</li>                            
+                            <br>
+                            <img src="img/manual/detalle-veh.jpg"/>
+                            <br>
+                            <li><b>ACCIONES:</b> Se presenta en forma de bot&oacute;n en la parte superior izquierda. Al hacer click sobre &eacute;ste se depliegan las opciones de NUEVO y ELIMINAR.</li>                            
+                            <img src="img/manual/acciones.jpg"/> <img src="img/manual/nuevo-eliminar.jpg"/>
+                        </ul>
+                        <br>
+                        <h3> Acciones NUEVO/EDITAR/ELIMINAR </h3><br>
+                         <ul>
+                            <li><b>NUEVO:</b> A continucaci&oacute;n se detalla paso a paso el proceso de inserci&oacute;n de un nuevo registro:</li>
+                                    <ol>
+                                        <li>El usuario debe dirigirse al menú ACCIONES ubicado en la parte superior izquierda y elegir la opci&oacute;n NUEVO</li><br>
+                                        <img src="img/manual/nuevo.jpg" />
+                                        <li>Aparecer&aacute; una ventana para el ingreso de informaci&oacute;n relacionada al veh&iacute;culo. Una vez ingresado los datos, dar en GUARDAR</li><br>
+                                        <img src="img/manual/pantalla-nuevo-veh.jpg" />
+                                        <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. Se podr&aacute; observar el nuevo registro en la tabla de mantenimiento.</li><br>
+                                        <img src="img/manual/solicitud-procesada.jpg" />
+                                    </ol>
+                            <br>
+                            <li><b>EDITAR:</b> A continucaci&oacute;n se detalla paso a paso el proceso de edici&oacute;n de un registro existente:</li>
+                                    <ol>
+                                        <li>El usuario debe dirigirse al bot&oacute;n EDITAR ubicado en la casilla ACCIONES en la tabla de mantenimiento de veh&iacute;culos</li><br>
+                                        <img src="img/manual/editar.jpg" />
+                                        <li>Aparecer&aacute; una ventana con la informaci&oacute;n relacionada a ese veh&iacute;culo. Los datos que puedan ser cambiados estar&aacute;n disponibles para edici&oacute;n. Una vez realizados los cambios, dar en GUARDAR</li><br>
+                                        <img src="img/manual/pantalla-editar-veh.jpg" />
+                                        <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. Se podr&aacute; observar que el registro en la tabla ha cambiado.</li><br>
+                                        <img src="img/manual/solicitud-procesada.jpg" />
+                                    </ol>
+                            <br>
+                            <li><b>ELIMINAR:</b> A continucaci&oacute;n se detalla paso a paso el proceso de eliminaci&oacute;n de un registro existente:</li>
+                                    <ol>
+                                        <li>El usuario debe seleccionar el o los registros que desea eliminar y dirigirse al menú ACCIONES ubicado en la parte superior izquierda. Elegir la opci&oacute;n ELIMINAR</li><br>
+                                        <img src="img/manual/eliminar.jpg" />
+                                        <li>Aparecer&aacute; un mensaje informando si se está seguro de eliminar el o los registros </li><br>
+                                        <img src="img/manual/eliminar-confirmacion.jpg" />
+                                        <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. Se podr&aacute; observar que el registro en la tabla de mantenimiento ha desaparecido.</li><br>
+                                        <img src="img/manual/solicitud-procesada.jpg" />
+                                    </ol>
+                            <br>
+                        </ul>
+                        
+                      
+                        
+                        
+                        
                         </p>
                     </div>
                     <div class="tab-pane" id="tab_vehicle-type">

@@ -35,6 +35,7 @@ var load = function (key) {
             popover();
             chosen();
             plan();
+            liberar();
             plan_save();
             plan_delete();
             date();
@@ -216,10 +217,70 @@ var plan_save = function(){
                 $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
                 load();           
             }        
-        });
-        
+        });        
     });
-};    
+};
+var liberar = function(){
+    $(".set_free").off().on('click', function (e) {
+        e.preventDefault();
+        var _id = $('input:checkbox:checked.row_sel').map(function () {
+            return $(this).data('id');
+        }).get();
+        var _status = $('input:checkbox:checked.row_sel').map(function () {
+            return $(this).data('status');
+        }).get();
+        if(_id.length===0){
+            $.sticky("INFO<br>[Orden(es) no seleccionada(s).]", {autoclose : 5000, position: "top-right", type: "st-info" });
+        }else{
+            var _nroStatus = [];
+            for(v = 0; v < _status.length; v++){
+                var _statusBool = true;
+                if (_nroStatus.length > 0) {
+                    for (i = 0; i < _nroStatus.length; i++) {
+                        if (_nroStatus[i] === _status[v]) { _statusBool = false; }
+                    }
+                    if (_statusBool) { _nroStatus.push(_status[v]); }
+                } else {
+                    _nroStatus.push(_status[v]);
+                }
+            }
+            if(_nroStatus.length !== 1) {
+                $.sticky("ERROR<br>[Las ordenes seleccionadas tienen un estado no v&aacute;lido.]", {autoclose : 5000, position: "top-right", type: "st-error" });
+            }else{
+                if(_nroStatus[0] !== 4){
+                    $.sticky("ERROR<br>[Las ordenes seleccionadas tienen un estado no v&aacute;lido.]", {autoclose : 5000, position: "top-right", type: "st-error" });
+                }else{
+                    $.colorbox({
+                        initialHeight: '0',
+                        initialWidth: '0',
+                        href: "#set_free_dialog",
+                        inline: true,
+                        opacity: '0.3',
+                        onComplete: function () {
+                            $('.set_free_yes').off().on('click', function (e) {
+                                e.preventDefault();                   
+                                $.colorbox.close();
+                                $.ajax({
+                                    type: "POST",
+                                    url: "module/order/crud/order.php",
+                                    data: "action=status&status=5&id="+_id,
+                                    success: function () {
+                                        $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success"});
+                                        load(true);         
+                                    }        
+                                });
+                            });
+                            $('.set_free_no').off().on('click', function (e) {
+                                e.preventDefault();
+                                $.colorbox.close();
+                            });
+                        }
+                    });
+                }
+            }
+        }
+    });
+};
 var plan = function(){
     $(".plan").off().on('click', function (e) {
         e.preventDefault();
@@ -286,11 +347,14 @@ var plan = function(){
     });
 };
 var plan_reload = function(){
-   var _id = $('input:checkbox:checked.row_sel').map(function () {
+    var _id = $('input:checkbox:checked.row_sel').map(function () {
         return $(this).data('id');
     }).get();
     var _customer = $('input:checkbox:checked.row_sel').map(function () {
         return $(this).data('customer');
+    }).get();
+    var _status = $('input:checkbox:checked.row_sel').map(function () {
+        return $(this).data('status');
     }).get();
     var _customerBool = true;
     if(_id.length===0){
@@ -342,7 +406,7 @@ var plan_reload = function(){
                 $.sticky("ERROR<br>[Las ordenes seleccionadas no pertenecen al mismo cliente.]", {autoclose : 5000, position: "top-right", type: "st-error" });
             }
         }
-    } 
+    }
 };
 var load_truck_number = function (){
     var _id = $('#editPlanOrderId').val();
@@ -392,9 +456,9 @@ var wizard = function(){
         },
         finish: function() {
             save_transport_allocation();
+            plan_reload();
             $.sticky("&Eacute;XITO<br>[Selecci&oacute;n de veh&iacute;culos procesada.]", {autoclose : 5000, position: "top-center", type: "st-success"}, "", "modal");
             $("#vehicle_selection_modal").modal('hide');
-            plan_reload();
             return false;
         }
     });

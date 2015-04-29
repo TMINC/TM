@@ -127,19 +127,19 @@ include_once 'functions.php';
             <div class="sidebar_info">
                 <ul class="list-unstyled">
                     <li style="text-align: center;"><strong>ESTADO DE ORDEN(ES)</strong></li>
-                    <li>
-                        <span class="act act-danger"><?php echo order_total("0", $mysqli);?></span>
-                        <strong>&blacksquare; Rechazada(s)</strong>
+                    <li class="small">
+                        <span class="act act-danger"><?php echo order_total("0", $mysqli)." | ".order_total("1", $mysqli);?></span>
+                        <strong>&blacksquare; Rechazada(s) | Pendiente(s)</strong>
                     </li>
-                    <li>
+                    <li class="small">
                         <span class="act act-warning"><?php echo order_total("2", $mysqli);?></span>
                         <strong>&blacksquare; Liberada(s)</strong>
                     </li>
-                    <li>
-                        <span class="act act-info"><?php echo order_total("3", $mysqli);?></span>
-                        <strong>&blacksquare; Subastada(s)</strong>
+                    <li class="small">
+                        <span class="act act-info"><?php echo order_total("3", $mysqli)." | ".order_total("4", $mysqli);?></span>
+                        <strong>&blacksquare; Subasta | Trans. Asignado</strong>
                     </li>
-                    <li>
+                    <li class="small">
                         <span class="act act-success"><?php echo order_total("5", $mysqli);?></span>
                         <strong>&blacksquare; En Transporte</strong>
                     </li>

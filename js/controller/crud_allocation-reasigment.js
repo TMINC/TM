@@ -46,10 +46,16 @@ var maskinput = function (){
    //$("#editTime").inputmask("99:99:99");
 };
 var popover = function (){
-    $(".pop_over").popover();
+    $(".pop_over").popover({ html:true });
 };
 var chosen = function (){
     $(".chzn_edit").chosen();
+};
+var reassign_fail = function(){
+    $(".no_reassign").off().on('click', function (e) {
+        e.preventDefault();
+        $.sticky('INFO<br>[El proceso de subasta no ha finalizado, no se puede reasignar.]', {autoclose : 5000, position: "top-right", type: "st-info" });
+    });
 };
 var reassign = function(){
     $(".reassign").off().on('click', function (e) {
@@ -117,7 +123,7 @@ var table = function () {
     /* Formating function for row details */
     function fnFormatDetails(order_id){
         var sOut = '<table class="table table-striped table-bordered dTableR">';
-        sOut += '<thead><tr><th class="center" style="width: 106px;">SERVICIO</th><th class="center">ORIGEN</th><th class="center">DESTINO</th><th class="center">VOLUMEN</th><th class="center">PESO</th><th class="center">DISTANCIA</th><th class="center">ACCI&Oacute;N</th></tr></thead><tbody>';
+        sOut += '<thead><tr><th class="center" style="width: 136px;">SERVICIO</th><th class="center">ORIGEN</th><th class="center">DESTINO</th><th class="center">VEH&Iacute;CULO</th><th class="center">ACCI&Oacute;N</th></tr></thead><tbody>';
         $.ajax({
             type: "POST",
             url: "module/shipment/crud/shipment.php",
@@ -193,6 +199,7 @@ var table = function () {
                 $(".details").css("padding", "0 0 0 36px");
                 popover();
                 reassign();
+                reassign_fail();
                 reassign_save(); 
             }
         });

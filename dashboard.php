@@ -106,7 +106,27 @@ include_once 'includes/functions.php';
         </header>
         <!--start main content-->
         <div id="contentwrapper">
-            <div class="main_content"><?php include('directory.php');?></div>			
+            <div class="main_content">
+                <?php include('directory.php');?>
+                <!-- hide elements-->
+                <div class="hide">           
+                    <!-- confirmation box -->
+                    <div id="confirm_dialog" class="cbox_content">
+                        <div class="sepH_c tac"><strong>Esta seguro de eliminar el(los) registro(s)?</strong></div>
+                        <div class="tac">
+                            <a href="JavaScript:void(0);" class="btn btn-gebo confirm_yes btn-default">S&iacute;</a>
+                            <a href="JavaScript:void(0);" class="btn confirm_no btn-default">No</a>
+                        </div>
+                    </div>
+                    <div id="set_free_dialog" class="cbox_content">
+                        <div class="sepH_c tac"><strong>Esta seguro de liberar el(los) registro(s)?</strong></div>
+                        <div class="tac">
+                            <a href="JavaScript:void(0);" class="btn btn-gebo set_free_yes btn-default">S&iacute;</a>
+                            <a href="JavaScript:void(0);" class="btn set_free_no btn-default">No</a>
+                        </div>
+                    </div>
+                </div>
+            </div>			
         </div>                   
         <!--end main content-->
         <!--start sidebar-->

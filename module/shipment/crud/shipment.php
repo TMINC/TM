@@ -56,7 +56,7 @@
             }
             
             if($option=='2'){
-                if ($stmt = $mysqli->prepare("SELECT iOrdID, iOrdTyp, iCusID, cOrdVol, iMeaIDVol, cOrdWei, iMeaIDWei, cOrdDis, iMeaIDDis, cOrdPri, iMeaIDPri, cOrdReaPri, iMeaIDReaPri, cOrdDet, cOrdSta FROM tm_order WHERE cOrdSta='4'")){
+                if ($stmt = $mysqli->prepare("SELECT iOrdID, iOrdTyp, iCusID, cOrdVol, iMeaIDVol, cOrdWei, iMeaIDWei, cOrdDis, iMeaIDDis, cOrdPri, iMeaIDPri, cOrdReaPri, iMeaIDReaPri, cOrdDet, cOrdSta FROM tm_order WHERE cOrdSta>3")){
                     $stmt->execute();
                     $stmt->store_result();
                     $stmt->bind_result($order_id, $order_type, $customer_id, $order_volume, $measure_volume_id, $order_weight, $measure_weight_id, $order_distance, $measure_distance_id, $order_price, $measure_price_id, $order_real_price, $measure_real_price_id, $order_detail, $order_status);
@@ -193,17 +193,12 @@
                     $measure_volume = measure_char($measure_volume_id, $mysqli);
                     $measure_weight = measure_char($measure_weight_id, $mysqli); 
                     $measure_distance = measure_char($measure_distance_id, $mysqli);
+                    $vehicle_description = ship_char_extreme($order_detail_id, $mysqli);
                     $current_name = "12345678901 - FARZA";
-                    echo '<tr><td><i class="splashy-arrow_state_blue_right"></i> '.format($order_detail_id).'</td>'.
+                    echo '<tr><td><i class="splashy-arrow_state_blue_right"></i> '.format($order_detail_id).'<a class="pop_over hint--left hint--info" data-placement="right" data-content="<b>VOLUMEN:</b> '.$order_volume.' '.$measure_volume.'<br /><b>PESO: </b>'.$order_weight.' '.$measure_weight.'<br /><b>DISTANCIA: </b>'.$order_distance.' '.$measure_distance.'" data-hint="Caracter&iacute;sticas" style="cursor:help;float:right;" data-original-title="NRO. '.format($order_detail_id).'"><i class="glyphicon glyphicon-list-alt"></i></a></td>'.
                         '<td>'.$center_origin.'<a class="pop_over hint--left hint--info" data-placement="right" data-content="'.$order_origin_date." ".$order_origin_hour.'" data-hint="Cita Recojo" style="cursor:help;float:right;" data-original-title="'.$center_origin.'"><i class="glyphicon glyphicon-calendar"></i></a></td>'.
                         '<td>'.$center_destination.'<a class="pop_over hint--left hint--info" data-placement="right" data-content="'.$order_destination_date." ".$order_destination_hour.'" data-hint="Cita Llegada" style="cursor:help;float:right;" data-original-title="'.$center_destination.'"><i class="glyphicon glyphicon-calendar"></i></a></td>'.
-                        '<td>'.$order_volume.' '.$measure_volume.'</td>'.
-                        '<td>'.$order_weight.' '.$measure_weight.'</td>'.
-                        '<td>'.$order_distance.' '.$measure_distance.'</td>'.
-                        '<td class="center">'.
-                            '<a style="cursor:pointer;" class="reassign hint--left" data-hint="Reasignar Servicio" data-id="'.$order_detail_id.'" data-ids="'.$order_detail_id.'" data-current_id="'.$center_origin_id.'" data-current_name="'.$current_name.'"><i class="glyphicon glyphicon-transfer"></i></a>'.
-                            '<a style="cursor:pointer;margin-left:20px;" class="auction hint--left" data-hint="Transporte Asignado" data-id="'.$order_detail_id.'"><i class="glyphicon glyphicon-tasks" /></a>'.
-                        '</td></tr>';                    
+                        $vehicle_description.'</tr>';                    
                 }
             }
         }

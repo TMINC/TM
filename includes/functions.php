@@ -227,6 +227,16 @@ function customer_char($iCusID, $mysqli){
     return $customer;
 }
 
+function carrier_char($iCarID, $mysqli){
+    $stmt = $mysqli->prepare("SELECT CONCAT(cCarRuc,' - ',cCarNam) AS carrier FROM tm_carrier WHERE iCarID = ?");
+    $stmt->bind_param('s', $iCarID);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($carrier);
+    $stmt->fetch();
+    return $carrier;
+}
+
 function user_char($iUseID, $mysqli){
     $stmt = $mysqli->prepare("SELECT cUseNam FROM tm_user WHERE iUseID = ?");
     $stmt->bind_param('i', $iUseID);
@@ -419,6 +429,20 @@ function format($number){
     return $ship;
  }
  
+ function ship_carrier_char($detail_id, $mysqli){
+    $stmt = $mysqli->prepare("SELECT td.iAllTraID, ca.i, CONCAT(ca.cCarRuc,' ',ca.cCarNam) AS carrier, td.cAllTraDetAdjTyp FROM tm_allocation_transport_detail AS td, tm_allocation_transport AS t, tm_carrier AS ca WHERE t.iAllTraID=td.iAllTraID AND td.cAllTraDetCarrID=ca.iCarID AND td.cAllTraDetOrdDet= ?");
+    $stmt->bind_param('i', $detail_id);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($vehicle_code, $carrier_id, $carrier_description, $order_status);
+    $ship = "";
+    while($row = $stmt->fetch()) {
+        if($vehicle_status=="1"){$status="S";$style="class='act-info' style='font-size:10px;bold:bolder;'";}else{$status="D";$style="class='act-success' style='font-size:10px;bold:bolder;'";}
+        $ship.= "<span ".$style.">".$vehicle_code."[".$status."] - ".$vehicle_class." / ".$vehicle_type." / ".$vehicle_category."</span><br />";
+    }
+    return $ship;
+ }
+ 
  function get_ship_id($iAllTraDetID, $mysqli){
     $stmt = $mysqli->prepare("SELECT iAllTraID FROM tm_allocation_transport_detail WHERE cAllTraDetOrdDet = ?");
     $stmt->bind_param('s', $iAllTraDetID);
@@ -430,3 +454,53 @@ function format($number){
     }
     return $ship_id;
 }
+
+function ship_char_extreme($detail_id, $mysqli){
+    $stmt = $mysqli->prepare("SELECT td.iAllTraID, CONCAT(vc.cVehClaInf,' ',vc.cVehClaNam) AS vClass, vt.cVehTypInf, va.cVehCatInf, td.cAllTraDetAdjTyp, td.cAllTraDetCarrID FROM tm_allocation_transport_detail AS td, tm_allocation_transport AS t, tm_vehicle_class AS vc, tm_vehicle_type AS vt, tm_vehicle_category AS va WHERE vc.iVehClaID=t.iVehClaID AND vt.iVehTypID=t.iVehTypID AND va.iVehCatID=t.iVehCatID AND t.iAllTraID=td.iAllTraID AND td.cAllTraDetOrdDet = ?");
+    $stmt->bind_param('i', $detail_id);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($vehicle_code, $vehicle_class, $vehicle_type, $vehicle_category, $vehicle_status, $current_id);
+    $ship = "";
+    if($stmt->num_rows()>1){
+        $vehicle = '<td>';
+        $graphic = '<td class="center">';
+        while($row = $stmt->fetch()) {
+            if($vehicle_status=='0'){
+                $status='<a class="hint--left hint--info" style="float:right;cursor:pointer;" data-hint="Adjudicaci&oacute;n Directa"><i class="glyphicon glyphicon-ok"></i></a>';
+                $class='reassign';
+                $current_name = carrier_char($current_id, $mysqli);
+            }
+            if($vehicle_status=='1'){
+                $status='<a class="hint--left hint--info" style="float:right;cursor:pointer;" data-hint="Proceso Subasta"><i class="glyphicon glyphicon-time"></i></a>';
+                $class='no_reassign';
+                $current_name = "";
+            }            
+            $order_detail_id ="";
+            $vehicle .= '<div class="formSep">'.format($vehicle_code).' - '.$vehicle_class.' / '.$vehicle_type.' / '.$vehicle_category.$status.'</div>';
+            $graphic .= '<div class="formSep"><a style="cursor:pointer;" class="'.$class.' hint--left" data-hint="Reasignar Servicio" data-id="'.$detail_id.'" data-ids="'.$order_detail_id.'" data-current_id="'.$current_id.'" data-current_name="'.$current_name.'"><i class="glyphicon glyphicon-transfer"></i></a></div>';
+        }
+        $vehicle .= '</td>';
+        $graphic .= '</td>';
+        $ship .= $vehicle.$graphic;
+    }else{
+        while($row = $stmt->fetch()) {
+            if($vehicle_status=='0'){
+                $status='<a class="hint--left hint--info" style="float:right;cursor:pointer;" data-hint="Adjudicaci&oacute;n Directa"><i class="glyphicon glyphicon-ok"></i></a>';
+                $class='reassign';
+                $current_name = carrier_char($current_id, $mysqli);
+            }
+            if($vehicle_status=='1'){
+                $status='<a class="hint--left hint--info" style="float:right;cursor:pointer;" data-hint="Proceso Subasta"><i class="glyphicon glyphicon-time"></i></a>';
+                $class='no_reassign';
+                $current_name = "";
+            }            
+            $order_detail_id ="";
+            $ship .= '<td>'.format($vehicle_code).' - '.$vehicle_class.' / '.$vehicle_type.' / '.$vehicle_category.$status.'</td>'.
+                '<td class="center">'.
+                    '<a style="cursor:pointer;" class="'.$class.' hint--left" data-hint="Reasignar Servicio" data-id="'.$detail_id.'" data-ids="'.$order_detail_id.'" data-current_id="'.$current_id.'" data-current_name="'.$current_name.'"><i class="glyphicon glyphicon-transfer"></i></a>'.
+                '</td>';
+        }
+    }
+    return $ship;
+ }
