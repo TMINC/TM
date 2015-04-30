@@ -91,6 +91,18 @@
                 $_id = explode(",", $order_id);
                 for($i=0; $i< sizeof($_id) ;$i++){
                     $mysqli->query("UPDATE tm_order SET cOrdSta='".$status."' WHERE iOrdID='".$_id[$i]."'");
+                    //Si el "status" cumple el tipo 5, tendremos que asignarle la insercion de los servicios y la orden en la tabla tm_state_control
+                    if($status=='5'){
+                        $order_detail_id = get_order_details($_id[$i], $mysqli);
+                        $_ids = explode(",", $order_detail_id);
+                        for($is=0; $is< sizeof($_ids) ;$is++){
+                            $allocation_detail_id = get_order_details_allocation($_ids[$is], $mysqli);
+                            $_ida = explode(",", $allocation_detail_id);
+                            for($ia=0; $ia< sizeof($_ida) ;$ia++){
+                                $mysqli->query("INSERT INTO tm_state_control(iOrdID, iOrdDetID, iAllTraDetID) VALUES ('".$_id[$i]."', '".$_ids[$is]."', '".$_ida[$ia]."')");
+                            }
+                        }
+                    }
                 }
             }
             if($action=='detail'){

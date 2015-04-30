@@ -23,20 +23,13 @@
                 $measure_distance = measure_char($measure_distance_id, $mysqli);
 
                 if($order_type=='1'){$type='TRANSPORTE FRESCO';}else{$type='TRANSPORTE CONGELADO';}
-                if($order_status=='3'){$status='<a class="hint--right hint--info" style="float:right;cursor:pointer;margin-left:5px;" data-hint="Orden Subastada"><i class="glyphicon glyphicon-flash" /></a>';}
-                if($order_detail_flag=='1'){$flag='<a class="hint--right hint--success" style="float:right;cursor:pointer;" data-hint="Liberada"><i class="glyphicon glyphicon-flag" /></a>';}
-                else{$flag='<a class="hint--right hint--warning" style="float:right;cursor:pointer;" data-hint="Pendiente de Liberar"><i class="glyphicon glyphicon-lock" /></a>';}
-                echo '<tr><td>'.format($order_detail_id).$status.$flag.'<br /><span class="help-block" style="font-size:8px;"><b>REF.ORDEN: </b>'.$order_id.'</span></td>'.
-                    '<td><div style="float:left;">'.$type.'<br /><small class="s_color sl_email">1. TJ-L7 MATPEL<br />2. TJ-L5 MATPEL<br /></small></div><a style="cursor:help;float:right;" class="pop_over hint--left hint--info" data-hint="Caracter&iacute;sticas" data-content="VOLUMEN: '.$order_volume.' '.$measure_volume.'. <br />PESO: '.$order_weight.' '.$measure_weight.'. <br />DISTANCIA APROX.: '.$order_distance.' '.$measure_distance.'" title="CARACTER&Iacute;STICAS" data-placement="right"><i class="glyphicon glyphicon-list-alt"/></a></td>'.  
+                echo '<tr><td>'.format($order_detail_id).'<a style="cursor:help;float:right;" class="pop_over hint--left hint--info" data-hint="Nota" data-content="'.$order_note.'" title="NOTA" data-placement="right"><i class="glyphicon glyphicon-comment"/></a><br /><span class="help-block" style="font-size:8px;"><b>REF.ORDEN: </b>'.$order_id.'</span></td>'.
+                    '<td>'.$type.'<a style="cursor:help;float:right;" class="pop_over hint--left hint--info" data-hint="Caracter&iacute;sticas" data-content="VOLUMEN: '.$order_volume.' '.$measure_volume.'. <br />PESO: '.$order_weight.' '.$measure_weight.'. <br />DISTANCIA APROX.: '.$order_distance.' '.$measure_distance.'" title="CARACTER&Iacute;STICAS" data-placement="right"><i class="glyphicon glyphicon-list-alt"/></a>'.
                     '<td><div style="float:left;">'.$center_origin.'<br /><span class="help-block" style="font-size:8px;">'.$center_type_origin.'</span></div><a style="cursor:help;float:right;" class="pop_over hint--left hint--info" data-hint="Cita Recojo" data-content="'.$order_origin_date.' '.$order_origin_hour.'" title="'.$center_origin.'" data-placement="right"><i class="glyphicon glyphicon-calendar"/></a></td>'.                            
                     '<td><div style="float:left;">'.$center_destination.'<br /><span class="help-block" style="font-size:8px;">'.$center_type_destination.'</span></div><a style="cursor:help;float:right;" class="pop_over hint--left hint--info" data-hint="Cita Llegada" data-content="'.$order_destination_date.' '.$order_destination_hour.'" title="'.$center_destination.'" data-placement="right"><i class="glyphicon glyphicon-calendar"/></a></td>'.
-                    '<td><div style="float:left;">'.$order_note.'</div></td>'.    
-                    '<td class="center">'.
-                        '<a style="cursor:pointer;" class="add_transport hint--left" data-hint="Datos Transporte" data-id="'.$order_detail_id.'"><i class="glyphicon glyphicon-list" /></a>'.
-                        '<a style="cursor:pointer;margin-left:20px;" class="add_state hint--left" data-hint="Control de Estados" data-id="'.$order_detail_id.'"><i class="glyphicon glyphicon-check" /></a>'.
-                    '</td></tr>';
-                    }
-                }         
+                    ship_char_full($order_detail_id, $mysqli).'</tr>';
+            }
+        }         
     }else{        
         $center_origin_id = $_POST['origin'];
         $order_origin_date = $_POST['origin_date'];

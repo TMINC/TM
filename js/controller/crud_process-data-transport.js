@@ -71,7 +71,7 @@ var table = function () {
                 ],
                 "sSwfPath": "lib/datatables/extras/TableTools/media/swf/copy_csv_xls_pdf.swf"
             },
-            "aaSorting": [[1, "asc"]],
+            "aaSorting": [[0, "desc"]],
             "iDisplayLength": -1,
             "aLengthMenu": [[-1, 100, 50, 25], ["[ * ]", 100, 50, 25]],
             "oLanguage": {
@@ -114,7 +114,9 @@ var exit_state = function (){
 var agregar_datos = function(){
     $(".add_transport").off().on('click', function (e) {
         e.preventDefault();
-       $("#editDriver").val("");
+        var _carrier = $(this).data('carrier');$("#editCarrier").val(_carrier);
+        var _type = $(this).data('vehicle');$("#editType").val(_type);
+        $("#editDriver").val("");
         $("#editPlate").val("");
         $("#editIMEI").val("");
         $("#modal_transport").modal("show");
