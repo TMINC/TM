@@ -2,6 +2,7 @@
 /** 
  * Copyright (C) 2015 netpartners-international.com
  * By: Angel Silva Figueroa
+ * Rv: Johnny Moscoso Rossel
  **/
 ?>
     <div class="row">
@@ -17,10 +18,8 @@
                         <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> DESTINO</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> VEH&Iacute;CULO</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
-                            
                     </ul>
-                </div>
-              
+                </div>              
             </div>   
             <table class="table table-striped table-bordered dTableR" id="dt_maintenance" style="cursor:">
                 <thead>
@@ -47,36 +46,40 @@
                 </div>
                 <div class="modal-body">
                 <form id="validation_transport">
-                <table class="table table-bordered">
-                <tr>
-                    <td><b>PROVEEDOR :</b></td>
-                    <td class="form-group"><input class="form-control" readonly="true" type="text" id="editCarrier" name="editCarrier"></td>
-                </tr>
-                <tr>
-                    <td><b>TIPO DE VEH&Iacute;CULO :</b></td>
-                    <td class="form-group"><input class="form-control" readonly="true" type="text" id="editType" name="editType"></td>
-                </tr>
-                <tr>
-                    <td><b>CHOFER :</b></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editDriver" name="editDriver" data-placeholder="SELECCIONE UN CHOFER..." /></td>
-                </tr>
-                <tr>
-                    <td><b>PLACA :</b></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editPlate" name="editPlate" data-placeholder="SELECCIONE UNA PLACA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>IMEI :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editIMEI" name="editIMEI"></td>
-                </tr>   
-                <tr class="hide">
-                    <td><b>ACCI&Oacute;N :</b></td>
-                    <td><input class="form-control" type="text" id="editAction"></td>
-                </tr> 
-                </table>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td><b>PROVEEDOR :</b></td>
+                            <td class="form-group">
+                                <input class="form-control" readonly="true" type="text" id="editID" name="editID">
+                                <input class="form-control" readonly="true" type="text" id="editCarrier" name="editCarrier">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>TIPO DE VEH&Iacute;CULO :</b></td>
+                            <td class="form-group"><input class="form-control" readonly="true" type="text" id="editType" name="editType"></td>
+                        </tr>
+                        <tr>
+                            <td><b>CHOFER :</b></td>
+                            <td class="form-group"><select class="form-control chzn_edit" id="editDriver" name="editDriver" data-placeholder="SELECCIONE UN CHOFER..." /></td>
+                        </tr>
+                        <tr>
+                            <td><b>PLACA :</b></td>
+                            <td class="form-group"><select class="form-control chzn_edit" id="editPlate" name="editPlate" data-placeholder="SELECCIONE UNA PLACA..." /></td>
+                        </tr>
+                        <tr>
+                            <td><b>IMEI :</b></td>
+                            <td class="form-group"><input class="form-control" type="text" id="editIMEI" name="editIMEI"></td>
+                        </tr>   
+                        <tr class="hide">
+                            <td><b>ACCI&Oacute;N :</b></td>
+                            <td><input class="form-control" type="text" id="editAction"></td>
+                        </tr> 
+                    </table>
                 </form>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn btn-primary" id="save_transport"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
+                    <a href="JavaScript:void(0);" class="btn btn-default" data-dismiss="modal"><i class="glyphicon glyphicon-log-out"></i> SALIR</a>
+                    <a href="JavaScript:void(0);" class="btn btn-primary" id="save"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
                 </div>
             </div>
         </div>
@@ -88,62 +91,13 @@
             <div class="modal-content">        
                 <div class="modal-header">
                     <button class="close" data-dismiss="modal">×</button>
-                    <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
+                    <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> INFORME</h3>
                 </div>
                 <div class="modal-body">
-                    <form id="validation_state">
-                        <table class="table table-bordered">
-                         <tr class="centerStart">
-                             <td><b>INICIO DE CARGA :</b></td>
-                            <td> 
-                                <input id="cchargingStart" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" disabled="true"/> 
-                                <input id="chargingStart" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                            </td>
-                        </tr>
-                         <tr class="centerStart">
-                             <td><b>FIN DE CARGA :</b></td>
-                            <td> 
-                                <input id="cchargingEnd" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" disabled="true"/> 
-                                <input id="chargingEnd" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                            </td>
-                        </tr>
-                       <tr class="centerStart">
-                           <td><b>EN TR&Aacute;NSITO :</b></td>
-                            <td> 
-                                <input id="ctransit" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" disabled="true"/> 
-                                <input id="transit" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                            </td>
-                        </tr>
-                        <tr class="centerEnd">
-                             <td><b>LLEGADA DESTINO :</b></td>
-                            <td> 
-                                <input id="cArrivalDestination" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" disabled="true"/> 
-                                <input id="ArrivalDestination" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                            </td>
-                        </tr>
-                        <tr class="centerEnd">
-                             <td><b>INICIO DESCARGA :</b></td>
-                            <td> 
-                                <input id="cStartDownload" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" disabled="true"/> 
-                                <input id="StartDownload" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                            </td>
-                        </tr>
-                        <tr class="centerEnd">
-                            <td><b>FIN DE TRANSPORTE :</b></td>
-                            <td> 
-                                <input id="cEndTransportation" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" disabled="true"/> 
-                                <input id="EndTransportation" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                            </td>
-                        </tr>
-                        <tr class="hide">
-                            <td><b>ACCI&Oacute;N :</b></td>
-                            <td><input class="form-control" type="text" id="editAction"></td>
-                        </tr> 
-                        </table>
-                    </form>
+                    <table class="table table-bordered" id="state_control_view"></table>
                 </div>
                 <div class="modal-footer">
-                    <a href="JavaScript:void(0);" class="btn btn-primary" id="exit_state"><i class="glyphicon glyphicon-log-out"></i> SALIR</a>
+                    <a href="JavaScript:void(0);" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-log-out"></i> SALIR</a>
                 </div>
             </div>
         </div>

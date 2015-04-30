@@ -7,6 +7,20 @@
     include_once '../../../includes/psl-config.php';
     include_once '../../../includes/functions.php';    
     $action = $_POST['action'];
+    if($action=='plate'){
+        $sel = $_POST['sel'];
+        $vehicle = $_POST['vehicle'];
+        $_id_vehicle = explode(",", $vehicle);
+        if ($stmt = $mysqli->prepare("SELECT iVehID, CONCAT(cVehPla,' - ',cVehTuc) AS find FROM tm_vehicle WHERE iVehClaID='".$_id_vehicle[0]."' AND iVehTypID='".$_id_vehicle[1]."' AND iVehCatID='".$_id_vehicle[2]."' AND cVehSta='1'")){
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($vehicle_id, $vehicle);
+            while($row = $stmt->fetch()) {
+                if($sel==$vehicle){$selected = " selected";}else{$selected = "";}
+                echo '<option value="'.$vehicle_id.'" '.$selected.'>'.$vehicle.'</option>';
+            }            
+        }
+    }
     if($action=='consult'){
         $sel = $_POST['sel'];
         if ($stmt = $mysqli->prepare("SELECT iVehID, CONCAT(cVehPla,' - ',cVehTuc) AS find FROM tm_vehicle WHERE cVehSta='1'")){

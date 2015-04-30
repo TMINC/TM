@@ -2,6 +2,7 @@
 /** 
  * Copyright (C) 2015 netpartners-international.com
  * By: Angel Silva Figueroa
+ * Rv: Johnny Moscoso Rossel
  **/
     include_once '../../../includes/db_connect.php';
     include_once '../../../includes/psl-config.php';
@@ -9,10 +10,10 @@
      
     $option = $_POST['action'];
     if($option=='select'){
-        if ($stmt = $mysqli->prepare("SELECT iStaConID, d.iOrdDetID, d.cOrdDetFla, o.iOrdID, o.cOrdSta, o.iOrdTyp, d.iCenIDOri, d.cOrdColDat, d.cOrdColHou, d.iCenIDDes, d.cOrdArrDat, d.cOrdArrHou, d.cOrdVol, d.iMeaIDVol, d.cOrdWei, d.iMeaIDWei, d.cOrdDis, d.iMeaIDDis, d.cOrdDetNot,cStaConStaCha, cStaConEndCha, cStaConTra, cStaConArrDes, cStaConStaDow, cStaConEndTra, cStaConSta FROM tm_state_control AS s, tm_order_detail AS d, tm_order AS o WHERE s.iOrdDetID=d.iOrdDetID AND s.iOrdID=o.iOrdID")){
+        if ($stmt = $mysqli->prepare("SELECT DISTINCT(d.iOrdDetID), d.cOrdDetFla, o.iOrdID, o.cOrdSta, o.iOrdTyp, d.iCenIDOri, d.cOrdColDat, d.cOrdColHou, d.iCenIDDes, d.cOrdArrDat, d.cOrdArrHou, d.cOrdVol, d.iMeaIDVol, d.cOrdWei, d.iMeaIDWei, d.cOrdDis, d.iMeaIDDis, d.cOrdDetNot FROM tm_state_control AS s, tm_order_detail AS d, tm_order AS o WHERE s.iOrdDetID=d.iOrdDetID AND s.iOrdID=o.iOrdID")){
             $stmt->execute();
             $stmt->store_result();
-            $stmt->bind_result($state_control_id, $order_detail_id, $order_detail_flag, $order_id, $order_status, $order_type, $center_origin_id, $order_origin_date, $order_origin_hour, $center_destination_id, $order_destination_date, $order_destination_hour, $order_volume, $measure_volume_id, $order_weight, $measure_weight_id, $order_distance, $measure_distance_id, $order_note, $state_control_start_charging, $state_control_end_charging, $state_control_transit, $state_control_arrival_desdtination, $state_control_start_download, $state_control_end_transportation, $state_control_status);
+            $stmt->bind_result($order_detail_id, $order_detail_flag, $order_id, $order_status, $order_type, $center_origin_id, $order_origin_date, $order_origin_hour, $center_destination_id, $order_destination_date, $order_destination_hour, $order_volume, $measure_volume_id, $order_weight, $measure_weight_id, $order_distance, $measure_distance_id, $order_note);
             while($row = $stmt->fetch()) { 
                 $center_origin = center_char($center_origin_id, $mysqli);
                 $center_type = center_type_char($center_origin_id, $mysqli);if($center_type==1){$center_type_origin="CENTRO DE ACOPIO";}if($center_type==2){$center_type_origin="PLANTA";}if($center_type==3){$center_type_origin="PUERTO DESTINO";}
@@ -31,28 +32,60 @@
             }
         }         
     }else{        
-        $center_origin_id = $_POST['origin'];
-        $order_origin_date = $_POST['origin_date'];
-        $order_origin_hour = $_POST['origin_hour'];
-        $center_destination_id = $_POST['destination'];
-        $order_destination_date = $_POST['destination_date'];
-        $order_destination_hour = $_POST['destination_hour'];
-        $order_volume = $_POST['volume']; 
-        $measure_volume_id = $_POST['measure_volume']; 
-        $order_weight = $_POST['weight'];
-        $measure_weight_id = $_POST['measure_weight'];
-        $order_distance = $_POST['distance'];
-        $measure_distance_id = $_POST['measure_distance'];
-        $state_control_start_charging = $_POST['start_charging'];
-        $state_control_end_charging = $_POST['end_charging'];
-        $state_control_transit = $_POST['transit'];
-        $state_control_arrival_desdtination = $_POST['arrival_destination'];
-        $state_control_start_download = $_POST['start_download'];
-        $state_control_end_transportation = $_POST['end_transportation'];
-        if($action=='insert'){
-            $mysqli->query("INSERT INTO tm_state_control (iOrdID, iOrdDetID, cStaConStaCha, cStaConEndCha, cStaConTra, cStaConArrDes, cStaConStaDow, cStaConEndTra, cStaConSta) VALUES ('".$order_id."', '".$order_detail_id."', '".$state_control_start_charging."', '".$state_control_end_charging."', '".$state_control_transit."', '".$state_control_arrival_desdtination."', '".$state_control_start_download."', '".$state_control_end_transportation."')");
+        $allocation = $_POST['id'];
+        $vehicle = $_POST['vehicle'];
+        $driver = $_POST['driver'];
+        $imei = $_POST['imei'];
+        if($option=='insert'){
+            $mysqli->query("INSERT INTO tm_order_detail_assign (iAllTraDetID, iDriID, iVehID, cOrdDetAssIMEI) VALUES ('".$allocation."', '".$driver."', '".$vehicle."', '".$imei."')");
         } 
-        if($action=='update'){
-            $mysqli->query("UPDATE tm_state_control SET cStaConStaCha='".$state_control_start_charging."' , cStaConEndCha='".$state_control_end_charging."', cStaConTra='".$state_control_transit."', cStaConArrDes='".$state_control_arrival_desdtination."', cStaConStaDow='".$state_control_start_charging."', cStaConEndTra='".$state_control_end_transportation."' WHERE iStaConID='".$state_control_id."'");   
+        if($option=='update'){
+            $mysqli->query("UPDATE tm_order_detail_assign SET iDriID='".$driver."', iVehID='".$vehicle."', cOrdDetAssIMEI='".$imei."' WHERE iAllTraDetID='".$allocation."'");   
+        }
+        if($option=='state'){
+            $id = $_POST['id'];
+            if ($stmt = $mysqli->prepare("SELECT cStaConStaCha, cStaConEndCha, cStaConTra, cStaConArrDes, cStaConStaDow, cStaConEndTra, cStaConSta FROM tm_state_control WHERE iStaConID='".$id."'")){
+                $stmt->execute();
+                $stmt->store_result();
+                $stmt->bind_result($state_control_start_charging, $state_control_end_charging, $state_control_transit, $state_control_arrival_desdtination, $state_control_start_download, $state_control_end_transportation, $state_control_status);
+                while($row = $stmt->fetch()) {
+                    $rate = char_rate($state_control_status);
+                    if($state_control_status==0 || $state_control_status==1){$msg="MUY MALO";$hint="error";}
+                    if($state_control_status==2 || $state_control_status==3){$msg="MALO";$hint="warning";}
+                    if($state_control_status==4 || $state_control_status==5){$msg="REGULAR";$hint="warning";}
+                    if($state_control_status==6 || $state_control_status==7){$msg="BUENO";$hint="info";}
+                    if($state_control_status==8 || $state_control_status==9){$msg="MUY BUENO";$hint="success";}
+                    if($state_control_status==10){$msg="EXELENTE";$hint="success";}
+                    echo '<tr class="centerStart">'.
+                            '<td><b>INICIO DE CARGA :</b></td>'.
+                            '<td><input id="chargingStart" class="form-control" readonly="true" type="text" value="'.$state_control_start_charging.'" /></td>'.
+                        '</tr>'.
+                        '<tr class="centerStart">'.
+                            '<td><b>FIN DE CARGA :</b></td>'.
+                            '<td><input id="chargingEnd" class="form-control" readonly="true" type="text" value="'.$state_control_end_charging.'" /></td>'.
+                        '</tr>'.
+                        '<tr class="centerStart">'.
+                            '<td><b>EN TR&Aacute;NSITO :</b></td>'.
+                            '<td><input id="transit" class="form-control" readonly="true" type="text" value="'.$state_control_transit.'" /></td>'.
+                        '</tr>'.
+                        '<tr class="centerEnd">'.
+                            ' <td><b>LLEGADA DESTINO :</b></td>'.
+                            '<td><input id="ArrivalDestination" class="form-control" readonly="true" type="text" value="'.$state_control_arrival_desdtination.'" /></td>'.
+                        '</tr>'.
+                        '<tr class="centerEnd">'.
+                            '<td><b>INICIO DESCARGA :</b></td>'.
+                            '<td><input id="StartDownload" class="form-control" readonly="true" type="text" value="'.$state_control_start_download.'" /></td>'.
+                        '</tr>'.
+                            '<tr class="centerEnd">'.
+                            '<td><b>FIN DE TRANSPORTE :</b></td>'.
+                            '<td><input id="EndTransportation" class="form-control" readonly="true" type="text" value="'.$state_control_end_transportation.'" /></td>'.
+                        '</tr>'.
+                        '<tr class="centerEnd">'.
+                            '<td><b>CALIFICACI&Oacute;N :</b></td>'.
+                            '<td><a style="cursor:pointer;" class="hint--right hint--'.$hint.'" data-hint="'.$msg.'">'.$rate.'</a></td>'.
+                        '</tr>';
+                }
+            }
         }
     }
+    

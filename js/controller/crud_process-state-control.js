@@ -32,10 +32,11 @@ var load = function () {
             table();
             unistyle();
             popover();
-            exit_state();
-            exit_transport();
+            chosen();
             agregar_estados();
             agregar_datos();
+            no_agregar_datos();
+            no_agregar_estados();
         }        
     });
 };
@@ -44,6 +45,9 @@ var unistyle = function (){
 };
 var popover = function (){
     $(".pop_over").popover({html:true});
+};
+var chosen = function (){
+    $(".chzn_edit").chosen();
 };
 var table = function () {
     function fnShowHide(iCol) {
@@ -72,7 +76,7 @@ var table = function () {
                 ],
                 "sSwfPath": "lib/datatables/extras/TableTools/media/swf/copy_csv_xls_pdf.swf"
             },
-            "aaSorting": [[1, "asc"]],
+            "aaSorting": [[0, "desc"]],
             "iDisplayLength": -1,
             "aLengthMenu": [[-1, 100, 50, 25], ["[ * ]", 100, 50, 25]],
             "oLanguage": {
@@ -103,23 +107,18 @@ var table = function () {
         });
     }
 };
-
-var exit_state = function (){
-    $("#exit_state").off().on('click', function (e) {
+var no_agregar_datos = function(){
+    $(".no_add_transport").off().on('click', function (e) {
         e.preventDefault();
-        $("#modal_state").modal("hide");
-        load();
+        $.sticky('INFO<br>[Subasta sin finalizar-Datos transporte, no disponible.]', {autoclose : 5000, position: "top-right", type: "st-info" });
     });
 };
-
-var exit_transport = function (){
-    $("#exit_transport").off().on('click', function (e) {
-        e.preventDefault();
-        $("#modal_transport").modal("hide");
-        load();
+var no_agregar_estados = function(){
+    $(".no_add_state").off().on('click', function (e) {
+       e.preventDefault();
+       $.sticky('INFO<br>[Subasta sin finalizar-Control de estados, no disponible.]', {autoclose : 5000, position: "top-right", type: "st-info" });
     });
-};
-
+};  
 var agregar_estados = function(){
     $(".add_state").off().on('click', function (e) {
         e.preventDefault();
@@ -132,20 +131,43 @@ var agregar_estados = function(){
         $("#modal_state").modal("show");
     });
 };
-
 var agregar_datos = function(){
     $(".add_transport").off().on('click', function (e) {
-        e.preventDefault();
+        var _carrier = $(this).data('carrier');$("#editCarrier").val(_carrier);
+        var _name = $(this).data('vehicle');$("#editType").val(_name);
+        var _vehicle = $(this).data('vehicle_id');
+        var _driver = $(this).data('driver');
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/driver.php",
+            data: "action=consult&sel="+ _driver,
+            success: function (data) { 
+                $("#editDriver").empty();
+                if(_driver>0){}else{$("#editDriver").append('<option selected="true"> </option>');}
+                $("#editDriver").append(data);
+            }        
+        });
+        chosen();
+        $("#editDriver").trigger("liszt:updated");
         
-        $("#editDriver").val("");
-        $("#editPlate").val("");
-        $("#editIMEI").val("");
+        var _plate = $(this).data('plate');
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "module/master/crud/vehicle.php",
+            data: "action=plate&vehicle="+_vehicle+"sel="+ _plate,
+            success: function (data) { 
+                $("#editPlate").empty();
+                if(_plate>0){}else{$("#editPlate").append('<option selected="true"> </option>');}
+                $("#editPlate").append(data);
+            }        
+        });
+        chosen();
+        $("#editPlate").trigger("liszt:updated");
+        var _imei = $(this).data('imei');$("#editIMEI").val(_imei);
         $("#modal_transport").modal("show");
     });
-};
-
-var editar = function(){
-   
 };
 var guardar = function () {
     $("#save").off().on('click', function (e) {

@@ -530,11 +530,11 @@ function ship_char_extreme($detail_id, $mysqli){
  }
  
  function ship_char_full($detail_id, $mysqli){
-    $stmt = $mysqli->prepare("SELECT td.iAllTraID, CONCAT(vc.cVehClaInf,' ',vc.cVehClaNam) AS vClass, vc.cVehClaInf, vt.cVehTypInf, va.cVehCatInf, td.cAllTraDetAdjTyp, td.cAllTraDetCarrID FROM tm_allocation_transport_detail AS td, tm_allocation_transport AS t, tm_vehicle_class AS vc, tm_vehicle_type AS vt, tm_vehicle_category AS va WHERE vc.iVehClaID=t.iVehClaID AND vt.iVehTypID=t.iVehTypID AND va.iVehCatID=t.iVehCatID AND t.iAllTraID=td.iAllTraID AND td.cAllTraDetOrdDet = ?");
+    $stmt = $mysqli->prepare("SELECT t.cAllTraOrd, td.iAllTraDetID, CONCAT(t.iVehClaID,',',t.iVehTypID,',',t.iVehCatID) AS map, td.iAllTraID, CONCAT(vc.cVehClaInf,' ',vc.cVehClaNam) AS vClass, vc.cVehClaInf, vt.cVehTypInf, va.cVehCatInf, td.cAllTraDetAdjTyp, td.cAllTraDetCarrID FROM tm_allocation_transport_detail AS td, tm_allocation_transport AS t, tm_vehicle_class AS vc, tm_vehicle_type AS vt, tm_vehicle_category AS va WHERE vc.iVehClaID=t.iVehClaID AND vt.iVehTypID=t.iVehTypID AND va.iVehCatID=t.iVehCatID AND t.iAllTraID=td.iAllTraID AND td.cAllTraDetOrdDet = ?");
     $stmt->bind_param('i', $detail_id);
     $stmt->execute();
     $stmt->store_result();
-    $stmt->bind_result($vehicle_code, $vehicle_class_total, $vehicle_class, $vehicle_type, $vehicle_category, $vehicle_status, $current_id);
+    $stmt->bind_result($order_id, $allocation_detail_id, $vehicle_map, $vehicle_code, $vehicle_class_total, $vehicle_class, $vehicle_type, $vehicle_category, $vehicle_status, $current_id);
     $ship = "";
     if($stmt->num_rows()>1){
         $vehicle = '<td>';
@@ -550,11 +550,14 @@ function ship_char_extreme($detail_id, $mysqli){
                 $class='no_';
                 $current_name = "";
             }
+            $driver=order_detail_assign('iDriID',$allocation_detail_id, $mysqli);
+            $plate=order_detail_assign('iVehID',$allocation_detail_id, $mysqli);
+            $imei=order_detail_assign('cOrdDetAssIMEI',$allocation_detail_id, $mysqli);
             $vehicletotal = $vehicle_class_total.' / '.$vehicle_type.' / '.$vehicle_category;
-            $order_detail_id ="";
+            $order_detail_id ="";//Ordenes relacionadas
             $vehicle .= '<div class="formSep">'.format($vehicle_code).' - '.$vehicle_class.' / '.$vehicle_type.' / '.$vehicle_category.$status.'</div>';
-            $graphic .= '<div class="formSep"><a style="cursor:pointer;" class="'.$class.'add_transport hint--left" data-hint="Datos Transporte" data-id="'.$detail_id.'" data-carrier_id="'.$current_id.'" data-carrier="'.$current_name.'" data-vehicle="'.$vehicletotal.'"><i class="glyphicon glyphicon-list"></i></a>'.
-                        '<a style="cursor:pointer;margin-left:20px;" class="'.$class.'add_state hint--left" data-hint="Control de Estados" data-id="'.$detail_id.'"><i class="glyphicon glyphicon-check" /></a></div>';
+            $graphic .= '<div class="formSep"><a style="cursor:pointer;" class="'.$class.'add_transport hint--left" data-hint="Datos Transporte" data-id="'.$detail_id.'" data-carrier_id="'.$current_id.'" data-carrier="'.$current_name.'" data-vehicle="'.$vehicletotal.'" data-allocation="'.$allocation_detail_id.'" data-vehicle_id="'.$vehicle_map.'" data-driver="'.$driver.'" data-plate="'.$plate.'" data-imei="'.$imei.'"><i class="glyphicon glyphicon-list"></i></a>'.
+                        '<a style="cursor:pointer;margin-left:20px;" class="'.$class.'add_state hint--left" data-hint="Control de Estados" data-id="'.state_control_id($order_id, $detail_id, $allocation_detail_id,$mysqli).'"><i class="glyphicon glyphicon-check" /></a></div>';
         }
         $vehicle .= '</td>';
         $graphic .= '</td>';
@@ -572,13 +575,46 @@ function ship_char_extreme($detail_id, $mysqli){
                 $current_name = "";
             }   
             $vehicletotal = $vehicle_class_total.' / '.$vehicle_type.' / '.$vehicle_category;
-            $order_detail_id ="";
+            $order_detail_id ="";//Ordenes relacionadas
+            $driver=order_detail_assign('iDriID',$allocation_detail_id, $mysqli);
+            $plate=order_detail_assign('iVehID',$allocation_detail_id, $mysqli);
+            $imei=order_detail_assign('cOrdDetAssIMEI',$allocation_detail_id, $mysqli);
             $ship .= '<td>'.format($vehicle_code).' - '.$vehicle_class.' / '.$vehicle_type.' / '.$vehicle_category.$status.'</td>'.
                 '<td class="center">'.
-                    '<a style="cursor:pointer;" class="'.$class.'add_transport hint--left" data-hint="Datos Transporte" data-id="'.$detail_id.'" data-carrier_id="'.$current_id.'" data-carrier="'.$current_name.'" data-vehicle="'.$vehicletotal.'"><i class="glyphicon glyphicon-list"></i></a>'.
-                    '<a style="cursor:pointer;margin-left:20px;" class="'.$class.'add_state hint--left" data-hint="Control de Estados" data-id="'.$detail_id.'"><i class="glyphicon glyphicon-check" /></a>'.
+                    '<a style="cursor:pointer;" class="'.$class.'add_transport hint--left" data-hint="Datos Transporte" data-id="'.$detail_id.'" data-carrier_id="'.$current_id.'" data-carrier="'.$current_name.'" data-vehicle="'.$vehicletotal.'" data-allocation="'.$allocation_detail_id.'" data-vehicle_id="'.$vehicle_map.'" data-driver="'.$driver.'" data-plate="'.$plate.'" data-imei="'.$imei.'"><i class="glyphicon glyphicon-list"></i></a>'.
+                    '<a style="cursor:pointer;margin-left:20px;" class="'.$class.'add_state hint--left" data-hint="Control de Estados" data-id="'.state_control_id($order_id, $detail_id, $allocation_detail_id,$mysqli).'"><i class="glyphicon glyphicon-check" /></a>'.
                 '</td>';
         }
     }
     return $ship;
  }
+ function state_control_id($order_id, $order_detail_id, $allocation_detail_id, $mysqli){
+    $stmt = $mysqli->prepare("SELECT iStaConID FROM tm_state_control WHERE iOrdID = '".$order_id."' AND iOrdDetID = '".$order_detail_id."' AND iAllTraDetID = '".$allocation_detail_id."'");
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($id);
+    $stmt->fetch();
+    return $id;
+}
+function order_detail_assign($campo, $allocation_detail_id, $mysqli){
+    $stmt = $mysqli->prepare("SELECT ".$campo." FROM tm_order_detail_assign WHERE iAllTraDetID = '".$allocation_detail_id."'");
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($data);
+    $stmt->fetch();
+    return $data;
+}
+function char_rate($n){
+    if($n=='0'){ $rate = '<i class="splashy-star_boxed_empty"></i> <i class="splashy-star_boxed_empty"></i> <i class="splashy-star_boxed_empty"></i> <i class="splashy-star_boxed_empty"></i> <i class="splashy-star_boxed_empty"></i>';}
+    if($n=='1'){ $rate = '<i class="splashy-star_boxed_half"></i> <i class="splashy-star_boxed_empty"></i> <i class="splashy-star_boxed_empty"></i> <i class="splashy-star_boxed_empty"></i> <i class="splashy-star_boxed_empty"></i>';}
+    if($n=='2'){ $rate = '<i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_empty"></i> <i class="splashy-star_boxed_empty"></i> <i class="splashy-star_boxed_empty"></i> <i class="splashy-star_boxed_empty"></i>';}
+    if($n=='3'){ $rate = '<i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_half"></i> <i class="splashy-star_boxed_empty"></i> <i class="splashy-star_boxed_empty"></i> <i class="splashy-star_boxed_empty"></i>';}
+    if($n=='4'){ $rate = '<i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_empty"></i> <i class="splashy-star_boxed_empty"></i> <i class="splashy-star_boxed_empty"></i>';}
+    if($n=='5'){ $rate = '<i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_half"></i> <i class="splashy-star_boxed_empty"></i> <i class="splashy-star_boxed_empty"></i>';}
+    if($n=='6'){ $rate = '<i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_empty"></i> <i class="splashy-star_boxed_empty"></i>';}
+    if($n=='7'){ $rate = '<i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_half"></i> <i class="splashy-star_boxed_empty"></i>';}
+    if($n=='8'){ $rate = '<i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_empty"></i>';}
+    if($n=='9'){ $rate = '<i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_half"></i>';}
+    if($n=='10'){ $rate = '<i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i>';}
+    return $rate;
+}
