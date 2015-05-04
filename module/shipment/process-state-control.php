@@ -41,62 +41,15 @@
             <div class="modal-content">        
                 <div class="modal-header">
                     <button class="close" data-dismiss="modal">×</button>
-                    <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
+                    <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> REGISTRO</h3>
                 </div>
                 <div class="modal-body">
-                    <form id="validation_state">
-                        <table class="table table-bordered">
-                            <tr class="centerStart">
-                                <td><b>INICIO DE CARGA :</b></td>
-                               <td> 
-                                   <input id="cchargingStart" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" /> 
-                                   <input id="chargingStart" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                               </td>
-                           </tr>
-                            <tr class="centerStart">
-                                <td><b>FIN DE CARGA :</b></td>
-                               <td> 
-                                   <input id="cchargingEnd" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" /> 
-                                   <input id="chargingEnd" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                               </td>
-                           </tr>
-                          <tr class="centerStart">
-                              <td><b>EN TR&Aacute;NSITO :</b></td>
-                               <td> 
-                                   <input id="ctransit" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" /> 
-                                   <input id="transit" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                               </td>
-                           </tr>
-                           <tr class="centerEnd">
-                                <td><b>LLEGADA DESTINO :</b></td>
-                               <td> 
-                                   <input id="cArrivalDestination" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" /> 
-                                   <input id="ArrivalDestination" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                               </td>
-                           </tr>
-                           <tr class="centerEnd">
-                                <td><b>INICIO DESCARGA :</b></td>
-                               <td> 
-                                   <input id="cStartDownload" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" /> 
-                                   <input id="StartDownload" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                               </td>
-                           </tr>
-                           <tr class="centerEnd">
-                               <td><b>FIN DE TRANSPORTE :</b></td>
-                               <td> 
-                                   <input id="cEndTransportation" type="checkbox" style="float:left;margin:11px 10px 0 0;" class="uni_style" /> 
-                                   <input id="EndTransportation" class="form-control" readonly="true" type="text" style="width:70%;float:left;" />
-                               </td>
-                           </tr>
-                           <tr class="hide">
-                               <td><b>ACCI&Oacute;N :</b></td>
-                               <td><input class="form-control" type="text" id="editAction"></td>
-                           </tr> 
-                        </table>
-                    </form>
+                    <input class="form-control hide" readonly="true" type="text" id="editID">
+                    <table class="table table-bordered" id="state_control_view"></table>
                 </div>
                 <div class="modal-footer">
-                    <a href="JavaScript:void(0);" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-log-out"></i> SALIR</a>
+                    <a href="JavaScript:void(0);" class="btn btn-default" data-dismiss="modal"><i class="glyphicon glyphicon-log-out"></i> SALIR</a>
+                    <a href="JavaScript:void(0);" class="btn btn-primary hide" id="save"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
                 </div>
             </div>
         </div>
@@ -145,11 +98,6 @@
             </div>
         </div>
     </div>
-    
-    <!-- hide elements-->
-    <div class="hide">           
-        
-    </div>
     <!-- JQuery Implementation -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate.min.js"></script>
@@ -171,7 +119,7 @@
     <!-- code prettifier -->
     <script src="lib/google-code-prettify/prettify.min.js"></script>
     <!-- sticky messages -->
-    <script src="lib/sticky/sticky.min.js"></script>
+    <script src="lib/sticky/sticky.js"></script>
     <!-- lightbox -->
     <script src="lib/colorbox/jquery.colorbox.min.js"></script>
     <!-- jBreadcrumbs -->
@@ -188,12 +136,14 @@
     <script src="js/selectNav.js"></script>
     <!-- moment.js date library -->
     <script src="lib/moment/moment.min.js"></script>
+    <!-- globalize for jQuery UI-->
+    <script src="lib/jquery-ui/external/globalize.js"></script>
     <!-- masked inputs -->
     <script src="js/forms/jquery.inputmask.min.js"></script>
-    <!-- common functions -->
-    <script src="js/pages/tm_common.js"></script>
     <!-- styled form elements -->
     <script src="lib/uniform/jquery.uniform.min.js"></script>
+    <!-- common functions -->
+    <script src="js/pages/tm_common.js"></script>
     <!-- datatable -->
     <script src="lib/datatables/jquery.dataTables.min.js"></script>
     <script src="lib/datatables/extras/Scroller/media/js/dataTables.scroller.min.js"></script>
@@ -202,8 +152,6 @@
     <script src="lib/datatables/extras/TableTools/media/js/ZeroClipboard.js"></script>
     <!-- datatables bootstrap integration -->
     <script src="lib/datatables/jquery.dataTables.bootstrap.min.js"></script>
-    <!-- datatable functions -->
-    <script src="js/pages/tm_datatables.js"></script>
     <!-- tooltips -->
     <script src="lib/qtip2/jquery.qtip.min.js"></script>
     <!-- chosen -->

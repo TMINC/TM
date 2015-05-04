@@ -44,18 +44,18 @@
         }
         if($option=='state'){
             $id = $_POST['id'];
-            if ($stmt = $mysqli->prepare("SELECT cStaConStaCha, cStaConEndCha, cStaConTra, cStaConArrDes, cStaConStaDow, cStaConEndTra, cStaConSta FROM tm_state_control WHERE iStaConID='".$id."'")){
+            if ($stmt = $mysqli->prepare("SELECT cStaConStaCha, cStaConEndCha, cStaConTra, cStaConArrDes, cStaConStaDow, cStaConEndTra, cStaConSta, iStaConRat FROM tm_state_control WHERE iStaConID='".$id."'")){
                 $stmt->execute();
                 $stmt->store_result();
-                $stmt->bind_result($state_control_start_charging, $state_control_end_charging, $state_control_transit, $state_control_arrival_desdtination, $state_control_start_download, $state_control_end_transportation, $state_control_status);
+                $stmt->bind_result($state_control_start_charging, $state_control_end_charging, $state_control_transit, $state_control_arrival_destination, $state_control_start_download, $state_control_end_transportation, $state_control_status, $state_control_rate);
                 while($row = $stmt->fetch()) {
-                    $rate = char_rate($state_control_status);
-                    if($state_control_status==0 || $state_control_status==1){$msg="MUY MALO";$hint="error";}
-                    if($state_control_status==2 || $state_control_status==3){$msg="MALO";$hint="warning";}
-                    if($state_control_status==4 || $state_control_status==5){$msg="REGULAR";$hint="warning";}
-                    if($state_control_status==6 || $state_control_status==7){$msg="BUENO";$hint="info";}
-                    if($state_control_status==8 || $state_control_status==9){$msg="MUY BUENO";$hint="success";}
-                    if($state_control_status==10){$msg="EXELENTE";$hint="success";}
+                    $rate = char_rate($state_control_rate);
+                    if($state_control_rate==0 || $state_control_rate==1){$msg="MUY MALO";$hint="error";}
+                    if($state_control_rate==2 || $state_control_rate==3){$msg="MALO";$hint="warning";}
+                    if($state_control_rate==4 || $state_control_rate==5){$msg="REGULAR";$hint="warning";}
+                    if($state_control_rate==6 || $state_control_rate==7){$msg="BUENO";$hint="info";}
+                    if($state_control_rate==8 || $state_control_rate==9){$msg="MUY BUENO";$hint="success";}
+                    if($state_control_rate==10){$msg="EXELENTE";$hint="success";}
                     echo '<tr class="centerStart">'.
                             '<td><b>INICIO DE CARGA :</b></td>'.
                             '<td><input id="chargingStart" class="form-control" readonly="true" type="text" value="'.$state_control_start_charging.'" /></td>'.
@@ -70,7 +70,7 @@
                         '</tr>'.
                         '<tr class="centerEnd">'.
                             ' <td><b>LLEGADA DESTINO :</b></td>'.
-                            '<td><input id="ArrivalDestination" class="form-control" readonly="true" type="text" value="'.$state_control_arrival_desdtination.'" /></td>'.
+                            '<td><input id="ArrivalDestination" class="form-control" readonly="true" type="text" value="'.$state_control_arrival_destination.'" /></td>'.
                         '</tr>'.
                         '<tr class="centerEnd">'.
                             '<td><b>INICIO DESCARGA :</b></td>'.

@@ -7,7 +7,6 @@ $(document).ready(function() {
     $.validator.addMethod(
         "chosen",
         function(value, element) {
-            console.log(element);
             return (value === null ? false : (value.length === 0 ? false : true));
         },
         "Por favor, elige una opción válida."
@@ -61,9 +60,12 @@ var reassign = function(){
     $(".reassign").off().on('click', function (e) {
         e.preventDefault();
         var _id = $(this).data('id');$("#editId").val(_id);
-        var _ids = $(this).data('ids');$("#editOrderDetail").val(_ids);
-        var _carrier_current_id = $(this).data('current_id');
+        var _ids = $(this).data('ids');$("#editIds").val(_ids);
+        var _carrier_current_id = $(this).data('current_id');$("#editCarrierCurrentID").val(_carrier_current_id);
         var _carrier_current = $(this).data('current_name');$("#editCarrierCurrent").val(_carrier_current);
+        var _allocation = $(this).data('allocation');$("#editAllocationsID").val(_allocation);
+        $("#editReason").val("");
+        
         $("#editCarrierNew").empty();
         $.ajax({
             type: "POST",
@@ -81,7 +83,7 @@ var reassign_save = function (){
     $("#adjudication_save").off().on('click', function (e) {
         e.preventDefault();
         $("[name='editCarrierNew']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
-        if($('#validation_form').validate({
+        if($('#validation_adjudication').validate({
             onkeyup: false,
             errorClass: 'error',
             validClass: 'valid',
@@ -98,16 +100,20 @@ var reassign_save = function (){
                 $(element).closest('.form-group').append(error);
             }
         }).form()){
-            var _ids = $("#editOrderDetail").val();
-            var _carrier_current_id = $("#editCarrierNew option:selected").val();
+            var _id = $("#editId").val();
+            var _ids = $("#editIds").val();
+            var _carrier_current_id = $("#editCarrierCurrentID").val();
+            var _carrier_new_id = $("#editCarrierNew option:selected").val();
             var _reason = $("#editReason").val();
+            var _allocation = $("#editAllocationsID").val();
             $.ajax({
                 type: "POST",
-                url: "module/shipment/crud/shipment.php",
-                data: "action=reasigment&id="+_ids+"&carrier="+_carrier_current_id+"&reason="+_reason,
+                url: "module/shipment/crud/reasigment.php",
+                data: "action=reasigment&id="+_id+"&ids="+_ids+"&current="+_carrier_current_id+"&new="+_carrier_new_id+"&reason="+_reason+"&allocation="+_allocation,
                 success: function () {
                     $("#adjudication").modal("hide");
                     $.sticky("INFO<br>[Su solicitud ha sido procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                    load();
                 }        
             });
         }

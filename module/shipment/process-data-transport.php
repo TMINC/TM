@@ -50,7 +50,7 @@
                         <tr>
                             <td><b>PROVEEDOR :</b></td>
                             <td class="form-group">
-                                <input class="form-control" readonly="true" type="text" id="editID" name="editID">
+                                <input class="form-control hide" readonly="true" type="text" id="editID" name="editID">
                                 <input class="form-control" readonly="true" type="text" id="editCarrier" name="editCarrier">
                             </td>
                         </tr>
@@ -83,8 +83,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    
+    </div>    
     <!-- Modal Estados -->
     <div class="modal" id="modal_state">
         <div class="modal-dialog">
@@ -101,11 +100,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- hide elements-->
-    <div class="hide">           
-        
     </div>
     <!-- JQuery Implementation -->
     <script src="js/jquery.min.js"></script>
@@ -147,10 +141,10 @@
     <script src="lib/moment/moment.min.js"></script>
     <!-- masked inputs -->
     <script src="js/forms/jquery.inputmask.min.js"></script>
-    <!-- common functions -->
-    <script src="js/pages/tm_common.js"></script>
     <!-- styled form elements -->
     <script src="lib/uniform/jquery.uniform.min.js"></script>
+    <!-- common functions -->
+    <script src="js/pages/tm_common.js"></script>
     <!-- datatable -->
     <script src="lib/datatables/jquery.dataTables.min.js"></script>
     <script src="lib/datatables/extras/Scroller/media/js/dataTables.scroller.min.js"></script>
@@ -159,8 +153,6 @@
     <script src="lib/datatables/extras/TableTools/media/js/ZeroClipboard.js"></script>
     <!-- datatables bootstrap integration -->
     <script src="lib/datatables/jquery.dataTables.bootstrap.min.js"></script>
-    <!-- datatable functions -->
-    <script src="js/pages/tm_datatables.js"></script>
     <!-- tooltips -->
     <script src="lib/qtip2/jquery.qtip.min.js"></script>
     <!-- chosen -->

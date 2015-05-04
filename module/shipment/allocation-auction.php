@@ -77,41 +77,8 @@
             </div>
         </div>
     </div>
-    <!-- Selección datos Transporte -->
-    <div class="modal" id="adjudicationDirect">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal">×</button>
-                    <h3><i class="glyphicon glyphicon-tasks" style="margin-top: 3px;font-size:15px;"></i> ASIGNACI&Oacute;N TRANSPORTE</h3>
-                </div>
-                <div class="modal-body">
-                    <form id="validation_adjudication_direct">
-                        <table class="table table-bordered">
-                            <tr>
-                                <td><b>NRO.VIAJE :</b></td>
-                                <td class="form-group"><input class="form-control" readonly="true" type="text" id="editDirectId" name="editDirectId"></td>
-                            </tr>
-                            <tr>
-                                <td><b>NRO.PEDIDO(S) :</b></td>
-                                <td class="form-group"><input class="form-control" readonly="true" type="text" id="editDirectOrderId" name="editDirectOrderId"></td>
-                            </tr>
-                            <tr>
-                                <td><b>PROVEEDOR TRANSPORTE :</b></td>
-                                <td class="form-group"><select class="form-control chzn_edit" id="editDirectCarrier" name="editDirectCarrier" data-placeholder="SELECCIONE UN PROVEEDOR..." /></td>
-                            </tr>
-                        </table>
-                    </form> 
-                </div>
-                <div class="modal-footer">
-                    <a href="JavaScript:void(0);" class="btn btn-default" id="adjudication_direct_close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> CANCELAR</a>
-                    <a href="JavaScript:void(0);" class="btn btn-primary" id="adjudication_direct_save"><i class="glyphicon glyphicon-save"></i> GUARDAR</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="modal" id="modal">
+     <!-- Editar Subasta -->
+      <div class="modal" id="modal_auction">
         <div class="modal-dialog">
             <div class="modal-content">        
                 <div class="modal-header">
@@ -119,256 +86,91 @@
                     <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
                 </div>
                 <div class="modal-body">
-                <table class="table table-bordered">
-                <tr>
-                    <td><b>NRO.ORDEN :</b></td>
-                    <td colspan="2"><input class="form-control" readonly="true" type="text" id="editId"></td>
-                </tr>
-                <tr>
-                    <td><b>TIPO DE SERVICIO :</b></td>
-                    <td colspan="2"><select class="form-control chzn_edit" id="editType" data-placeholder="SELECCIONE TIPO DE SERVICIO..." /></td>
-                </tr>
-                <tr>
-                    <td><b>VOLUMEN:</b></td>
-                    <td><input class="form-control" type="text" id="editVolume"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureVolume" data-placeholder="SELECCIONE U.M. VOLUMEN..." /></td>
-                </tr>
-                <tr>
-                    <td><b>PESO :</b></td>
-                    <td><input class="form-control" type="text" id="editWeight"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureWeight" data-placeholder="SELECCIONE U.M. PESO..." /></td>
-                </tr>
-                <tr>
-                    <td><b>DISTANCIA :</b></td>
-                    <td><input class="form-control" type="text" id="editDistance"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>COSTO :</b></td>
-                    <td><input class="form-control" type="text" id="editPrice"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>PRECIO :</b></td>
-                    <td><input class="form-control" type="text" id="editRealPrice"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureRealPrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
-                </tr>
-                <tr class="hide">
-                    <td><b>ESTADO :</b></td>
-                    <td colspan="2"><input type="checkbox" id="editStatus"></td>
-                </tr> 
-                <tr class="hide">
-                    <td><b>ACCI&Oacute;N :</b></td>
-                    <td colspan="2"><input class="form-control" type="text" id="editAction"></td>
-                </tr> 
-                </table>
+                    <form id="validation_auction_form">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><b>NRO.ORDEN :</b></td>
+                                <td colspan="2"><input class="form-control" readonly="true" type="text" id="editId"></td>
+                            </tr>
+                            <tr>
+                                <td><b>MONTO BASE :</b></td>
+                                <td class="form-group" colspan="2"><input class="form-control" type="text" id="editBaseAmount"></td>
+                            </tr>
+                             <tr>
+                                <td><b>INFO ADICIONAL :</b></td>
+                                <td class="form-group" colspan="2"><input class="form-control" type="text" id="editInfo"></td>
+                            </tr>
+                            <tr>
+                                <td><b>FECHA INICIO:</b></td>
+                                <td class="form-group" style="width: 50%;">
+                                    <div id="StartAuctionDate" class="input-group date">
+                                        <input class="form-control" type="text" readonly="" id="editStartAuctionDate" name="editStartAuctionDate">
+                                        <span class="input-group-addon"><i class="splashy-calendar_day_up"></i></span>
+                                    </div>
+                                </td>
+                                <td class="form-group">                        
+                                    <div class="input-group bootstrap-timepicker">
+                                        <input class="form-control" type="text" id="editStartAuctionHour" name="editStartAuctionHour" readonly="true">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>FECHA FIN:</b></td>
+                                <td class="form-group">
+                                    <div id="EndAuctionDate" class="input-group date">
+                                        <input class="form-control" type="text" readonly="" id="editEndAuctionDate" name="editEndAuctionDate">
+                                        <span class="input-group-addon"><i class="splashy-calendar_day_down"></i></span>
+                                    </div>
+                                </td>
+                                <td class="form-group">                        
+                                    <div class="input-group bootstrap-timepicker">
+                                        <input class="form-control" type="text" id="editEndAuctionHour" name="editEndAuctionHour" readonly="true">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn btn-primary" id="save"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
+                    <a href="JavaScript:void(0);" class="btn btn-default" id="auction_close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> CANCELAR</a>
+                    <a href="JavaScript:void(0);" class="btn btn-primary" id="auction_save"><i class="glyphicon glyphicon-save"></i> GUARDAR</a>
                 </div>
             </div>
         </div>
     </div>
-    
-    
-    <!-- Selección datos Transporte -->
-    <div class="modal fade" id="directTransport">
-	    <div class="modal-dialog">
-		    <div class="modal-content">
-			    <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				    <h3 class="modal-title">Informaci&oacute;n Transporte</h3>
-			    </div>
-			    <div class="modal-body">
-				    <table class="table table-striped table-bordered table-condensed" id="table_edit">
-                        <tr>
-                            <td>Nro. Viaje</td>
-                            <td><input id="numberTransport" class="form-control" type="text" disabled /></td>
+     
+       <!-- Ver Ofertas -->
+       
+         <div class="modal" id="modal_offer">
+        <div class="modal-dialog">
+            <div class="modal-content">        
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">×</button>
+                    <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="validation_offer_form">
+                        <table class="table table-bordered">
+                         <tr>
+                            <td><b>MONTO ACTUAL :</b></td>
+                            <td class="form-group" colspan="2"><input class="form-control" type="text" id="editCurrentAmount" name="editCurrentAmount"></td>
                         </tr>
-                        <tr>
-                            <td>Nro. Cita Recojo</td>
-                            <td><input id="dateTransport" class="form-control" type="text" disabled /></td>
+                         <tr>
+                            <td><b>MONTO A OFERTAR :</b></td>
+                            <td class="form-group" colspan="2"><input class="form-control" type="text" id="editOfferAmount" name="editOfferAmount"></td>
                         </tr>
-                        <tr>
-                            <td>Proveedor de Transporte</td>
-                            <td><select id="supplier" data-placeholder="SELECCIONE PROVEEDOR DE TRANSPORTE..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>
-                        <tr>
-                            <td>Tipo de Veh&iacute;culo<br /> 
-                                <input id="newType" type="checkbox" style="float:left;"/><div style="font-size:11px;color:Blue;margin:3px 0 0 4px;float:left;">Solicitar Transporte Adicional</div>
-                            </td>
-                            <td><select id="typeVehicle" data-placeholder="SELECCIONE TIPO DE VEHICULO..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>                       
-                        <tr>
-                            <td>Clase de Veh&iacute;culo</td>
-                            <td><select id="classVehicle" data-placeholder="SELECCIONE CLASE DE VEHICULO..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>
-                        <tr class="trtransporte hide">
-                            <td>Tipo de Veh&iacute;culo II</td>
-                            <td><select id="typeVehicleII" data-placeholder="SELECCIONE TIPO DE VEHICULO..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>                       
-                        <tr class="trtransporte hide">
-                            <td>Clase de Veh&iacute;culo II</td>
-                            <td><select id="classVehicleII" data-placeholder="SELECCIONE CLASE DE VEHICULO..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>
-                        <tr>
-                            <td>Clase de Documento de Transporte</td>
-                            <td><select id="document" data-placeholder="SELECCIONE CLASE DE DOCUMENTO DE TRANSPORTE..." class="chzn_a form-control" style="width:330px;"></select></td>                                
-                        </tr> 
-                        <tr class="trorigen hide">
-                            <td>Seleccione Origen</td>
-                            <td><select id="origin" data-placeholder="SELECCIONE ORIGEN..." class="chzn_a form-control" style="width:330px;"/></td>                                
-                        </tr>
-                        <tr class="trdestino hide">
-                            <td>Seleccione Destino</td>
-                            <td><select id="destination" data-placeholder="SELECCIONE DESTINO..." class="chzn_a form-control" style="width:330px;"/></td>                                
-                        </tr>
-                        <tr class="trdestino hide">
-                            <td colspan="2">Cita Entrega Destino</td>
-                        </tr>
-                        <tr class="trdestino hide">
-                            <td colspan="2">
-                                <table id="dt_citaEntregaCD">
-                                <tbody></tbody>                                
-                                </table>                                
-                           </td>
-                        </tr>
-                        <tr class="trcitaEntrega hide">
-                            <td colspan="2">Registre hora y fecha para la(s) cita(s) de Entrega en Destino(s)</td>
-                        </tr>
-                        <tr class="trcitaEntrega hide">
-                            <td colspan="2">
-                                <table id="dt_citaEntrega">
-                                <tbody></tbody>                                
-                                </table>                                
-                           </td>                                
-                        </tr>                        
-                    </table>
-			    </div>
-			    <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-				    <button type="button" class="btn btn-primary" id="saveTransport">Guardar</button>
-			    </div>
-		    </div>
-	    </div>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary" id="offer"><i class="glyphicon glyphicon-saved"></i> REALIZAR OFERTA</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- Selección datos Subasta -->
-    <div class="modal fade" id="auctionTransport">
-	    <div class="modal-dialog">
-		    <div class="modal-content">
-			    <div class="modal-header">
-				    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				    <h3 class="modal-title">Informaci&oacute;n Subasta</h3>
-			    </div>
-			    <div class="modal-body">
-                    <table class="table table-striped table-bordered table-condensed">
-                        <tr>
-                            <td width="40%">Nro. Subasta</td>
-                            <td><input id="idSubasta" class="form-control" type="text" disabled /></td>
-                        </tr>
-                        <tr>
-                            <td>Nro. Viaje</td>
-                            <td><input id="numberTravel" class="form-control" type="text" disabled /></td>
-                        </tr>
-                        <tr>
-                            <td>Nro. Cita</td>
-                            <td><input id="numberDate" class="form-control" type="text" disabled /></td>
-                        </tr>
-                        <tr>
-                            <td>Proveedor de Transporte</td>
-                            <td><select id="supplierTransport" data-placeholder="SELECCIONE PARTICIPANTES..." class="chzn_a form-control" style="width:330px;" multiple="multiple"/></td>
-                        </tr>
-                        <tr>
-                            <td>Tipo de Veh&iacute;culo<br /> 
-                                <input id="newTypeSub" type="checkbox" style="float:left;"/><div style="font-size:11px;color:Blue;margin:3px 0 0 4px;float:left;">Solicitar Transporte Adicional</div>
-                            </td>
-                            <td><select id="typeVehSub" data-placeholder="SELECCIONE TIPO DE VEHICULO..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>
-                        <tr>
-                            <td>Clase de Veh&iacute;culo</td>
-                            <td><select id="classVehSub" data-placeholder="SELECCIONE CLASE DE VEHICULO..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>
-                        <tr class="trtransporteSub hide">
-                            <td>Tipo de Veh&iacute;culo II</td>
-                            <td><select id="typeVehSubII" data-placeholder="SELECCIONE TIPO DE VEHICULO..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>
-                        <tr class="trtransporteSub hide">
-                            <td>Clase de Veh&iacute;culo II</td>
-                            <td><select id="classVehSubII" data-placeholder="SELECCIONE CLASE DE VEHICULO..." class="chzn_a form-control" style="width:330px;"/></td>
-                        </tr>
-                        <tr>
-                            <td>Clase de Documento de Transporte</td>
-                            <td><select id="documentSub" data-placeholder="SELECCIONE CLASE DE DOCUMENTO DE TRANSPORTE..." class="chzn_a form-control" style="width:330px;"></select></td>                                
-                        </tr> 
-                        <tr class="trorigenSub hide">
-                            <td>Seleccione Origen</td>
-                            <td><select id="originSub" data-placeholder="SELECCIONE ORIGEN..." class="chzn_a form-control" style="width:330px;"/></td>                                
-                        </tr>
-                        <tr class="trdestinoSub hide">
-                            <td>Seleccione Destino</td>
-                            <td><select id="destinationSub" data-placeholder="SELECCIONE DESTINO..." class="chzn_a form-control" style="width:330px;"/></td>                                
-                        </tr>
-                        <tr class="trdestinoSub hide">
-                            <td colspan="2">Cita Entrega Destino</td>
-                        </tr>
-                        <tr class="trdestinoSub hide">
-                            <td colspan="2">
-                                <table id="dt_citaEntregaCDSub">
-                                <tbody></tbody>                                
-                                </table>                                
-                           </td>
-                        </tr>
-                        <tr class="trcitaEntregaSub hide">
-                            <td colspan="2">Registre hora y fecha para la(s) cita(s) de Entrega en Destino(s)</td>
-                        </tr>
-                        <tr class="trcitaEntregaSub hide">
-                            <td colspan="2">
-                                <table id="dt_citaEntregaSub">
-                                <tbody></tbody>                                
-                                </table>                                
-                           </td>                                
-                        </tr>
-                        <tr>
-                            <td>Descripci&oacute;n del Servicio</td>
-                            <td><input id="descriptionTravel" class="form-control" type="text" /></td>
-                        </tr>
-                        <tr>
-                            <td>Monto Base S/.</td>
-                            <td><input id="amountTravel" class="form-control" type="text" /></td>
-                        </tr>
-                        <tr>
-                            <td>Estado</td>
-                            <td><input type="checkbox" id="editStatus" checked disabled></td>
-                        </tr>
-                        <tr>
-                            <td>Fecha Fin de Subasta</td>
-                            <td>
-                                <div id="dateSelectTxt" class="input-group date">
-							        <input class="form-control" readonly="" type="text" id="dateSelectS">
-				                    <span class="input-group-addon"><i class="splashy-calendar_day"></i></span>
-						        </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Hora Fin de Subasta</td>
-                            <td>
-                                <div class="input-group bootstrap-timepicker">
-							        <input id="hourSelect" type="text" class="form-control detHour" value="">
-							        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i> Ajustar Hora</span>
-						        </div>
-                            </td>
-                        </tr>
-                    </table>				    
-			    </div>
-			    <div class="modal-footer">
-				    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-				    <button type="button" class="btn btn-primary" id="saveAuction">Guardar</button>
-			    </div>
-		    </div>
-	    </div>
-    </div>
-    
-    
+   
     <!-- hide elements-->
     <div class="hide">           
         <!-- confirmation box -->

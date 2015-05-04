@@ -37,8 +37,8 @@
             </table>
         </div>
     </div>
-    <!-- Modal -->
-    <!-- Selección datos Transporte -->
+   
+    <!-- Reasignación Transportista -->
     <div class="modal" id="adjudication">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -55,11 +55,17 @@
                             </tr>
                             <tr>
                                 <td><b>SERVICIOS RELACIONADOS :</b></td>
-                                <td class="form-group"><input class="form-control" readonly="true" type="text" id="editOrderDetail" name="editOrderDetail"></td>
+                                <td class="form-group">
+                                    <input class="form-control hide" readonly="true" type="text" id="editAllocationsID">
+                                    <input class="form-control" readonly="true" type="text" id="editIds" name="editIds">
+                                </td>
                             </tr>
                             <tr>
                                 <td><b>PROVEEDOR TRANSPORTE ACTUAL :</b></td>
-                                <td class="form-group"><input class="form-control" readonly="true" type="text" id="editCarrierCurrent" name="editCarrierCurrent"></td>
+                                <td class="form-group">
+                                    <input class="form-control hide" readonly="true" type="text" id="editCarrierCurrentID">
+                                    <input class="form-control" readonly="true" type="text" id="editCarrierCurrent" name="editCarrierCurrent">
+                                </td>
                             </tr>
                             <tr>
                                 <td><b>PROVEEDOR TRANSPORTE NUEVO :</b></td>
@@ -82,75 +88,7 @@
         </div>
     </div>
     
-    <div class="modal" id="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">        
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal">×</button>
-                    <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> EDICI&Oacute;N</h3>
-                </div>
-                <div class="modal-body">
-                <table class="table table-bordered">
-                <tr>
-                    <td><b>NRO.ORDEN :</b></td>
-                    <td colspan="2"><input class="form-control" readonly="true" type="text" id="editId"></td>
-                </tr>
-                <tr>
-                    <td><b>TIPO DE SERVICIO :</b></td>
-                    <td colspan="2"><select class="form-control chzn_edit" id="editType" data-placeholder="SELECCIONE TIPO DE SERVICIO..." /></td>
-                </tr>
-                <tr>
-                    <td><b>VOLUMEN:</b></td>
-                    <td><input class="form-control" type="text" id="editVolume"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureVolume" data-placeholder="SELECCIONE U.M. VOLUMEN..." /></td>
-                </tr>
-                <tr>
-                    <td><b>PESO :</b></td>
-                    <td><input class="form-control" type="text" id="editWeight"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureWeight" data-placeholder="SELECCIONE U.M. PESO..." /></td>
-                </tr>
-                <tr>
-                    <td><b>DISTANCIA :</b></td>
-                    <td><input class="form-control" type="text" id="editDistance"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>COSTO :</b></td>
-                    <td><input class="form-control" type="text" id="editPrice"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>PRECIO :</b></td>
-                    <td><input class="form-control" type="text" id="editRealPrice"></td>
-                    <td><select class="form-control chzn_edit" id="editMeasureRealPrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
-                </tr>
-                <tr class="hide">
-                    <td><b>ESTADO :</b></td>
-                    <td colspan="2"><input type="checkbox" id="editStatus"></td>
-                </tr> 
-                <tr class="hide">
-                    <td><b>ACCI&Oacute;N :</b></td>
-                    <td colspan="2"><input class="form-control" type="text" id="editAction"></td>
-                </tr> 
-                </table>
-                </div>
-                <div class="modal-footer">
-                    <a href="JavaScript:void(0);" class="btn btn-primary" id="save"><i class="glyphicon glyphicon-saved"></i> GUARDAR</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- hide elements-->
-    <div class="hide">           
-        <!-- confirmation box -->
-        <div id="confirm_dialog" class="cbox_content">
-            <div class="sepH_c tac"><strong>Esta seguro de eliminar el(los) registro(s)?</strong></div>
-            <div class="tac">
-                <a href="JavaScript:void(0);" class="btn btn-gebo confirm_yes btn-default">S&iacute;</a>
-                <a href="JavaScript:void(0);" class="btn confirm_no btn-default">No</a>
-            </div>
-        </div>
-    </div>
+
     <!-- JQuery Implementation -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate.min.js"></script>

@@ -34,6 +34,7 @@ var load = function () {
             popover();
             chosen();
             agregar_estados();
+            activar_estados();
             agregar_datos();
             no_agregar_datos();
             no_agregar_estados();
@@ -48,6 +49,20 @@ var popover = function (){
 };
 var chosen = function (){
     $(".chzn_edit").chosen();
+};
+var slider = function (){
+    var slider = $( "<div id='rate' style='margin-left:5px;'></div>" ).insertAfter( $("#rate_sel") ).slider({
+        min: 1,
+        max: 11,
+        range: 0,
+        value: $("#rate_sel")[0].selectedIndex + 1,
+        slide: function( event, ui ) {
+            $("#rate_sel")[0].selectedIndex = ui.value - 1;
+        }
+    });
+    $("#rate_sel").change(function() {
+        slider.slider( "value", this.selectedIndex + 1 );
+    });
 };
 var table = function () {
     function fnShowHide(iCol) {
@@ -122,17 +137,133 @@ var no_agregar_estados = function(){
 var agregar_estados = function(){
     $(".add_state").off().on('click', function (e) {
         e.preventDefault();
-        $("#chargingStart").val("");
-        $("#chargingEnd").val("");
-        $("#transit").val("");
-        $("#ArrivalDestination").val("");
-        $("#StartDownload").val("");
-        $("#EndTransportation").val("");
-        $("#modal_state").modal("show");
+        var _id = $(this).data('id');
+        $.ajax({
+            type: "POST",
+            url: "module/shipment/crud/process-state-control.php",
+            data: "action=state&id="+_id,
+            success: function (response) {
+                $("#state_control_view").empty();
+                $("#state_control_view").append(response);
+                $("#modal_state").modal("show");                
+                slider();
+                activar_estados();
+                $("#editID").val(_id);
+            }
+        });
     });
 };
+var activar_estados = function(){
+    var cnt = $(".cnt_control").val();
+    $("#cchargingStart").off().on('click', function () {
+        var d = new Date(); var _date = get_date(d);
+        $("#chargingStart").val(_date);$("#cchargingStart").attr("disabled", true);cnt++;calificar(cnt);
+        var _id = $("#editID").val();
+        $.ajax({
+            type: "POST",
+            url: "module/shipment/crud/process-state-control.php",
+            data: "action=update&campo=chargingStart&start_charging="+_date+"&id="+_id,
+            success: function () {
+                $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-center", type: "st-success"}, "", "modal");
+            }        
+        });
+    });
+    $("#cchargingEnd").off().on('click', function () {
+        var d = new Date(); var _date = get_date(d);
+        $("#chargingEnd").val(_date);$("#cchargingEnd").attr("disabled", true);cnt++;calificar(cnt);
+        var _id = $("#editID").val();
+        $.ajax({
+            type: "POST",
+            url: "module/shipment/crud/process-state-control.php",
+            data: "action=update&campo=chargingEnd&end_charging="+_date+"&id="+_id,
+            success: function () {
+                $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-center", type: "st-success"}, "", "modal");
+            }        
+        });
+    });
+    $("#ctransit").off().on('click', function () {
+        var d = new Date(); var _date = get_date(d);
+        $("#transit").val(_date);$("#ctransit").attr("disabled", true);cnt++;calificar(cnt);
+        var _id = $("#editID").val();
+        $.ajax({
+            type: "POST",
+            url: "module/shipment/crud/process-state-control.php",
+            data: "action=update&campo=transit&transit="+_date+"&id="+_id,
+            success: function () {
+                $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-center", type: "st-success"}, "", "modal");
+            }        
+        });
+    });
+    $("#cArrivalDestination").off().on('click', function () {
+        var d = new Date(); var _date = get_date(d);
+        $("#arrivalDestination").val(_date);$("#cArrivalDestination").attr("disabled", true);cnt++;calificar(cnt);
+        var _id = $("#editID").val();
+        $.ajax({
+            type: "POST",
+            url: "module/shipment/crud/process-state-control.php",
+            data: "action=update&campo=arrivalDestination&arrival_destination="+_date+"&id="+_id,
+            success: function () {
+                $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-center", type: "st-success"}, "", "modal");
+            }        
+        });
+    });
+    $("#cStartDownload").off().on('click', function () {
+        var d = new Date(); var _date = get_date(d);
+        $("#startDownload").val(_date);$("#cStartDownload").attr("disabled", true);cnt++;calificar(cnt);
+        var _id = $("#editID").val();
+        $.ajax({
+            type: "POST",
+            url: "module/shipment/crud/process-state-control.php",
+            data: "action=update&campo=startDownload&start_download="+_date+"&id="+_id,
+            success: function () {
+                $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-center", type: "st-success"}, "", "modal");
+            }        
+        });
+    });
+    $("#cEndTransportation").off().on('click', function () {
+        var d = new Date(); var _date = get_date(d);
+        $("#endTransportation").val(_date);$("#cEndTransportation").attr("disabled", true);cnt++;calificar(cnt);
+        $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-center", type: "st-success"}, "", "modal");
+    });
+    calificar(cnt);
+};
+var guardar = function (){
+    $("#save").off().on('click', function () {
+        var _id = $("#editID").val();
+        var _last_state = $("#endTransportation").val();
+        var _rate = $("#rate_sel option:selected").val();
+        $.ajax({
+            type: "POST",
+            url: "module/shipment/crud/process-state-control.php",
+            data: "action=update&campo=endTransportation&end_transportation="+_last_state+"&id="+_id+"&rate="+_rate,
+            success: function () {
+                $("#modal_state").modal("hide");
+                $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+            }        
+        });
+    });
+};
+var calificar = function (cnt){
+    if(cnt===6){
+        $.sticky("INFO<br>[Registre la calificación del servicio.]", {autoclose : 5000, position: "top-center", type: "st-info"}, "", "modal");
+        $("#td_rate").removeClass("hide");
+        $("#save").removeClass("hide");
+        guardar();
+    }
+    if(cnt===9){$("#td_rate").removeClass("hide");}
+};
+var get_date = function(d){
+    var ano = d.getFullYear();
+    var mes = d.getMonth();
+    var dia = d.getDate();
+    var h = d.getHours();
+    var m = d.getMinutes();
+    var s = d.getSeconds();
+    var date_format = ano+'-'+mes+'-'+dia+' '+h+':'+m+':'+s;
+    return date_format;
+};
 var agregar_datos = function(){
-    $(".add_transport").off().on('click', function (e) {
+    $(".add_transport").off().on('click', function () {
         var _carrier = $(this).data('carrier');$("#editCarrier").val(_carrier);
         var _name = $(this).data('vehicle');$("#editType").val(_name);
         var _vehicle = $(this).data('vehicle_id');
@@ -169,25 +300,3 @@ var agregar_datos = function(){
         $("#modal_transport").modal("show");
     });
 };
-var guardar = function () {
-    $("#save").off().on('click', function (e) {
-        e.preventDefault();
-        var _start_charging = $("#chargingStart").val();
-        var _end_charging = $("#chargingEnd").val();
-        var _transit = $("#transit").val();
-        var _arrival_destination = $("#ArrivalDestination").val();
-        var _start_download = $("#StartDownload").val();
-        var _end_transportation = $("#EndTransportation").val();
-        var _status = $("#editStatus").is(':checked');
-        var _action = $("#editAction").val();
-        $.ajax({
-            type: "POST",
-            url: "module/shipment/crud/process-state-control.php",
-            data: "action="+ _action +"& start_charging="+ _start_charging+"& end_charging="+ _end_charging +"& transit="+ _transit+"& arrival_destination="+ _arrival_destination+"& start_download="+ _start_download+"& end_transportation="+ _end_transportation+"& status="+ _status,
-            success: function () {
-                load();  
-                 $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
-            }        
-        });
-    });
-};  

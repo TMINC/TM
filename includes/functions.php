@@ -467,11 +467,11 @@ function format($number){
 }
 
 function ship_char_extreme($detail_id, $mysqli){
-    $stmt = $mysqli->prepare("SELECT td.iAllTraID, CONCAT(vc.cVehClaInf,' ',vc.cVehClaNam) AS vClass, vt.cVehTypInf, va.cVehCatInf, td.cAllTraDetAdjTyp, td.cAllTraDetCarrID FROM tm_allocation_transport_detail AS td, tm_allocation_transport AS t, tm_vehicle_class AS vc, tm_vehicle_type AS vt, tm_vehicle_category AS va WHERE vc.iVehClaID=t.iVehClaID AND vt.iVehTypID=t.iVehTypID AND va.iVehCatID=t.iVehCatID AND t.iAllTraID=td.iAllTraID AND td.cAllTraDetOrdDet = ?");
+    $stmt = $mysqli->prepare("SELECT td.iAllTraDetID, td.iAllTraID, CONCAT(vc.cVehClaInf,' ',vc.cVehClaNam) AS vClass, vt.cVehTypInf, va.cVehCatInf, td.cAllTraDetAdjTyp, td.cAllTraDetCarrID FROM tm_allocation_transport_detail AS td, tm_allocation_transport AS t, tm_vehicle_class AS vc, tm_vehicle_type AS vt, tm_vehicle_category AS va WHERE vc.iVehClaID=t.iVehClaID AND vt.iVehTypID=t.iVehTypID AND va.iVehCatID=t.iVehCatID AND t.iAllTraID=td.iAllTraID AND td.cAllTraDetOrdDet = ?");
     $stmt->bind_param('i', $detail_id);
     $stmt->execute();
     $stmt->store_result();
-    $stmt->bind_result($vehicle_code, $vehicle_class, $vehicle_type, $vehicle_category, $vehicle_status, $current_id);
+    $stmt->bind_result($allocation, $vehicle_code, $vehicle_class, $vehicle_type, $vehicle_category, $vehicle_status, $current_id);
     $ship = "";
     if($stmt->num_rows()>1){
         $vehicle = '<td>';
@@ -489,7 +489,7 @@ function ship_char_extreme($detail_id, $mysqli){
             }            
             $order_detail_id ="";
             $vehicle .= '<div class="formSep">'.format($vehicle_code).' - '.$vehicle_class.' / '.$vehicle_type.' / '.$vehicle_category.$status.'</div>';
-            $graphic .= '<div class="formSep"><a style="cursor:pointer;" class="'.$class.' hint--left" data-hint="Reasignar Servicio" data-id="'.$detail_id.'" data-ids="'.$order_detail_id.'" data-current_id="'.$current_id.'" data-current_name="'.$current_name.'"><i class="glyphicon glyphicon-transfer"></i></a></div>';
+            $graphic .= '<div class="formSep"><a style="cursor:pointer;" class="'.$class.' hint--left" data-hint="Reasignar Servicio" data-allocation="'.$allocation.'" data-id="'.$detail_id.'" data-ids="'.$detail_id.'" data-current_id="'.$current_id.'" data-current_name="'.$current_name.'"><i class="glyphicon glyphicon-transfer"></i></a></div>';
         }
         $vehicle .= '</td>';
         $graphic .= '</td>';
@@ -509,7 +509,7 @@ function ship_char_extreme($detail_id, $mysqli){
             $order_detail_id ="";
             $ship .= '<td>'.format($vehicle_code).' - '.$vehicle_class.' / '.$vehicle_type.' / '.$vehicle_category.$status.'</td>'.
                 '<td class="center">'.
-                    '<a style="cursor:pointer;" class="'.$class.' hint--left" data-hint="Reasignar Servicio" data-id="'.$detail_id.'" data-ids="'.$order_detail_id.'" data-current_id="'.$current_id.'" data-current_name="'.$current_name.'"><i class="glyphicon glyphicon-transfer"></i></a>'.
+                    '<a style="cursor:pointer;" class="'.$class.' hint--left" data-hint="Reasignar Servicio" data-allocation="'.$allocation.'" data-id="'.$detail_id.'" data-ids="'.$detail_id.'" data-current_id="'.$current_id.'" data-current_name="'.$current_name.'"><i class="glyphicon glyphicon-transfer"></i></a>'.
                 '</td>';
         }
     }
