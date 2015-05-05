@@ -20,8 +20,8 @@ $(document).ready(function() {
                 $(element).valid();
             });
           }
-          return parseInt(value) > parseInt($min.val());
-        }, "El monto ingresado es menor que la oferta actual.");
+          return parseInt(value) < parseInt($min.val());
+        }, "El monto ingresado es mayor que la oferta actual.");
 });
 
 shipment = {    
@@ -52,6 +52,9 @@ var load = function () {
             offer();
             save_auction();
             save_offer();
+            free();
+            reset();
+            see();
         }        
     });
 };
@@ -112,7 +115,129 @@ var reassign = function(){
         if(_id.length===0){
             $.sticky("INFO<br>[Orden(es) no seleccionada(s).]", {autoclose : 5000, position: "top-right", type: "st-info" });
         }else{
-            $.sticky("ERROR<br>[Las ordenes seleccionadas no pertenecen al mismo cliente.]", {autoclose : 5000, position: "top-right", type: "st-error" });
+            $.sticky("ERROR<br>[No selecciono orden(es).]", {autoclose : 5000, position: "top-right", type: "st-error" });
+        }
+    });
+};
+var see = function(){
+    $(".see_offer").off().on('click', function (e) {
+        e.preventDefault();
+        var _exist = $('input:checkbox:checked.row_sel').map(function () {
+            return $(this).data('exist');
+        }).get();
+        var _id = $('input:checkbox:checked.row_sel').map(function () {
+            return $(this).data('auction');
+        }).get();
+        var _cnt = 0;
+        for(i=0; i<_exist.length; i++){ 
+            if(_exist[i]===0){
+                _cnt++;
+            }
+        }
+        if(_cnt===0){
+            if(_exist.length===1){
+                $('#modal_offer_see').modal('show');
+                $.ajax({
+                    type: "POST",
+                    url: "module/shipment/crud/shipment-auction.php",
+                    data: "action=sdetail&aucid="+_id[0],
+                    success: function (response) {
+                        $("#table_offer tbody").empty();
+                        $("#table_offer tbody").append(response);
+                    }        
+                });
+            }else{
+                $.sticky("WARNING<br>[Porfavor, seleccione una &uacute;nica subasta.]", {autoclose : 5000, position: "top-right", type: "st-warning" });
+            }
+        }else{
+            $.sticky("ERROR<br>[Existe subasta(s) que no han iniciado.]", {autoclose : 5000, position: "top-right", type: "st-error" });
+        }
+    });
+};
+        
+var free = function(){
+    $(".set_free").off().on('click', function (e) {
+        e.preventDefault();
+        var _exist = $('input:checkbox:checked.row_sel').map(function () {
+            return $(this).data('exist');
+        }).get();
+        var _cnt = 0;
+        for(i=0; i<_exist.length; i++){ 
+            if(_exist[i]===0){
+                _cnt++;
+            }
+        }
+        if(_cnt===0){
+            var _id = $('input:checkbox:checked.row_sel').map(function () {
+                return $(this).data('auction');
+            }).get();
+            $.colorbox({
+                initialHeight: '0',
+                initialWidth: '0',
+                href: "#set_free_dialog",
+                inline: true,
+                opacity: '0.3',
+                onComplete: function () {
+                    $('.set_free_yes').off().on('click', function (e) {
+                        e.preventDefault();
+                        $.colorbox.close();
+                        $.ajax({ type: "POST", url: "module/shipment/crud/shipment-auction.php", data: "action=free&id="+ _id,
+                            success: function () {
+                                load(); $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                            }        
+                        });
+                    });
+                    $('.set_free_no').off().on('click', function (e) {
+                        e.preventDefault();
+                        $.colorbox.close();
+                    });
+                }
+            });
+        }else{
+            $.sticky("ERROR<br>[Existe subasta(s) que no han iniciado.]", {autoclose : 5000, position: "top-right", type: "st-error" });
+        }
+    });
+};
+var reset = function(){
+    $(".reset_offer").off().on('click', function (e) {
+        e.preventDefault();
+        var _exist = $('input:checkbox:checked.row_sel').map(function () {
+            return $(this).data('exist');
+        }).get();
+        var _cnt = 0;
+        for(i=0; i<_exist.length; i++){ 
+            if(_exist[i]===0){
+                _cnt++;
+            }
+        }
+        if(_cnt===0){
+            var _id = $('input:checkbox:checked.row_sel').map(function () {
+                return $(this).data('auction');
+            }).get();
+            $.colorbox({
+                initialHeight: '0',
+                initialWidth: '0',
+                href: "#reset_dialog",
+                inline: true,
+                opacity: '0.3',
+                onComplete: function () {
+                    $('.reset_yes').off().on('click', function (e) {
+                        e.preventDefault();
+                        $.colorbox.close();
+                        $.ajax({ type: "POST", url: "module/shipment/crud/shipment-auction.php", data: "action=delete&id="+ _id,
+                            success: function () {
+                                load(); $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                            }        
+                        });
+                    });
+                    $('.reset_no').off().on('click', function (e) {
+                        e.preventDefault();
+                        $.colorbox.close();
+                    });
+                }
+            });
+        }else{
+            $.sticky("ERROR<br>[Existe subasta(s) que no han iniciado.]", {autoclose : 5000, position: "top-right", type: "st-error" });
         }
     });
 };
@@ -245,11 +370,11 @@ var save_offer = function (){
         }).form()){
             var _id = $("#editIdAuction").val();
             var _amount = $("#editOfferAmount").val();
-            var _carrier =
+            var _carrier = $("#userSesionID").val();
             $.ajax({ 
                 type: "POST", 
                 url: "module/shipment/crud/shipment-auction.php", 
-                data: "action=idetail&id="+ _id+"&amount="+ _amount+"&carrier="+ _carrier,
+                data: "action=idetail&aucid="+ _id+"&offer="+ _amount+"&carrier="+ _carrier,
                 success: function () {
                     load();
                     $("#modal_offer").modal("hide"); 

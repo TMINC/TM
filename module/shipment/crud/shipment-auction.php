@@ -35,7 +35,7 @@
                     $auction=char_auction_id($order_id, $order_detail_id, $mysqli);
                     $status_auction=char_auction('cAucSta', $auction, $mysqli);
                     $price_start=char_auction('cAucBasAmo', $auction, $mysqli);
-                    $price_now='0';
+                    $price_now=char_auction_offer($auction, $mysqli);
                     $start=char_auction('cAucStart', $auction, $mysqli);
                     $_start = explode(" ", $start);
                     $date_start=$_start[0];
@@ -64,7 +64,7 @@
                 if($price_now>0){}else{$price_now=$price_start;}
                 $_date_end = explode("-", $date_end);
                 $_hour_end = explode(":", $hour_end);
-                echo '<tr><td><input name="row_sel" type="checkbox" class="row_sel" data-id="'.$order_detail_id.'" data-exist="'.$exist.'"></td>'.
+                echo '<tr><td><input name="row_sel" type="checkbox" class="row_sel" data-id="'.$order_detail_id.'" data-exist="'.$exist.'" data-auction="'.$auction.'"></td>'.
                     '<td>'.format($order_detail_id).$status.$flag.'<br /><span class="help-block" style="font-size:8px;"><b>REF.ORDEN: </b>'.$order_id.'</span></td>'.
                     '<td>'.
                         '<div class="formSep">'.$type.
@@ -77,7 +77,7 @@
                     '<td><div style="float:left;">'.$center_origin.'<br /><span class="help-block" style="font-size:8px;">'.$center_type_origin.'</span></div><a style="cursor:help;float:right;" class="pop_over hint--left hint--info" data-hint="Origen" data-content="'.$order_origin_date.' '.$order_origin_hour.'" title="'.$center_origin.'" data-placement="right"><i class="glyphicon glyphicon-calendar"/></a></td>'.                            
                     '<td><div style="float:left;">'.$center_destination.'<br /><span class="help-block" style="font-size:8px;">'.$center_type_destination.'</span></div><a style="cursor:help;float:right;" class="pop_over hint--left hint--info" data-hint="Destino" data-content="'.$order_destination_date.' '.$order_destination_hour.'" title="'.$center_destination.'" data-placement="right"><i class="glyphicon glyphicon-calendar"/></a></td>'.
                     '<td><p><span class="label label-default"  style="float:right;">PRECIO INICIAL &nbsp;&nbsp;&nbsp; (S/.)</span><br /><span class="help-block" style="float:right;">'.number_format($price_start,2).'</help></p><p><span class="label label-info" style="float:right;">PRECIO SUBASTA (S/.)</span><br /><span class="help-block" style="float:right;">'.number_format($price_now,2).'</span></p></td>'.
-                    '<td class="center">'.
+                    '<td class="center" style="width: 90px;">'.
                         '<a style="cursor:pointer;" class="edit hint--left" data-hint="Administrar Subasta" data-exist="'.$exist.'" data-order="'.$order_id.'" data-order_id="'.$order_detail_id.'" data-id="'.$auction.'" data-price_start="'.$price_start.'" data-price_now="'.$price_now.'" data-date_start="'.$date_start.'" data-date_end="'.$date_end.'" data-hour_start="'.$hour_start.'" data-hour_end="'.$hour_end.'" data-info="'.$info.'" data-participants="'.$participants.'" data-vehicle="'.$vehicle_code.'"><i class="glyphicon glyphicon-edit" /></a>'.
                         '<a style="cursor:pointer;margin-left:10px;" class="offer hint--left" data-hint="Ofertar" data-id="'.$auction.'" data-exist="'.$exist.'" data-price_start="'.$price_start.'" data-price_now="'.$price_now.'"><i class="glyphicon glyphicon-usd" /></a>'.
                         '<a style="cursor:pointer;margin-left:10px;" class="reassign hint--left" data-hint="Asignaci&nacute;n Directa" data-id="'.$order_detail_id.'"><i class="glyphicon glyphicon-transfer" /></a>'.
@@ -106,12 +106,45 @@
             //UPDATE EN ALLOCATION
         }
         if($action=='free'){
-            $mysqli->query("UPDATE tm_auction SET cAucSta='".$free."' WHERE iOrdID='".$order_id."' AND iOrdDetID='".$order_detail_id."'");
+            $auction_id = $_POST['id'];
+            $_id = explode(",", $auction_id);
+            for($i=0; $i< sizeof($_id) ;$i++){
+                $mysqli->query("UPDATE tm_auction SET cAucSta='1' WHERE iAucID='".$_id[$i]."'");
+            }
         }
         if($action=='delete'){
+            $auction_id = $_POST['id'];
             $_id = explode(",", $auction_id);
             for($i=0; $i< sizeof($_id) ;$i++){
                  $mysqli->query("DELETE FROM tm_auction WHERE iAucID='".$_id[$i]."'");
+                 $mysqli->query("DELETE FROM tm_auction_offer WHERE iAucID='".$_id[$i]."'");
+            }
+        }
+        if($action=='idetail'){
+            $auction_id = $_POST['aucid'];
+            $carrier = $_POST['carrier'];
+            $offer = $_POST['offer'];
+            $mysqli->query("INSERT INTO tm_auction_offer (iAucID, iCarID, cAucOffDatHou, cAucOffAmo) VALUES ('".$auction_id."', '".$carrier."', '".date("Y-m-d H:i:s")."', '".$offer."')");
+        }
+        if($action=='sdetail'){
+            $auction_id = $_POST['aucid'];
+            $user_type = $_POST['type'];
+            if ($stmt = $mysqli->prepare("SELECT u.cUseNam, o.cAucOffDatHou, o.cAucOffAmo FROM tm_auction_offer AS o,tm_user AS u WHERE o.iCarID=u.iUseID AND o.iAucID='".$auction_id."' ORDER BY o.cAucOffAmo ASC")){
+                $stmt->execute();
+                $stmt->store_result();
+                $stmt->bind_result($user, $auction_date, $auction_amount);
+                while($row = $stmt->fetch()) { 
+                    echo '<tr>
+                        <td><b>'.$user.'</b><span class="help-block">Oferto a las: '.$auction_date.'</span></td>
+                        <td class="form-group" colspan="2">
+                            <div class="input-group f_success ">
+                                <span class="input-group-addon">S/.</span>
+                                <input class="form-control" type="text" style="text-align: right;" value="'.$auction_amount.'" disabled="">
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                        </td>
+                    </tr>';
+                }
             }
         }
     }

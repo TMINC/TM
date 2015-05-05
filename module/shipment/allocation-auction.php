@@ -30,6 +30,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="javascript:void(0);" class="set_free" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-flag"></i> LIBERAR</a></li>
                             <li><a href="javascript:void(0);" class="see_offer" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-search"></i> VER HISTORIAL DE OFERTAS</a></li>
+                            <li><a href="javascript:void(0);" class="reset_offer" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-refresh"></i> REINICIAR</a></li>
                         </ul>
                     </div>
                 </div>
@@ -44,7 +45,7 @@
                         <th class="center">ORIGEN</th>
                         <th class="center">DESTINO</th>
                         <th class="center">PRECIO</th>
-                        <th class="center" style="width: 120px;">ACCI&Oacute;N</th>
+                        <th class="center" style="width: 90px;">ACCI&Oacute;N</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -131,7 +132,7 @@
             </div>
         </div>
     </div>
-    <!-- Ver Ofertas -->
+    <!-- Hacer Ofertas -->
     <div class="modal" id="modal_offer">
         <div class="modal-dialog">
             <div class="modal-content">        
@@ -175,8 +176,33 @@
                         </table>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer">                    
                     <a href="JavaScript:void(0);" class="btn btn-primary" id="save_offer"><i class="glyphicon glyphicon-saved"></i> REALIZAR OFERTA</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Ver Ofertas -->
+    <div class="modal" id="modal_offer_see">
+        <div class="modal-dialog">
+            <div class="modal-content">        
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">×</button>
+                    <h3><i class="glyphicon glyphicon-file" style="margin-top: 3px;font-size:15px;"></i> OFERTAS ACTUALES</h3>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped table-bordered" id="table_offer">
+                        <thead>
+                            <tr>
+                                <th class="center" style="width: 70%;text-align: center;">TRANSPORTISTA</th>
+                                <th class="center" style="text-align: center;">OFERTA</td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <a href="JavaScript:void(0);" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> SALIR</a>
                 </div>
             </div>
         </div>

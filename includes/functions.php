@@ -653,3 +653,11 @@ function vehicle_char($id, $mysqli){
     $stmt->fetch();
     return $data;
 }
+function char_auction_offer($id, $mysqli){
+    $stmt = $mysqli->prepare("SELECT MIN(cAucOffAmo) FROM tm_auction_offer WHERE iAucID = '".$id."'");
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($data);
+    $stmt->fetch();
+    return $data;
+}

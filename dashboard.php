@@ -91,7 +91,7 @@ include_once 'includes/functions.php';
                         </li>
                         <li class="divider-vertical hidden-sm hidden-xs"></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user_avatar.png" alt="" class="user_avatar"><?php echo htmlentities($_SESSION['username']);?><b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user_avatar.png" alt="" class="user_avatar"><?php echo htmlentities($_SESSION['username']);?><input class="form-control hide" readonly="true" type="text" id="userSesionID" value="<?php echo $_SESSION['user_id'];?>"><b class="caret"></b></a>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <li><a href="./?mod=7">Mi Perfil</a></li>
                                 <li><a href="javascrip:void(0)">Acerca de...</a></li>
@@ -116,6 +116,13 @@ include_once 'includes/functions.php';
                         <div class="tac">
                             <a href="JavaScript:void(0);" class="btn btn-gebo confirm_yes btn-default">S&iacute;</a>
                             <a href="JavaScript:void(0);" class="btn confirm_no btn-default">No</a>
+                        </div>
+                    </div>
+                    <div id="reset_dialog" class="cbox_content">
+                        <div class="sepH_c tac"><strong>Esta seguro de reiniciar el(los) registro(s)?</strong></div>
+                        <div class="tac">
+                            <a href="JavaScript:void(0);" class="btn btn-gebo reset_yes btn-default">S&iacute;</a>
+                            <a href="JavaScript:void(0);" class="btn reset_no btn-default">No</a>
                         </div>
                     </div>
                     <div id="set_free_dialog" class="cbox_content">
