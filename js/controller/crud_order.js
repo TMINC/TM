@@ -71,10 +71,10 @@ var load_detail =  function (id) {
     });
 };
 var date_detail = function (){
-    $('#detailOriginDate').datepicker();
-    $('#detailDestinationDate').datepicker();
+    $('#detailOriginDate').datepicker({format: "yyyy-mm-dd", language: 'es'});
+    $('#detailDestinationDate').datepicker({format: "yyyy-mm-dd", language: 'es'});
     var $dp_start = $('#detailOriginDate'),$dp_end = $('#detailDestinationDate');
-    $dp_start.datepicker({ format: "dd/mm/yyyy" }).off().on('changeDate', function(){
+    $dp_start.datepicker().off().on('changeDate', function(){
         var dateText = $(this).data('date');
         var endDateTextBox = $dp_end.children('input');
         if (endDateTextBox.val() !== '') {
@@ -85,7 +85,7 @@ var date_detail = function (){
         $dp_end.datepicker('setStartDate', dateText);
         $dp_start.datepicker('hide');
     });
-    $dp_end.datepicker({format: "dd/mm/yyyy"}).off().on('changeDate', function(){
+    $dp_end.datepicker().off().on('changeDate', function(){
         var dateText = $(this).data('date');
         var startDateTextBox = $dp_start.children('input');
         if (startDateTextBox.val() !== '') {

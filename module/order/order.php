@@ -319,6 +319,7 @@
     <script src="js/forms/jquery.inputmask.min.js"></script>
     <!-- datepicker -->
     <script src="lib/datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="lib/datepicker/locales/bootstrap-datepicker.es.js"></script>
     <!-- timepicker -->
     <script src="lib/timepicker/js/bootstrap-timepicker.min.js"></script>
     <!-- common functions -->

@@ -7,11 +7,21 @@ $(document).ready(function() {
     $.validator.addMethod(
         "chosen",
         function(value, element) {
-            console.log(element);
             return (value === null ? false : (value.length === 0 ? false : true));
         },
         "Por favor, elige una opción válida."
     );
+    $.validator.addMethod(
+        "greaterThan",
+        function (value, element, param) {
+            var $min = $(param);
+            if (this.settings.onfocusout) {
+            $min.off(".validate-greaterThan").on("blur.validate-greaterThan", function () {
+                $(element).valid();
+            });
+          }
+          return parseInt(value) > parseInt($min.val());
+        }, "El monto ingresado es menor que la oferta actual.");
 });
 
 shipment = {    
@@ -31,15 +41,56 @@ var load = function () {
             $('#dt_maintenance').dataTable().fnDestroy();
             $("#dt_maintenance tbody").append(response);
             table();
+            date_detail();
+            hour_detail();
             unistyle();
             maskinput();
             popover();
             chosen();
             reassign();
+            edit();
+            offer();
+            save_auction();
+            save_offer();
         }        
     });
 };
-
+var date_detail = function (){
+    $('#startAuctionDate').datepicker({format: "yyyy-mm-dd", language: 'es'});
+    $('#endAuctionDate').datepicker({format: "yyyy-mm-dd", language: 'es'});
+    var $dp_start = $('#startAuctionDate'),$dp_end = $('#endAuctionDate');
+    $dp_start.datepicker().off().on('changeDate', function(){
+        var dateText = $(this).data('date');
+        var endDateTextBox = $dp_end.children('input');
+        if (endDateTextBox.val() !== '') {
+            var testStartDate = new Date(dateText);
+            var testEndDate = new Date(endDateTextBox.val());
+            if (testStartDate > testEndDate) { endDateTextBox.val(dateText); }
+        }else{ endDateTextBox.val(dateText); }
+        $dp_end.datepicker('setStartDate', dateText);
+        $dp_start.datepicker('hide');
+    });
+    $dp_end.datepicker().off().on('changeDate', function(){
+        var dateText = $(this).data('date');
+        var startDateTextBox = $dp_start.children('input');
+        if (startDateTextBox.val() !== '') {
+            var testStartDate = new Date(startDateTextBox.val());
+            var testEndDate = new Date(dateText);
+            if (testStartDate > testEndDate) { startDateTextBox.val(dateText); }
+        }else{ startDateTextBox.val(dateText); }
+        $dp_start.datepicker('setEndDate', dateText);
+        $dp_end.datepicker('hide');
+    }); 
+};  
+var hour_detail = function(){
+    $("#editStartAuctionHour, #editEndAuctionHour").timepicker({
+        defaultTime: 'current',
+        minuteStep: 1,
+        disableFocus: true,
+        template: 'dropdown',
+        showMeridian: false
+    });
+};
 var unistyle = function (){
     $(".uni_style").uniform();  
 };
@@ -65,44 +116,150 @@ var reassign = function(){
         }
     });
 };
-
-var save_plan = function (){
-    $("#adjudication_save").off().on('click', function (e) {
+var edit = function (){
+    $(".edit").off().on('click', function (e) {
         e.preventDefault();
-        $("[name='editAdjudicationType']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
-        if($('#validation_adjudication').validate({
+        var _exist = $(this).data('exist');
+        var _id = $(this).data('order');$("#editId").val(_id);
+        var _detail_id = $(this).data('order_id');$("#editDetailId").val(_detail_id);
+        var _carrier_id = $(this).data('participants');
+        var _vehicle = $(this).data('vehicle');
+        $("#editCarrier").empty();
+        $.ajax({
+            type: "POST",
+            async:false,
+            url: "module/master/crud/carrier.php",
+            data: "action=consult&task=dynu&sel="+_vehicle+"&act="+_carrier_id,
+            success: function (data) { $("#editCarrier").append(data); }        
+        });        
+        chosen();
+        $("#editCarrier").trigger("liszt:updated");
+        if(_exist===0){
+            $("#editBaseAmount").val("");
+            $("#editInfo").val("");
+            $("#editStartAuctionDate").val("");
+            $("#editStartAuctionHour").val("");
+            $("#editEndAuctionDate").val("");
+            $("#editEndAuctionHour").val("");
+            $("#editAction").val("insert");
+        }else{
+            var _price_start = $(this).data('price_start');$("#editBaseAmount").val(_price_start);
+            var _info = $(this).data('info');$("#editInfo").val(_info);
+            var _date_start = $(this).data('date_start');$("#editStartAuctionDate").val(_date_start);
+            var _hour_start = $(this).data('hour_start');$("#editStartAuctionHour").val(_hour_start);
+            var _date_end = $(this).data('date_end');$("#editEndAuctionDate").val(_date_end);
+            var _hour_end = $(this).data('hour_end');$("#editEndAuctionHour").val(_hour_end);
+            $("#editAction").val("update");
+        }
+        $('#modal_auction').modal('show');
+    });
+};
+var save_auction = function (){
+    $("#save_auction").off().on('click', function (e) {
+        e.preventDefault();
+        $("[name='editCarrier']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        if($('#validation_auction_form').validate({
             onkeyup: false,
             errorClass: 'error',
             validClass: 'valid',
             rules: {
-                editAdjudicationType: { chosen: true }
+                editCarrier: { chosen: true },
+                editStartAuctionDate: { required: true },
+                editStartAuctionHour: { required: true },
+                editEndAuctionDate: { required: true },
+                editEndAuctionHour: { required: true },
+                editBaseAmount: { required: true, number: true }            
             },
             highlight: function(element) {
                 $(element).closest('.form-group').addClass("f_error");
             },
             unhighlight: function(element) {
-                $(element).closest('.form-group').removeClass("f_error");
+                $(element).closest('.form-group').removeClass("f_error");    
             },
             errorPlacement: function(error, element) {
                 $(element).closest('.form-group').append(error);
             }
         }).form()){
-            $("#adjudication").modal("hide");
-            var _type = $("#editAdjudicationType option:selected").val();
-            var _id = $('input:checkbox:checked.row_sel').map(function () {
-                return $(this).data('id');
-            }).get();
-            if(_type==0){
-                $('#adjudicationDirect').modal('show');
-                $('#editDirectOrderId').val(_id);
-            }else{
-                alert("S");
-            }
+            var _order_id = $("#editId").val();
+            var _order_detail_id = $("#editDetailId").val();
+            var _info = $("#editInfo").val();
+            var _carrier = $("#editCarrier option:selected").val(); 
+            var _date_start = $("#editStartAuctionDate").val();
+            var _hour_start = $("#editStartAuctionHour").val();
+            var _date_end = $("#editEndAuctionDate").val();
+            var _hour_end = $("#editEndAuctionHour").val();
+            var _amount = $("#editBaseAmount").val();
+            var _detail_action = $("#editAction").val();
+            $.ajax({ 
+                type: "POST", 
+                url: "module/shipment/crud/shipment-auction.php", 
+                data: "action="+ _detail_action +"& order_id="+ _order_id+"& order_detail_id="+ _order_detail_id+"& info="+ _info+"& carrier="+ _carrier +"& date_start="+ _date_start+"& hour_start="+ _hour_start+"& date_end="+ _date_end+"& hour_end="+ _hour_end+"& amount="+ _amount,
+                success: function () {
+                    load();
+                    $("#modal_auction").modal("hide"); 
+                    $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                }        
+            });
         }
-        return false;
+        return false;        
     });
 };
-
+var offer = function (){
+    $(".offer").off().on('click', function (e) {
+        e.preventDefault();
+        var _exist= $(this).data('exist');
+        if(_exist===1){
+            $('#modal_offer').modal('show');
+            var _id = $(this).data('id');$("#editIdAuction").val(_id);
+            var _price_initial = $(this).data('price_start');$("#editInitialAmount").val(_price_initial);
+            var _price_now = $(this).data('price_now');$("#editCurrentAmount").val(_price_now);
+            $("#editOfferAmount").val("");
+        }else{
+            $.sticky("ERROR<br>[La subasta no ha sido completada.]", {autoclose : 5000, position: "top-right", type: "st-error" });
+        }
+    });
+};
+var save_offer = function (){
+    $("#save_offer").off().on('click', function (e) {
+        e.preventDefault();
+        if($('#validation_offer_form').validate({
+            onkeyup: false,
+            errorClass: 'error',
+            validClass: 'valid',
+            rules: {
+                editOfferAmount: {
+                    greaterThan: '#editCurrentAmount',
+                    required: true, 
+                    number: true
+                }           
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass("f_error");
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass("f_error");    
+            },
+            errorPlacement: function(error, element) {
+                $(element).closest('.form-group').append(error);
+            }
+        }).form()){
+            var _id = $("#editIdAuction").val();
+            var _amount = $("#editOfferAmount").val();
+            var _carrier =
+            $.ajax({ 
+                type: "POST", 
+                url: "module/shipment/crud/shipment-auction.php", 
+                data: "action=idetail&id="+ _id+"&amount="+ _amount+"&carrier="+ _carrier,
+                success: function () {
+                    load();
+                    $("#modal_offer").modal("hide"); 
+                    $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                }        
+            });
+        }
+        return false;        
+    });
+};
 var table = function () {
     function fnShowHide(iCol) {
         var oTable = $('#dt_maintenance').dataTable();
@@ -110,21 +267,6 @@ var table = function () {
         oTable.fnSetColumnVis( iCol, bVis ? false : true );
     }
     /* Formating function for row details */
-    function fnFormatDetails(order_id){
-        var sOut = '<table class="table table-striped table-bordered dTableR" id="order_detail">';
-        sOut += '<thead><tr><th class="center">ORIGEN</th><th class="center">DESTINO</th><th class="center">VOLUMEN</th><th class="center">PESO</th><th class="center">DISTANCIA</th><th class="center">ACCI&Oacute;N</th></tr></thead><tbody>';
-        $.ajax({
-            type: "POST",
-            url: "module/shipment/crud/shipment.php",
-            async: false,
-            data: "action=detail&order="+ order_id,
-            success: function (response) {
-                sOut += response;                
-            }        
-        });
-        sOut += '</tbody></table>';
-        return sOut;
-    }
     if($('#dt_maintenance').length){
         $('#dt_maintenance').dataTable({
             "sDom": "<'row'<'col-sm-4'l><'col-sm-4 text-right'T><'col-sm-4'f>r>t<'row'<'col-sm-5'i><'col-sm-7'p>>",
@@ -175,18 +317,6 @@ var table = function () {
         });
         $('#dt_maintenance_nav').off().on('click', 'li input', function(){
             fnShowHide($(this).val());
-        });
-        $('#dt_maintenance').off().on('click', 'tbody tr td img', function(){
-            var oTable = $('#dt_maintenance').dataTable();
-            var nTr = $(this).parents('tr')[0];
-            if (oTable.fnIsOpen(nTr)){
-                this.src = "img/details_open.png";
-                oTable.fnClose(nTr);
-            }else{
-                this.src = "img/details_close.png";
-                oTable.fnOpen(nTr, fnFormatDetails($(this).data('id')), 'details');
-                $(".details").css("padding", "0 0 0 36px");
-            }
         });
     }
 };

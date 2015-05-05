@@ -618,3 +618,38 @@ function char_rate($n){
     if($n=='10'){ $rate = '<i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i> <i class="splashy-star_boxed_full"></i>';}
     return $rate;
 }
+function char_auction_id($order_id, $order_detail_id, $mysqli){
+    $stmt = $mysqli->prepare("SELECT iAucID FROM tm_auction WHERE iOrdID = '".$order_id."' AND iOrdDetID = '".$order_detail_id."'");
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($data);
+    $stmt->fetch();
+    return $data;
+}
+function char_auction($campo, $id, $mysqli){
+    $stmt = $mysqli->prepare("SELECT ".$campo." FROM tm_auction WHERE iAucID = '".$id."'");
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($data);
+    $stmt->fetch();
+    return $data;
+}
+function char_auction_exist($order_id, $order_detail_id,$mysqli){
+    if ($stmt = $mysqli->prepare("SELECT * FROM tm_auction WHERE iOrdID = '".$order_id."' AND iOrdDetID = '".$order_detail_id."' LIMIT 1")) {
+        $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->num_rows == 1){
+            return true;
+        }
+    } 
+    return false;
+}
+function vehicle_char($id, $mysqli){
+    $stmt = $mysqli->prepare("SELECT CONCAT(iVehClaID,'-',iVehTypID,'-',iVehCatID) AS dato FROM tm_allocation_transport WHERE iAllTraID = ? LIMIT 1");
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($data);
+    $stmt->fetch();
+    return $data;
+}

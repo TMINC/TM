@@ -21,6 +21,30 @@
                     }
                 }            
             }
+        }else if($exclude=='dynu'){
+            $active = $_POST['act'];
+            $_names = explode("-", $sel);//clase,tipo,cat
+            $_class = $_names[0];
+            $_type = $_names[1];
+            $_cat = $_names[2];
+            $_active = explode(",", $active);
+            //echo 'Clase: '.$_class.' Tipo: '.$_type.' Categoria: '.$_cat;
+            if ($stmt = $mysqli->prepare("SELECT c.iCarID, CONCAT(c.cCarRuc,' - ',c.cCarNam) "
+                    . " FROM tm_vehicle as v "
+                    . " JOIN tm_vehicle_assignation as va ON va.iVehID = v.iVehID"
+                    . " JOIN tm_carrier as c ON c.iCarID = va.iCarID"
+                    . " WHERE v.cVehSta='1' AND v.iVehClaID='".$_class."' AND v.iVehTypID='".$_type."' AND v.iVehCatID='".$_cat."'")){
+                $stmt->execute();
+                $stmt->store_result();
+                $stmt->bind_result($carrier_id, $carrier);
+                while($row = $stmt->fetch()) {
+                    $selected = "";
+                    for($i=0; $i< sizeof($_active) ;$i++){
+                       if($_active[$i]==$carrier_id){$selected = " selected";}
+                    }
+                    echo '<option value="'.$carrier_id.'" '.$selected.'>'.$carrier.'</option>';
+                }            
+            }
         }else if($exclude=='dyn'){
             $_names = explode("-", $sel);//id,clase,tipo,cat
             $_class = $_names[1];

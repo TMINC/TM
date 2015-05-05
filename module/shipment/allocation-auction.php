@@ -29,7 +29,7 @@
                         <button data-toggle="dropdown" class="btn dropdown-toggle btn-default">ACCIONES <span class="caret"></span></button>
                         <ul class="dropdown-menu">
                             <li><a href="javascript:void(0);" class="set_free" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-flag"></i> LIBERAR</a></li>
-                            <li><a href="javascript:void(0);" class="reassign" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-transfer"></i> ASIGNACI&Oacute;N DIRECTA</a></li>
+                            <li><a href="javascript:void(0);" class="see_offer" data-tableid="dt_maintenance"><i class="glyphicon glyphicon-search"></i> VER HISTORIAL DE OFERTAS</a></li>
                         </ul>
                     </div>
                 </div>
@@ -44,41 +44,16 @@
                         <th class="center">ORIGEN</th>
                         <th class="center">DESTINO</th>
                         <th class="center">PRECIO</th>
-                        <th class="center" style="width: 80px;">ACCI&Oacute;N</th>
+                        <th class="center" style="width: 120px;">ACCI&Oacute;N</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
         </div>
     </div>
-    <!-- Modal -->
-    <!-- Adjudication Type-->
-    <div class="modal" id="adjudication">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal">×</button>
-                    <h3><i class="glyphicon glyphicon-tasks" style="margin-top: 3px;font-size:15px;"></i> ADJUDICACI&Oacute;N</h3>
-                </div>
-                <div class="modal-body">
-                    <form id="validation_adjudication">
-                        <table class="table table-bordered" >
-                            <tr>
-                                <td><b>TIPO :</b></td>
-                                <td class="form-group"><select class="form-control chzn_edit" id="editAdjudicationType" name="editAdjudicationType" data-placeholder="SELECCIONE TIPO DE ADJUDICACION..."></select></td>
-                            </tr>
-                        </table>                        
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <a href="JavaScript:void(0);" class="btn btn-default" id="adjudication_close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> CANCELAR</a>
-                    <a href="JavaScript:void(0);" class="btn btn-primary" id="adjudication_save"><i class="glyphicon glyphicon-ok"></i> CONTINUAR</a>
-                </div>
-            </div>
-        </div>
-    </div>
-     <!-- Editar Subasta -->
-      <div class="modal" id="modal_auction">
+    <!-- Modal -->    
+    <!-- Editar Subasta -->
+     <div class="modal" id="modal_auction">
         <div class="modal-dialog">
             <div class="modal-content">        
                 <div class="modal-header">
@@ -89,21 +64,33 @@
                     <form id="validation_auction_form">
                         <table class="table table-bordered">
                             <tr>
-                                <td><b>NRO.ORDEN :</b></td>
-                                <td colspan="2"><input class="form-control" readonly="true" type="text" id="editId"></td>
+                                <td><b>NRO.SERVICIO :</b></td>
+                                <td colspan="2"><input class="form-control hide" readonly="true" type="text" id="editId"><input class="form-control" readonly="true" type="text" id="editDetailId"></td>
                             </tr>
                             <tr>
-                                <td><b>MONTO BASE :</b></td>
-                                <td class="form-group" colspan="2"><input class="form-control" type="text" id="editBaseAmount"></td>
-                            </tr>
-                             <tr>
-                                <td><b>INFO ADICIONAL :</b></td>
-                                <td class="form-group" colspan="2"><input class="form-control" type="text" id="editInfo"></td>
+                                <td><b>PARTICIPANTES&nbsp;:</b></td>
+                                <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editCarrier" name="editCarrier" data-placeholder="SELECCIONE TRANSPORTISTAS..." multiple="" /></td>
                             </tr>
                             <tr>
-                                <td><b>FECHA INICIO:</b></td>
-                                <td class="form-group" style="width: 50%;">
-                                    <div id="StartAuctionDate" class="input-group date">
+                                <td><b>PRECIO INICIAL : </b></td>
+                                <td class="form-group" colspan="2">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">S/.</span>
+                                        <input class="form-control" type="text" style="text-align: right;" id="editBaseAmount" name="editBaseAmount">
+                                        <span class="input-group-addon">.00</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                 <td><b>INFORMACI&Oacute;N :</b></td>
+                                <td class="form-group" colspan="2">
+                                    <textarea rows="2" id="editInfo" name="editInfo" class="form-control autosize"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>FECHA INICIO :</b></td>
+                                <td class="form-group" style="width: 40%;">
+                                    <div id="startAuctionDate" class="input-group date">
                                         <input class="form-control" type="text" readonly="" id="editStartAuctionDate" name="editStartAuctionDate">
                                         <span class="input-group-addon"><i class="splashy-calendar_day_up"></i></span>
                                     </div>
@@ -116,9 +103,9 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><b>FECHA FIN:</b></td>
+                                <td><b>FECHA FIN :</b></td>
                                 <td class="form-group">
-                                    <div id="EndAuctionDate" class="input-group date">
+                                    <div id="endAuctionDate" class="input-group date">
                                         <input class="form-control" type="text" readonly="" id="editEndAuctionDate" name="editEndAuctionDate">
                                         <span class="input-group-addon"><i class="splashy-calendar_day_down"></i></span>
                                     </div>
@@ -130,20 +117,22 @@
                                     </div>
                                 </td>
                             </tr>
+                            <tr class="hide">
+                                <td><b>ACCI&Oacute;N :</b></td>
+                                <td colspan="2"><input class="form-control" type="text" id="editAction"></td>
+                            </tr> 
                         </table>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <a href="JavaScript:void(0);" class="btn btn-default" id="auction_close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> CANCELAR</a>
-                    <a href="JavaScript:void(0);" class="btn btn-primary" id="auction_save"><i class="glyphicon glyphicon-save"></i> GUARDAR</a>
+                    <a href="JavaScript:void(0);" class="btn btn-default" id="close_auction" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> CANCELAR</a>
+                    <a href="JavaScript:void(0);" class="btn btn-primary" id="save_auction"><i class="glyphicon glyphicon-save"></i> GUARDAR</a>
                 </div>
             </div>
         </div>
     </div>
-     
-       <!-- Ver Ofertas -->
-       
-         <div class="modal" id="modal_offer">
+    <!-- Ver Ofertas -->
+    <div class="modal" id="modal_offer">
         <div class="modal-dialog">
             <div class="modal-content">        
                 <div class="modal-header">
@@ -153,32 +142,42 @@
                 <div class="modal-body">
                     <form id="validation_offer_form">
                         <table class="table table-bordered">
-                         <tr>
-                            <td><b>MONTO ACTUAL :</b></td>
-                            <td class="form-group" colspan="2"><input class="form-control" type="text" id="editCurrentAmount" name="editCurrentAmount"></td>
-                        </tr>
-                         <tr>
-                            <td><b>MONTO A OFERTAR :</b></td>
-                            <td class="form-group" colspan="2"><input class="form-control" type="text" id="editOfferAmount" name="editOfferAmount"></td>
-                        </tr>
+                            <tr>
+                                <td><b>MONTO INICIAL :</b><input class="form-control hide" readonly="true" type="text" id="editIdAuction"></td>
+                                <td class="form-group" colspan="2">
+                                    <div class="input-group f_success ">
+                                        <span class="input-group-addon">S/.</span>
+                                        <input class="form-control" type="text" style="text-align: right;" id="editInitialAmount" disabled="">
+                                        <span class="input-group-addon">.00</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                               <td><b>MONTO ACTUAL :</b></td>
+                               <td class="form-group" colspan="2">
+                                   <div class="input-group f_warning">
+                                       <span class="input-group-addon">S/.</span>
+                                       <input class="form-control" type="text" style="text-align: right;" id="editCurrentAmount" disabled="">
+                                       <span class="input-group-addon">.00</span>
+                                   </div>
+                               </td>
+                            </tr>
+                            <tr>
+                                <td><b>MONTO A OFERTAR :</b></td>
+                                <td class="form-group" colspan="2">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">S/.</span>
+                                        <input class="form-control" type="text" style="text-align: right;" id="editOfferAmount" name="editOfferAmount">
+                                        <span class="input-group-addon">.00</span>
+                                    </div>
+                                </td>
+                            </tr>
                         </table>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn btn-primary" id="offer"><i class="glyphicon glyphicon-saved"></i> REALIZAR OFERTA</a>
+                    <a href="JavaScript:void(0);" class="btn btn-primary" id="save_offer"><i class="glyphicon glyphicon-saved"></i> REALIZAR OFERTA</a>
                 </div>
-            </div>
-        </div>
-    </div>
-   
-    <!-- hide elements-->
-    <div class="hide">           
-        <!-- confirmation box -->
-        <div id="confirm_dialog" class="cbox_content">
-            <div class="sepH_c tac"><strong>Esta seguro de eliminar el(los) registro(s)?</strong></div>
-            <div class="tac">
-                <a href="#" class="btn btn-gebo confirm_yes btn-default">S&iacute;</a>
-                <a href="#" class="btn confirm_no btn-default">No</a>
             </div>
         </div>
     </div>
@@ -224,6 +223,7 @@
     <script src="js/forms/jquery.inputmask.min.js"></script>
     <!-- datepicker -->
     <script src="lib/datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="lib/datepicker/locales/bootstrap-datepicker.es.js"></script>
     <!-- timepicker -->
     <script src="lib/timepicker/js/bootstrap-timepicker.min.js"></script>
     <!-- common functions -->

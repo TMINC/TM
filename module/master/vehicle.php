@@ -74,7 +74,7 @@
                             <td><b>TUC :</b></td>
                             <td class="form-group" colspan="2"><input class="form-control" type="text" id="editTuc" name="editTuc"></td>
                         </tr>
-                       <tr>
+                        <tr>
                             <td><b>TIPO :</b></td>
                             <td class="form-group" colspan="2"><select class="form-control chzn_edit" id="editType" name="editType" data-placeholder="SELECCIONE TIPO..." /></td>
                         </tr>
