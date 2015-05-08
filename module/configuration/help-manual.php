@@ -77,7 +77,44 @@
                                 <p>El manejo de este m&oacute;dulo es de nivel general…</p>
                                 <small class="help-block">Administrator TMPanel</small>
                             </blockquote>
-                            <img src="img/manual/nuevo-eliminar.jpg" />
+                             <br>        
+                        <br>        
+                        <br>        
+                        <br>        
+                        <br>       
+                        <h3> Definici&oacute;n </h3><br>
+                        <p>El siguiente manual hace referencia al perfil que permite identificar a cada usuario en el sistema. A trav&eacute;s de &eacute;ste se puede configurar accesos o privilegios dentro del sistema de transporte.</p>
+                        <p>La informaci&oacute;n sobre el perfil del usuario se encuentra en el men&uacute; de usuario ubicado en la parte superior derecha de la pantalla. 
+                        <br>
+                        <br>
+                        <img src="img/manual/perfil_menu.jpg"/>
+                        <br>
+                        <br>
+                        <p>A continuaci&oacute;n se presenta una imagen de la vista de perfil:</p>
+                        <br>
+                         
+                        <h3>Descripci&oacute;n de Pantalla:</h3><br>
+                        <img src="img/manual/perfil_vista.jpg"/>
+                        <br>
+                        <br>
+                        <p>La vista de Perfil cuenta con 7 campos. A continuaci&oacute;n describimos cada uno:</p>
+                        <ul>
+                            <li><b>USUARIO:</b> C&oacute;digo alfanum&eacute;rico que permite identificar de forma &uacute;nica a cada persona que ingresa al sistema. </li>
+                            <li><b>DESCRIPCI&Oacute;N:</b> Explicaci&oacute;n m&aacute;s amplia sobre la persona que se encuentra en el sistema.</li>
+                            <li><b>NOMBRE COMPLETO:</b> Como parte de la informaci&oacute;n personal del usuario, &eacute;ste debe ingresar sus nombres y apellidos completos.</li>
+                            <li><b>CORREO ELECTR&Oacute;NICO:</b> Cuenta de correo electr&oacute;nico que permita contactar con el usuario.</li>
+                            <li><b>CAMBIAR CONTRASEÑA:</b> Existen 2 estados: "Activar" y "Desactivar". Al escoger la opci&oacute;n "Activar" se muestran un campo para introducir la nueva contraseña y otro adicional para repetir la misma, evitando as&iacute; errores de digitaci&oacute;n.</li>
+                                    <br>
+                                    <img src="img/manual/perfil_contraseña-activar.jpg" /> <img src="img/manual/perfil_contraseña-desactivar.jpg" />
+                                    <br>
+                                    <br>
+                                    <img src="img/manual/perfil_contraseña-nueva.jpg" />
+                                    <br>
+                                    <br> 
+                            <li><b>TIPO:</b> Existen 2 tipos: "Particular" o "Gen&eacute;rico". El perfil puede pertenecer a una persona puntualmente o de lo contrario puede llevar el nombre de un cargo o posici&oacute;n de forma gen&eacute;rica. Ejm: Admin.</li>
+                            <li><b>FIRMA:</b> Texto libre no mandatorio que sirve en caso se desee enviar correos.</li>
+                        </ul>
+                        <br>
                         </p>
                     </div>
                     <div class="tab-pane" id="tab_customer">

@@ -207,6 +207,55 @@
             </div>
         </div>
     </div>
+     <!-- Asignación Directa -->
+    <div class="modal" id="modal_adjudication">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">×</button>
+                    <h3><i class="glyphicon glyphicon-tasks" style="margin-top: 3px;font-size:15px;"></i> REASIGNACI&Oacute;N TRANSPORTE</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="validation_adjudication">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><b>NRO.SERVICIO :</b></td>
+                                <td class="form-group"><input class="form-control" readonly="true" type="text" id="editId" name="editId"></td>
+                            </tr>
+                            <tr>
+                                <td><b>SERVICIOS RELACIONADOS :</b></td>
+                                <td class="form-group">
+                                    <input class="form-control hide" readonly="true" type="text" id="editAllocationsID">
+                                    <input class="form-control" readonly="true" type="text" id="editIds" name="editIds">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>PROVEEDOR TRANSPORTE ACTUAL :</b></td>
+                                <td class="form-group">
+                                    <input class="form-control hide" readonly="true" type="text" id="editCarrierCurrentID">
+                                    <input class="form-control" readonly="true" type="text" id="editCarrierCurrent" name="editCarrierCurrent">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>PROVEEDOR TRANSPORTE NUEVO :</b></td>
+                                <td class="form-group"><select class="form-control chzn_edit" id="editCarrierNew" name="editCarrierNew" data-placeholder="SELECCIONE UN PROVEEDOR..." /></td>
+                            </tr>
+                            <tr>
+                                <td><b>MOTIVO :</b></td>
+                                <td class="form-group">
+                                    <textarea rows="2" id="editReason" name="editReason" class="form-control autosize"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </form> 
+                </div>
+                <div class="modal-footer">
+                    <a href="JavaScript:void(0);" class="btn btn-default" id="adjudication_close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> CANCELAR</a>
+                    <a href="JavaScript:void(0);" class="btn btn-primary" id="adjudication_save"><i class="glyphicon glyphicon-save"></i> GUARDAR</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- JQuery Implementation -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate.min.js"></script>

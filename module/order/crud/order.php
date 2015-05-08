@@ -47,11 +47,11 @@
                         '<td>'.$order_id.$status.'</td>'.
                         '<td>'.$customer_name.'</td>'.
                         '<td>'.$type.'</td>'.
-                        '<td>'.$order_volume.' '.$measure_volume.'</td>'.                            
-                        '<td>'.$order_weight.' '.$measure_weight.'</td>'.
-                        '<td>'.$order_distance.' '.$measure_distance.'</td>'.
-                        '<td>'.$measure_price.' '.$order_price.'</td>'.
-                        '<td>'.$measure_real_price.' '.$order_real_price.'</td>'.
+                        '<td style="text-align:right;">'.$order_volume.'&nbsp;'.$measure_volume.'</td>'.                            
+                        '<td style="text-align:right;">'.$order_weight.'&nbsp;'.$measure_weight.'</td>'.
+                        '<td style="text-align:right;">'.$order_distance.'&nbsp;'.$measure_distance.'</td>'.
+                        '<td style="text-align:right;">'.$measure_price.'&nbsp;'.number_format($order_price,2).'</td>'.
+                        '<td style="text-align:right;">'.$measure_real_price.'&nbsp;'.number_format($order_real_price,2).'</td>'.
                         '<td class="center">'.
                             '<a style="cursor:pointer;" class="edit hint--left" data-hint="Editar" data-id="'.$order_id.'" data-type="'.$order_type.'" data-volume="'.$order_volume.'" data-measure_volume="'.$measure_volume_id.'" data-weight="'.$order_weight.'" data-measure_weight="'.$measure_weight_id.'" data-distance="'.$order_distance.'" data-measure_distance="'.$measure_distance_id.'" data-price="'.$order_price.'" data-measure_price="'.$measure_price_id.'" data-real_price="'.$order_real_price.'" data-measure_real_price="'.$measure_real_price_id.'" data-customer="'.$customer_id.'" data-detail="'.$order_detail.'" data-status="'.$order_status.'"><i class="glyphicon glyphicon-edit" /></a>'.
                             '<a style="cursor:pointer;margin-left:20px;" class="detail hint--left" data-hint="Registrar Detalle" data-id="'.$order_id.'" data-type="'.$order_type.'" data-volume="'.$order_volume.'" data-measure_volume="'.$measure_volume_id.'" data-weight="'.$order_weight.'" data-measure_weight="'.$measure_weight_id.'" data-distance="'.$order_distance.'" data-measure_distance="'.$measure_distance_id.'" data-price="'.$order_price.'" data-measure_price="'.$measure_price_id.'" data-real_price="'.$order_real_price.'" data-measure_real_price="'.$measure_real_price_id.'" data-customer="'.$customer_id.'" data-detail="'.$order_detail.'" data-status="'.$order_status.'"><i class="glyphicon glyphicon-pencil" /></a>'.

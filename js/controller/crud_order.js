@@ -249,23 +249,23 @@ var agregar = function(){
             if(i===1){$("#editType").append('<option value="' + i + '">TRANSPORTE FRESCO</option>');}
             if(i===2){$("#editType").append('<option value="' + i + '">TRANSPORTE CONGELADO</option>');}
         } chosen(); $("#editType").trigger("liszt:updated");        
-        $("#editVolume").val("");        
+        $("#editVolume").val("0");        
         $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=2&sel=0",
             success: function (data) { $("#editMeasureVolume").empty();$("#editMeasureVolume").append('<option selected="true"> </option>');$("#editMeasureVolume").append(data); }        
         }); chosen(); $("#editMeasureVolume").trigger("liszt:updated");
-        $("#editWeight").val("");
+        $("#editWeight").val("0");
         $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=3&sel=0",
             success: function (data) { $("#editMeasureWeight").empty();$("#editMeasureWeight").append('<option selected="true" />');$("#editMeasureWeight").append(data); }        
         }); chosen(); $("#editMeasureWeight").trigger("liszt:updated"); 
-        $("#editDistance").val("");
+        $("#editDistance").val("0");
         $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=1&sel=0",
             success: function (data) { $("#editMeasureDistance").empty();$("#editMeasureDistance").append('<option selected="true" />');$("#editMeasureDistance").append(data); }        
         }); chosen(); $("#editMeasureDistance").trigger("liszt:updated");
-        $("#editPrice").val("");
+        $("#editPrice").val("0");
         $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=6&sel=0",
             success: function (data) { $("#editMeasurePrice").empty();$("#editMeasurePrice").append('<option selected="true" />');$("#editMeasurePrice").append(data); }        
         }); chosen(); $("#editMeasurePrice").trigger("liszt:updated");
-        $("#editRealPrice").val("");
+        $("#editRealPrice").val("0");
         $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=6&sel=0",
             success: function (data) { $("#editMeasureRealPrice").empty();$("#editMeasureRealPrice").append('<option selected="true" />');$("#editMeasureRealPrice").append(data); }        
         }); chosen(); $("#editMeasureRealPrice").trigger("liszt:updated");
@@ -602,7 +602,7 @@ var eliminar_detail = function(){
                             url: "module/order/crud/order-detail.php",
                             data: "action=delete&order_detail_id="+_id+"& order_id="+ _order_number,
                             success: function () {
-                                load_detail(_order_number); $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                                load_detail(_order_number); $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-center", type: "st-success" }, "", "modal");
                             }        
                         });
                     });
@@ -682,7 +682,7 @@ var guardar_detail = function(){
             $.ajax({ type: "POST", url: "module/order/crud/order-detail.php", data: "action="+ _detail_action +"& order_id="+ _order_id+"& order_detail_id="+ _order_detail_id+"& origin="+ _origin+"& origin_date="+ _origin_date +"& origin_hour="+ _origin_hour+"& destination="+ _destination+"& destination_date="+ _destination_date+"& destination_hour="+ _destination_hour+"& volume="+ _detail_volume+"& measure_volume="+ _detail_measure_volume+"& weight="+ _detail_weight+"& measure_weight="+ _detail_measure_weight+"& distance="+ _detail_distance+"& measure_distance="+ _detail_measure_distance+"& detail_price="+ _detail_price+"& detail_measure_price="+ _detail_measure_price+"& detail_real_price="+ _detail_real_price+"& detail_measure_real_price="+ _detail_measure_real_price+"& detail_note="+ _detail_note,
                 success: function () {
                     load_detail(_order_id);
-                    $("#modal_detail").modal("hide"); $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                    $("#modal_detail").modal("hide"); $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-center", type: "st-success" }, "", "modal");
                 }        
             });
         }

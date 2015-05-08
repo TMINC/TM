@@ -91,7 +91,7 @@ include_once 'includes/functions.php';
                         </li>
                         <li class="divider-vertical hidden-sm hidden-xs"></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user_avatar.png" alt="" class="user_avatar"><?php echo htmlentities($_SESSION['username']);?><input class="form-control hide" readonly="true" type="text" id="userSesionID" value="<?php echo $_SESSION['user_id'];?>"><b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user_avatar.png" alt="" class="user_avatar"><?php echo htmlentities($_SESSION['username']);?><input class="form-control hide" readonly="true" type="text" id="userSesionID" value="<?php echo $_SESSION['user_id'];?>"><input class="form-control hide" readonly="true" type="text" id="lockuser" value="<?php echo $_SESSION['user'];?>"><b class="caret"></b></a>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <li><a href="./?mod=7">Mi Perfil</a></li>
                                 <li><a href="javascrip:void(0)">Acerca de...</a></li>

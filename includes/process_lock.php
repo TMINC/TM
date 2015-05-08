@@ -40,8 +40,8 @@ if($activity=='1'){
         $stmt->fetch();
         if ($stmt->num_rows == 1) {
             if($user_activity=='0'){
-                echo 'aqui';
                 header('Location: ../includes/logout.php');
+                header('Location: ../index.php');
             }
             exit();
         }

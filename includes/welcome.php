@@ -53,3 +53,7 @@
     <script src="lib/datatables/jquery.dataTables.bootstrap.min.js"></script>
     <!-- datatable functions -->
     <script src="js/pages/tm_datatables.js"></script>
+    <!-- lock screen-->    
+    <script src="js/np/idle-time.js"></script>
+    <script src="js/np/lock-screen.js"></script>
+    <script src="js/np/sha512.js"></script>

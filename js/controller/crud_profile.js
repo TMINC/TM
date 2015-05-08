@@ -48,7 +48,7 @@ var activar = function () {
         if($("#editActive").is(':checked')){_active=1;}else{_active=0;};
         if(_active==1){
             $(".password").addClass("hide");$("#editActive").removeAttr('checked');
-            $("#active_edit").html('<img src="img/gCons/lock.png" alt="Cerrado" /> <span class="act act-warning">Inactivar</span>');
+            $("#active_edit").html('<img src="img/gCons/lock.png" alt="Cerrado" /> <span class="act act-warning">Desactivar</span>');
         }else{
             $(".password").removeClass("hide");$("#editActive").attr('checked','checked');
             $("#active_edit").html('<img src="img/gCons/unlock.png" alt="Abierto" /> <span class="act act-success">Activar</span>');

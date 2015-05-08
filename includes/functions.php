@@ -661,3 +661,12 @@ function char_auction_offer($id, $mysqli){
     $stmt->fetch();
     return $data;
 }
+function char_sum_order($campo, $order, $mysqli){
+    $stmt = $mysqli->prepare("SELECT SUM(".$campo.") FROM tm_order_detail WHERE iOrdID = ?");
+    $stmt->bind_param('s', $order);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($total);
+    $stmt->fetch();
+    return $total;
+}

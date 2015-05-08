@@ -35,6 +35,9 @@ switch($mod){
     case 35: include "module/shipment/process-state-control$page.php"; break;
     case 36: include "module/shipment/process-tracking$page.php"; break;
     
+    case 41: include "module/report/report-service$page.php"; break;
+    case 42: include "module/report/report-price$page.php"; break;
+    
     case 51: include "module/configuration/configuration-profile$page.php"; break;
     case 52: include "module/configuration/configuration-rol$page.php"; break;
     case 53: include "module/configuration/configuration-user$page.php"; break;

@@ -48,6 +48,7 @@ var load = function () {
             popover();
             chosen();
             reassign();
+            reassign_save();
             edit();
             offer();
             save_auction();
@@ -107,16 +108,67 @@ var chosen = function (){
     $(".chzn_edit").chosen();
 };
 var reassign = function(){
-    $(".reassign").off().on('click', function (e) {
+     $(".reassign").off().on('click', function (e) {
         e.preventDefault();
-        var _id = $('input:checkbox:checked.row_sel').map(function () {
-            return $(this).data('id');
-        }).get();
-        if(_id.length===0){
-            $.sticky("INFO<br>[Orden(es) no seleccionada(s).]", {autoclose : 5000, position: "top-right", type: "st-info" });
-        }else{
-            $.sticky("ERROR<br>[No selecciono orden(es).]", {autoclose : 5000, position: "top-right", type: "st-error" });
+        var _id = $(this).data('id');$("#editId").val(_id);
+        var _ids = $(this).data('ids');$("#editIds").val(_ids);
+        var _carrier_current_id = $(this).data('current_id');$("#editCarrierCurrentID").val(_carrier_current_id);
+        var _carrier_current = $(this).data('current_name');$("#editCarrierCurrent").val(_carrier_current);
+        var _allocation = $(this).data('allocation');$("#editAllocationsID").val(_allocation);
+        $("#editReason").val("");
+        
+        $("#editCarrierNew").empty();
+        $.ajax({
+            type: "POST",
+            async:false,
+            url: "module/master/crud/carrier.php",
+            data: "action=consult&task=exclude&sel="+ _carrier_current_id,
+            success: function (data) { $("#editCarrierNew").append('<option selected="true"> </option>'); $("#editCarrierNew").append(data); }        
+        });        
+        chosen();
+        $("#editCarrierNew").trigger("liszt:updated");
+        $("#modal_adjudication").modal("show");
+    });
+};
+var reassign_save = function (){
+    $("#adjudication_save").off().on('click', function (e) {
+        e.preventDefault();
+        $("[name='editCarrierNew']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
+        if($('#validation_adjudication').validate({
+            onkeyup: false,
+            errorClass: 'error',
+            validClass: 'valid',
+            rules: {
+                editCarrierNew: { chosen: true }
+            },
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass("f_error");
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass("f_error");    
+            },
+            errorPlacement: function(error, element) {
+                $(element).closest('.form-group').append(error);
+            }
+        }).form()){
+            var _id = $("#editId").val();
+            var _ids = $("#editIds").val();
+            var _carrier_current_id = $("#editCarrierCurrentID").val();
+            var _carrier_new_id = $("#editCarrierNew option:selected").val();
+            var _reason = $("#editReason").val();
+            var _allocation = $("#editAllocationsID").val();
+            $.ajax({
+                type: "POST",
+                url: "module/shipment/crud/reasigment.php",
+                data: "action=reasigment&id="+_id+"&ids="+_ids+"&current="+_carrier_current_id+"&new="+_carrier_new_id+"&reason="+_reason+"&allocation="+_allocation,
+                success: function () {
+                    $("#modal_adjudication").modal("hide");
+                    $.sticky("INFO<br>[Su solicitud ha sido procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
+                    load();
+                }        
+            });
         }
+        return false;
     });
 };
 var see = function(){

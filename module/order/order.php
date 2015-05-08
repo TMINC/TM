@@ -79,27 +79,27 @@
                 </tr>
                 <tr>
                     <td><b>VOLUMEN :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editVolume" name="editVolume"></td>
+                    <td class="form-group"><input class="form-control" readonly="true" type="text" id="editVolume" name="editVolume"></td>
                     <td class="form-group"><select class="form-control chzn_edit" id="editMeasureVolume" name="editMeasureVolume" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                 </tr>
                  <tr>
                     <td><b>PESO :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editWeight" name="editWeight"></td>
+                    <td class="form-group"><input class="form-control" readonly="true" type="text" id="editWeight" name="editWeight"></td>
                     <td class="form-group"><select class="form-control chzn_edit" id="editMeasureWeight" name="editMeasureWeight" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                 </tr>
                 <tr>
                     <td><b>DISTANCIA :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editDistance" name="editDistance"></td>
+                    <td class="form-group"><input class="form-control" readonly="true" type="text" id="editDistance" name="editDistance"></td>
                     <td class="form-group"><select class="form-control chzn_edit" id="editMeasureDistance" name="editMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                 </tr>
                 <tr>
                     <td><b>COSTO :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editPrice" name="editPrice"></td>
+                    <td class="form-group"><input class="form-control" readonly="true" type="text" id="editPrice" name="editPrice"></td>
                     <td class="form-group"><select class="form-control chzn_edit" id="editMeasurePrice" name="editMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
                 </tr>
                 <tr>
                     <td><b>PRECIO :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editRealPrice" name="editRealPrice"></td>
+                    <td class="form-group"><input class="form-control" readonly="true" type="text" id="editRealPrice" name="editRealPrice"></td>
                     <td class="form-group"><select class="form-control chzn_edit" id="editMeasureRealPrice" name="editMeasureRealPrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
                 </tr>
                 <tr class="hide">
@@ -298,7 +298,7 @@
     <!-- code prettifier -->
     <script src="lib/google-code-prettify/prettify.min.js"></script>
     <!-- sticky messages -->
-    <script src="lib/sticky/sticky.min.js"></script>
+    <script src="lib/sticky/sticky.js"></script>
     <!-- lightbox -->
     <script src="lib/colorbox/jquery.colorbox.min.js"></script>
     <!-- jBreadcrumbs -->

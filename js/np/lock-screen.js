@@ -15,7 +15,7 @@
         this.isLocked = false; e = $.Event('unlock.bs.modal', { relatedTarget: _relatedTarget });
         this.$element.trigger(e);
     };    
-    var timeout=900000; $.idleTimer(timeout);        
+    var timeout=9000000; $.idleTimer(timeout);        
 })(jQuery, window, document);
 
 $(document).ready(function () {
