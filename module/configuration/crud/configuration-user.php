@@ -41,22 +41,24 @@
         $user_type = $_POST['type'];
         $user_Date = (string)getdate();        
         $user_Act = '1';
-        $user_status = $_POST['status'];        
+        $user_status = $_POST['status'];   
+        $user_check = $_POST['estadoc'];
+        
         $user_password = $_POST['password'];
         $random_salt = hash('sha512', uniqid(openssl_random_pseudo_bytes(16), TRUE));
         $password = hash('sha512', $user_password.$random_salt);
         if($action=='update'){
             if($user_status=='1'){
-                $mysqli->query("UPDATE tm_user SET cUseUse='".$user_user."', cUsePas='".$password."', cUseSal='".$random_salt."', cUseNam='".$user_name."', cUseDes='".$user_description."', cUseEma='".$user_mail."', iProID='".$user_profile."', iRolID='".$user_role."', cUseTyp='".$user_type."', cUseSta='".$user_status."', dUseDatUpd='".$user_Date."' WHERE iUseID='".$user_id."'");
+                $mysqli->query("UPDATE tm_user SET cUseUse='".$user_user."', cUsePas='".$password."', cUseSal='".$random_salt."', cUseNam='".$user_name."', cUseDes='".$user_description."', cUseEma='".$user_mail."', iProID='".$user_profile."', iRolID='".$user_role."', cUseTyp='".$user_type."', cUseSta='".$user_check."', dUseDatUpd='".$user_Date."' WHERE iUseID='".$user_id."'");
             }else{
-                $mysqli->query("UPDATE tm_user SET cUseUse='".$user_user."', cUseNam='".$user_name."', cUseDes='".$user_description."', cUseEma='".$user_mail."', iProID='".$user_profile."', iRolID='".$user_role."', cUseTyp='".$user_type."', cUseSta='".$user_status."', dUseDatUpd='".$user_Date."' WHERE iUseID='".$user_id."'");
+                $mysqli->query("UPDATE tm_user SET cUseUse='".$user_user."', cUseNam='".$user_name."', cUseDes='".$user_description."', cUseEma='".$user_mail."', iProID='".$user_profile."', iRolID='".$user_role."', cUseTyp='".$user_type."', cUseSta='".$user_check."', dUseDatUpd='".$user_Date."' WHERE iUseID='".$user_id."'");
             }
         }
         else if($action=='insert')
         {
-            echo "INSERT INTO tm_user (cUseUse, cUsePas, cUseSal, cUseNam, cUseDes, cUseEma, iProID, iRolID,dUseDatCre,cUseTyp,cUseSta) VALUES ('".$user_user."', '".$password."', '".$random_salt."', '".$user_name."', '".$user_description."', '".$user_mail."', '".$user_profile."', '".$user_role."', '".$user_Date."', '".$user_type."', '".$user_status."'";
+            echo "INSERT INTO tm_user (cUseUse, cUsePas, cUseSal, cUseNam, cUseDes, cUseEma, iProID, iRolID,dUseDatCre,cUseTyp,cUseSta) VALUES ('".$user_user."', '".$password."', '".$random_salt."', '".$user_name."', '".$user_description."', '".$user_mail."', '".$user_profile."', '".$user_role."', '".$user_Date."', '".$user_type."', '".$user_check."'";
             
-            $mysqli->query("INSERT INTO tm_user (cUseUse, cUsePas, cUseSal, cUseNam, cUseDes, cUseEma, iProID, iRolID,dUseDatCre,cUseTyp,cUseSta) VALUES ('".$user_user."', '".$password."', '".$random_salt."', '".$user_name."', '".$user_description."', '".$user_mail."', '".$user_profile."', '".$user_role."', '".$user_Date."', '".$user_type."', '".$user_status."')");
+            $mysqli->query("INSERT INTO tm_user (cUseUse, cUsePas, cUseSal, cUseNam, cUseDes, cUseEma, iProID, iRolID,dUseDatCre,cUseTyp,cUseSta) VALUES ('".$user_user."', '".$password."', '".$random_salt."', '".$user_name."', '".$user_description."', '".$user_mail."', '".$user_profile."', '".$user_role."', '".$user_Date."', '".$user_type."', '".$user_check."')");
         }
         else if($action == 'delete')
         {

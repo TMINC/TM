@@ -67,7 +67,9 @@
                 <table class="table table-bordered">
                 <tr>
                     <td><b>ID:</b></td>
-                    <td class="form-group"><input class="form-control" readonly="true" type="text" id="editId" name="editId" disabled="true"></td>
+                    <td class="form-group"><input class="form-control" readonly="true" type="text" id="editId" name="editId" disabled="true">
+                    <input class="EA hide" type="checkbox" id="editActive">
+                    </td>
                 </tr>
                 <tr>
                     <td><b>USUARIO:</b></td>
@@ -77,9 +79,27 @@
                     <td><b>NOMBRE:</b></td>
                     <td class="form-group"><input class="form-control" type="text" id="editName" name="editName"></td>
                 </tr>
-                <tr>
+                <tr class="pwd hide">
                     <td><b>PASSWORD:</b></td>
                     <td class="form-group"><input class="form-control" type="password" id="editPassword" name="editPassword"></td>
+                </tr>
+                <tr class="CheckPass hide">
+                    <td><b>CAMBIAR CONTRASE&Ntilde;A</b></td>
+                    <td><span style="cursor:pointer;" id="active_edit"><img src="img/gCons/unlock.png" alt="Abierto" /> <span class="act act-success">Activar</span></span></td>
+                </tr>
+                <tr>
+                    <td class="form-group hide password"><b>CONTRASE&Ntilde;A</b></td>
+                    <td class="form-group hide password">
+                        <input id="editUserPassword" name="editUserPassword" class="input-xlarge form-control" type="password">
+                        <span class="help-block">Ingrese su contrase&ntilde;a</span>
+                    </td>                    
+                </tr>
+                <tr>
+                    <td class="form-group hide password"><b>REPITA CONTRASE&Ntilde;A</b></td>
+                    <td class="form-group hide password">
+                        <input id="editUserPasswordRepeat" name="editUserPasswordRepeat" class="input-xlarge form-control" type="password">
+                        <span class="help-block">Repita su contrase&ntilde;a</span>
+                    </td>
                 </tr>
                 <tr>
                     <td><b>DESCRIPCI&Oacute;N:</b></td>

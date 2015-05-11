@@ -28,7 +28,7 @@ user = {
                 success: function (data) { $("#editRole").append('<option selected="true"> </option>'); $("#editRole").append(data); }        
             });        
             chosen();
-            $("#editRole").trigger("liszt:updated"); 
+            $("#editRole").trigger("liszt:updated");
         });
     }
 };
@@ -52,10 +52,24 @@ var load = function () {
             editar();
             eliminar();
             guardar();
+            activar();
         }        
     });
 };
-
+var activar = function () {
+    $("#active_edit").off().on('click', function (e) {
+        e.preventDefault();
+        var _active = 0;
+        if($("#editActive").is(':checked')){_active=1;}else{_active=0;};
+        if(_active==1){
+            $(".password").addClass("hide");$("#editActive").removeAttr('checked');
+            $("#active_edit").html('<img src="img/gCons/lock.png" alt="Cerrado" /> <span class="act act-warning">Desactivar</span>');
+        }else{
+            $(".password").removeClass("hide");$("#editActive").attr('checked','checked');
+            $("#active_edit").html('<img src="img/gCons/unlock.png" alt="Abierto" /> <span class="act act-success">Activar</span>');
+        }
+     });
+};
 var unistyle = function (){
     $(".uni_style").uniform();  
 };
@@ -176,6 +190,9 @@ var agregar = function(){
         $('#editType').chosen();
         $("#editType").trigger("liszt:updated");
         
+        $(".CheckPass").addClass('hide');
+        $(".password").removeClass("hide");
+        $("#editActive").attr('checked','checked');
         $("#editStatus").removeAttr('checked');
         $("#editAction").val("insert");        
     });
@@ -222,6 +239,7 @@ var editar = function(){
         chosen();
         $("#editRole").trigger("liszt:updated");  
         
+        $(".CheckPass").removeClass('hide');
         $("#editType").empty();
         //$('#editType').append('<option selected="selected"></option>');
         $('#editType').append('<option value="G" selected>GENERICO</option>');
@@ -294,7 +312,16 @@ var guardar = function () {
                 editUser: { required: true, minlength: 3 },
                 editName: { required: true, minlength: 3 },
                 editPassword: { required: true, minlength: 3 },
-                editEmail: { required: true, minlength: 3, email:true }                
+                editEmail: { required: true, minlength: 3, email:true },
+                editUserPassword: {
+                    required: true,
+                    minlength: 5
+                },
+                editUserPasswordRepeat: {
+                    required: true,
+                    minlength: 5,
+                    equalTo: "#editUserPassword"
+                }
             },
             highlight: function(element) {
                 $(element).closest('.form-group').addClass("f_error");    
@@ -311,22 +338,35 @@ var guardar = function () {
         var _id = $("#editId").val();
         var _user = $("#editUser").val();
         var _name = $("#editName").val();
-        var _password = $("#editPassword").val();
+        //var _password = $("#editPassword").val();
+        var auxp = $("#editPassword").val();
+        var _password="";var _active=0;
+        if($("#editActive").is(':checked')){_active=1;}else{_active=0;};
+        if(_active==1){
+            _password = hex_sha512($("#editUserPassword").val());
+        }
+        else{_password=auxp;}
+        
         var _description = $("#editDescription").val();
         var _mail = $("#editEmail").val();
         var _Pid = $("#editProfile option:selected").val();
         var _Rid = $("#editRole option:selected").val();
         var _Type = $("#editType option:selected").val();
-        var _status = $("#editStatus").is(':checked');
-        var _sta = "0";
+        var _status = $("#editActive").is(':checked');
+        var _sta="0";
         if(_status){_sta="1";}else{_sta="0";}
         var _action = $("#editAction").val();
+        
+        var chk_estado = $("#editStatus").is(':checked');
+        var _chk="";
+        if(chk_estado){_chk="1";}else{_chk="0";}
         $.ajax({
             type: "POST",
             url: "module/configuration/crud/configuration-user.php",
             data: "action="+ _action +"& id="+ _id+"& user="+ _user+"& name="+ _name+
                     "& description="+ _description+"& mail="+ _mail+"& profile="+ _Pid+
-                    "& role="+ _Rid+"& type="+ _Type+"& status="+ _sta+"& password="+ _password,
+                    "& role="+ _Rid+"& type="+ _Type+"& status="+ _sta+"& password="+ _password+
+                    "& estadoc="+_chk,
             success: function () {
                 load();       
                 $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
