@@ -16,9 +16,9 @@
                 $stmt->store_result();
                 $stmt->bind_result($carrier_id, $carrier);
                 while($row = $stmt->fetch()) {
-                    if($sel==$carrier_id){}else{
-                        echo '<option value="'.$carrier_id.'">'.$carrier.'</option>';
-                    }
+                    $selected = "";
+                    if($sel==$carrier_id){$selected = " selected";}else{$selected = "";}
+                    echo '<option value="'.$carrier_id.'" '.$selected.'>'.$carrier.'</option>';
                 }            
             }
         }else if($exclude=='dynu'){

@@ -147,7 +147,7 @@ var agregar = function(){
             type: "POST",
             async:false,
             url: "module/master/crud/carrier.php",
-            data: "action=consult&sel="+ _sel,
+            data: "action=consult&task=exclude&sel="+ _sel,
             success: function (data) { $("#editCarrier").append('<option selected="true"> </option>'); $("#editCarrier").append(data); }        
         });        
         chosen();
@@ -185,7 +185,7 @@ var editar = function(){
             type: "POST",
             async: false,
             url: "module/master/crud/carrier.php",
-            data: "action=consult&sel="+ _carrier,
+            data: "action=consult&task=exclude&sel="+ _carrier,
             success: function (data) { $("#editCarrier").empty();$("#editCarrier").append(data); }        
         });
         chosen();
