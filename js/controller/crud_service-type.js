@@ -3,7 +3,7 @@
  * By: Angel Silva Figueroa
  **/
 $(document).ready(function() {
-    type.dt_maintenance();
+    service.dt_maintenance();
     $.validator.addMethod(
         "chosen",
         function(value, element) {
@@ -13,7 +13,7 @@ $(document).ready(function() {
     );
 });
 
-type = {    
+service = {    
     dt_maintenance: function() {
         load();             
     }
@@ -21,7 +21,7 @@ type = {
 var load = function () {    
     $.ajax({
         type: "POST",
-        url: "module/master/crud/vehicle-type.php",
+        url: "module/master/crud/service-type.php",
         data: "action=select",
         success: function (response) {
             $("#dt_maintenance tbody").empty();
@@ -31,7 +31,7 @@ var load = function () {
             $("#dt_maintenance tbody").append(response);
             table();
             unistyle();
-            maskinput(); 
+            maskinput();
             agregar();
             editar();
             guardar();
@@ -104,7 +104,6 @@ var table = function () {
                     { "sType": "string" },
                     { "sType": "string" },
                     { "sType": "string" },
-                    { "sType": "string" },
                     { "bSortable": false }
                 ],
             "sPaginationType": "bootstrap"
@@ -118,14 +117,8 @@ var agregar = function(){
     $(".add").off().on('click', function (e) {
         e.preventDefault();
         $("#editId").val("");
-        $("#editInfo").val("");
         $("#editName").val("");
-        $("#editType").empty();
-        $("#editType").append('<option selected="true"> </option>');
-        $("#editType").append('<option value="1">R</option>');
-        $("#editType").append('<option value="2">O</option>');
-        chosen();
-        $("#editType").trigger("liszt:updated");
+        $("#editDescription").val("");  
         $("#editStatus").removeAttr('checked');
         $("#editAction").val("insert");        
     });
@@ -133,18 +126,9 @@ var agregar = function(){
 var editar = function(){
     $(".edit").off().on('click', function (e) {
         e.preventDefault();
-        var _id = $(this).data('id'); $("#editId").val(_id);
+        var _id = $(this).data('id'); $("#editId").val(_id); 
         var _name = $(this).data('name'); $("#editName").val(_name);
-        var _info = $(this).data('info'); $("#editInfo").val(_info);
-        $("#editType").empty();
-        var _type = $(this).data('type');var sel='selected';
-        for(i=1; i<4; i++){
-            if(i==_type){sel='selected';}else{sel='';}
-            if(i==1){$("#editType").append('<option value="' + i + '" ' + sel + '>R</option>');}
-            if(i==2){$("#editType").append('<option value="' + i + '" ' + sel + '>O</option>');}
-           }  
-        chosen();
-        $("#editType").trigger("liszt:updated");
+        var _description = $(this).data('description'); $("#editDescription").val(_description);
         var _status = $(this).data('status');
         if(_status=="1"){
             $("#editStatus").attr('checked','checked');
@@ -180,7 +164,7 @@ var eliminar = function () {
                         $.colorbox.close();
                         $.ajax({
                             type: "POST",
-                            url: "module/master/crud/vehicle-type.php",
+                            url: "module/master/crud/service-type.php",
                             data: "action=delete& id="+ _id,
                             success: function () {
                                 load();            
@@ -199,18 +183,17 @@ var eliminar = function () {
 var guardar = function () {
     $("#save").off().on('click', function (e) {
         e.preventDefault();
-        $("[name='editType']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         if($('#validation_form').validate({
             onkeyup: false,
             errorClass: 'error',
             validClass: 'valid',
             rules: {
-                editInfo: { required: true },
                 editName: { required: true },
-                editType: { chosen: true}
+                editDescription: { required: true, minlength: 3 }
+                
             },
             highlight: function(element) {
-                $(element).closest('.form-group').addClass("f_error");
+                $(element).closest('.form-group').addClass("f_error");    
             },
             unhighlight: function(element) {
                 $(element).closest('.form-group').removeClass("f_error");
@@ -219,23 +202,23 @@ var guardar = function () {
                 $(element).closest('.form-group').append(error);
             }
         }).form()){
-            $("#modal").modal("hide");
-            var _id = $("#editId").val();
-            var _info = $("#editInfo").val();
-            var _name = $("#editName").val();
-            var _type = $("#editType option:selected").val();
-            var _status = $("#editStatus").is(':checked');
-            var _action = $("#editAction").val();
-            $.ajax({
-                type: "POST",
-                url: "module/master/crud/vehicle-type.php",
-                data: "action="+ _action +"& id="+ _id+"& info="+ _info +"& name="+ _name +"& type="+ _type+"& status="+ _status,
-                success: function () {
-                    load();      
-                    $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
-                }        
-            });
+           $("#modal").modal("hide");
+        var _id = $("#editId").val();
+        var _name = $("#editName").val();
+        var _description = $("#editDescription").val();
+        var _status = $("#editStatus").is(':checked');
+        var _action = $("#editAction").val();
+        $.ajax({
+            type: "POST",
+            url: "module/master/crud/service-type.php",
+            data: "action="+ _action +"& id="+ _id+"& name="+ _name +"& description="+ _description+"& status="+ _status,
+            success: function () {
+                load();       
+                $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });
+            }        
+        });
         }
         return false;
+        
     });
 };

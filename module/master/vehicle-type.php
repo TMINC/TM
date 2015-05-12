@@ -69,10 +69,6 @@
                             <td class="form-group"><input class="form-control" type="text" id="editName" name="editName"></td>
                         </tr>
                         <tr>
-                            <td><b>DESCRIPCI&Oacute;N :</b></td>
-                            <td class="form-group"><input class="form-control" type="text" id="editDescription" name="editDescription"></td>
-                        </tr>
-                        <tr>
                             <td><b>TIPO :</b></td>
                             <td class="form-group"><select class="form-control chzn_edit" id="editType" name="editType" data-placeholder="SELECCIONE UN TIPO..." /></td>
                         </tr>

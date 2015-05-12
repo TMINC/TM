@@ -15,7 +15,27 @@ $(document).ready(function() {
 
 driver = {    
     dt_maintenance: function() {
-        load();             
+        load();     
+        $("#editType").change(function(){
+           var _val = $('#editType :selected').val();
+           if(_val=="2"){
+               $(".Prov").addClass("hide");
+           }
+           else{$(".Prov").removeClass("hide");}
+           
+        $("#editCarrier").empty();
+        var _sel='0';
+        $.ajax({
+            type: "POST",
+            async:false,
+            url: "module/master/crud/carrier.php",
+            data: "action=consult&task=exclude&sel="+ _sel,
+            success: function (data) { $("#editCarrier").append('<option selected="true"> </option>'); $("#editCarrier").append(data); }        
+        });        
+        chosen();
+        $("#editCarrier").trigger("liszt:updated");
+           
+        });
     }
 };
 var load = function () {    
@@ -141,7 +161,7 @@ var agregar = function(){
         chosen();
         $("#editType").trigger("liszt:updated");
         
-        $("#editCarrier").empty();
+       $("#editCarrier").empty();
         var _sel='0';
         $.ajax({
             type: "POST",
@@ -152,6 +172,7 @@ var agregar = function(){
         });        
         chosen();
         $("#editCarrier").trigger("liszt:updated");
+        
         $("#editStatus").removeAttr('checked');
         $("#editAction").val("insert");        
     });
@@ -180,7 +201,7 @@ var editar = function(){
         chosen();
         $("#editType").trigger("liszt:updated");
         
-        var _carrier = $(this).data('carrier');
+         var _carrier = $(this).data('carrier');
         $.ajax({
             type: "POST",
             async: false,
@@ -246,13 +267,11 @@ var guardar = function () {
     $("#save").off().on('click', function (e) {
         e.preventDefault();
         $("[name='editType']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
-        $("[name='editCarrier']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         if($('#validation_form').validate({
             onkeyup: false,
             errorClass: 'error',
             validClass: 'valid',
             rules: {
-                editCarrier: { required: true },
                 editLicense: { required: true },
                 editFirstName: { required: true },
                 editLastName: { required: true },
@@ -261,8 +280,7 @@ var guardar = function () {
                 editDateBirth: { required: true },
                 editDni: { required: true, number: true },
                 editBloodType: { required: true },
-                editType: { chosen: true },
-                editCarrier: { chosen: true }
+                editType: { chosen: true }
             },
             highlight: function(element) {
                 $(element).closest('.form-group').addClass("f_error");

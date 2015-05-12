@@ -41,6 +41,7 @@ include_once 'functions.php';
                                     <li class="nav-header">Generales</li>
                                     <li id="other-measure"><a href="./?mod=20">&ShortRightArrow; U.Medida</a></li>
                                     <li id="info-route"><a href="./?mod=21">&ShortRightArrow; Ruta(s)</a></li>
+                                    <li id="service-type"><a href="./?mod=22">&ShortRightArrow; Tipo Servicio(s)</a></li>
                                  
                                 </ul>
                             </div>
@@ -55,7 +56,7 @@ include_once 'functions.php';
                         <div class="accordion-body collapse" id="collapseTwo">
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li id="order"><a href="./?mod=22">&ShortRightArrow; Pedido(s)</a></li>
+                                    <li id="order"><a href="./?mod=25">&ShortRightArrow; Pedido(s)</a></li>
                                 </ul>
                             </div>
                         </div>

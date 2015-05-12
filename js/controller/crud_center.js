@@ -110,7 +110,6 @@ var table = function () {
                     { "sType": "string" },
                     { "sType": "string" },
                     { "sType": "string" },
-                    { "sType": "string" },
                     { "bSortable": false }
                 ],
             "sPaginationType": "bootstrap"
@@ -150,18 +149,6 @@ var agregar = function(){
         chosen();
         $("#editCustomer").trigger("liszt:updated");
         
-        $("#editCarrier").empty();
-        var _sel='0';
-        $.ajax({
-            type: "POST",
-            async:false,
-            url: "module/master/crud/carrier.php",
-            data: "action=consult&sel="+ _sel,
-            success: function (data) { $("#editCarrier").append('<option selected="true"> </option>'); $("#editCarrier").append(data); }        
-        });        
-        chosen();
-        $("#editCarrier").trigger("liszt:updated");
-        
         $("#editStatus").removeAttr('checked');
         $("#editAction").val("insert");        
     });
@@ -196,18 +183,7 @@ var editar = function(){
         });
         chosen();
         $("#editCustomer").trigger("liszt:updated");
-        
-         var _carrier = $(this).data('carrier');
-        $.ajax({
-            type: "POST",
-            async: false,
-            url: "module/master/crud/carrier.php",
-            data: "action=consult&sel="+ _carrier,
-            success: function (data) { $("#editCarrier").empty();$("#editCarrier").append(data); }        
-        });
-        chosen();
-        $("#editCarrier").trigger("liszt:updated");
-        
+
         var _status = $(this).data('status');
         if(_status=="1"){
             $("#editStatus").attr('checked','checked');
@@ -264,21 +240,19 @@ var guardar = function () {
         e.preventDefault();
         $("[name='editType']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         $("[name='editCustomer']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
-        $("[name='editCarrier']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         if($('#validation_form').validate({
             onkeyup: false,
             errorClass: 'error',
             validClass: 'valid',
             rules: {
-                editCustomer: { required: true, minlength: 3 },
+                //editCustomer: { required: true, minlength: 3 },
                 editName: { required: true, minlength: 3 },
-                editType: { required: true },
+                //editType: { required: true },
                 editAddress: { required: true, minlength: 3 },
                 editLatitud: { required: true, minlength: 3 },
                 editLongitud: { required: true, minlength: 3 },
                 editType: { chosen: true },
                 editCustomer: { chosen: true },
-                editCarrier: { chosen: true }
                       
             },
             highlight: function(element) {
@@ -299,13 +273,12 @@ var guardar = function () {
             var _latitud = $("#editLatitud").val();
             var _longitud = $("#editLongitud").val();
             var _customer = $("#editCustomer option:selected").val();
-            var _carrier = $("#editCarrier option:selected").val();
             var _status = $("#editStatus").is(':checked');
             var _action = $("#editAction").val();
             $.ajax({
                 type: "POST",
                 url: "module/master/crud/center.php",
-                data: "action="+ _action +"& id="+ _id+"& name="+ _name +"& address="+ _address+"& type="+ _type+"& latitud="+ _latitud+"& longitud="+ _longitud+"& customer="+ _customer+"& carrier="+ _carrier+"& status="+ _status,
+                data: "action="+ _action +"& id="+ _id+"& name="+ _name +"& type="+ _type+"& address="+ _address+"& latitud="+ _latitud+"& longitud="+ _longitud+"& customer="+ _customer+"& status="+ _status,
                 success: function () {
                     load();   
                     $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });

@@ -116,7 +116,7 @@ var agregar = function(){
         $("#editCode").val("");
         $("#editAddress").val("");
         $("#editPhoneName").val("");
-        $("#editEmailName").val("");
+        $("#editWebName").val("");
         $("#editContact").val("");
         $("#editPhoneContact").val("");
         $("#editEmailContact").val("");
@@ -132,7 +132,7 @@ var editar = function(){
         var _code = $(this).data('code'); $("#editCode").val(_code);
         var _address = $(this).data('address'); $("#editAddress").val(_address);
         var _phone_name = $(this).data('phone_name'); $("#editPhoneName").val(_phone_name);
-        var _email_name = $(this).data('email_name'); $("#editEmailName").val(_email_name);
+        var _web_name = $(this).data('web_name'); $("#editWebName").val(_web_name);
         var _contact = $(this).data('contact'); $("#editContact").val(_contact);
         var _phone_contact = $(this).data('phone_contact'); $("#editPhoneContact").val(_phone_contact);
         var _email_contact = $(this).data('email_contact'); $("#editEmailContact").val(_email_contact);
@@ -199,7 +199,7 @@ var guardar = function () {
                 editCode: { required: true, number: true },
                 editAddress: { required: true },
                 editPhoneName: { required: true },
-                editEmailName: { required: true, email: true },
+                editWebName: { required: true, url: true },
                 editContact: { required: true, minlength: 3 },
                 editPhoneContact: { required: true },
                 editEmailContact: { required: true, email: true }
@@ -220,7 +220,7 @@ var guardar = function () {
         var _code = $("#editCode").val();
         var _address = $("#editAddress").val();
         var _phone_name = $("#editPhoneName").val();
-        var _email_name = $("#editEmailName").val();
+        var _web_name = $("#editWebName").val();
         var _contact = $("#editContact").val();
         var _phone_contact = $("#editPhoneContact").val();
         var _email_contact = $("#editEmailContact").val();
@@ -229,7 +229,7 @@ var guardar = function () {
         $.ajax({
             type: "POST",
             url: "module/master/crud/customer.php",
-            data: "action="+ _action +"& id="+ _id+"& name="+ _name +"& code="+ _code+"& address="+ _address+"& phone_name="+ _phone_name+"& email_name="+ _email_name+"& contact="+ _contact+"& phone_contact="+ _phone_contact+"& email_contact="+ _email_contact+"& status="+ _status,
+            data: "action="+ _action +"& id="+ _id+"& name="+ _name +"& code="+ _code+"& address="+ _address+"& phone_name="+ _phone_name+"& web_name="+ _web_name+"& contact="+ _contact+"& phone_contact="+ _phone_contact+"& email_contact="+ _email_contact+"& status="+ _status,
             success: function () {
                 load();    
                 $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });

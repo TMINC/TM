@@ -25,8 +25,9 @@ switch($mod){
     case 19: include "module/master/center$page.php"; break;
     case 20: include "module/master/measure$page.php"; break;
     case 21: include "module/master/route$page.php"; break;
+    case 22: include "module/master/service-type$page.php"; break;
     
-    case 22: include "module/order/order$page.php"; break;
+    case 25: include "module/order/order$page.php"; break;
 
     case 31: include "module/shipment/allocation-service$page.php"; break;
     case 32: include "module/shipment/allocation-reasigment$page.php"; break;

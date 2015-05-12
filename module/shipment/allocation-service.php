@@ -196,7 +196,8 @@
                                     <legend class="hide">Cantidad por Veh&iacute;culo(s)…</legend>
                                     <table id="vehicle_table_number" class="table table-bordered"></table>    
                                 </fieldset>
-                                <a href="JavaScript:void(o);" class="finish btn btn-primary" id="vehicle_save"><i class="glyphicon glyphicon-ok"></i> CONTINUAR</a>                                
+                                <input type="submit" value="&checkmark; FINALIZAR" />
+                                <!--<a href="JavaScript:void(o);" class="finish btn btn-primary" id="vehicle_save"><i class="glyphicon glyphicon-ok"></i> CONTINUAR</a> -->
                             </form>
                         </div>
                     </div>
@@ -226,8 +227,8 @@
                                     <legend class="hide">Cantidad por Veh&iacute;culo(s)…</legend>
                                     <table id="vehicle_table_number_adjudication" class="table table-bordered"></table>    
                                 </fieldset>
-                                <a href="JavaScript:void(o);" class="finish btn btn-primary" id="vehicle_save_trip"><i class="glyphicon glyphicon-ok"></i> GUARDAR</a>
-                            </form>
+                                <input type="submit" value="&checkmark; FINALIZAR" />
+                                <!--<a href="JavaScript:void(o);" class="finish btn btn-primary" id="vehicle_save_trip"><i class="glyphicon glyphicon-ok"></i> GUARDAR</a>-->                            </form>
                         </div>
                     </div>
                 </div>
@@ -312,7 +313,7 @@
     <script src="lib/validation/jquery.validate.min.js"></script>
     <script src="lib/validation/localization/messages_es.js"></script>
     <!-- wizard -->
-    <script src="lib/stepy/js/jquery.stepy.min.js"></script>
+    <script src="lib/stepy/js/jquery.stepy.js"></script>
     <!-- crud functions -->
     <script src="js/controller/crud_allocation-service.js"></script>
     <!-- lock screen-->    

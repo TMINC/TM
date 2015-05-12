@@ -77,8 +77,8 @@
                     <td class="form-group"><input class="form-control" type="text" id="editPhoneName" name="editPhoneName"></td>
                 </tr>
                  <tr>
-                    <td><b>CORREO CLIENTE :</b></td>
-                    <td class="form-group"><input class="form-control" type="text" id="editEmailName" name="editEmailName"></td>
+                     <td><b>P&Aacute;GINA WEB CLIENTE :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editWebName" name="editWebName"></td>
                 </tr>
                  <tr>
                     <td><b>CONTACTO :</b></td>

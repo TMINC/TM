@@ -98,7 +98,7 @@
                     <td><b>TIPO :</b></td>
                     <td class="form-group"><select class="form-control chzn_edit" id="editType" name="editType" data-placeholder="SELECCIONE UN TIPO..." /></td>
                 </tr>
-                <tr>
+                <tr class="Prov hide">
                     <td><b>PROVEEDOR :</b></td>
                     <td class="form-group"><select class="form-control chzn_edit" id="editCarrier" name="editCarrier" data-placeholder="SELECCIONE UNA EMPRESA DE TRANSPORTE..." /></td>
                 </tr>

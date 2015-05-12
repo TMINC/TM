@@ -16,12 +16,13 @@
                 $stmt->store_result();
                 $stmt->bind_result($carrier_id, $carrier);
                 while($row = $stmt->fetch()) {
-                    $selected = "";
                     if($sel==$carrier_id){$selected = " selected";}else{$selected = "";}
-                    echo '<option value="'.$carrier_id.'" '.$selected.'>'.$carrier.'</option>';
+                        echo '<option value="'.$carrier_id.'">'.$carrier.'</option>';
+                    }
                 }            
             }
-        }else if($exclude=='dynu'){
+        }
+        if($exclude=='dynu'){
             $active = $_POST['act'];
             $_names = explode("-", $sel);//clase,tipo,cat
             $_class = $_names[0];
@@ -45,12 +46,17 @@
                     echo '<option value="'.$carrier_id.'" '.$selected.'>'.$carrier.'</option>';
                 }            
             }
-        }else if($exclude=='dyn'){
+        }
+        if($exclude=='dyn'){
             $_names = explode("-", $sel);//id,clase,tipo,cat
             $_class = $_names[1];
             $_type = $_names[2];
             $_cat = $_names[3];
-            //echo 'Clase: '.$_class.' Tipo: '.$_type.' Categoria: '.$_cat;
+            echo "SELECT c.iCarID, CONCAT(c.cCarRuc,' - ',c.cCarNam) "
+                    . " FROM tm_vehicle as v "
+                    . " JOIN tm_vehicle_assignation as va ON va.iVehID = v.iVehID"
+                    . " JOIN tm_carrier as c ON c.iCarID = va.iCarID"
+                    . " WHERE v.cVehSta='1' AND v.iVehClaID='".$_class."' AND v.iVehTypID='".$_type."' AND v.iVehCatID='".$_cat."'";
             if ($stmt = $mysqli->prepare("SELECT c.iCarID, CONCAT(c.cCarRuc,' - ',c.cCarNam) "
                     . " FROM tm_vehicle as v "
                     . " JOIN tm_vehicle_assignation as va ON va.iVehID = v.iVehID"
@@ -64,7 +70,7 @@
                 }            
             }
         }
-    }else{
+    else{
         if($action=='select'){
             echo "SELECT iCarID, cCarNam, cCarAdd, cCarPhoNam, cCarEmaNam, cCarRuc, cCarAge, cCarPhoAge, cCarEmaAge, cCarCon, cCarPhoCon, cCarEmaCon, cCarSta FROM tm_carrier";
             if ($stmt = $mysqli->prepare("SELECT iCarID, cCarNam, cCarAdd, cCarPhoNam, cCarEmaNam, cCarRuc, cCarAge, cCarPhoAge, cCarEmaAge, cCarCon, cCarPhoCon, cCarEmaCon, cCarSta FROM tm_carrier")){

@@ -446,8 +446,9 @@ var vehicle = function(){
 var wizard = function(){
     $('#vehicle_wizard').stepy({
         titleClick : true,
-        nextLabel:      'Siguiente <i class="glyphicon glyphicon-chevron-right"></i>',
-        backLabel:      '<i class="glyphicon glyphicon-chevron-left"></i> Anterior',
+        nextLabel:      'CONTINUAR <i class="glyphicon glyphicon-chevron-right"></i>',
+        backLabel:      '<i class="glyphicon glyphicon-chevron-left"></i> REGRESAR',
+        finishButton : true,
         block  : true,
         errorImage : true,
         validate : true,
@@ -541,8 +542,9 @@ var wizard_titles = function (){
 var wizard_two = function(){
     $('#adjudication_wizard').stepy({
         titleClick : true,
-        nextLabel:      'Siguiente <i class="glyphicon glyphicon-chevron-right"></i>',
-        backLabel:      '<i class="glyphicon glyphicon-chevron-left"></i> Anterior',
+        nextLabel:      'CONTINUAR <i class="glyphicon glyphicon-chevron-right"></i>',
+        backLabel:      '<i class="glyphicon glyphicon-chevron-left"></i> REGRESAR',
+        finishButton : true,
         block  : true,
         errorImage : true,
         validate : true,

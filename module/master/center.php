@@ -17,7 +17,6 @@
                         <li><div class="checkbox"><label class="" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> TIPO</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> DIRECCI&Oacute;N</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> CLIENTE</label></div></li>
-                        <li><div class="checkbox"><label class="" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> PROVEE.</label></div></li>
                         <li><div class="checkbox"><label class="" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> ACCI&Oacute;N</label></div></li>
                     </ul>
                 </div>
@@ -42,7 +41,6 @@
                         <th class="center">TIPO</th>
                         <th class="center">DIRECCI&Oacute;N</th>
                         <th class="center">CLIENTE</th>
-                        <th class="center">PROVEEDOR</th>
                         <th class="center" style="width: 100px;">ACCI&Oacute;N</th>
                     </tr>
                 </thead>
@@ -88,10 +86,6 @@
                 <tr>
                     <td><b>CLIENTE :</b></td>
                     <td class="form-group"><select class="form-control chzn_edit" id="editCustomer" name="editCustomer" data-placeholder="SELECCIONE UNA EMPRESA..." /></td>
-                </tr>
-                <tr>
-                    <td><b>PROVEEDOR :</b></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editCarrier" name="editCarrier" data-placeholder="SELECCIONE UNA EMPRESA..." /></td>
                 </tr>
                 <tr>
                     <td><b>ESTADO :</b></td>

@@ -20,10 +20,10 @@
         }
     }else{
         if($action=='select'){
-            if ($stmt = $mysqli->prepare("SELECT iVehTypID, cVehTypInf, cVehTypNam, cVehTypDes, cVehTypTyp, cVehTypSta FROM tm_vehicle_type")){
+            if ($stmt = $mysqli->prepare("SELECT iVehTypID, cVehTypInf, cVehTypNam, cVehTypTyp, cVehTypSta FROM tm_vehicle_type")){
                 $stmt->execute();
                 $stmt->store_result();
-                $stmt->bind_result($type_id, $type_info, $type_name, $type_description, $type_type, $type_status);
+                $stmt->bind_result($type_id, $type_info, $type_name, $type_type, $type_status);
                 while($row = $stmt->fetch()) {
                     if($type_type=='1'){$type='R';}if($type_type=='2'){$type='O';}
                     if($type_status=='1'){$status='<a class="hint--left hint--success" style="float:right;cursor:pointer;" data-hint="Activo"><i class="glyphicon glyphicon-ok" /></a>';}else{$status='<a class="hint--left hint--error" style="float:right;cursor:pointer;" data-hint="Inactivo"><i class="glyphicon glyphicon-minus" /></a>';}
@@ -41,14 +41,13 @@
            $type_id = $_POST['id'];
            $type_info = $_POST['info'];
            $type_name = $_POST['name'];
-           $type_description = $_POST['description'];
            $type_type = $_POST['type'];
            if($_POST['status']=='true'){$type_status=1;}else{$type_status=0;}
            if($action=='insert'){
-               $mysqli->query("INSERT INTO tm_vehicle_type (cVehTypInf, cVehTypNam, cVehTypDes, cVehTypTyp, cVehTypSta) VALUES ('".$type_info."', '".$type_name."', '".$type_description."', '".$type_type."', '".$type_status."')");
+               $mysqli->query("INSERT INTO tm_vehicle_type (cVehTypInf, cVehTypNam, cVehTypTyp, cVehTypSta) VALUES ('".$type_info."', '".$type_name."', '".$type_type."', '".$type_status."')");
            } 
            if($action=='update'){
-               $mysqli->query("UPDATE tm_vehicle_type SET cVehTypInf='".$type_info."' , cVehTypNam='".$type_name."', cVehTypDes='".$type_description."', cVehTypTyp='".$type_type."', cVehTypSta='".$type_status."' WHERE iVehTypID='".$type_id."'");
+               $mysqli->query("UPDATE tm_vehicle_type SET cVehTypInf='".$type_info."' , cVehTypNam='".$type_name."', cVehTypTyp='".$type_type."', cVehTypSta='".$type_status."' WHERE iVehTypID='".$type_id."'");
            }
            if($action=='delete'){
                $_id = explode(",", $type_id);

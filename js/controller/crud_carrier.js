@@ -115,7 +115,7 @@ var agregar = function(){
         $("#editName").val("");
         $("#editAddress").val("");
         $("#editPhoneName").val("");
-        $("#editEmailName").val("");
+        $("#editWebName").val("");
         $("#editCode").val("");
         $("#editAgent").val("");
         $("#editPhoneAgent").val("");
@@ -134,7 +134,7 @@ var editar = function(){
         var _name = $(this).data('name'); $("#editName").val(_name);
         var _address = $(this).data('address'); $("#editAddress").val(_address);
         var _phone_name = $(this).data('phone_name'); $("#editPhoneName").val(_phone_name);
-        var _email_name = $(this).data('email_name'); $("#editEmailName").val(_email_name);
+        var _web_name = $(this).data('web_name'); $("#editWebName").val(_web_name);
         var _code = $(this).data('code'); $("#editCode").val(_code);
         var _agent = $(this).data('agent'); $("#editAgent").val(_agent);
         var _phone_agent = $(this).data('phone_agent'); $("#editPhoneAgent").val(_phone_agent);
@@ -204,7 +204,7 @@ var guardar = function () {
                 editName: { required: true, minlength: 3 },
                 editAddress: { required: true, minlength: 3 },
                 editPhoneName: { required: true },
-                editEmailName: { required: true, email: true },
+                editWebName: { required: true, url: true},
                 editCode: { required: true, number: true },
                 editAgent: { required: true, minlength: 3 },
                 editPhoneAgent: { required: true },
@@ -228,7 +228,7 @@ var guardar = function () {
         var _name = $("#editName").val();
         var _address = $("#editAddress").val();
         var _phone_name = $("#editPhoneName").val();
-        var _email_name = $("#editEmailName").val();
+        var _web_name = $("#editWebName").val();
         var _code = $("#editCode").val();
         var _agent = $("#editAgent").val();
         var _phone_agent = $("#editPhoneAgent").val();
@@ -241,7 +241,7 @@ var guardar = function () {
         $.ajax({
             type: "POST",
             url: "module/master/crud/carrier.php",
-            data: "action="+ _action +"& id="+ _id+"& name="+ _name+"& address="+ _address+"& phone_name="+ _phone_name+"& email_name="+ _email_name+"& code="+ _code+"& agent="+ _agent+"& phone_agent="+ _phone_agent+"& email_agent="+ _email_agent+"& contact="+ _contact+"& phone_contact="+ _phone_contact+"& email_contact="+ _email_contact+"& status="+ _status,
+            data: "action="+ _action +"& id="+ _id+"& name="+ _name+"& address="+ _address+"& phone_name="+ _phone_name+"& web_name="+ _web_name+"& code="+ _code+"& agent="+ _agent+"& phone_agent="+ _phone_agent+"& email_agent="+ _email_agent+"& contact="+ _contact+"& phone_contact="+ _phone_contact+"& email_contact="+ _email_contact+"& status="+ _status,
             success: function () {
                 load(); 
                 $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });

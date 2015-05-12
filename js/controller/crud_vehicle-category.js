@@ -97,7 +97,6 @@ var table = function () {
                     { "sType": "string" },
                     { "sType": "string" },
                     { "sType": "string" },
-                    { "sType": "string" },
                     { "bSortable": false }
                 ],
             "sPaginationType": "bootstrap"
@@ -118,8 +117,7 @@ var agregar = function(){
         $("#editType").append('<option value="1">R</option>');
         $("#editType").append('<option value="2">O</option>');
         chosen();
-        $("#editType").trigger("liszt:updated");    
-        $("#editDescription").val("");
+        $("#editType").trigger("liszt:updated");
         $("#editStatus").removeAttr('checked');
         $("#editAction").val("insert");        
     });
@@ -130,7 +128,6 @@ var editar = function(){
         var _id = $(this).data('id'); $("#editId").val(_id);
         var _name = $(this).data('name'); $("#editName").val(_name);
         var _info = $(this).data('info'); $("#editInfo").val(_info);
-        var _description = $(this).data('description'); $("#editDescription").val(_description);
         $("#editType").empty();
         var _type = $(this).data('type');var sel='selected';
         for(i=1; i<4; i++){
@@ -201,7 +198,6 @@ var guardar = function () {
             rules: {
                 editInfo: { required: true },
                 editName: { required: true },
-                editDescription: { required: true }
             },
             highlight: function(element) {
                 $(element).closest('.form-group').addClass("f_error");
@@ -217,14 +213,13 @@ var guardar = function () {
         var _id = $("#editId").val();
         var _info = $("#editInfo").val();
         var _name = $("#editName").val();
-        var _description = $("#editDescription").val();
         var _type = $("#editType option:selected").val();
         var _status = $("#editStatus").is(':checked');
         var _action = $("#editAction").val();
         $.ajax({
             type: "POST",
             url: "module/master/crud/vehicle-category.php",
-            data: "action="+ _action +"& id="+ _id+"& info="+ _info +"& name="+ _name +"& description="+ _description+"& type="+ _type+"& status="+ _status,
+            data: "action="+ _action +"& id="+ _id+"& info="+ _info +"& name="+ _name +"& type="+ _type+"& status="+ _status,
             success: function () {
                 load();    
                 $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });

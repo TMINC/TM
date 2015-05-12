@@ -27,6 +27,7 @@
                              <li class="divider"></li>
                              <li><a href="#tab_measure" data-toggle="tab">U.Medida</a></li>
                             <li><a href="#tab_route" data-toggle="tab">Ruta(s)</a></li>
+                            <li><a href="#tab_service-type" data-toggle="tab">Tipo Servicio(s)</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -885,6 +886,84 @@
                     <div class="tab-pane" id="tab_route">
                         <p>
                             <h2>RUTA(S)</h2><br>
+                            <blockquote class="pull-right">
+                                <p>El manejo de este m&oacute;dulo es de nivel general…</p>
+                                <small class="help-block">Administrator TMPanel</small>
+                            </blockquote>
+                            <br>        
+                        <br>        
+                        <br>        
+                        <br>        
+                        <br>       
+                        <h3> Definici&oacute;n </h3><br>
+                        <p>El siguiente manual hace referencia a las diferentes rutas que se recorrer&aacute;n durante el proceso de transporte de carga de un centro a otro. Se nos brindará información referencial sobre el costo y precio de la ruta, la distancia a recorrer y el tiempo estimnado.</p>
+                        <p>El mantenimiento de rutas se encuentra dentro del m&oacute;dulo de Maestros/Generales/Ruta(s). A continuaci&oacute;n se presenta una imagen de la vista al maestro de rutas:</p><br>
+                         
+                        <h3>Descripci&oacute;n de Pantalla:</h3><br>
+                        <img src="img/manual/maestro_ruta-vista.jpg" width="95%"/>
+                        <br>
+                        <p>La tabla mantenimiento de rutas cuenta con 10 columnas de datos. A continuaci&oacute;n describimos cada una:</p>
+                        <ul>
+                            <li><b>Caja Multiselecci&oacute;n:</b> Se presenta en forma de checkbox o caja seleccionadora. Es un elemento de interacci&oacute;n de la interfaz gr&aacute;fica de usuario que permite hacer selecciones m&uacute;ltiples. </li>
+                            <li><b>ID:</b> C&oacute;digo autogenerado por el sistema que identifica de forma &uacute;nica a cada registro</li>
+                            <li><b>NOMBRE:</b> Nombre que sirva de indentificación para la ruta y lo diferencie del resto. El usuario debe ingresar el nombre en la caja de texto.</li>
+                            <li><b>ORIGEN:</b> Se presenta en forma de lista desplegable. El usuario deberá escoger entre las opciones de centros activos que se encuentran dispoonibles en la lista y asiganrlo punto de origen</li>
+                            <li><b>DESTINO:</b> Se presenta en forma de lista desplegable. El usuario deberá escoger entre las opciones de centros activos que se encuentran dispoonibles en la lista y asiganrlo punto de destino</li>
+                            <li><b>DISTANCIA&Iacute;A:</b> A modo de referencia el usuario deber&aacute; ingresar la distancia estimada a recorrer en la caja de texto.</li>
+                            <li><b>TIEMPO:</b> A modo de referencia el usuario deber&aacute; ingresar el tiempo estimado que tomar&aacute; completar dicha ruta en la caja de texto.</li>
+                            <li><b>COSTO:</b> A modo de referencia el usuario deber&aacute; ingresar el costo estimado que implica tomar dicha ruta en la caja de texto.</li>
+                            <li><b>PRECIO:</b> A modo de referencia el usuario deber&aacute; ingresar el precio (costo + margen) estimado que implica tomar dicha ruta en la caja de texto.</li>
+                            <li><b>ACCI&Oacute;N:</b> Se presenta en forma de bot&oacute;n. Al hacer click sobre &eacute;ste, el usuario podr&aacute; editar registro a través de una ventana de edici&oacute;n</li>
+                        </ul>
+                        <br>
+                        <h3> Otros Elementos </h3><br>
+                        <ul>
+                            <li><b>ESTADO:</b> Se presenta en forma de imagen dentro del campo ID. Existen 2 estados activo e inactivo.</li>
+                            <br>
+                            <img src="img/manual/maestro_estado-activo.jpg" /> <img src="img/manual/maestro_estado-inactivo.jpg" />
+                            <br>
+                            <li><b>ACCIONES:</b> Se presenta en forma de bot&oacute;n en la parte superior izquierda. Al hacer click sobre &eacute;ste se depliegan las opciones de NUEVO y ELIMINAR.</li>                            
+                            <img src="img/manual/general_acciones.jpg"/> <img src="img/manual/maestro_acciones.jpg"/>
+                        </ul>
+                        <br>
+                        <h3> Acciones NUEVO/EDITAR/ELIMINAR </h3><br>
+                         <ul>
+                            <li><b>NUEVO:</b> A continucaci&oacute;n se detalla paso a paso el proceso de inserci&oacute;n de un nuevo registro:</li>
+                                    <ol>
+                                        <li>El usuario debe dirigirse al menú ACCIONES ubicado en la parte superior izquierda y elegir la opci&oacute;n NUEVO</li><br>
+                                        <img src="img/manual/maestro_nuevo.jpg" />
+                                        <li>Aparecer&aacute; una ventana para el ingreso de informaci&oacute;n relacionada a la ruta. Una vez ingresado los datos, dar en GUARDAR</li><br>
+                                        <img src="img/manual/maestro_ruta-nuevo.jpg" />
+                                        <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. Se podr&aacute; observar el nuevo registro en la tabla de mantenimiento.</li><br>
+                                        <img src="img/manual/general_solicitud-procesada.jpg" />
+                                    </ol>
+                            <br>
+                            <li><b>EDITAR:</b> A continucaci&oacute;n se detalla paso a paso el proceso de edici&oacute;n de un registro existente:</li>
+                                    <ol>
+                                        <li>El usuario debe dirigirse al bot&oacute;n EDITAR ubicado en la casilla ACCIONES en la tabla de mantenimiento de rutas</li><br>
+                                        <img src="img/manual/maestro_editar.jpg" />
+                                        <li>Aparecer&aacute; una ventana con la informaci&oacute;n relacionada a esa ruta. Los datos que puedan ser cambiados estar&aacute;n disponibles para edici&oacute;n. Una vez realizados los cambios, dar en GUARDAR</li><br>
+                                        <img src="img/manual/maestro_ruta-editar.jpg" />
+                                        <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. Se podr&aacute; observar que el registro en la tabla ha cambiado.</li><br>
+                                        <img src="img/manual/general_solicitud-procesada.jpg" />
+                                    </ol>
+                            <br>
+                            <li><b>ELIMINAR:</b> A continucaci&oacute;n se detalla paso a paso el proceso de eliminaci&oacute;n de un registro existente:</li>
+                                    <ol>
+                                        <li>El usuario debe seleccionar el o los registros que desea eliminar y dirigirse al menú ACCIONES ubicado en la parte superior izquierda. Elegir la opci&oacute;n ELIMINAR</li><br>
+                                        <img src="img/manual/maestro_eliminar.jpg" />
+                                        <li>Aparecer&aacute; un mensaje informando si se está seguro de eliminar el o los registros </li><br>
+                                        <img src="img/manual/maestro_eliminar-confirmacion.jpg" />
+                                        <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. Se podr&aacute; observar que el registro en la tabla de mantenimiento ha desaparecido.</li><br>
+                                        <img src="img/manual/general_solicitud-procesada.jpg" />
+                                    </ol>
+                            <br>
+                        </ul>
+                        </p>
+                    </div>
+                    <div class="tab-pane" id="tab_service-type">
+                        <p>
+                            <h2>Tipo de Servicio(S)</h2><br>
                             <blockquote class="pull-right">
                                 <p>El manejo de este m&oacute;dulo es de nivel general…</p>
                                 <small class="help-block">Administrator TMPanel</small>
