@@ -84,33 +84,21 @@
                     <td class="form-group"><input class="form-control" type="password" id="editPassword" name="editPassword"></td>
                 </tr>
                 <tr class="CheckPass hide">
-                    <td>
-                        <label class="control-label col-sm-2">Cambiar Contrase&ntilde;a</label></td>
-                    <td>
-                        <div class="col-sm-8"><span style="cursor:pointer;" id="active_edit"><img src="img/gCons/unlock.png" alt="Abierto" /> <span class="act act-success">Activar</span></span></div>                        
-                    </div>
-                    </td>
+                    <td><b>CAMBIAR CONTRASE&Ntilde;A</b></td>
+                    <td><span style="cursor:pointer;" id="active_edit"><img src="img/gCons/unlock.png" alt="Abierto" /> <span class="act act-success">Activar</span></span></td>
                 </tr>
                 <tr>
+                    <td class="form-group hide password"><b>CONTRASE&Ntilde;A</b></td>
                     <td class="form-group hide password">
-                        <label class="control-label col-sm-2">Contrase&ntilde;a</label>
-                    </td>
-                    <td class="form-group hide password">
-                        <div class="col-sm-8">
-                            <input id="editUserPassword" name="editUserPassword" class="input-xlarge form-control" type="password">
-                            <span class="help-block">Ingrese su contrase&ntilde;a</span>
-                        </div>
+                        <input id="editUserPassword" name="editUserPassword" class="input-xlarge form-control" type="password">
+                        <span class="help-block">Ingrese su contrase&ntilde;a</span>
                     </td>                    
                 </tr>
                 <tr>
+                    <td class="form-group hide password"><b>REPITA CONTRASE&Ntilde;A</b></td>
                     <td class="form-group hide password">
-                        <label class="control-label col-sm-2">Repita Contrase&ntilde;a</label>
-                    </td>
-                    <td class="form-group hide password">
-                        <div class="col-sm-8">
-                            <input id="editUserPasswordRepeat" name="editUserPasswordRepeat" class="input-xlarge form-control" type="password">
-                            <span class="help-block">Repita su contrase&ntilde;a</span>
-                        </div>
+                        <input id="editUserPasswordRepeat" name="editUserPasswordRepeat" class="input-xlarge form-control" type="password">
+                        <span class="help-block">Repita su contrase&ntilde;a</span>
                     </td>
                 </tr>
                 <tr>
