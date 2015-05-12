@@ -80,27 +80,27 @@
                 <tr>
                     <td><b>VOLUMEN :</b></td>
                     <td class="form-group"><input class="form-control" readonly="true" type="text" id="editVolume" name="editVolume"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureVolume" name="editMeasureVolume" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" disabled="disabled" id="editMeasureVolume" name="editMeasureVolume" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                 </tr>
                  <tr>
                     <td><b>PESO :</b></td>
                     <td class="form-group"><input class="form-control" readonly="true" type="text" id="editWeight" name="editWeight"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureWeight" name="editMeasureWeight" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" disabled="disabled" id="editMeasureWeight" name="editMeasureWeight" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                 </tr>
                 <tr>
                     <td><b>DISTANCIA :</b></td>
                     <td class="form-group"><input class="form-control" readonly="true" type="text" id="editDistance" name="editDistance"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureDistance" name="editMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" disabled="disabled" id="editMeasureDistance" name="editMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                 </tr>
                 <tr>
                     <td><b>COSTO :</b></td>
                     <td class="form-group"><input class="form-control" readonly="true" type="text" id="editPrice" name="editPrice"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasurePrice" name="editMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" disabled="disabled" id="editMeasurePrice" name="editMeasurePrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
                 </tr>
                 <tr>
                     <td><b>PRECIO :</b></td>
                     <td class="form-group"><input class="form-control" readonly="true" type="text" id="editRealPrice" name="editRealPrice"></td>
-                    <td class="form-group"><select class="form-control chzn_edit" id="editMeasureRealPrice" name="editMeasureRealPrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
+                    <td class="form-group"><select class="form-control chzn_edit" disabled="disabled" id="editMeasureRealPrice" name="editMeasureRealPrice" data-placeholder="SELECCIONE UNA MONEDA..." /></td>
                 </tr>
                 <tr class="hide">
                     <td><b>ESTADO :</b></td>
@@ -238,27 +238,27 @@
                             <tr>
                                 <td><b>VOLUMEN :</b></td>
                                 <td class="form-group"><input class="form-control" type="text" id="editDetailVolume" name="editDetailVolume"></td>
-                                <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasureVolume" name="editDetailMeasureVolume" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                                <td class="form-group"><select class="form-control chzn_edit" disabled="disabled" id="editDetailMeasureVolume" name="editDetailMeasureVolume" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                             </tr>
                             <tr>
                                 <td><b>PESO :</b></td>
                                 <td class="form-group"><input class="form-control" type="text" id="editDetailWeight" name="editDetailWeight"></td>
-                                <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasureWeight" name="editDetailMeasureWeight" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                                <td class="form-group"><select class="form-control chzn_edit" disabled="disabled" id="editDetailMeasureWeight" name="editDetailMeasureWeight" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                             </tr>
                             <tr>
                                 <td><b>DISTANCIA :</b></td>
                                 <td class="form-group"><input class="form-control" type="text" id="editDetailDistance" name="editDetailDistance"></td>
-                                <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasureDistance" name="editDetailMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                                <td class="form-group"><select class="form-control chzn_edit" disabled="disabled" id="editDetailMeasureDistance" name="editDetailMeasureDistance" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                             </tr>
                             <tr>
                                 <td><b>COSTO :</b></td>
                                 <td class="form-group"><input class="form-control" type="text" id="editDetailPrice" name="editDetailPrice"></td>
-                                <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasurePrice" name="editDetailMeasurePrice" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                                <td class="form-group"><select class="form-control chzn_edit" disabled="disabled" id="editDetailMeasurePrice" name="editDetailMeasurePrice" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                             </tr>
                             <tr>
                                 <td><b>PRECIO :</b></td>
                                 <td class="form-group"><input class="form-control" type="text" id="editDetailRealPrice" name="editDetailRealPrice"></td>
-                                <td class="form-group"><select class="form-control chzn_edit" id="editDetailMeasureRealPrice" name="editDetailMeasureRealPrice" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
+                                <td class="form-group"><select class="form-control chzn_edit" disabled="disabled" id="editDetailMeasureRealPrice" name="editDetailMeasureRealPrice" data-placeholder="SELECCIONE U.M. DISTANCIA..." /></td>
                             </tr>
                             <tr>
                                 <td><b>NOTA :</b></td>

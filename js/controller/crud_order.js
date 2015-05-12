@@ -250,23 +250,23 @@ var agregar = function(){
             if(i===2){$("#editType").append('<option value="' + i + '">TRANSPORTE CONGELADO</option>');}
         } chosen(); $("#editType").trigger("liszt:updated");        
         $("#editVolume").val("0");        
-        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=2&sel=0",
+        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=2&sel=1",
             success: function (data) { $("#editMeasureVolume").empty();$("#editMeasureVolume").append('<option selected="true"> </option>');$("#editMeasureVolume").append(data); }        
         }); chosen(); $("#editMeasureVolume").trigger("liszt:updated");
         $("#editWeight").val("0");
-        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=3&sel=0",
+        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=3&sel=2",
             success: function (data) { $("#editMeasureWeight").empty();$("#editMeasureWeight").append('<option selected="true" />');$("#editMeasureWeight").append(data); }        
         }); chosen(); $("#editMeasureWeight").trigger("liszt:updated"); 
         $("#editDistance").val("0");
-        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=1&sel=0",
+        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=1&sel=4",
             success: function (data) { $("#editMeasureDistance").empty();$("#editMeasureDistance").append('<option selected="true" />');$("#editMeasureDistance").append(data); }        
         }); chosen(); $("#editMeasureDistance").trigger("liszt:updated");
         $("#editPrice").val("0");
-        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=6&sel=0",
+        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=6&sel=3",
             success: function (data) { $("#editMeasurePrice").empty();$("#editMeasurePrice").append('<option selected="true" />');$("#editMeasurePrice").append(data); }        
         }); chosen(); $("#editMeasurePrice").trigger("liszt:updated");
         $("#editRealPrice").val("0");
-        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=6&sel=0",
+        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=6&sel=3",
             success: function (data) { $("#editMeasureRealPrice").empty();$("#editMeasureRealPrice").append('<option selected="true" />');$("#editMeasureRealPrice").append(data); }        
         }); chosen(); $("#editMeasureRealPrice").trigger("liszt:updated");
         $.ajax({ type: "POST", async:false, url: "module/master/crud/customer.php", data: "action=consult&sel=0",
@@ -500,23 +500,23 @@ var agregar_detail = function(){
             success: function (data) { $("#editDetailDestination").empty();$("#editDetailDestination").append('<option selected="true"> </option>');$("#editDetailDestination").append(data); }        
         }); chosen(); $("#editDetailDestination").trigger("liszt:updated");        
         $("#editDetailVolume").val("");        
-        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=2&sel=0",
+        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=2&sel=1",
             success: function (data) { $("#editDetailMeasureVolume").empty();$("#editDetailMeasureVolume").append('<option selected="true"> </option>');$("#editDetailMeasureVolume").append(data); }        
         }); chosen(); $("#editDetailMeasureVolume").trigger("liszt:updated");
         $("#editDetailWeight").val("");
-        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=3&sel=0",
+        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=3&sel=2",
             success: function (data) { $("#editDetailMeasureWeight").empty();$("#editDetailMeasureWeight").append('<option selected="true"> </option>');$("#editDetailMeasureWeight").append(data); }        
         }); chosen(); $("#editDetailMeasureWeight").trigger("liszt:updated"); 
         $("#editDetailDistance").val("");
-        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=1&sel=0",
+        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=1&sel=4",
             success: function (data) { $("#editDetailMeasureDistance").empty();$("#editDetailMeasureDistance").append('<option selected="true"> </option>');$("#editDetailMeasureDistance").append(data); }        
         }); chosen(); $("#editDetailMeasureDistance").trigger("liszt:updated");
         $("#editDetailPrice").val("");
-        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=6&sel=0",
+        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=6&sel=3",
             success: function (data) { $("#editDetailMeasurePrice").empty();$("#editDetailMeasurePrice").append('<option selected="true"> </option>');$("#editDetailMeasurePrice").append(data); }        
         }); chosen(); $("#editDetailMeasurePrice").trigger("liszt:updated");        
         $("#editDetailRealPrice").val("");
-        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=6&sel=0",
+        $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=6&sel=3",
             success: function (data) { $("#editDetailMeasureRealPrice").empty();$("#editDetailMeasureRealPrice").append('<option selected="true"> </option>');$("#editDetailMeasureRealPrice").append(data); }        
         }); chosen(); $("#editDetailMeasureRealPrice").trigger("liszt:updated");
         $("#editDetailOriginDate").val("");

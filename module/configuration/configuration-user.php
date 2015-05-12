@@ -38,7 +38,7 @@
             <table class="table table-striped table-bordered dTableR" id="dt_maintenance">
                 <thead>
                     <tr>
-                        <th></th>
+                        <th style="width: 20px;"></th>
                         <th class="center">USUARIO</th>
                         <th class="center">NOMBRE</th>
                         <th class="center">DESCRIPCION</th>
