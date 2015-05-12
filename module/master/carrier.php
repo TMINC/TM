@@ -38,7 +38,7 @@
                         <th class="center" style="width: 120px;">ID</th>
                         <th class="center">RAZ&Oacute;N SOCIAL</th>
                         <th class="center">RUC</th>
-                        <th class="center">REPRESENTANTE LEGAL</th>
+                        <th class="center">REPRESENTANTE</th>
                         <th class="center">CONTACTO</th>
                         <th class="center" style="width: 100px;">ACCI&Oacute;N</th>
                     </tr>

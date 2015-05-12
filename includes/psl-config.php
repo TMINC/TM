@@ -15,7 +15,7 @@
  **/
 define("HOST", "localhost"); 			// The host you want to connect to. 
 define("USER", "root"); 			// The database username. 
-define("PASSWORD", "root");                         // The database password. 
+define("PASSWORD", "");                         // The database password. 
 define("DATABASE", "transportation_management");// The database name.
 
 /**
