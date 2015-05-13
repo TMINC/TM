@@ -117,22 +117,23 @@
             }
         } 
         else if($option=='4'){
-                if ($stmt = $mysqli->prepare("SELECT at.iVehClaID, CONCAT(vc.cVehClaInf,'-',vc.cVehClaNam),at.iVehTypID,at.iVehCatID "
-                        . "FROM tm_allocation_transport as at "
-                        . "JOIN tm_vehicle_class as vc ON vc.iVehClaID=at.iVehClaID "
-                        . "JOIN tm_vehicle_type as vt ON vt.iVehTypID=at.iVehTypID "
-                        . "JOIN tm_vehicle_category as vca ON vca.iVehCatID=at.iVehCatID "
-                        . " WHERE at.iAllTraStaVeh in (0,2) AND vc.cVehClaSta='1'")){
-                    $stmt->execute();
-                    $stmt->store_result();
-                    $stmt->bind_result($vehcla_id, $vehcla_dsc,$vehtyp_id,$vehcat_id);
-                    $i=0;
-                    while($row = $stmt->fetch()) {
-                        $veh = get_vehicles_details_adjudication($i,$vehcla_id,$vehtyp_id,$vehcat_id,$mysqli);
-                        echo '<optgroup label="'.$vehcla_dsc.'" >'.$veh.'</optgroup>';                        
-                        $i++;
-                    }            
-                }
+            $order_id = $_POST['id']; 
+            if ($stmt = $mysqli->prepare("SELECT at.iVehClaID, CONCAT(vc.cVehClaInf,'-',vc.cVehClaNam),at.iVehTypID,at.iVehCatID "
+                    . "FROM tm_allocation_transport as at "
+                    . "JOIN tm_vehicle_class as vc ON vc.iVehClaID=at.iVehClaID "
+                    . "JOIN tm_vehicle_type as vt ON vt.iVehTypID=at.iVehTypID "
+                    . "JOIN tm_vehicle_category as vca ON vca.iVehCatID=at.iVehCatID "
+                    . " WHERE at.iAllTraStaVeh in (0,2) AND vc.cVehClaSta='1' AND at.cAllTraOrd in ('".$order_id."')")){
+                $stmt->execute();
+                $stmt->store_result();
+                $stmt->bind_result($vehcla_id, $vehcla_dsc,$vehtyp_id,$vehcat_id);
+                $i=0;
+                while($row = $stmt->fetch()) {
+                    $veh = get_vehicles_details_adjudication($i,$vehcla_id,$vehtyp_id,$vehcat_id,$mysqli);
+                    echo '<optgroup label="'.$vehcla_dsc.'" >'.$veh.'</optgroup>';                        
+                    $i++;
+                }            
+            }    
         }
     }
     else if($action == 'saveAllocTransp'){

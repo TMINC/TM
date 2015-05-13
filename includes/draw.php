@@ -27,10 +27,10 @@ $action = $_POST['action'];
     }
     if($action=='drawAdjudication'){
         $names = $_POST['name'];
-        $_names = explode(",", $names);
+        $_names = array_unique(explode(",", $names));
         $values = $_POST['value'];
-        $_values = explode(",", $values);
-        $a_values = explode("-", $values);
+        $_values = array_unique(explode(",", $values));
+        $a_values = array_unique(explode("-", $values));
         $stmt = $mysqli->prepare("SELECT iVehClaID, CONCAT(cVehClaInf,'-',cVehClaNam) FROM tm_vehicle_class WHERE cVehClaSta='1'");
         $class_id = $a_values[1];
         for($i=0; $i< sizeof($_values) ;$i++){

@@ -102,6 +102,7 @@ var hour_detail = function(){
     });
 };
 var multiselectable = function(){
+    $('#vehicle_select').multiSelect('deselect_all');
     if($('#vehicle_select').length) {
         $('#vehicle_select').multiSelect({
             selectableHeader: '<div class="search-header"><input type="text" class="form-control" id="ms-search" autocomplete="off" placeholder="Ingrese t&eacute;rmino de b&uacute;squeda.."></div>',
@@ -532,7 +533,7 @@ var save_transport_allocation_detail = function(){
     
 };
 var wizard_titles = function (){
-    $('.stepy-titles').each(function(){
+    $('.stepy-header').each(function(){
         $(this).children('li').each(function(index){
             var myIndex = index + 1;
             $(this).append('<span class="stepNb">'+myIndex+'</span>');
@@ -540,6 +541,7 @@ var wizard_titles = function (){
     });
 };
 var wizard_two = function(){
+    $('#adjudication_wizard').stepy('step');
     $('#adjudication_wizard').stepy({
         titleClick : true,
         nextLabel:      'CONTINUAR <i class="glyphicon glyphicon-chevron-right"></i>',
@@ -555,9 +557,7 @@ var wizard_two = function(){
             save_transport_allocation_detail();
             $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-center", type: "st-success"}, "", "modal");
             $("#adjudication").modal('hide');
-            plan_reload();
-            $('#adjudication_wizard').stepy('destroy');
-            wizard_two();            
+            plan_reload();         
             return false;
         }
     });
@@ -586,6 +586,7 @@ var vehicle_table_number = function (){
     var sOut = "";
     var names =  [];
     var values = [];
+    $("#vehicle_table_number").empty();
     $("#vehicle_select option:selected").each(function() {   
         values.push($(this).val().toString());
         names.push($(this).text().toString()); 
@@ -648,6 +649,7 @@ var plan_trip_delete = function (){
     });   
 };
 var multiselectable_trip = function(){
+    $('#vehicle_select_adjudication').multiSelect('deselect_all');
     if($('#vehicle_select_adjudication').length) {
         $('#vehicle_select_adjudication').multiSelect({
             selectableHeader: '<div class="search-header"><input type="text" class="form-control" id="ms-search_adjudication" autocomplete="off" placeholder="Ingrese t&eacute;rmino de b&uacute;squeda.."></div>',
@@ -665,13 +667,15 @@ var multiselectable_trip = function(){
     }
 };
 var load_vehicle_trip = function(){
-   $.ajax({
+    var order_id = $("#editPlanOrderId").val();
+    $.ajax({
         type: "POST",
         async: false,
         url: "module/shipment/crud/shipment-detail.php",
-        data: "action=detail&option=4",
+        data: "action=detail&option=4&id="+order_id,
         success: function (data) {
-           $("#vehicle_select_adjudication").append(data);                
+            $("#vehicle_select_adjudication").empty();  
+            $("#vehicle_select_adjudication").append(data);                
         }        
     });
 };
@@ -679,6 +683,7 @@ var vehicle_table_number_two = function (){
     var sOut = "";
     var names =  [];
     var values = [];
+    $("#vehicle_table_number_adjudication").empty();
     $("#vehicle_select_adjudication option:selected").each(function() {			
         values.push($(this).val().toString());
         names.push($(this).text().toString());	
