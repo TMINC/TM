@@ -9,7 +9,7 @@
      
     $action = $_POST['action'];
     if($action=='select'){
-        if ($stmt = $mysqli->prepare("SELECT atd.iAllTraID, d.iOrdDetID, d.cOrdDetFla, o.iOrdID, o.cOrdSta, o.iOrdTyp, d.iCenIDOri, d.cOrdColDat, d.cOrdColHou, d.iCenIDDes, d.cOrdArrDat, d.cOrdArrHou, d.cOrdVol, d.iMeaIDVol, d.cOrdWei, d.iMeaIDWei, d.cOrdDis, d.iMeaIDDis, d.cOrdDetNot, atd.cAllTraDetCarrID FROM tm_order_detail AS d, tm_order AS o, tm_allocation_transport_detail AS atd WHERE d.iOrdID=o.iOrdID AND atd.cAllTraDetOrdDet=d.iOrdDetID AND atd.cAllTraDetAdjTyp='1'")){
+        if ($stmt = $mysqli->prepare("SELECT atd.iAllTraID, d.iOrdDetID, d.cOrdDetFla, o.iOrdID, o.cOrdSta, o.iSerTypID, d.iCenIDOri, d.cOrdColDat, d.cOrdColHou, d.iCenIDDes, d.cOrdArrDat, d.cOrdArrHou, d.cOrdVol, d.iMeaIDVol, d.cOrdWei, d.iMeaIDWei, d.cOrdDis, d.iMeaIDDis, d.cOrdDetNot, atd.cAllTraDetCarrID FROM tm_order_detail AS d, tm_order AS o, tm_allocation_transport_detail AS atd WHERE d.iOrdID=o.iOrdID AND atd.cAllTraDetOrdDet=d.iOrdDetID AND atd.cAllTraDetAdjTyp='1'")){
             $stmt->execute();
             $stmt->store_result();
             $stmt->bind_result($allocation_id, $order_detail_id, $order_detail_flag, $order_id, $order_status, $order_type, $center_origin_id, $order_origin_date, $order_origin_hour, $center_destination_id, $order_destination_date, $order_destination_hour, $order_volume, $measure_volume_id, $order_weight, $measure_weight_id, $order_distance, $measure_distance_id, $order_note, $participants);

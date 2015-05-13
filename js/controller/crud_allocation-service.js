@@ -556,6 +556,8 @@ var wizard_two = function(){
             $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-center", type: "st-success"}, "", "modal");
             $("#adjudication").modal('hide');
             plan_reload();
+            $('#adjudication_wizard').stepy('destroy');
+            wizard_two();            
             return false;
         }
     });

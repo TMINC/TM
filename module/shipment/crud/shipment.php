@@ -23,7 +23,7 @@
         if($action=='select'){
             $option = $_POST['option'];
             if($option=='0'){
-                if ($stmt = $mysqli->prepare("SELECT iOrdID, iOrdTyp, iCusID, cOrdVol, iMeaIDVol, cOrdWei, iMeaIDWei, cOrdDis, iMeaIDDis, cOrdPri, iMeaIDPri, cOrdReaPri, iMeaIDReaPri, cOrdDet, cOrdSta FROM tm_order WHERE cOrdSta>'1'")){
+                if ($stmt = $mysqli->prepare("SELECT iOrdID, iSerTypID, iCusID, cOrdVol, iMeaIDVol, cOrdWei, iMeaIDWei, cOrdDis, iMeaIDDis, cOrdPri, iMeaIDPri, cOrdReaPri, iMeaIDReaPri, cOrdDet, cOrdSta FROM tm_order WHERE cOrdSta>'1'")){
                     $stmt->execute();
                     $stmt->store_result();
                     $stmt->bind_result($order_id, $order_type, $customer_id, $order_volume, $measure_volume_id, $order_weight, $measure_weight_id, $order_distance, $measure_distance_id, $order_price, $measure_price_id, $order_real_price, $measure_real_price_id, $order_detail, $order_status);
@@ -56,7 +56,7 @@
             }
             
             if($option=='2'){
-                if ($stmt = $mysqli->prepare("SELECT iOrdID, iOrdTyp, iCusID, cOrdVol, iMeaIDVol, cOrdWei, iMeaIDWei, cOrdDis, iMeaIDDis, cOrdPri, iMeaIDPri, cOrdReaPri, iMeaIDReaPri, cOrdDet, cOrdSta FROM tm_order WHERE cOrdSta>3")){
+                if ($stmt = $mysqli->prepare("SELECT iOrdID, iSerTypID, iCusID, cOrdVol, iMeaIDVol, cOrdWei, iMeaIDWei, cOrdDis, iMeaIDDis, cOrdPri, iMeaIDPri, cOrdReaPri, iMeaIDReaPri, cOrdDet, cOrdSta FROM tm_order WHERE cOrdSta>3")){
                     $stmt->execute();
                     $stmt->store_result();
                     $stmt->bind_result($order_id, $order_type, $customer_id, $order_volume, $measure_volume_id, $order_weight, $measure_weight_id, $order_distance, $measure_distance_id, $order_price, $measure_price_id, $order_real_price, $measure_real_price_id, $order_detail, $order_status);
@@ -87,7 +87,7 @@
                 }
             }
             if($option=='4'){
-                if ($stmt = $mysqli->prepare("SELECT iOrdID, iOrdTyp, iCusID, cOrdVol, iMeaIDVol, cOrdWei, iMeaIDWei, cOrdDis, iMeaIDDis, cOrdPri, iMeaIDPri, cOrdReaPri, iMeaIDReaPri, cOrdAucFla, cOrdSta FROM tm_order WHERE cOrdSta>1")){
+                if ($stmt = $mysqli->prepare("SELECT iOrdID, iSerTypID, iCusID, cOrdVol, iMeaIDVol, cOrdWei, iMeaIDWei, cOrdDis, iMeaIDDis, cOrdPri, iMeaIDPri, cOrdReaPri, iMeaIDReaPri, cOrdAucFla, cOrdSta FROM tm_order WHERE cOrdSta>1")){
                     $stmt->execute();
                     $stmt->store_result();
                     $stmt->bind_result($order_id, $order_type, $customer_id, $order_volume, $measure_volume_id, $order_weight, $measure_weight_id, $order_distance, $measure_distance_id, $order_price, $measure_price_id, $order_real_price, $measure_real_price_id, $order_flag, $order_status);
@@ -124,7 +124,7 @@
                 }
             }
             if($option=='5'){
-                if ($stmt = $mysqli->prepare("SELECT iOrdID, iOrdTyp, iCusID, cOrdVol, iMeaIDVol, cOrdWei, iMeaIDWei, cOrdDis, iMeaIDDis, cOrdPri, iMeaIDPri, cOrdReaPri, iMeaIDReaPri, cOrdAucFla, cOrdSta FROM tm_order WHERE cOrdSta>3")){
+                if ($stmt = $mysqli->prepare("SELECT iOrdID, iSerTypID, iCusID, cOrdVol, iMeaIDVol, cOrdWei, iMeaIDWei, cOrdDis, iMeaIDDis, cOrdPri, iMeaIDPri, cOrdReaPri, iMeaIDReaPri, cOrdAucFla, cOrdSta FROM tm_order WHERE cOrdSta>3")){
                     $stmt->execute();
                     $stmt->store_result();
                     $stmt->bind_result($order_id, $order_type, $customer_id, $order_volume, $measure_volume_id, $order_weight, $measure_weight_id, $order_distance, $measure_distance_id, $order_price, $measure_price_id, $order_real_price, $measure_real_price_id, $order_flag, $order_status);

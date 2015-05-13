@@ -52,11 +52,6 @@
             $_class = $_names[1];
             $_type = $_names[2];
             $_cat = $_names[3];
-            echo "SELECT c.iCarID, CONCAT(c.cCarRuc,' - ',c.cCarNam) "
-                    . " FROM tm_vehicle as v "
-                    . " JOIN tm_vehicle_assignation as va ON va.iVehID = v.iVehID"
-                    . " JOIN tm_carrier as c ON c.iCarID = va.iCarID"
-                    . " WHERE v.cVehSta='1' AND v.iVehClaID='".$_class."' AND v.iVehTypID='".$_type."' AND v.iVehCatID='".$_cat."'";
             if ($stmt = $mysqli->prepare("SELECT c.iCarID, CONCAT(c.cCarRuc,' - ',c.cCarNam) "
                     . " FROM tm_vehicle as v "
                     . " JOIN tm_vehicle_assignation as va ON va.iVehID = v.iVehID"

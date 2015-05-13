@@ -670,3 +670,12 @@ function char_sum_order($campo, $order, $mysqli){
     $stmt->fetch();
     return $total;
 }
+function service_type_char($iSerTypID, $mysqli){
+    $stmt = $mysqli->prepare("SELECT cSerTypNam FROM tm_service_type WHERE iSerTypID = ?");
+    $stmt->bind_param('s', $iSerTypID);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($service_type);
+    $stmt->fetch();
+    return $service_type;
+}

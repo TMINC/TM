@@ -8,8 +8,9 @@
     
     $action = $_POST['action'];
     if($action=='consult'){
+        $sel = $_POST['sel'];
         if ($stmt = $mysqli->prepare("SELECT iSerTypID, cSerTypNam FROM tm_service_type WHERE cSerTypSta='1'")){
-           $stmt->execute();
+            $stmt->execute();
             $stmt->store_result();
             $stmt->bind_result($service_type_id, $service_type_name);
             while($row = $stmt->fetch()) {

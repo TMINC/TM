@@ -58,6 +58,7 @@
         $measure_real_price_id = $_POST['detail_measure_real_price'];
         $order_note = $_POST['detail_note'];
         if($action=='insert'){
+            echo "INSERT INTO tm_order_detail (iOrdID, iCenIDOri, cOrdColDat, cOrdColHou, iCenIDDes, cOrdArrDat, cOrdArrHou, cOrdVol, iMeaIDVol, cOrdWei, iMeaIDWei, cOrdDis, iMeaIDDis, cOrdDetPri, iMeaIDDetPri, cOrdDetReaPri, iMeaIDDetReaPri, cOrdDetNot) VALUES ('".$order_id."', '".$center_origin_id."', '".$order_origin_date."', '".$order_origin_hour."', '".$center_destination_id."', '".$order_destination_date."', '".$order_destination_hour."', '".$order_volume."', '".$measure_volume_id."', '".$order_weight."', '".$measure_weight_id."', '".$order_distance."', '".$measure_distance_id."', '".$order_price."', '".$measure_price_id."', '".$order_real_price."', '".$measure_real_price_id."', '".$order_note."')";
             $mysqli->query("INSERT INTO tm_order_detail (iOrdID, iCenIDOri, cOrdColDat, cOrdColHou, iCenIDDes, cOrdArrDat, cOrdArrHou, cOrdVol, iMeaIDVol, cOrdWei, iMeaIDWei, cOrdDis, iMeaIDDis, cOrdDetPri, iMeaIDDetPri, cOrdDetReaPri, iMeaIDDetReaPri, cOrdDetNot) VALUES ('".$order_id."', '".$center_origin_id."', '".$order_origin_date."', '".$order_origin_hour."', '".$center_destination_id."', '".$order_destination_date."', '".$order_destination_hour."', '".$order_volume."', '".$measure_volume_id."', '".$order_weight."', '".$measure_weight_id."', '".$order_distance."', '".$measure_distance_id."', '".$order_price."', '".$measure_price_id."', '".$order_real_price."', '".$measure_real_price_id."', '".$order_note."')");
             $total = detail_total($order_id, $mysqli);
             if($total==0){
@@ -68,8 +69,8 @@
             $volume = char_sum_order("cOrdVol", $order_id, $mysqli);
             $weight = char_sum_order("cOrdWei", $order_id, $mysqli);
             $distance = char_sum_order("cOrdDis", $order_id, $mysqli);
-            $price = char_sum_order("cOrdPri", $order_id, $mysqli);
-            $real_price = char_sum_order("cOrdReaPri", $order_id, $mysqli);
+            $price = char_sum_order("cOrdDetPri", $order_id, $mysqli);
+            $real_price = char_sum_order("cOrdDetReaPri", $order_id, $mysqli);
             $mysqli->query("UPDATE tm_order SET cOrdVol='".$volume."', cOrdWei='".$weight."', cOrdDis='".$distance."', cOrdPri='".$price."', cOrdReaPri='".$real_price."' WHERE iOrdID='".$order_id."'");
         } 
         if($action=='update'){
@@ -85,7 +86,6 @@
             $distance = char_sum_order("cOrdDis", $order_id, $mysqli);
             $price = char_sum_order("cOrdDetPri", $order_id, $mysqli);
             $real_price = char_sum_order("cOrdDetReaPri", $order_id, $mysqli);
-            echo "UPDATE tm_order SET cOrdVol='".$volume."', cOrdWei='".$weight."', cOrdDis='".$distance."', cOrdPri='".$price."', cOrdReaPri='".$real_price."' WHERE iOrdID='".$order_id."'";
             $mysqli->query("UPDATE tm_order SET cOrdVol='".$volume."', cOrdWei='".$weight."', cOrdDis='".$distance."', cOrdPri='".$price."', cOrdReaPri='".$real_price."' WHERE iOrdID='".$order_id."'");
         }
         if($action=='delete'){
@@ -102,8 +102,8 @@
             $volume = char_sum_order("cOrdVol", $order_id, $mysqli);
             $weight = char_sum_order("cOrdWei", $order_id, $mysqli);
             $distance = char_sum_order("cOrdDis", $order_id, $mysqli);
-            $price = char_sum_order("cOrdPri", $order_id, $mysqli);
-            $real_price = char_sum_order("cOrdReaPri", $order_id, $mysqli);
+            $price = char_sum_order("cOrdDetPri", $order_id, $mysqli);
+            $real_price = char_sum_order("cOrdDetReaPri", $order_id, $mysqli);
             $mysqli->query("UPDATE tm_order SET cOrdVol='".$volume."', cOrdWei='".$weight."', cOrdDis='".$distance."', cOrdPri='".$price."', cOrdReaPri='".$real_price."' WHERE iOrdID='".$order_id."'");
         }
     }

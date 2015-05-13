@@ -21,7 +21,7 @@
         }
     }else{
         if($action=='select'){
-            if ($stmt = $mysqli->prepare("SELECT iOrdID, iOrdTyp, cOrdVol, iMeaIDVol, cOrdWei, iMeaIDWei, cOrdDis, iMeaIDDis, cOrdPri, iMeaIDPri, cOrdReaPri, iMeaIDReaPri, cs.iCusID, cs.cCusNam, cOrdDet, cOrdSta FROM tm_order AS o, tm_customer AS cs WHERE o.iCusID=cs.iCusID")){
+            if ($stmt = $mysqli->prepare("SELECT iOrdID, iSerTypID, cOrdVol, iMeaIDVol, cOrdWei, iMeaIDWei, cOrdDis, iMeaIDDis, cOrdPri, iMeaIDPri, cOrdReaPri, iMeaIDReaPri, cs.iCusID, cs.cCusNam, cOrdDet, cOrdSta FROM tm_order AS o, tm_customer AS cs WHERE o.iCusID=cs.iCusID")){
                 $stmt->execute();
                 $stmt->store_result();
                 $stmt->bind_result($order_id, $order_type, $order_volume, $measure_volume_id, $order_weight, $measure_weight_id, $order_distance, $measure_distance_id, $order_price, $measure_price_id, $order_real_price, $measure_real_price_id, $customer_id, $customer_name, $order_detail, $order_status);
@@ -31,8 +31,7 @@
                     $measure_distance = measure_char($measure_distance_id, $mysqli);
                     $measure_price = measure_char($measure_price_id, $mysqli);
                     $measure_real_price = measure_char($measure_real_price_id, $mysqli);
-                                      
-                    if($order_type=='1'){$type='TRANSPORTE FRESCO';}else{$type='TRANSPORTE CONGELADO';}
+                    $type = service_type_char($order_type, $mysqli);
                     $disabled = ' disabled="disabled"';
                     if($order_detail=='0'){$detail='<a class="hint--right hint--warning" style="float:right;cursor:pointer;" data-hint="Sin detalle registrado"><i class="glyphicon glyphicon-exclamation-sign" /></a>';}
                     if($order_detail=='1'){$detail='<a class="hint--right hint--info" style="float:right;cursor:pointer;" data-hint="Con detalle registrado"><i class="glyphicon glyphicon-ok-sign" /></a>';}
@@ -75,11 +74,11 @@
             $status = $_POST['status'];
             $detail = $_POST['detail'];
             if($action=='insert'){
-                $mysqli->query("INSERT INTO tm_order (iOrdTyp, cOrdVol, iMeaIDVol, cOrdWei, iMeaIDWei, cOrdDis, iMeaIDDis, cOrdPri, iMeaIDPri, cOrdReaPri, iMeaIDReaPri, iCusID, cOrdSta) VALUES "
+                $mysqli->query("INSERT INTO tm_order (iSerTypID, cOrdVol, iMeaIDVol, cOrdWei, iMeaIDWei, cOrdDis, iMeaIDDis, cOrdPri, iMeaIDPri, cOrdReaPri, iMeaIDReaPri, iCusID, cOrdSta) VALUES "
                         . "('".$order_type."', '".$order_volume."', '".$measure_volume_id."', '".$order_weight."', '".$measure_weight_id."', '".$order_distance."', '".$measure_distance_id."', '".$order_price."', '".$measure_price_id."', '".$order_real_price."', '".$measure_real_price_id."', '".$customer_id."', '1')");
             } 
             if($action=='update'){
-                $mysqli->query("UPDATE tm_order SET iOrdTyp='".$order_type."' , cOrdVol='".$order_volume."', iMeaIDVol='".$measure_volume_id."', cOrdWei='".$order_weight."', iMeaIDWei='".$measure_weight_id."', cOrdDis='".$order_distance."', iMeaIDDis='".$measure_distance_id."', cOrdPri='".$order_price."', iMeaIDPri='".$measure_price_id."', cOrdReaPri='".$order_real_price."', iMeaIDReaPri='".$measure_real_price_id."', iCusID='".$customer_id."' WHERE iOrdID='".$order_id."'");
+                $mysqli->query("UPDATE tm_order SET iSerTypID='".$order_type."' , cOrdVol='".$order_volume."', iMeaIDVol='".$measure_volume_id."', cOrdWei='".$order_weight."', iMeaIDWei='".$measure_weight_id."', cOrdDis='".$order_distance."', iMeaIDDis='".$measure_distance_id."', cOrdPri='".$order_price."', iMeaIDPri='".$measure_price_id."', cOrdReaPri='".$order_real_price."', iMeaIDReaPri='".$measure_real_price_id."', iCusID='".$customer_id."' WHERE iOrdID='".$order_id."'");
             }
             if($action=='delete'){
                 $_id = explode(",", $order_id);

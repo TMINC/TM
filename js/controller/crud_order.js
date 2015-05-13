@@ -244,11 +244,9 @@ var agregar = function(){
         e.preventDefault();
         $(".save").removeClass('hide');
         $("#editId").val("");
-        $("#editType").empty(); $("#editType").append('<option selected="true" />');
-        for(i=1; i<3; i++){
-            if(i===1){$("#editType").append('<option value="' + i + '">TRANSPORTE FRESCO</option>');}
-            if(i===2){$("#editType").append('<option value="' + i + '">TRANSPORTE CONGELADO</option>');}
-        } chosen(); $("#editType").trigger("liszt:updated");        
+        $.ajax({ type: "POST", async:false, url: "module/master/crud/service-type.php", data: "action=consult&sel=0",
+            success: function (data) { $("#editType").empty(); $("#editType").append('<option selected="true" />'); $("#editType").append(data); }        
+        }); chosen(); $("#editType").trigger("liszt:updated");
         $("#editVolume").val("0");        
         $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=2&sel=1",
             success: function (data) { $("#editMeasureVolume").empty();$("#editMeasureVolume").append('<option selected="true"> </option>');$("#editMeasureVolume").append(data); }        
@@ -328,12 +326,10 @@ var editar = function(){
         var _distance = $(this).data('distance'); $("#editDistance").val(_distance);
         var _price = $(this).data('price'); $("#editPrice").val(_price);
         var _real_price = $(this).data('real_price'); $("#editRealPrice").val(_real_price);        
-        var _type = $(this).data('type');var sel='selected'; $("#editType").empty();
-        for(i=1; i<3; i++){
-            if(i===_type){sel='selected';}else{sel='';}
-            if(i===1){$("#editType").append('<option value="' + i + '" ' + sel + '>TRANSPORTE FRESCO</option>');}
-            if(i===2){$("#editType").append('<option value="' + i + '" ' + sel + '>TRANSPORTE CONGELADO</option>');}
-        } chosen(); $("#editType").trigger("liszt:updated");
+        var _service_type = $(this).data('type');
+        $.ajax({ type: "POST", async: false, url: "module/master/crud/service-type.php", data: "action=consult&sel="+ _service_type,
+            success: function (data) { $("#editType").empty();$("#editType").append(data); }        
+        }); chosen(); $("#editType").trigger("liszt:updated");
         var _measure_volume = $(this).data('measure_volume');
         $.ajax({ type: "POST", async: false, url: "module/master/crud/measure.php", data: "action=consult&type=2&sel="+ _measure_volume,
             success: function (data) { $("#editMeasureVolume").empty();$("#editMeasureVolume").append(data); }        
@@ -413,7 +409,7 @@ var guardar = function () {
         $("[name='editMeasureDistance']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         $("[name='editMeasurePrice']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
         $("[name='editMeasureRealPrice']").css("position", "absolute").css("z-index",   "-9999").css("width", "10%").chosen().show();
-         if($('#validation_form').validate({
+        if($('#validation_form').validate({
             onkeyup: false,
             errorClass: 'error',
             validClass: 'valid',

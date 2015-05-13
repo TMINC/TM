@@ -10,7 +10,7 @@
      
     $option = $_POST['action'];
     if($option=='select'){
-        if ($stmt = $mysqli->prepare("SELECT DISTINCT(d.iOrdDetID), d.cOrdDetFla, o.iOrdID, o.cOrdSta, o.iOrdTyp, d.iCenIDOri, d.cOrdColDat, d.cOrdColHou, d.iCenIDDes, d.cOrdArrDat, d.cOrdArrHou, d.cOrdVol, d.iMeaIDVol, d.cOrdWei, d.iMeaIDWei, d.cOrdDis, d.iMeaIDDis, d.cOrdDetNot FROM tm_state_control AS s, tm_order_detail AS d, tm_order AS o WHERE s.iOrdDetID=d.iOrdDetID AND s.iOrdID=o.iOrdID")){
+        if ($stmt = $mysqli->prepare("SELECT DISTINCT(d.iOrdDetID), d.cOrdDetFla, o.iOrdID, o.cOrdSta, o.iSerTypID, d.iCenIDOri, d.cOrdColDat, d.cOrdColHou, d.iCenIDDes, d.cOrdArrDat, d.cOrdArrHou, d.cOrdVol, d.iMeaIDVol, d.cOrdWei, d.iMeaIDWei, d.cOrdDis, d.iMeaIDDis, d.cOrdDetNot FROM tm_state_control AS s, tm_order_detail AS d, tm_order AS o WHERE s.iOrdDetID=d.iOrdDetID AND s.iOrdID=o.iOrdID")){
             $stmt->execute();
             $stmt->store_result();
             $stmt->bind_result($order_detail_id, $order_detail_flag, $order_id, $order_status, $order_type, $center_origin_id, $order_origin_date, $order_origin_hour, $center_destination_id, $order_destination_date, $order_destination_hour, $order_volume, $measure_volume_id, $order_weight, $measure_weight_id, $order_distance, $measure_distance_id, $order_note);
