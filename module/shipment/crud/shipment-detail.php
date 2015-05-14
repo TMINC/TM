@@ -33,60 +33,37 @@
                 $order_id = $_POST['id'];
                 $_id = explode(",", $order_id);
                 $_Typeadj="";
-                $mysqli->prepare("SELECT iOrdDetID FROM tm_order_detail");
-                /*echo "SELECT det.iOrdDetID, det.iOrdID,c.cCenNam, det.cOrdColDat,det.cOrdColHou,c1.cCenNam, det.cOrdArrDat, det.cOrdArrHou, carr.cCarNam, p.cPlaniAdjType 
-                        FROM tm_order_detail as det 
-                        JOIN tm_center as c ON det.iCenIDOri=c.iCenID 
-                        JOIN tm_center as c1 ON det.iCenIDDes=c1.iCenID 
-                        LEFT JOIN tm_planification as p ON det.IOrdDetID=p.iOrdDetID 
-                        LEFT JOIN tm_carrier as carr ON p.iCarID = carr.iCarID
-                        WHERE det.iOrdID='".$order_id."'";*/
-                
                 for($i=0; $i< sizeof($_id) ;$i++){
+                    $mysqli->prepare("SELECT iOrdDetID FROM tm_order_detail");
                     $orderdet_id = get_order_details($_id[$i],$mysqli);
                     $_detid = explode(",",$orderdet_id);
                     for($j=0;$j < sizeof($_detid) ;$j++){
+                        $carr_names = get_carrier_id_by_Order($_id[$i],$_detid[$j],$mysqli);
+                        $adj_names = get_AdjTypes_by_Order($_id[$i],$_detid[$j],$mysqli);                        
                         if ($stmt = $mysqli->prepare("SELECT det.iOrdDetID,c.cCenNam, det.cOrdColDat,det.cOrdColHou, "
                                         . " c1.cCenNam, det.cOrdArrDat, det.cOrdArrHou,det.cOrdVol, "
-                                        . " det.iMeaIDVol, det.cOrdWei, det.iMeaIDWei,(SELECT GROUP_CONCAT(c.cCarNam)  "
-                                        . "                                             FROM tm_allocation_transport_detail td "
-                                        . "                                             JOIN tm_carrier c ON td.cAllTraDetCarrID in (c.iCarID)"
-                                        . "                                             WHERE td.cAllTraDetOrdDet='".$_detid[$j]."'), "
-                                        . "                                         (SELECT GROUP_CONCAT(DISTINCT(cAllTraDetAdjTyp)) "
-                                        . "                                             FROM tm_allocation_transport_detail "
-                                        . "                                             WHERE cAllTraDetOrdDet='".$_detid[$j]."')"
+                                        . " det.iMeaIDVol, det.cOrdWei, det.iMeaIDWei "
                                         . "FROM tm_order_detail as det  "
                                         . "JOIN tm_center as c ON det.iCenIDOri=c.iCenID "
                                         . "JOIN tm_center as c1 ON det.iCenIDDes=c1.iCenID "
-                                        . "LEFT JOIN tm_allocation_transport as at ON at.cAllTraOrd in (det.IOrdDetID) "
-                                        . "LEFT JOIN tm_allocation_transport_detail as atd ON at.iAllTraID = atd.iAllTraID "
-                                        . "LEFT JOIN tm_carrier as carr ON atd.cAllTraDetCarrID in (carr.iCarID)"
-                                        . "WHERE det.iOrdID in ('".$_id[$i]."') AND det.iOrdDetID='".$_detid[$j]."'")){
+                                        . "WHERE det.iOrdDetID in ('".$_detid[$j]."') AND det.iOrdID='".$_id[$i]."'")){
                             $stmt->execute();
                             $stmt->store_result();
-                            $stmt->bind_result($orderdet_id, $orderdet_orig, $ordendet_dataO, $orderdet_hourO, $orderdet_dest, $orderdet_dataD, $orderdet_hourD, $order_detail_volume, $order_detail_volume_id, $order_detail_weight, $order_detail_weight_id, $orderdet_transp,$orderdet_AdjType);
+                            $stmt->bind_result($orderdet_id, $orderdet_orig, $ordendet_dataO, $orderdet_hourO, $orderdet_dest, $orderdet_dataD, $orderdet_hourD, $order_detail_volume, $order_detail_volume_id, $order_detail_weight, $order_detail_weight_id);
                             while($row = $stmt->fetch()) { 
-                                $_type = explode(",",$orderdet_AdjType);
-                                $_Typeadj=" ";
-                                for($z=0;$z<sizeof($_type);$z++){
-                                    if($_type[$z]=='0'){$_Typeadj.=" DIRECTA /";}
-                                    else if($_type[$z]=='1'){$_Typeadj.=" SUBASTA /";}
-                                }
-                                $_Typeadj = substr($_Typeadj, 0, -1);
-                                //if($orderdet_AdjType=='1'){$_Typeadj="DIRECTA";}else if($orderdet_AdjType=='2'){$_Typeadj="SUBASTA";}
                                 $weight = measure_char($order_detail_weight_id, $mysqli);
                                 $volume = measure_char($order_detail_volume_id, $mysqli);
                                 $ship = ship_char($orderdet_id, $mysqli);
                                 echo 
                                 '<tr><td style="text-align: center;">'.
-                                    '<a href="JavaScript:void(0);" style="cursor:pointer;" class="plan_trip hint--left hint--success" data-hint="Asignar Veh&iacute;culo" data-id="'.$orderdet_id.'" data-origin="'.$orderdet_orig.'" data-destination="'.$orderdet_dest.'" data-adjudication="'.$orderdet_AdjType.'" data-carrier="'.$orderdet_transp.'"><i class="glyphicon glyphicon-resize-small"></i></a>'.
+                                    '<a href="JavaScript:void(0);" style="cursor:pointer;" class="plan_trip hint--left hint--success" data-hint="Asignar Veh&iacute;culo" data-id="'.$orderdet_id.'" data-origin="'.$orderdet_orig.'" data-destination="'.$orderdet_dest.'" data-adjudication="'.$adj_names.'" data-carrier="'.$carr_names.'"><i class="glyphicon glyphicon-resize-small"></i></a>'.
                                     '<a href="JavaScript:void(0);" style="cursor:pointer;margin-left:20px;" class="plan_trip_delete hint--right hint--error" data-hint="Denegar Veh&iacute;culo" data-id="'.$orderdet_id.'"><i class="glyphicon glyphicon-resize-full"></i></a>'.
                                 '</td>'.
                                 '<td>'.format($orderdet_id).'<a class="pop_over hint--left hint--info" data-placement="right" data-content="<b>VOLUMEN</b>: '.$order_detail_volume." ".$volume.' <br /> <b>PESO</b>: '.$order_detail_weight." ".$weight.'" data-hint="Caracter&iacute;sticas" style="cursor:help;float:right;" data-original-title="Caracter&iacute;sticas '.format($orderdet_id).'"><i class="glyphicon glyphicon-list-alt"></i></a></td>'.
                                 '<td>'.$orderdet_orig.'<a class="pop_over hint--left hint--info" data-placement="right" data-content="'.$ordendet_dataO." ".$orderdet_hourO.'" data-hint="Cita Recojo" style="cursor:help;float:right;" data-original-title="'.$orderdet_orig.'"><i class="glyphicon glyphicon-calendar"></i></a></td>'.
                                 '<td>'.$orderdet_dest.'<a class="pop_over hint--left hint--info" data-placement="right" data-content="'.$orderdet_dataD." ".$orderdet_hourD.'" data-hint="Cita Llegada" style="cursor:help;float:right;" data-original-title="'.$orderdet_dest.'"><i class="glyphicon glyphicon-calendar"></i></a></td>'.
-                                '<td>'.$orderdet_transp.'<a class="pop_over hint--left hint--info" data-placement="right" data-content="'.$ship.'" data-hint="Transporte Asignado" style="cursor:help;float:right;" data-original-title="Transporte Asignado"><i class="glyphicon glyphicon-comment"></i></a></td>'. 
-                                '<td>'.$_Typeadj.'</td></tr>';
+                                '<td>'.$carr_names.'<a class="pop_over hint--left hint--info" data-placement="right" data-content="'.$ship.'" data-hint="Transporte Asignado" style="cursor:help;float:right;" data-original-title="Transporte Asignado"><i class="glyphicon glyphicon-comment"></i></a></td>'. 
+                                '<td>'.$adj_names.'</td></tr>';
                             }
                         }
                     }
@@ -129,8 +106,8 @@
                     $stmt->bind_result($vehcla_id, $vehcla_dsc,$vehtyp_id,$vehcat_id,$indice,$shared);
                     while($row = $stmt->fetch()) {
                         $valor="";
-                        if($shared=="2"){ $valor=' &nbsp;&nbsp;&lrarr; Compartido';}else{$valor="";}
-                        $veh = get_vehicles_details_adjudication($valor, $indice,$vehcla_id,$vehtyp_id,$vehcat_id,$shared,$mysqli);
+                        if($shared=="2"){ $valor="(* compartido)";}else{$valor="";}
+                        $veh = get_vehicles_details_adjudication($valor,$indice,$vehcla_id,$vehtyp_id,$vehcat_id,$shared,$mysqli);
                         echo '<optgroup label="'.$vehcla_dsc.'" >'.$veh.'</optgroup>';                        
                         $i++;
                     }            

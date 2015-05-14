@@ -293,7 +293,75 @@ function get_vehicles_details($vehcla_id, $mysqli){
     }    
     return $valor;
 }
-function get_vehicles_details_adjudication($compartido, $xi,$vehcla_id,$vehtyp_id,$vehcat_id,$shared, $mysqli){
+function get_carrier_id_by_Order($det_id,$order_id, $mysqli){
+    $stmt = $mysqli->prepare("SELECT  GROUP_CONCAT(TRIM(LEADING ',' FROM td.cAllTraDetCarrID)) "
+            . "FROM tm_allocation_transport_detail td "
+            . "JOIN tm_allocation_transport tc ON tc.iAllTraID = td.iAllTraID  "
+            . "WHERE td.cAllTraDetOrdDet = '".$order_id."' AND td.iAllTraID in (SELECT tc.iAllTraID"
+            . "                         FROM tm_allocation_transport tc"
+            . "                         WHERE tc.cAllTraOrd in ('".$det_id."'))");
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($carrier_ids);
+    $stmt->fetch();
+    if(sizeof($carrier_ids)>0){$carrier_names = get_carrier_names_byID($carrier_ids, $mysqli);}
+    else{$carrier_names="";}
+    return $carrier_names;
+}
+function get_carrier_names_byID($carrier_ids, $mysqli){
+    $_cID = explode(",", $carrier_ids);
+    $carrier_names = "";    
+    for($i=0; $i< sizeof($_cID) ;$i++){
+        $stmt = $mysqli->prepare("SELECT  GROUP_CONCAT(c.cCarNam) "
+            . " FROM tm_carrier c "
+            . " WHERE c.iCarID = ".$_cID[$i]);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($carrier_n);
+        $stmt->fetch();
+        if($carrier_names==""){
+            $carrier_names.=$carrier_n;}
+        else{
+            $carrier_names.=",".$carrier_n;
+        }
+    }    
+    return $carrier_names;
+}
+function get_AdjTypes_by_Order($det_id,$order_id, $mysqli){
+    $stmt = $mysqli->prepare("SELECT GROUP_CONCAT(DISTINCT(td.cAllTraDetAdjTyp)) "
+            . "FROM tm_allocation_transport_detail td "
+            . "JOIN tm_allocation_transport tc ON tc.iAllTraID = td.iAllTraID  "
+            . "WHERE td.cAllTraDetOrdDet = '".$order_id."' AND td.iAllTraID in (SELECT tc.iAllTraID"
+            . "                         FROM tm_allocation_transport tc"
+            . "                         WHERE tc.cAllTraOrd in ('".$det_id."'))");
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($adjudication_types);
+    $stmt->fetch();
+    if(sizeof($adjudication_types)>0){$adj_names = get_adjudication_names($adjudication_types, $mysqli);}
+    else{$adj_names="";}
+    return $adj_names;
+}
+function get_adjudication_names($adjudication_types, $mysqli){
+    $_cID = explode(",", $adjudication_types);
+    $adj_names = "";
+    for($i=0; $i< sizeof($_cID) ;$i++){
+        switch ($_cID[$i])
+        {
+            case 0: $aux_name="";break;
+            case 1: $aux_name=" DIRECTA ";break;
+            case 2: $aux_name=" SUBASTA ";break;
+            default : $aux_name="";break;
+        }
+        if($adj_names==""){
+            $adj_names.=$aux_name;}
+        else{
+            $adj_names.=",".$aux_name;
+        }
+    }    
+    return $adj_names;
+}
+function get_vehicles_details_adjudication($valor22,$xi,$vehcla_id,$vehtyp_id,$vehcat_id,$shared, $mysqli){
     $stmt = $mysqli->prepare("SELECT DISTINCT(at.iVehTypID), at.iVehCatID, CONCAT(vt.cVehTypNam,' [',vc.cVehCatInf,']') "
             . "FROM tm_allocation_transport at "
             . "JOIN tm_vehicle_type vt ON at.iVehTypID = vt.iVehTypID  "
@@ -305,7 +373,7 @@ function get_vehicles_details_adjudication($compartido, $xi,$vehcla_id,$vehtyp_i
     $valor = "";
     while($row = $stmt->fetch()) {
         //$valor .= '<option value='.$xi.'_'.$i.'-'.$vehcla_id.'-'.$vehtyp_id.'-'.$vehcat_id.'-'.$shared.'>'.$veh_dsc.'</option>';
-        $valor .= '<option value='.$xi.'-'.$vehcla_id.'-'.$vehtyp_id.'-'.$vehcat_id.'-'.$shared.'>'.$veh_dsc.$compartido.'</option>';
+        $valor .= '<option value='.$xi.'-'.$vehcla_id.'-'.$vehtyp_id.'-'.$vehcat_id.'-'.$shared.'>'.$veh_dsc.$valor22.'</option>';
         //$i++;
     }    
     return $valor;
