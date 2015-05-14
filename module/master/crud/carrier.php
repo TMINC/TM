@@ -48,11 +48,13 @@
             }
         }
         if($exclude=='dyn'){
-            $_names = explode("-", $sel);//id,clase,tipo,cat
+            $aux_names = explode("_", $sel);
+            $_names = explode("-", $aux_names[1]);//id,clase,tipo,cat
+            $indice = $_names[0];
             $_class = $_names[1];
             $_type = $_names[2];
             $_cat = $_names[3];
-            if ($stmt = $mysqli->prepare("SELECT c.iCarID, CONCAT(c.cCarRuc,' - ',c.cCarNam) "
+            if ($stmt = $mysqli->prepare("SELECT DISTINCT(c.iCarID), CONCAT(c.cCarRuc,' - ',c.cCarNam) "
                     . " FROM tm_vehicle as v "
                     . " JOIN tm_vehicle_assignation as va ON va.iVehID = v.iVehID"
                     . " JOIN tm_carrier as c ON c.iCarID = va.iCarID"

@@ -117,23 +117,24 @@
             }
         } 
         else if($option=='4'){
-            $order_id = $_POST['id']; 
-            if ($stmt = $mysqli->prepare("SELECT at.iVehClaID, CONCAT(vc.cVehClaInf,'-',vc.cVehClaNam),at.iVehTypID,at.iVehCatID "
-                    . "FROM tm_allocation_transport as at "
-                    . "JOIN tm_vehicle_class as vc ON vc.iVehClaID=at.iVehClaID "
-                    . "JOIN tm_vehicle_type as vt ON vt.iVehTypID=at.iVehTypID "
-                    . "JOIN tm_vehicle_category as vca ON vca.iVehCatID=at.iVehCatID "
-                    . " WHERE at.iAllTraStaVeh in (0,2) AND vc.cVehClaSta='1' AND at.cAllTraOrd in ('".$order_id."')")){
-                $stmt->execute();
-                $stmt->store_result();
-                $stmt->bind_result($vehcla_id, $vehcla_dsc,$vehtyp_id,$vehcat_id);
-                $i=0;
-                while($row = $stmt->fetch()) {
-                    $veh = get_vehicles_details_adjudication($i,$vehcla_id,$vehtyp_id,$vehcat_id,$mysqli);
-                    echo '<optgroup label="'.$vehcla_dsc.'" >'.$veh.'</optgroup>';                        
-                    $i++;
-                }            
-            }    
+                $order_id = $_POST['id']; 
+                    if ($stmt = $mysqli->prepare("SELECT at.iVehClaID, CONCAT(vc.cVehClaInf,'-',vc.cVehClaNam),at.iVehTypID,at.iVehCatID,at.iAllTraInd, at.iAllStaSha  "
+                            . "FROM tm_allocation_transport as at "
+                            . "JOIN tm_vehicle_class as vc ON vc.iVehClaID=at.iVehClaID "
+                            . "JOIN tm_vehicle_type as vt ON vt.iVehTypID=at.iVehTypID "
+                            . "JOIN tm_vehicle_category as vca ON vca.iVehCatID=at.iVehCatID "
+                            . " WHERE at.iAllStaSha in (0,2) AND vc.cVehClaSta='1' AND at.cAllTraOrd in ('".$order_id."')")){
+                    $stmt->execute();
+                    $stmt->store_result();
+                    $stmt->bind_result($vehcla_id, $vehcla_dsc,$vehtyp_id,$vehcat_id,$indice,$shared);
+                    while($row = $stmt->fetch()) {
+                        $valor="";
+                        if($shared=="2"){ $valor=' &nbsp;&nbsp;&lrarr; Compartido';}else{$valor="";}
+                        $veh = get_vehicles_details_adjudication($valor, $indice,$vehcla_id,$vehtyp_id,$vehcat_id,$shared,$mysqli);
+                        echo '<optgroup label="'.$vehcla_dsc.'" >'.$veh.'</optgroup>';                        
+                        $i++;
+                    }            
+                }
         }
     }
     else if($action == 'saveAllocTransp'){
@@ -145,8 +146,9 @@
             $vehcla_id = $_veh_id[1];
             $vehtyp_id = $_veh_id[2];
             $vehcat_id = $_veh_id[3];
-            $mysqli->query("INSERT INTO tm_allocation_transport (cAllTraOrd, iVehClaID, iVehTypID, iVehCatID, iAllTraQtyVeh, iAllTraStaVeh)"
-                        . "VALUES ('".$order_id."', '".$vehcla_id."', '".$vehtyp_id."', '".$vehcat_id."', '1', '0')");
+            echo "INDICE: ".$indice." CLASE: ".$vehcla_id." TIPO: ".$vehtyp_id." CATE: ".$vehcat_id;
+            $mysqli->query("INSERT INTO tm_allocation_transport (cAllTraOrd,iAllTraInd, iVehClaID, iVehTypID, iVehCatID, iAllTraQtyVeh, iAllTraStaVeh)"
+                        . "VALUES ('".$order_id."', '".$i."', '".$vehcla_id."', '".$vehtyp_id."', '".$vehcat_id."', '1', '0')");
             
         }
     }
@@ -158,10 +160,12 @@
             $vehcla_id =$_val[0];
             $vehtyp_id=$_val[1];
             $vehcat_id=$_val[2];
+            //NP
+            $indice = "0";
             $status="0";
             for($i=0;$i<$cnt;$i++){
-                $mysqli->query("INSERT INTO tm_allocation_transport (cAlloTraOrders,iAlloTraCntVeh,iAlloTraStaVeh,iVehCatId,iVehClaID,iVehTypID) "
-                    . "VALUES ('".$order."', '1', '".$status."', '".$vehcat_id."', '".$vehcla_id."', '".$vehtyp_id."')");
+                $mysqli->query("INSERT INTO tm_allocation_transport (cAlloTraOrders,iAlloTraCntVeh,iAlloTraStaVeh,iAllTraind,iVehCatId,iVehClaID,iVehTypID) "
+                    . "VALUES ('".$order."', '1', '".$status."', '".$indice."', '".$vehcat_id."', '".$vehcla_id."', '".$vehtyp_id."')");
             }
         }
         else if($action=='SelectDetail'){
@@ -253,19 +257,26 @@
             $adj_id = $_POST['adjType'];
             $carriers = $_POST['carrID'];
             $veh_id = $_POST['vehID'];
-            $_id = explode("-", $veh_id);
+            $share_chk = $_POST['chkShare'];            
+            $aux_id = explode("_", $veh_id);
+            $_id = explode("-", $aux_id[1]);
+            $indice = $_id[0];
             $vehcla_id =$_id[1];
             $vehtyp_id=$_id[2];
-            $vehcat_id=$_id[3];
+            $vehcat_id=$_id[3];            
+            echo "AUXID: ".$aux_id[1]." INDICE: ".$indice." CLASE: ".$vehcla_id." TIPO: ".$vehtyp_id." CAT: ".$vehcat_id;
+            if($share_chk=="1"){$_adj_id=2;/*/*Vehículo compartido*/}else{$_adj_id=1;}
             $stmt = $mysqli->prepare("SELECT iVehClaID, CONCAT(cVehClaInf,'-',cVehClaNam) FROM tm_vehicle_class WHERE cVehClaSta='1'");
-            $alltra_id = get_Allocation_Transport_ID($vehcla_id,$vehtyp_id,$vehcat_id,$mysqli);
+            $alltra_id = get_Allocation_Transport_ID($indice,$vehcla_id,$vehtyp_id,$vehcat_id,$detail_id,$share_chk,$mysqli);
+            echo " ALLTRAID: ".$alltra_id;
             $val_adj=0;
             if($adj_id=="0"){$val_adj=1;}else{$val_adj=2;}
-            //echo 'Insertando data : AllTraID:'.$alltra_id.'  DetailID:'.$detail_id.'  AdjID:'.$adj_id.'  Carriers:'.$carriers.' ';
-            $mysqli->query("INSERT INTO tm_allocation_transport_detail (iAllTraID,cAllTraDetOrdDet,cAllTraDetAdjTyp,cAllTraDetCarrID,cAllTraDetOrdSta) "
-                . "VALUES ('".format($alltra_id)."', '".$detail_id."', '".$adj_id."', '".$carriers."', '1')");
-            $mysqli->query("UPDATE tm_allocation_transport SET iAllTraStaVeh='".$val_adj."' WHERE iAllTraID='".$alltra_id."'");
-        }
+                
+             $mysqli->query("INSERT INTO tm_allocation_transport_detail (iAllTraID,cAllTraDetOrdDet,cAllTraDetAdjTyp,"
+                    . "cAllTraDetCarrID,cAllTraDetOrdSta) "
+                . "VALUES ('".format($alltra_id)."', '".$detail_id."', '".$_adj_id."', '".$carriers."', '1')");
+                $mysqli->query("UPDATE tm_allocation_transport SET iAllTraStaVeh='".$val_adj."', iAllStaSha='".$_adj_id."' WHERE iAllTraID='".$alltra_id."'");
+         }
         
     }
     else{        

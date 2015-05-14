@@ -65,6 +65,12 @@ var chosen = function (){
 var spinner = function(){
     $(".editPlanQuantity").spinner({min: 1});
 };
+var assigmnet_switch = function(){
+    $('.bs-switch').bootstrapSwitch({
+        onText: "SI",
+        offText: "NO"
+    });
+};
 var date_detail = function (){
     $('#dateOriginDate').datepicker();
     $('#dateDestinationDate').datepicker();
@@ -511,6 +517,7 @@ var save_transport_allocation_detail = function(){
     var veh_id = [];
     var carr_id = [];
     var carr_name = [];
+    var chk_type=[];
     $(".editAdjudicationType ").each(function() {	
         values.push($(this).val().toString());//0(Directo),1(Subasta)
         veh_id.push($(this).data('id').toString());//ID,Classe,Typo,Cat	
@@ -519,13 +526,17 @@ var save_transport_allocation_detail = function(){
         carr_id.push($(this).val().toString());//0(Directo),1(Subasta)
         carr_name.push($(this).text().toString());//ID,Classe,Typo,Cat	
     });
+    $(".editShareType ").each(function(){
+        if($(this).is(':checked')){chk_type.push("1");}else{chk_type.push("0");}
+    });
     
     for(var x=0;x<values.length;x++){
         $.ajax({
             type: "POST",
             url: "module/shipment/crud/shipment-detail.php",
             async: false,
-            data: "action=AllocTransportDet&option=insert&detID="+ _orderdet +"&adjType="+ values[x]+"&carrID="+ carr_id[x]+"&vehID="+veh_id[x],
+            data: "action=AllocTransportDet&option=insert&detID="+ _orderdet +"&adjType="+ values[x]+
+                    "&carrID="+ carr_id[x]+"&vehID="+veh_id[x]+"&chkShare="+chk_type[x],
             success: function (response) {                             
             }        
         });
@@ -541,7 +552,6 @@ var wizard_titles = function (){
     });
 };
 var wizard_two = function(){
-    $('#adjudication_wizard').stepy('step');
     $('#adjudication_wizard').stepy({
         titleClick : true,
         nextLabel:      'CONTINUAR <i class="glyphicon glyphicon-chevron-right"></i>',
@@ -551,13 +561,13 @@ var wizard_two = function(){
         errorImage : true,
         validate : true,
         next: function() {
-            if ($("#vehicle_select_adjudication").val().length > 0) {vehicle_table_number_two();}else{}
+            if ($("#vehicle_select_adjudication").val().length > 0) {vehicle_table_number_two();assigmnet_switch();$(".stepy_end").removeClass('hide');}else{}
         },
         finish: function() {
             save_transport_allocation_detail();
             $.sticky("&Eacute;XITO<br>[Solicitud procesada.]", {autoclose : 5000, position: "top-center", type: "st-success"}, "", "modal");
             $("#adjudication").modal('hide');
-            plan_reload();         
+            plan_reload();
             return false;
         }
     });
@@ -614,6 +624,12 @@ var plan_trip = function (){
             wizard_titles();
             $("#OrderDetail_Id").val($(this).data('id'));
             $("#adjudication").modal("show");
+            $("#vehicle_table_number_adjudication").empty();
+            $("#vehicle_table_number_adjudication").append('<tr><td><div class="alert alert-warning alert-dismissable">'+
+                '<a class="close" data-dismiss="alert">×</a>'+
+                '<strong>TM Warning</strong> <br />El proceso que se estaba realizando no finalizo, intentalo nuevamente.'+
+            '</div></td></tr>');
+            $(".stepy_end").addClass('hide');
         }
     });   
 };
@@ -668,13 +684,13 @@ var multiselectable_trip = function(){
 };
 var load_vehicle_trip = function(){
     var order_id = $("#editPlanOrderId").val();
-    $.ajax({
+   $.ajax({
         type: "POST",
         async: false,
         url: "module/shipment/crud/shipment-detail.php",
         data: "action=detail&option=4&id="+order_id,
         success: function (data) {
-            $("#vehicle_select_adjudication").empty();  
+           $("#vehicle_select_adjudication").empty();  
             $("#vehicle_select_adjudication").append(data);                
         }        
     });

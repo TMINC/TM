@@ -293,7 +293,7 @@ function get_vehicles_details($vehcla_id, $mysqli){
     }    
     return $valor;
 }
-function get_vehicles_details_adjudication($xi,$vehcla_id,$vehtyp_id,$vehcat_id, $mysqli){
+function get_vehicles_details_adjudication($compartido, $xi,$vehcla_id,$vehtyp_id,$vehcat_id,$shared, $mysqli){
     $stmt = $mysqli->prepare("SELECT DISTINCT(at.iVehTypID), at.iVehCatID, CONCAT(vt.cVehTypNam,' [',vc.cVehCatInf,']') "
             . "FROM tm_allocation_transport at "
             . "JOIN tm_vehicle_type vt ON at.iVehTypID = vt.iVehTypID  "
@@ -302,10 +302,11 @@ function get_vehicles_details_adjudication($xi,$vehcla_id,$vehtyp_id,$vehcat_id,
     $stmt->execute();
     $stmt->store_result();
     $stmt->bind_result($vehtyp_id,$vehcat_id,$veh_dsc);
-    $valor = "";$i=0;
+    $valor = "";
     while($row = $stmt->fetch()) {
-        $valor .= '<option value='.$xi.'_'.$i.'-'.$vehcla_id.'-'.$vehtyp_id.'-'.$vehcat_id.'>'.$veh_dsc.'</option>';
-        $i++;
+        //$valor .= '<option value='.$xi.'_'.$i.'-'.$vehcla_id.'-'.$vehtyp_id.'-'.$vehcat_id.'-'.$shared.'>'.$veh_dsc.'</option>';
+        $valor .= '<option value='.$xi.'-'.$vehcla_id.'-'.$vehtyp_id.'-'.$vehcat_id.'-'.$shared.'>'.$veh_dsc.$compartido.'</option>';
+        //$i++;
     }    
     return $valor;
 }
@@ -335,15 +336,21 @@ function get_order_details($order_id,$mysqli){
     $order_detail_id = trim($order_detail_id, ',');
     return $order_detail_id;
 }
-function get_Allocation_Transport_ID($vehcla_id,$vehtyp_id,$vehcat_id,$mysqli){
-    $stmt = $mysqli->prepare("SELECT iAllTraID "
-            . "FROM tm_allocation_transport "
-            . "WHERE iAllTraStaVeh = 0 AND iVehClaID=".$vehcla_id." AND iVehTypID=".$vehtyp_id." AND iVehCatID=".$vehcat_id." "
-            . "LIMIT 1");
+function get_Allocation_Transport_ID($indice,$vehcla_id,$vehtyp_id,$vehcat_id,$orderdet_id,$shared,$mysqli){
+    if($shared==1){$_auxShared=2;}else{$_auxShared=0;}
+    //echo 'CLASE: '.$vehcla_id.' TIPO: '.$vehtyp_id.' CAT: '.$vehcat_id.' ORDER: '.$orderdet_id.' SHARED: '.$_auxShared;
+    $stmt = $mysqli->prepare("SELECT tm.iAllTraID "
+            . " FROM tm_allocation_transport tm "
+            . " JOIN tm_order o ON tm.cAllTraOrd in (o.iOrdID) "
+            . " JOIN tm_order_detail det ON o.iOrdID = det.iOrdID "
+            . " WHERE tm.iAllTraInd=".$indice." AND tm.iVehClaID=".$vehcla_id." AND "
+            . " tm.iVehTypID=".$vehtyp_id." AND tm.iVehCatID=".$vehcat_id.""
+            . " AND det.IOrdDetID=".$orderdet_id."");// AND tm.iAllStaSha=".$_auxShared."");
     $stmt->execute();
     $stmt->store_result();
     $stmt->bind_result($alltra_id);
     $stmt->fetch();
+   
     return $alltra_id;    
 }
 function get_order_details_allocation($order_detail_id, $mysqli){
