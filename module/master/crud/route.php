@@ -8,6 +8,23 @@
     include_once '../../../includes/functions.php';
     
     $action = $_POST['action'];
+    if($action=='order_detail'){
+        $origin_id = $_POST['ori'];
+        $destination_id = $_POST['desti'];
+        if ($stmt = $mysqli->prepare("SELECT iRouID, cRouDis, iMeaIDDis, cRouPri, iMeaIDPri, cRouReaPri, iMeaIDReaPri FROM tm_route "
+                . "WHERE cRouSta = 1 and iCenIDOri = ".$origin_id." and iCenIDDes = ".$destination_id)){
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($route_id, $route_distance, $measure_distance_id, $route_price, $measure_price_id, $route_real_price, $measure_real_price_id);
+            while($row = $stmt->fetch()) {
+                $return = $_POST;
+                $return["route_distance"] = $route_distance;
+                $return["route_price"] = $route_price;
+                $return["route_real_price"] = $route_real_price;
+                echo json_encode($return);
+            }            
+        }
+    }
     if($action=='consult'){
         $sel = $_POST['sel'];
         if ($stmt = $mysqli->prepare("SELECT iRouID, cRouNam FROM tm_route WHERE cRouSta='1'")){

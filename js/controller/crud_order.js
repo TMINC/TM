@@ -472,6 +472,49 @@ var detalle = function(){
         $('#detail').modal({ backdrop: 'static', keyboard: false });
         $("#editDetailId").val(_order_number);
     });
+   
+    $("#editDetailOrigin").change(function(){
+           var _ori = $('#editDetailOrigin :selected').val();
+           var _desti = $('#editDetailDestination :selected').val();
+           if (_ori != "" && _desti != "")
+           {
+                  $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        async:false,
+                        url: "module/master/crud/route.php",
+                        data: "action=order_detail&ori=" + _ori + "&desti="+ _desti,
+                        success: function (data) { 
+                            $("#editDetailDistance").val(data["route_distance"]); 
+                            $("#editDetailPrice").val(data["route_price"]);
+                            $("#editDetailRealPrice").val(data["route_real_price"]);
+                        }        
+                    });     
+            }
+        });    
+           
+        
+    $("#editDetailDestination").change(function(){
+           var _ori = $('#editDetailOrigin :selected').val();
+           var _desti = $('#editDetailDestination :selected').val();
+           if (_ori != "" && _desti != "")
+           {
+                  $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        async:false,
+                        url: "module/master/crud/route.php",
+                        data: "action=order_detail&ori=" + _ori + "&desti="+ _desti,
+                        success: function (data) { 
+                            $("#editDetailDistance").val(data["route_distance"]); 
+                            $("#editDetailPrice").val(data["route_price"]);
+                            $("#editDetailRealPrice").val(data["route_real_price"]);
+                        }        
+                    });     
+            }
+        });    
+    
+    
 };
 var show_edit_detail = function(){
     if(_status>1){$(".accciones").addClass('hide');$(".saveD").addClass('hide');$(".edit_detail").addClass('hide');}
