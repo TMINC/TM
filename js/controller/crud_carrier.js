@@ -123,6 +123,8 @@ var agregar = function(){
         $("#editContact").val("");
         $("#editPhoneContact").val("");
         $("#editEmailContact").val("");
+        $("#editUserGPS").val("");
+        $("#editPasswordGPS").val("");
         $("#editStatus").removeAttr('checked');
         $("#editAction").val("insert");        
     });
@@ -142,6 +144,8 @@ var editar = function(){
         var _contact = $(this).data('contact'); $("#editContact").val(_contact);
         var _phone_contact = $(this).data('phone_contact'); $("#editPhoneContact").val(_phone_contact);
         var _email_contact = $(this).data('email_contact'); $("#editEmailContact").val(_email_contact);
+        var _user_gps = $(this).data('user_gps'); $("#editUserGPS").val(_user_gps);
+        var _password_gps = $(this).data('password_gps'); $("#editPasswordGPS").val(_password_gps);
         var _status = $(this).data('status');
         if(_status=="1"){
             $("#editStatus").attr('checked','checked');
@@ -211,7 +215,11 @@ var guardar = function () {
                 editEmailAgent: { required: true, email: true },
                 editContact: { required: true, minlength: 3 },
                 editPhoneContact: { required: true },
-                editEmailContact: { required: true, email: true }
+                editEmailContact: { required: true, email: true },
+                editUserGPS: { required: true, minlength: 3 },
+                editPasswordGPS: { required: true, minlength: 5 }
+              
+                
             },
             highlight: function(element) {
                 $(element).closest('.form-group').addClass("f_error");     
@@ -236,12 +244,14 @@ var guardar = function () {
         var _contact = $("#editContact").val();
         var _phone_contact = $("#editPhoneContact").val();
         var _email_contact = $("#editEmailContact").val();
+        var _user_gps = $("#editUserGPS").val();
+        var _password_gps = $("#editPasswordGPS").val();
         var _status = $("#editStatus").is(':checked');
         var _action = $("#editAction").val();
         $.ajax({
             type: "POST",
             url: "module/master/crud/carrier.php",
-            data: "action="+ _action +"& id="+ _id+"& name="+ _name+"& address="+ _address+"& phone_name="+ _phone_name+"& web_name="+ _web_name+"& code="+ _code+"& agent="+ _agent+"& phone_agent="+ _phone_agent+"& email_agent="+ _email_agent+"& contact="+ _contact+"& phone_contact="+ _phone_contact+"& email_contact="+ _email_contact+"& status="+ _status,
+            data: "action="+ _action +"& id="+ _id+"& name="+ _name+"& address="+ _address+"& phone_name="+ _phone_name+"& web_name="+ _web_name+"& code="+ _code+"& agent="+ _agent+"& phone_agent="+ _phone_agent+"& email_agent="+ _email_agent+"& contact="+ _contact+"& phone_contact="+ _phone_contact+"& email_contact="+ _email_contact+"& user_gps="+ _user_gps+"& password_gps="+ _password_gps+"& status="+ _status,
             success: function () {
                 load(); 
                 $.sticky("Su solicitud ha sido procesada.", {autoclose : 5000, position: "top-right", type: "st-success" });

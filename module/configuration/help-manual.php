@@ -17,6 +17,7 @@
                             <li><a href="#tab_carrier" data-toggle="tab">Proveedor(es)</a></li>
                             <li><a href="#tab_driver" data-toggle="tab">Chofer(es)</a></li>
                             <li class="divider"></li>
+                            <li><a href="#tab_registration-carrier-vehicle" data-toggle="tab">Registro Proveedor-Veh&iacute;culo</a></li>
                             <li><a href="#tab_vehicle" data-toggle="tab">Veh&iacute;culo(s)</a></li>
                             <li><a href="#tab_vehicle-type" data-toggle="tab">Veh&iacute;culo Tipo(s)</a></li>
                             <li><a href="#tab_vehicle-class" data-toggle="tab">Veh&iacute;culo Clase(s)</a></li>
@@ -106,10 +107,10 @@
                             <li><b>CORREO ELECTR&Oacute;NICO:</b> Cuenta de correo electr&oacute;nico que permita contactar con el usuario.</li>
                             <li><b>CAMBIAR CONTRASEÑA:</b> Existen 2 estados: "Activar" y "Desactivar". Al escoger la opci&oacute;n "Activar" se muestran un campo para introducir la nueva contraseña y otro adicional para repetir la misma, evitando as&iacute; errores de digitaci&oacute;n.</li>
                                     <br>
-                                    <img src="img/manual/perfil_contraseña-activar.jpg" /> <img src="img/manual/perfil_contraseña-desactivar.jpg" />
+                                    <img src="img/manual/perfil_password-activar.jpg" /> <img src="img/manual/perfil_password-desactivar.jpg" />
                                     <br>
                                     <br>
-                                    <img src="img/manual/perfil_contraseña-nueva.jpg" />
+                                    <img src="img/manual/perfil_password-nueva.jpg" />
                                     <br>
                                     <br> 
                             <li><b>TIPO:</b> Existen 2 tipos: "Particular" o "Gen&eacute;rico". El perfil puede pertenecer a una persona puntualmente o de lo contrario puede llevar el nombre de un cargo o posici&oacute;n de forma gen&eacute;rica. Ejm: Admin.</li>
@@ -354,7 +355,64 @@
                         </ul>
                         </p>
                     </div>
-                   <div class="tab-pane" id="tab_vehicle">
+                    <div class="tab-pane" id="tab_registration-carrier-vehicle">
+                        <p>
+                        <h2>REGISTRO PROVEEDOOR-VEH&Iacute;CULO(S)</h2><br>
+                            <blockquote class="pull-right">
+                                <p>El manejo de este m&oacute;dulo es de nivel general…</p>
+                                <small class="help-block">Administrator TMPanel</small>
+                            </blockquote>
+                        <br>        
+                        <br>        
+                        <br>        
+                        <br>        
+                        <br>        
+                        <h3> Definici&oacute;n </h3><br>
+                        <p>El siguiente manual hace referencia a la vinculaci&oacute;n que se hace entre los veh&iacute;culos y los n&uacute;meros de matr&iacute;cula ingresados en el sistema.</p>
+                        <p>El mantenimiento de Registro de Proveedores-Veh&iacute;culos se encuentra dentro del m&oacute;dulo de Maestros/Transporte/Registro Proveedor-Veh&iacute;culo. A continuaci&oacute;n se presenta una imagen de la vista al maestro de Registro de Proveedor-Veh&iacute;culo:</p><br>
+                         
+                        <h3>Descripci&oacute;n de Pantalla:</h3><br>
+                        <img src="img/manual/maestro_registro-proveedor-vehiculo-vista.jpg" width="95%" />
+                        <br>
+                        <p>La tabla mantenimiento de Registro de Proveedor-Veh&iacute;culo cuenta con 3 columnas de datos. A continuaci&oacute;n describimos cada una:</p>
+                        <ul>
+                            <li><b>Caja Multiselecci&oacute;n:</b> Se presenta en forma de checkbox o caja seleccionadora. Es un elemento de interacci&oacute;n de la interfaz gr&aacute;fica de usuario que permite hacer selecciones m&uacute;ltiples. </li>
+                            <li><b>PROVEEDOR:</b> Se presenta en forma de lista desplegable. El usuario debe escoger entre la lista de proveedores disponibles.</li>
+                            <li><b>PLACA:</b> Se presenta en forma de lista desplegable. El usuario debe escoger entre la lista de placas ingresadas al sistema y vincularlas con el proveedor seleccionado anteriormente.</li>
+                        </ul>
+                        <br>
+                        <h3> Otros Elementos </h3><br>
+                        <ul>
+                            <li><b>ACCIONES:</b> Se presenta en forma de bot&oacute;n en la parte superior izquierda. Al hacer click sobre &eacute;ste se depliegan las opciones de NUEVO y ELIMINAR.</li>                            
+                            <img src="img/manual/general_acciones.jpg"/> <img src="img/manual/maestro_acciones.jpg"/>
+                        </ul>
+                        <br>
+                        <h3> Acciones NUEVO/ELIMINAR </h3><br>
+                         <ul>
+                            <li><b>NUEVO:</b> A continucaci&oacute;n se detalla paso a paso el proceso de inserci&oacute;n de un nuevo registro:</li>
+                                    <ol>
+                                        <li>El usuario debe dirigirse al menú ACCIONES ubicado en la parte superior izquierda y elegir la opci&oacute;n NUEVO</li><br>
+                                        <img src="img/manual/maestro_nuevo.jpg" />
+                                        <li>Aparecer&aacute; una ventana para el ingreso de informaci&oacute;n relacionada al Registro de Proveedor-Veh&iacute;culo. Una vez ingresado los datos, dar en GUARDAR</li><br>
+                                        <img src="img/manual/maestro_registro-proveedor-vehiculo-nuevo.jpg" />
+                                        <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. Se podr&aacute; observar el nuevo registro en la tabla de mantenimiento.</li><br>
+                                        <img src="img/manual/general_solicitud-procesada.jpg" />
+                                    </ol>
+                            <br>
+                            <li><b>ELIMINAR:</b> A continucaci&oacute;n se detalla paso a paso el proceso de eliminaci&oacute;n de un registro existente:</li>
+                                    <ol>
+                                        <li>El usuario debe seleccionar el o los registros que desea eliminar y dirigirse al menú ACCIONES ubicado en la parte superior izquierda. Elegir la opci&oacute;n ELIMINAR</li><br>
+                                        <img src="img/manual/maestro_eliminar.jpg" />
+                                        <li>Aparecer&aacute; un mensaje informando si se está seguro de eliminar el o los registros </li><br>
+                                        <img src="img/manual/maestro_eliminar-confirmacion.jpg" />
+                                        <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. Se podr&aacute; observar que el registro en la tabla de mantenimiento ha desaparecido.</li><br>
+                                        <img src="img/manual/general_solicitud-procesada.jpg" />
+                                    </ol>
+                            <br>
+                        </ul>
+                        </p>
+                    </div>
+                    <div class="tab-pane" id="tab_vehicle">
                         <p>
                         <h2>VEH&Iacute;CULO(S)</h2><br>
                             <blockquote class="pull-right">
@@ -974,23 +1032,18 @@
                         <br>        
                         <br>       
                         <h3> Definici&oacute;n </h3><br>
-                        <p>El siguiente manual hace referencia a las diferentes rutas que se recorrer&aacute;n durante el proceso de transporte de carga de un centro a otro. Se nos brindará información referencial sobre el costo y precio de la ruta, la distancia a recorrer y el tiempo estimnado.</p>
-                        <p>El mantenimiento de rutas se encuentra dentro del m&oacute;dulo de Maestros/Generales/Ruta(s). A continuaci&oacute;n se presenta una imagen de la vista al maestro de rutas:</p><br>
+                        <p>El siguiente manual hace referencia a todos los tipos de servicio que se pueden ofrecer durante el proceso de transporte de carga de un centro a otro. Estos servicos determinan el tipo de transporte que ser&aacute; requerido. Ejm: Transporte de productos congelados, transporte de productos refrigerados y transporte de productos secos.</p>
+                        <p>El mantenimiento de tipos de servicio se encuentra dentro del m&oacute;dulo de Maestros/Generales/Tipo de Servicio(s). A continuaci&oacute;n se presenta una imagen de la vista al maestro de tipos de servicio:</p><br>
                          
                         <h3>Descripci&oacute;n de Pantalla:</h3><br>
-                        <img src="img/manual/maestro_ruta-vista.jpg" width="95%"/>
+                        <img src="img/manual/maestro_tipo-servicio-vista.jpg" width="95%"/>
                         <br>
-                        <p>La tabla mantenimiento de rutas cuenta con 10 columnas de datos. A continuaci&oacute;n describimos cada una:</p>
+                        <p>La tabla mantenimiento de tipos de servicio cuenta con 5 columnas de datos. A continuaci&oacute;n describimos cada una:</p>
                         <ul>
                             <li><b>Caja Multiselecci&oacute;n:</b> Se presenta en forma de checkbox o caja seleccionadora. Es un elemento de interacci&oacute;n de la interfaz gr&aacute;fica de usuario que permite hacer selecciones m&uacute;ltiples. </li>
                             <li><b>ID:</b> C&oacute;digo autogenerado por el sistema que identifica de forma &uacute;nica a cada registro</li>
-                            <li><b>NOMBRE:</b> Nombre que sirva de indentificación para la ruta y lo diferencie del resto. El usuario debe ingresar el nombre en la caja de texto.</li>
-                            <li><b>ORIGEN:</b> Se presenta en forma de lista desplegable. El usuario deberá escoger entre las opciones de centros activos que se encuentran dispoonibles en la lista y asiganrlo punto de origen</li>
-                            <li><b>DESTINO:</b> Se presenta en forma de lista desplegable. El usuario deberá escoger entre las opciones de centros activos que se encuentran dispoonibles en la lista y asiganrlo punto de destino</li>
-                            <li><b>DISTANCIA&Iacute;A:</b> A modo de referencia el usuario deber&aacute; ingresar la distancia estimada a recorrer en la caja de texto.</li>
-                            <li><b>TIEMPO:</b> A modo de referencia el usuario deber&aacute; ingresar el tiempo estimado que tomar&aacute; completar dicha ruta en la caja de texto.</li>
-                            <li><b>COSTO:</b> A modo de referencia el usuario deber&aacute; ingresar el costo estimado que implica tomar dicha ruta en la caja de texto.</li>
-                            <li><b>PRECIO:</b> A modo de referencia el usuario deber&aacute; ingresar el precio (costo + margen) estimado que implica tomar dicha ruta en la caja de texto.</li>
+                            <li><b>NOMBRE:</b> Nombre que sirva de indentificación para el tipo de servicio y lo diferencie del resto. El usuario debe ingresar el nombre en la caja de texto.</li>
+                            <li><b>DESCRIPCI&Oacute;N:</b> Explicaci&oacute;n m&aacute;s amplia sobre el tipo de servicio que se va a brindar.</li>
                             <li><b>ACCI&Oacute;N:</b> Se presenta en forma de bot&oacute;n. Al hacer click sobre &eacute;ste, el usuario podr&aacute; editar registro a través de una ventana de edici&oacute;n</li>
                         </ul>
                         <br>
@@ -1000,7 +1053,9 @@
                             <br>
                             <img src="img/manual/maestro_estado-activo.jpg" /> <img src="img/manual/maestro_estado-inactivo.jpg" />
                             <br>
-                            <li><b>ACCIONES:</b> Se presenta en forma de bot&oacute;n en la parte superior izquierda. Al hacer click sobre &eacute;ste se depliegan las opciones de NUEVO y ELIMINAR.</li>                            
+                            <br>
+                            <li><b>ACCIONES:</b> Se presenta en forma de bot&oacute;n en la parte superior izquierda. Al hacer click sobre &eacute;ste se depliegan las opciones de NUEVO y ELIMINAR.</li>
+                            <br>
                             <img src="img/manual/general_acciones.jpg"/> <img src="img/manual/maestro_acciones.jpg"/>
                         </ul>
                         <br>
@@ -1010,18 +1065,18 @@
                                     <ol>
                                         <li>El usuario debe dirigirse al menú ACCIONES ubicado en la parte superior izquierda y elegir la opci&oacute;n NUEVO</li><br>
                                         <img src="img/manual/maestro_nuevo.jpg" />
-                                        <li>Aparecer&aacute; una ventana para el ingreso de informaci&oacute;n relacionada a la ruta. Una vez ingresado los datos, dar en GUARDAR</li><br>
-                                        <img src="img/manual/maestro_ruta-nuevo.jpg" />
+                                        <li>Aparecer&aacute; una ventana para el ingreso de informaci&oacute;n relacionada al tipo de servicio. Una vez ingresado los datos, dar en GUARDAR</li><br>
+                                        <img src="img/manual/maestro_tipo-servicio-nuevo.jpg" />
                                         <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. Se podr&aacute; observar el nuevo registro en la tabla de mantenimiento.</li><br>
                                         <img src="img/manual/general_solicitud-procesada.jpg" />
                                     </ol>
                             <br>
                             <li><b>EDITAR:</b> A continucaci&oacute;n se detalla paso a paso el proceso de edici&oacute;n de un registro existente:</li>
                                     <ol>
-                                        <li>El usuario debe dirigirse al bot&oacute;n EDITAR ubicado en la casilla ACCIONES en la tabla de mantenimiento de rutas</li><br>
+                                        <li>El usuario debe dirigirse al bot&oacute;n EDITAR ubicado en la casilla ACCIONES en la tabla de mantenimiento de tipo de servicio</li><br>
                                         <img src="img/manual/maestro_editar.jpg" />
-                                        <li>Aparecer&aacute; una ventana con la informaci&oacute;n relacionada a esa ruta. Los datos que puedan ser cambiados estar&aacute;n disponibles para edici&oacute;n. Una vez realizados los cambios, dar en GUARDAR</li><br>
-                                        <img src="img/manual/maestro_ruta-editar.jpg" />
+                                        <li>Aparecer&aacute; una ventana con la informaci&oacute;n relacionada a ese tipo de servicio. Los datos que puedan ser cambiados estar&aacute;n disponibles para edici&oacute;n. Una vez realizados los cambios, dar en GUARDAR</li><br>
+                                        <img src="img/manual/maestro_tipo-servicio-editar.jpg" />
                                         <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. Se podr&aacute; observar que el registro en la tabla ha cambiado.</li><br>
                                         <img src="img/manual/general_solicitud-procesada.jpg" />
                                     </ol>
@@ -1200,6 +1255,136 @@
                                 <p>El manejo de este m&oacute;dulo es de nivel general…</p>
                                 <small class="help-block">Administrator TMPanel</small>
                             </blockquote>
+                            <br>        
+                    <br>        
+                    <br>        
+                    <br>        
+                    <br>       
+                    <h3> Definici&oacute;n </h3><br>
+                    <p>El siguiente manual hace a los servicios (pedidos con detalle registrado y liberados. Ver manual Pedido(s))que est&aacute;n listos para ser planificados y pendientes de asignar veh&iacute;culo y as&iacute; continuar con el proceso de transporte de carga de un centro a otro. Al igual que el pedido, los servicios cuentan con una cabecera y un detalle. En la cabecera se observa los datos generales del pedido y en los detalles los datos por tramo de transporte. La suma de los detalles se totaliza en la cabecera del servicio.</p>
+                    <p>La opci&oacute;n Servicios se encuentra dentro del m&oacute;dulo Transporte/Asignaci&oacute;n/Servicios. A continuaci&oacute;n se presenta una imagen de la vista a la tabla servicios:</p><br>
+
+                    <h3>Descripci&oacute;n de Pantalla Cabecera:</h3><br>
+                    <img src="img/manual/servicio_vista-cabecera.jpg" width="95%" />
+                    <br>
+                    <br>
+                    <p>La cabecera del servicio cuenta con 8 columnas de datos. A continuaci&oacute;n describimos cada una:</p>
+                    <ul>
+                        <li><b>Despliegue Detalle:</b> Se presenta en forma de s&iacute;mbolo " + " y " - " sirve para mostrar u ocultar el detalle del servicio.</li>
+                        <li><b>Caja Multiselecci&oacute;n:</b> Se presenta en forma de checkbox o caja seleccionadora. Es un elemento de interacci&oacute;n de la interfaz gr&aacute;fica de usuario que permite hacer selecciones m&uacute;ltiples.</li>
+                        <li><b>NRO ORDEN:</b> C&oacute;digo autogenerado por el sistema que identifica de forma &uacute;nica a cada pedido</li>
+                        <li><b>CLIENTE:</b> Campo ingresado en la generaci&oacute;n del pedido (Ver manual Pedido(s)) y que es obtenido en la cabecera del servicio. Hace referencia a la empresa que ha solicitado el servicio de transporte de carga.</li>
+                        <li><b>TIPO DE SERVICIO:</b> Campo ingresado en la generaci&oacute;n del pedido (Ver manual Pedido(s)) y que es obtenido en la cabecera del servicio. Hace referencia a los requerimientos de transporte de la carga. Existen diferentes tipos de servicio como: transporte congeladro, transporte refrigerado y transporte seco.</li>
+                        <li><b>VOLUMEN:</b> Campo ingresado en la generaci&oacute;n del pedido (Ver manual Pedido(s)) y que es obtenido en la cabecera del servicio. Hace referencia a la suma de vol&uacute;menes de los detalles registrados.</li>
+                        <li><b>PESO:</b> Campo ingresado en la generaci&oacute;n del pedido (Ver manual Pedido(s)) y que es obtenido en la cabecera del servicio. Hace referencia a la suma de pesos de los detalles registrados.</li>
+                        <li><b>DISTANCIA:</b> Campo ingresado en la generaci&oacute;n del pedido (Ver manual Pedido(s)) y que es obtenido en la cabecera del servicio. Hace referencia a la suma de distancias de los detalles registrados.</li>
+                    </ul>
+                    <br>
+                    <h3> Otros Elementos </h3><br>
+                    <ul>
+                        <li><b>ESTADO PEDIDO:</b> Se presenta en forma de imagen dentro del campo NRO. ORDEN. Estos estados hacen referencia a la situaci&oacute;n del pedido en el proceso de transporte. Existen 7 posibles estados "Rechazada", "Pendiente de liberaci&oacute;n", "Orden Liberada", "Orden Subastada", "Transporte Asignado", "Procesando Transporte" y "Transporte Finalizado".</li><br>
+                        <img src="img/manual/pedido_estado2-rechazada.jpg" /> <img src="img/manual/pedido_estado2-pendiente-liberacion.jpg" /> <img src="img/manual/pedido_estado2-orden-liberada.jpg" /> <img src="img/manual/pedido_estado2-orden-subastada.jpg" /> <img src="img/manual/pedido_estado2-transporte-asignado.jpg" /> <img src="img/manual/pedido_estado2-procesando-transporte.jpg" /> <img src="img/manual/pedido_estado2-transporte-finalizado.jpg" />
+                        <br>
+                        <br>
+                        <li><b>ACCIONES:</b> Se presenta en forma de bot&oacute;n en la parte superior izquierda. Al hacer click sobre &eacute;ste se depliegan las opciones de PLANIFICAR, CANCELAR PRE-PLANIFICACION, LIBERAR y RECHAZAR.</li>                            
+                        <img src="img/manual/general_acciones.jpg" /><img src="img/manual/servicio_acciones.jpg" />
+                        <br>
+                        <br>
+                    </ul>
+                    <br>
+                    <h3> Acciones de Cabecera - PLANIFICAR / CANCELAR PRE-PLANIFICACI&Oacute;N / LIBERAR / RECHAZAR </h3><br>
+                     <ul>
+                         <li><b>PLANIFICAR:</b> A continucaci&oacute;n se detalla paso a paso el proceso de planificaci&oacute;n de un nuevo servicio:</li>
+                                <ol>
+                                    <li>El usuario debe seleccionar el servicio que desea planificar y dirigirse al menú ACCIONES ubicado en la parte superior izquierda y elegir la opci&oacute;n PLANIFICAR.</li><br>
+                                    <img src="img/manual/servicio_planificar-1.jpg" /> 
+                                    <br>
+                                    <br>
+                                    <li>Aparecer&aacute; una ventana para la selecci&oacute;n de veh&iacute;culos y asignaci&oacute;n de los mismos a cada uno de los tramos.</li><br>
+                                    <img src="img/manual/servicio_planificar-2.jpg" width="95%" />
+                                    <br>
+                                    <br>
+                                    <li>Para seleccionar veh&iacute;culos, se debe dar click en el &iacute;cono del cami&oacute;n, el cual señala el n&uacute;mero de camiones seleccionados. Aparecer&aacute; una ventana con la lista de veh&iacute;culos ingresados en el sistema. Seleccionar los veh&iacute;culos deseados y dar CONTINUAR. A continuaci&oacute;n ingresar las cantidades y FINALIZAR.</li><br>
+                                    <img src="img/manual/servicio_planificar-seleccionar-vehiculos-1.jpg" /><br><br>
+                                    <img src="img/manual/servicio_planificar-seleccionar-vehiculos-2.jpg" /><br><br>
+                                    <img src="img/manual/servicio_planificar-seleccionar-vehiculos-3.jpg" />
+                                    <br>
+                                    <br>
+                                    <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. Se podr&aacute; observar que en selecci&oacute;n de veh&iacute;culos, en el &iacute;cono del cami&oacute;n aparace la cantidad de veh&iacute;culos seleccionados.</li><br>
+                                    <img src="img/manual/pedido_solicitud-procesada.jpg" /> <br><br>
+                                    <img src="img/manual/servicio_planificar-seleccionar-vehiculos-4.jpg"/>
+                                    <br>
+                                    <br>
+                                    <li>A continuaci&oacute;n se procede a asignar los veh&iacute;culos a cada tramo del servicio. Para esto dar click en el &iacute;cono ASIGNAR VEH&Iacute;CULO dentro de ASIG. TRANS. Aparecer&aacute; una ventana con la lista de veh&iacute;culos que seleccione previamente y las cantidades solicitadas. Se procede a asignar transporte y dar CONTINUAR.</li><br>
+                                    <img src="img/manual/servicio_planificar-asignar-vehiculos-1.jpg" /> <br><br>
+                                    <img src="img/manual/servicio_planificar-asignar-vehiculos-2.jpg.jpg"/>
+                                    <br>
+                                    <br>
+                                    <li>Inmediatamente aparecer&aacute; una nueva ventana donde te preguntan si deseas compartir este veh&iacute;culo en otro vieja o no. Adem&aacute;s se selecciona el tipo de adjudicaci&oacute;n de transporte (Directa o Subasta). Una vez terminado, dar FINALIZAR.</li><br>
+                                    <img src="img/manual/servicio_planificar-asignar-vehiculos-3.jpg" /> 
+                                    <br>
+                                    <br>
+                                    <li>Repetir los 2 pasos previos de asignaci&oacute;n de veh&iacute;culos para cada servicio por cada tramo del proceso de transporte. Finalmente, a manera de conformidad aparecer&aacute; un mensaje de conformidad en la parte superior derecha. Se podr&aacute; observar que cada tramo del proceso de transporte ya cuenta con veh&iacute;culo asignado. Dar en GENERAR PLANIFICACI&Oacute;N.</li><br>
+                                    <img src="img/manual/pedido_solicitud-procesada.jpg" /> <br><br>
+                                    <img src="img/manual/servicio_planificar-asignar-vehiculos-4.jpg" width="95%"/>
+                                    <br>
+                                    <br>
+                                    <li>Se podr&aacute; observar que el servicio cambi&oacute; de estado a "Transporte Asignado".</li><br>
+                                    <img src="img/manual/servicio_planificar-asignar-vehiculos-5.jpg" width="95%"/>
+                                    <br>
+                                    <br>
+                                </ol>
+                        <br>
+                        <li><b>CANCELAR PRE-PLANIFICACI&Oacute;N:</b> A continucaci&oacute;n se detalla paso a paso el proceso de cancelaci&oacute;n de un pre-planificaci&oacute;n en un servicio:</li>
+                                <ol>
+                                    <li>Una vez seleccionado los veh&iacute;culos y adem&aacute;s asignados a cada servicio por tramo del transporte, si a&uacute;n no se dio GENERAR PLANIFICACI&Oacute;N, es posible cancelar dicha planificaci&oacute;n .</li><br>
+                                    <img src="img/manual/servicio_cancelar-preplanificacion-1.jpg" width="95%" /> 
+                                    <br>
+                                    <br>
+                                    <li>El usuario debe seleccionar el servicio al cual desea cancelar pre-planificaci&oacute;n y dirigirse al menú ACCIONES ubicado en la parte superior izquierda y elegir la opci&oacute;n CANCELAR PRE-PLANIFICACI&Oacute;N.</li><br>
+                                    <img src="img/manual/servicio_cancelar-preplanificacion-2.jpg" /> 
+                                    <br>
+                                    <br>
+                                    <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. El servicio queda limpio para volver a planificar</li><br>
+                                    <img src="img/manual/pedido_solicitud-procesada.jpg" />
+                                    <br>
+                                    <br>
+                                </ol>
+                        <br>
+                        <li><b>LIBERAR:</b> A continucaci&oacute;n se detalla paso a paso el proceso de liberaci&oacute;n de un servicio:</li>
+                               <ol>
+                                    <li>El usuario debe seleccionar el servicio que desea liberar y dirigirse al menú ACCIONES ubicado en la parte superior izquierda y elegir la opci&oacute;n LIBERAR.</li><br>
+                                    <img src="img/manual/servicio_liberar-1.jpg" /> 
+                                    <br>
+                                    <br>
+                                    <li>Aparecer&aacute; un mensaje preguntando si est&aacute; seguro que desea liberar los registros.</li><br>
+                                    <img src="img/manual/servicio_liberar-confirmacion.jpg"/>
+                                    <br>
+                                    <br>
+                                    <li>Se podr&aacute; observar que el servicio cambi&oacute; de estado a "Procesando Transporte".</li><br>
+                                    <img src="img/manual/servicio_liberar-2.jpg" width="95%" />
+                                    <br>
+                                    <br>
+                                </ol>
+                        <li><b>RECHAZAR:</b> A continucaci&oacute;n se detalla paso a paso el proceso para rechazar un servicio:</li>
+                               <ol>
+                                    <li>El usuario debe seleccionar el servicio que desea rechazar y dirigirse al menú ACCIONES ubicado en la parte superior izquierda y elegir la opci&oacute;n RECHAZAR.</li><br>
+                                    <img src="img/manual/servicio_rechazar.jpg" /> 
+                                    <br>
+                                    <br>
+                                    <li>Aparecer&aacute; un mensaje preguntando si est&aacute; seguro que desea rechazar los registros.</li><br>
+                                    <img src="img/manual/XXXX.jpg"/>
+                                    <br>
+                                    <br>
+                                    <li>Se podr&aacute; observar que el servicio cambi&oacute; de estado a "XXXX".</li><br>
+                                    <img src="img/manual/xxxxx.jpg" />
+                                    <br>
+                                    <br>
+                                </ol>
+                        <br>
+                    </ul>
+                    <br>
+                    <br>
                         </p>
                     </div>
                      <div class="tab-pane" id="tab_allocation-reasigment">
@@ -1209,6 +1394,69 @@
                                 <p>El manejo de este m&oacute;dulo es de nivel general…</p>
                                 <small class="help-block">Administrator TMPanel</small>
                             </blockquote>
+                            <br>        
+                    <br>        
+                    <br>        
+                    <br>        
+                    <br>       
+                    <h3> Definici&oacute;n </h3><br>
+                    <p>El siguiente manual hace referencia a la opci&oacute;n de poder reemplazar a un transportista ya asignado por cualquier motivo de fuerza mayor. El sistema dar&aacute; la opci&oacute;n de escoger entre los proveedores registrados y que se encuentren activos. Si el transporte estuviese en proceso de subasta y se reasigna servicio, &eacute;ste se volver&iacute;a autom&aacute;ticamente a adjudicaci&oacute;n directa.</p>
+                    <p>La pantalla principal consta de una cabecera y un detalle. En la cabecera se mostrar&aacute; el pedido original a modo de referencia (Ver Manual Servicio(s)). Adem&aacute;s el sistema mostrar&aacute; un detalle de pedido donde se encontrar&aacute; la opci&oacute;n de reasignar transporte.</p>
+                    <p>La opci&oacute;n de Reasignar Servicio se encuentra dentro del m&oacute;dulo Transporte/Asignaci&oacute;n/Reasignar Servicio(s). A continuaci&oacute;n se presenta una imagen de la vista al reasignador de transporte:</p><br>
+
+                    <h3>Descripci&oacute;n de Pantalla Cabecera:</h3><br>
+                    <img src="img/manual/transporte_reasignacion-transporte-cabecera-vista.jpg" width="95%" />
+                    <br>
+                    <br>
+                    <p>Para mayor informaci&oacute;n sobre la cabecera ver el manual Servicio(s).</p>
+                    <br>
+                    <br>
+                    <h3> Descripci&oacute;n de Pantalla Detalle: </h3><br>
+                    <img src="img/manual/transporte_reasignacion-transporte-detalle-vista.jpg" width="95%" />
+                        <br>
+                        <br>
+                        <p>La tabla detalle cuenta con 5 columnas de datos. A continuaci&oacute;n describimos cada una:</p>
+                        <ul>
+                            <li><b>SERVICIO:</b> C&oacute;digo autogenerado por el sistema que identifica de forma &uacute;nica a cada servicio. Existe un c&oacute;digo de servicio por cada tramo en la ruta de proceso de transporte (Ver Manual de Servici(s)).</li>
+                            <li><b>ORIGEN:</b> Punto de incio de un tramo de la ruta en el proceso de transporte de carga. Este valor es registrado en el Servicio y obtenido en esta pantalla.</li>
+                            <li><b>DESTINO:</b> Punto de fin de un tramo de la ruta en el proceso de transporte de carga. Este valor es registrado en el Servicio y obtenido en esta pantalla.</li>
+                            <li><b>VEH&Iacute;CULO:</b> Este campo describe toda la informaci&oacute;n relacionada al veh&iacute;culo como lo son el tipo, la clase, etc. Esta informaci&oacute;n es por veh&iacute;culo, por lo que podr&iacute; haber m&aacute;s de un registro por cada servicio.</li>
+                            <li><b>ACCI&Oacute;N:</b> Se presenta en forma de un bot&oacute;n de acci&oacute;n con el cual el usuario podr&aacute; realizar la acci&oacute;n de REASIGNAR SERVICIO. </li>
+                        <br>
+                        </ul>
+                        <br>
+                        <h3> Otros Elementos </h3><br>
+                        <ul>
+                            <li><b>CARACTER&Iacute;STICAS:</b> Se presenta en forma de imagen dentro del campo SERVICIO. Al dar click sobre la imagen se muestra la siguiente informaci&oacute;n: NRO.SERVICO, VOLUMEN, PESO Y DISTANCIA.</li>
+                            <br>
+                            <img src="img/manual/transporte_reasignacion-transporte-caracteristica.jpg" /> 
+                            <br>
+                            <br>
+                            <li><b>CITAS:</b> Se presenta en forma de imagen dentro de los campos ORIGEN y DESTINO. Al dar click sobre la imagen se muestra la fecha y hora de recojo en el origen y la fecha y hora de llegada en el destino.</li>
+                            <br>
+                            <img src="img/manual/transporte_reasignacion-transporte-cita.jpg"/> 
+                            <br>
+                            <br>
+                            <li><b>TIPO DE ADJUDICACI&Oacute;N:</b> Se presenta en forma de imagen dentro del campo VEH&Iacute;CULO. Existen 2 tipos de adjudicaci&oacute;n de transporte: adjudicaci&oacute;n directa (cuando se selecciona directamente al proveedor de transporte) y por subasta (se invita a un proceso de subasta interna a 2 o m&aacute;s proveedores).</li>
+                            <br>
+                            <img src="img/manual/transporte_reasignacion-transporte-adjudicacion-directa.jpg"/> <img src="img/manual/transporte_reasignacion-transporte-adjudicacion-subasta.jpg"/> 
+                            <br>
+                            <br>
+                        </ul>
+                        <br>
+                        <h3> Acci&oacute;n REASIGNAR SERVICIO </h3><br>
+                         <ul>
+                             <li><b>REASIGNAR SERVICIO:</b> A continucaci&oacute;n se detalla paso a paso el proceso de reasignaci&oacute;n de servicio:</li>
+                                    <ol>
+                                        <li>El usuario debe dirigirse al bot&oacute;n Reasignar Servicio dentro del campo ACCIONES ubicado en el detalle.</li><br>
+                                        <img src="img/manual/transporte_reasignacion-transporte-accion.jpg" /><br><br>
+                                        <li>Aparecer&aacute; una ventana para el ingreso del nuevo proveedor y un motivo del cambio. Una vez ingresado los datos, dar en GUARDAR</li><br>
+                                        <img src="img/manual/transporte_reasignacion-transporte-reasignar.jpg" /><br><br>
+                                        <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha.</li><br>
+                                        <img src="img/manual/general_solicitud-procesada.jpg" /><br><br>
+                                    </ol>
+                            <br>
+                        </ul>
                         </p>
                     </div>
                      <div class="tab-pane" id="tab_allocation-auction">
@@ -1218,6 +1466,175 @@
                                 <p>El manejo de este m&oacute;dulo es de nivel general…</p>
                                 <small class="help-block">Administrator TMPanel</small>
                             </blockquote>
+                            <br>        
+                    <br>        
+                    <br>        
+                    <br>        
+                    <br>       
+                    <h3> Definici&oacute;n </h3><br>
+                    <p>El siguiente manual hace referencia al generador de subastas el cual sirve como herramienta para la designaci&oacute;n de un proveedor de transporte a trav&eacute;s de un proceso de subasta inversa.</p>
+                    <p>El generador de subastas se encuentra dentro del m&oacute;dulo Transporte/Asignaci&oacute;n/Subasta(s). A continuaci&oacute;n se presenta una imagen de la vista al generador de subasta:</p><br>
+
+                    <h3>Descripci&oacute;n de Pantalla:</h3><br>
+                    <img src="img/manual/transporte_subasta-vista.jpg" width="95%" />
+                    <br>
+                    <br>
+                    <p>La vista del generador de subasta cuenta con 7 columnas de datos. A continuaci&oacute;n describimos cada una:</p>
+                    <ul>
+                        <li><b>Caja Multiselecci&oacute;n:</b> Se presenta en forma de checkbox o caja seleccionadora. Es un elemento de interacci&oacute;n de la interfaz gr&aacute;fica de usuario que permite hacer selecciones m&uacute;ltiples. </li>
+                        <li><b>NRO.SERVICIO:</b> C&oacute;digo autogenerado por el sistema que identifica de forma &uacute;nica a cada servicio. Adem&aacute;s del c&oacute;digo de servicio tambi&eacute;n se presenta el n&uacute;mero de ord&eacute;n al cual hace referencia (ver manual Pedido(s)) dicho servicio.</li>
+                        <li><b>TIPO DE SERVICIO:</b> Este campo indica el tipo de servicio que requiere el transporte. Ejm: Transporte congelado, transporte refrigerado o transporte seco, etc. Además indica las caracter&iacute;sticas del veh&iacute;culo que ha sido asignado, como lo son el tipo, clase, categor&iacute;a, etc.</li>
+                        <li><b>ORIGEN:</b> Este campo indica el punto de origen del servicio. Adem&aacute;s indica el tipo de centro que corresponde. Por Ejm: Si es un centro de acopio, planta, puerto, etc.</li>
+                        <li><b>DESTINO:</b> Este campo indica el punto final del servicio. Adem&aacute;s indica el tipo de centro que corresponde. Por Ejm: Si es un centro de acopio, planta, puerto, etc.</li>
+                        <li><b>PRECIO:</b> En este campo se puede visulaizar el monto inicial de la subasta y monto actual.</li>
+                        <li><b>ACCI&Oacute;N:</b> Se presenta en forma de botones. Al hacer click sobre el primer &iacute;cono se podr&aacute; acceder al administrador de la subasta. El segundo bot&oacute;n permite participar de la subasta haciendo ofertas. Finalmente el tercer bot&oacute;n cambiar la adjudicaci&oacute;n por subasta de este transporte a adjudicaci&oacute;n directa (Ver manual de Reasignaci&oacute;n de Servicio).</li>
+                    </ul>
+                    <br>
+                    <h3> Otros Elementos </h3><br>
+                    <ul>
+                        <li><b>ACCIONES:</b> Se presenta en forma de bot&oacute;n en la parte superior izquierda. Al hacer click sobre &eacute;ste se depliegan las opciones de LIBERAR, VER HISTORIAL DE OFERTAS y REINICIAR..</li>
+                        <br>
+                        <img src="img/manual/general_acciones.jpg" /> <img src="img/manual/transporte_subasta-acciones.jpg" />
+                        <br>
+                        <br>
+                        <li><b>ESTADO SUBASTA:</b> Se presenta en forma de imagen dentro del campo NRO.SERVICIO. Existen 2 estados para la subasta: "Pendiente de Liberar" que se da una vez asignado el transporte como adjudicaci&oacute;n por subasta y "Liberada" que se da una vez activado la acci&oacute;n LIBERAR en la lista de acciones (para pasar a este estado se deben haber asignado los campos en el administrador de subasta, de lo contrario dar&aacute; un mensaje que subasta no ha iniciado).</li>
+                        <br>
+                        <img src="img/manual/transporte_subasta-estado-pendiente-liberar.jpg" /> <img src="img/manual/transporte_subasta-estado-liberada.jpg" />
+                        <br>
+                        <li><b>INFORMACI&Oacute;N ADICIONAL:</b> Se presenta en forma de imagen dentro del campo TIPO SERVICIO. Al dar click sobre la imagen se muestra informaci&oacute;n: adicional referente a la subasta. Esta informaci&oacute;n es completada en el Administrado de Subasta.</li>
+                        <img src="img/manual/transporte_subasta-informacion-adicional.jpg"/>
+                        <br>
+                        <br>
+                        <li><b>TIEMPO SUBASTA:</b> Se presenta en forma de imagen dentro del campo TIPO SERVICIO. Representa el tiempo de vida de una subasta activa y durante este periodo es posible realizar ofertas.</li>
+                        <br>
+                        <img src="img/manual/transporte_subasta-tiempo.jpg"/>
+                        <br>
+                        <br>
+                        <li><b>CARACTER&Iacute;STICAS:</b> Se presenta en forma de imagen dentro del campo TIPO SERVICIO. Al dar click sobre la imagen se muestra la siguiente informaci&oacute;n: VOLUMEN, PESO Y DISTANCIA APROX.</li>
+                        <br>        
+                        <img src="img/manual/transporte_subasta-caracteristicas.jpg"/>
+                        <br>
+                        <br>
+                        <li><b>CITAS:</b> Se presenta en forma de imagen dentro de los campos ORIGEN y DESTINO. Al dar click sobre la imagen se muestra la fecha y hora de recojo en el origen y la fecha y hora de llegada en el destino.</li>
+                        <br>        
+                        <img src="img/manual/transporte_subasta-cita.jpg"/>
+                        <br>
+                        <br>
+                    </ul>
+                    <br>
+                    <h3> Acciones de Subasta - ADMINISTRAR SUBASTA/LIBERAR/OFERTAR/VER HISTORIAL DE OFERTAS/REINICAR/ASIGNACI&Oacute;N DIRECTA </h3><br>
+                     <ul>
+                         <li><b>ADMINISTRAR SUBASTA:</b> A continucaci&oacute;n se detalla paso a paso el proceso de administraci&oacute;n de subasta:</li>
+                                <ol>
+                                    <li>El usuario debe dirigirse al bot&oacute;n ADMINISTRAR SUBASTA ubicado en la casilla ACCIONES en la tabla de subasta.</li><br>
+                                    <img src="img/manual/transporte_subasta-administrar-subasta-1.jpg" />
+                                    <br>
+                                    <br>
+                                    <li>Aparecer&aacute; una ventana para el ingreso de informaci&oacute;n relacionada con la subasta. Una vez ingresado los datos, dar en GUARDAR. La subasta est&aacute; lista para ser liberada.</li><br>
+                                    <img src="img/manual/transporte_subasta-administrar-subasta-2.jpg" />
+                                    <br>
+                                    <br>
+                                    <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. Se podr&aacute; observar que el reloj de subasta se activa en el campo TIPO SERVICIO. Adem&aacute;s aparecen los montos de PRECIO INICIAL Y PRECIO SUBASTA en el campo PRECIO.</li><br>
+                                    <img src="img/manual/general_exito-solicitud-procesada.jpg" /> 
+                                    <br>
+                                    <br>
+                                    <img src="img/manual/transporte_subasta-administrar-subasta-3.jpg" width="95%" />
+                                    <br>
+                                    <br>
+                                </ol>
+                        <br>
+                        <li><b>LIBERAR:</b> A continucaci&oacute;n se detalla paso a paso el proceso de liberaci&oacute;n de una subasta:</li>
+                                <ol>
+                                    <li>El usuario debe seleccionar la subasta que desea liberar y dirigirse al menú ACCIONES ubicado en la parte superior izquierda y elegir la opci&oacute;n LIBERAR. Es necesario que se hayan ingresado los datos de subasta en ADMINISTRAR SUBASTA para propceder a liberarla.</li><br>
+                                    <img src="img/manual/transporte_subasta-liberar-1.jpg" />
+                                    <br>
+                                    <br>
+                                    <li>Aparecer&aacute; un mensaje informando si se está seguro de liberar dicha subasta.</li><br>
+                                    <img src="img/manual/transporte_subasta-confirmar-liberar.jpg" />
+                                    <br>
+                                    <br>
+                                    <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. Se podr&aacute; que el ESTADO SUBASTA a cambiado a "Liberada".</li><br>
+                                    <img src="img/manual/general_exito-solicitud-procesada.jpg" />
+                                    <br>
+                                    <br>
+                                    <img src="img/manual/transporte_subasta-liberar-2.jpg" width="95%" />
+                                    <br>
+                                    <br>
+                                </ol>
+                        <br>
+                        <li><b>OFERTAR:</b> A continucaci&oacute;n se detalla paso a paso el proceso de ofertar en una subasta:</li>
+                                <ol>
+                                    <li>El usuario debe dirigirse al bot&oacute;n OFERTAR ubicado en la casilla ACCIONES en la tabla de subasta.</li><br>
+                                    <img src="img/manual/transporte_subasta-ofertar-1.jpg" />
+                                    <br>
+                                    <br>
+                                    <li>Aparecer&aacute; una ventana para el ingreso de la nueva oferta. Al ser una subasta inversa, el monto ingresado debe ser menor al monto actual indicado en la ventana. Una vez ingresado el monto a ofertar damos REALIZAR OFERTA.</li><br>
+                                    <img src="img/manual/transporte_subasta-ofertar-2.jpg" />
+                                    <br>
+                                    <br>
+                                    <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. Se podr&aacute; Se podr&aacute; observar que el precio subasta en el campo PRECIO ha cambiado por el monto ofertado.</li><br>
+                                    <img src="img/manual/general_exito-solicitud-procesada.jpg" />
+                                    <br>
+                                    <br>
+                                    <img src="img/manual/transporte_subasta-ofertar-3.jpg" width="95%" />
+                                    <br>
+                                    <br>
+                                </ol>
+                        <br>
+                        <li><b>VER HISTORIAL DE OFERTAS:</b> A continucaci&oacute;n se detalla paso a paso c&oacute;mo visualizar el historial de ofertas en una subasta:</li>
+                                <ol>
+                                    <li>El usuario debe seleccionar la subasta de la cual desea ver el historial de ofertas y dirigirse al menú ACCIONES ubicado en la parte superior izquierda y elegir la opci&oacute;n VER HISTORIAL DE OFERTAS.</li><br>
+                                    <img src="img/manual/transporte_subasta-historial-ofertas-1.jpg" />
+                                    <br>
+                                    <br>
+                                    <li>Aparecer&aacute; una ventana en la cual se podr&aacute; apreciar todas las ofertas realizadas. En la ventana se observa el cada proveedor de transporte con la respectiva fecha y hora de oferta. La pantalla es &uacute;nicamente de visualizaci&oacute;n.</li><br>
+                                    <img src="img/manual/transporte_subasta-historial-ofertas-2.jpg" />
+                                    <br>
+                                    <br>
+                                </ol>
+                        <br>
+                        <li><b>REINICIAR:</b> A continucaci&oacute;n se detalla paso a paso el proceso de reiniciar una subasta:</li>
+                                <ol>
+                                    <li>El usuario debe seleccionar la subasta la cual desea reiniciar y dirigirse al menú ACCIONES ubicado en la parte superior izquierda y elegir la opci&oacute;n REINICIAR.</li><br>
+                                    <img src="img/manual/transporte_subasta-reiniciar-1.jpg" />
+                                    <br>
+                                    <br>
+                                    <li>Aparecer&aacute; un mensaje informando si se está seguro de reinicar dicha subasta.</li><br>
+                                    <img src="img/manual/transporte_subasta-confirmar-reiniciar.jpg" />
+                                    <br>
+                                    <br>
+                                    <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. Se podr&aacute; observar el estado de la subasta en el campo NRO.SERVICIO a cambiado a "Pendiente de Liberar", adem&aacute;s el tiempo de subasta en el campo TIPO SERVICIO se ha desactivado indicando "0d 0h 0m 0s" como tiempo restante. Finalmente los montos de precio inicial y precio subasta en el campo PRECIO figuran con 0.00 soles.</li><br>
+                                    <img src="img/manual/general_exito-solicitud-procesada.jpg" />
+                                    <br>
+                                    <br>
+                                    <img src="img/manual/transporte_subasta-reiniciar-2.jpg" width="95%" />
+                                    <br>
+                                    <br>
+                                </ol>
+                        <br>
+                        <li><b>ASIGNACI&Oacute;N DIRECTA:</b> A continucaci&oacute;n se detalla paso a paso el proceso para cambiar una adjudicaci&oacute;n por subasta a una directa:</li>
+                                <ol>
+                                    <li>El usuario debe dirigirse al bot&oacute;n ASIGNACI&Oacute;N DIRECTA ubicado en la casilla ACCIONES en la tabla de subasta.</li><br>
+                                    <img src="img/manual/transporte_subasta-asignacion-directa-1.jpg" />
+                                    <br>
+                                    <br>
+                                    <li>Aparecer&aacute; una ventana para con los nombres de los proveedores invitados a subasta actualmente y opci&oacute;n de ingresar directamente a un nuevo proveedor.</li><br>
+                                    <img src="img/manual/transporte_subasta-asignacion-directa-2.jpg" />
+                                    <br>
+                                    <br>
+                                    <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. Se podr&aacute; observar que la actual subasta ha desaparecido de la tabla de subastas ya que ahora es una adjudicaci&oacute;n directa.</li><br>
+                                    <img src="img/manual/general_exito-solicitud-procesada.jpg" />
+                                    <br>
+                                    <br>
+                                    <img src="img/manual/transporte_subasta-asignacion-directa-3.jpg" width="95%" />
+                                    <br>
+                                    <br>
+                                </ol>
+                        <br>
+                    </ul>
+                    <br>
+                    
+                    <br>
                         </p>
                     </div>
                     <div class="tab-pane" id="tab_process-data-transport">
@@ -1227,6 +1644,87 @@
                                 <p>El manejo de este m&oacute;dulo es de nivel general…</p>
                                 <small class="help-block">Administrator TMPanel</small>
                             </blockquote>
+                            <br>        
+                    <br>        
+                    <br>        
+                    <br>        
+                    <br>       
+                    <h3> Definici&oacute;n </h3><br>
+                    <p>El siguiente manual hace referencia al proceso en el cual, una vez seleccionada la empresa de transporte, &eacute;sta debe ingresar los datos tanto del chofer como del veh&iacute;culo que ser&aacute;asignado.</p>
+                    <p>La opci&oacute;n de registrar transportista se encuentra dentro del m&oacute;dulo Transporte/Proceso/Registro Transportista. A continuaci&oacute;n se presenta una imagen de la vista del Registro de Transportista:</p><br>
+
+                    <h3>Descripci&oacute;n de Pantalla:</h3><br>
+                    <img src="img/manual/transporte_registro-transportista-vista.jpg" width="95%" />
+                    <br>
+                    <br>
+                    <p>La vista del registro de transportista cuenta con 6 columnas de datos. A continuaci&oacute;n describimos cada una:</p>
+                    <ul>
+                        <li><b>NRO.SERVICIO:</b> C&oacute;digo autogenerado por el sistema que identifica de forma &uacute;nica a cada servicio. Adem&aacute;s del c&oacute;digo de servicio tambi&eacute;n se presenta el n&uacute;mero de ord&eacute;n al cual hace referencia (ver manual Pedido(s)) dicho servicio.</li>
+                        <li><b>TIPO DE SERVICIO:</b> Este campo indica el tipo de servicio que requiere el transporte. Ejm: Transporte congelado, transporte refrigerado o transporte seco, etc.</li>
+                        <li><b>ORIGEN:</b> Este campo indica el punto de origen del servicio. Adem&aacute;s indica el tipo de centro que corresponde. Por Ejm: Si es un centro de acopio, planta, puerto, etc.</li>
+                        <li><b>DESTINO:</b> Este campo indica el punto final del servicio. Adem&aacute;s indica el tipo de centro que corresponde. Por Ejm: Si es un centro de acopio, planta, puerto, etc.</li>
+                        <li><b>VEH&Iacute;CULO:</b> Este campo indica las caracter&iacute;sticas del veh&iacute;culo que ha sido asignado, como lo son el tipo, clase, categor&iacute;a, etc.</li>
+                        <li><b>ACCI&Oacute;N:</b> Se presenta en forma de botones. Al hacer click sobre el primer &iacute;cono se ingresar&aacute;n los datos de transporte para ese servicio. Si hacemos click en el segundo &iacute;cono podremos observar los controles de estado de todo el proceso de tranasporte (Ver manual Control de Estado(s)).</li>
+                    </ul>
+                    <br>
+                    <h3> Otros Elementos </h3><br>
+                    <ul>
+                        <li><b>NOTA:</b> Se presenta en forma de imagen dentro del campo NRO.SERVICIO. Informaci&oacute;n adicional que fue ingresada en la generaci&oacute;n del pedido (Ver manual Peido(s)) y es obtenida en la presente pantalla.</li>
+                        <br>
+                        <img src="img/manual/transporte_registro-transportista-nota.jpg" />
+                        <br>
+                        <br>
+                        <li><b>CARACTER&Iacute;STICAS:</b> Se presenta en forma de imagen dentro del campo TIPO SERVICIO. Al dar click sobre la imagen se muestra la siguiente informaci&oacute;n: VOLUMEN, PESO Y DISTANCIA APROX.</li>
+                        <br>
+                        <img src="img/manual/transporte_subasta-caracteristicas.jpg"/>
+                        <br>
+                        <br>
+                        <li><b>CITAS:</b> Se presenta en forma de imagen dentro de los campos ORIGEN y DESTINO. Al dar click sobre la imagen se muestra la fecha y hora de recojo en el origen y la fecha y hora de llegada en el destino.</li>
+                        <br>        
+                        <img src="img/manual/transporte_subasta-cita.jpg"/>
+                        <br>
+                        <br>
+                        <li><b>TIPO DE ADJUDICACI&Oacute;N:</b> Se presenta en forma de imagen dentro del campo VEH&Iacute;CULO. Al pasar sobre la imagen muestra el tipo de adjudicaci&oacute;n de transporte.</li>
+                        <br>        
+                        <img src="img/manual/transporte_registro-transportista-tipo-adjudicacion.jpg"/>
+                        <br>
+                        <br>
+                    </ul>
+                    <br>
+                    <h3> Acciones de Registro de Transportista - DATOS DE TRANSPORTE / CONTROL DE ESTADOS </h3><br>
+                     <ul>
+                         <li><b>DATOS DE TRANSPORTE:</b> A continucaci&oacute;n se detalla paso a paso el proceso de asignar datos de transporte:</li>
+                                <ol>
+                                    <li>El usuario debe dirigirse al bot&oacute;n DATOS TRANSPORTE ubicado en la casilla ACCIONES en la tabla de registro de transportista.</li><br>
+                                    <img src="img/manual/transporte_registro-transportista-datos-transporte-1.jpg" />
+                                    <br>
+                                    <br>
+                                    <li>Aparecer&aacute; una ventana para el ingreso de informaci&oacute;n relacionada al chofer y el veh&iacute;culo asignado. Una vez ingresado los datos, dar en GUARDAR. El sistema da la opci&oacute;n de escoger una segunda placa de veh&iacute;culo por si se tratara de una carreta u otro veh&iacute;culo remolcado. La placa adicional ser&aacute; ingresada manualmente y no a trav&eacute;s de un combo como la placa principal.</li><br>
+                                    <img src="img/manual/transporte_registro-transportista-datos-transporte-2.jpg" />
+                                    <br>
+                                    <br>
+                                    <li>A manera de conformidad aparecer&aacute; un mensaje en la parte superior derecha. Se podr&aacute; observar que si se vuelve a intentar registrar datos de transporte, el sistema nos mostrar&aacute; un mensaje indicando que la edici&oacute;n ya fue finalizada.</li><br>
+                                    <img src="img/manual/general_exito-solicitud-procesada.jpg" /> <img src="img/manual/transporte_registro-transportista-info-edicion-finalizada.jpg" /> 
+                                    <br>
+                                    <br>
+                                </ol>
+                        <br>
+                        <li><b>CONTROL DE ESTADOS:</b> A continucaci&oacute;n se detalla paso a paso el proceso de visualizaci&oacute;n de estados:</li>
+                                <ol>
+                                    <li>El usuario debe dirigirse al bot&oacute;n CONTROL DE ESTADOS ubicado en la casilla ACCIONES en la tabla de registro de transportista.</li><br>
+                                    <img src="img/manual/transporte_registro-transportista-control-estados-1.jpg" />
+                                    <br>
+                                    <br>
+                                    <li>Aparecer&aacute; una ventana de visualizaci&oacute;n de los estados en el proceso de transporte. Los estados estar&aacute;n acompañados de la fecha y hora de registro. Adicionalmente se mostrar&aacute; una calificaci&oacute;n del servicio.</li><br>
+                                    <img src="img/manual/transporte_registro-transportista-control-estados-2.jpg" />
+                                    <br>
+                                    <br>
+                                </ol>
+                        <br>
+                    </ul>
+                    <br>
+                    
+                    <br>
                         </p>
                     </div>
                     <div class="tab-pane" id="tab_process-state-control">
@@ -1236,6 +1734,83 @@
                                 <p>El manejo de este m&oacute;dulo es de nivel general…</p>
                                 <small class="help-block">Administrator TMPanel</small>
                             </blockquote>
+                            <br>        
+                    <br>        
+                    <br>        
+                    <br>        
+                    <br>       
+                    <h3> Definici&oacute;n </h3><br>
+                    <p>El siguiente manual hace referencia al proceso en el cual se registra en el sistema la hora y fecha de los eventos que forman parte del proceso de transporte e carga como son: inicio de carga, fin de carga, en tr&aacute;nsito, llegada destino, inicio descarga y fin de transporte.</p>
+                    <p>La opci&oacute;n de control de estados se encuentra dentro del m&oacute;dulo Transporte/Proceso/Control de Estado(s). A continuaci&oacute;n se presenta una imagen de la vista del Registro de Transportista:</p><br>
+
+                    <h3>Descripci&oacute;n de Pantalla:</h3><br>
+                    <img src="img/manual/transporte_control-estados-vista.jpg" width="95%" />
+                    <br>
+                    <br>
+                    <p>La vista de control de estados cuenta con 6 columnas de datos. A continuaci&oacute;n describimos cada una:</p>
+                    <ul>
+                        <li><b>NRO.SERVICIO:</b> C&oacute;digo autogenerado por el sistema que identifica de forma &uacute;nica a cada servicio. Adem&aacute;s del c&oacute;digo de servicio tambi&eacute;n se presenta el n&uacute;mero de ord&eacute;n al cual hace referencia (ver manual Pedido(s)) dicho servicio.</li>
+                        <li><b>TIPO DE SERVICIO:</b> Este campo indica el tipo de servicio que requiere el transporte. Ejm: Transporte congelado, transporte refrigerado o transporte seco, etc.</li>
+                        <li><b>ORIGEN:</b> Este campo indica el punto de origen del servicio. Adem&aacute;s indica el tipo de centro que corresponde. Por Ejm: Si es un centro de acopio, planta, puerto, etc.</li>
+                        <li><b>DESTINO:</b> Este campo indica el punto final del servicio. Adem&aacute;s indica el tipo de centro que corresponde. Por Ejm: Si es un centro de acopio, planta, puerto, etc.</li>
+                        <li><b>VEH&Iacute;CULO:</b> Este campo indica las caracter&iacute;sticas del veh&iacute;culo que ha sido asignado, como lo son el tipo, clase, categor&iacute;a, etc.</li>
+                        <li><b>ACCI&Oacute;N:</b> Se presenta en forma de botones. Al hacer click sobre el primer &iacute;cono se ingresar&aacute;n los datos de transporte para ese servicio. Si hacemos click en el segundo &iacute;cono podremos observar los controles de estado de todo el proceso de tranasporte (Ver manual Control de Estado(s)).</li>
+                    </ul>
+                    <br>
+                    <h3> Otros Elementos </h3><br>
+                    <ul>
+                        <li><b>NOTA:</b> Se presenta en forma de imagen dentro del campo NRO.SERVICIO. Informaci&oacute;n adicional que fue ingresada en la generaci&oacute;n del pedido (Ver manual Peido(s)) y es obtenida en la presente pantalla.</li>
+                        <br>
+                        <img src="img/manual/transporte_registro-transportista-nota.jpg" />
+                        <br>
+                        <br>
+                        <li><b>CARACTER&Iacute;STICAS:</b> Se presenta en forma de imagen dentro del campo TIPO SERVICIO. Al dar click sobre la imagen se muestra la siguiente informaci&oacute;n: VOLUMEN, PESO Y DISTANCIA APROX.</li>
+                        <br>
+                        <img src="img/manual/transporte_subasta-caracteristicas.jpg"/>
+                        <br>
+                        <br>
+                        <li><b>CITAS:</b> Se presenta en forma de imagen dentro de los campos ORIGEN y DESTINO. Al dar click sobre la imagen se muestra la fecha y hora de recojo en el origen y la fecha y hora de llegada en el destino.</li>
+                        <br>        
+                        <img src="img/manual/transporte_subasta-cita.jpg"/>
+                        <br>
+                        <br>
+                        <li><b>TIPO DE ADJUDICACI&Oacute;N:</b> Se presenta en forma de imagen dentro del campo VEH&Iacute;CULO. Al pasar sobre la imagen muestra el tipo de adjudicaci&oacute;n de transporte.</li>
+                        <br>        
+                        <img src="img/manual/transporte_registro-transportista-tipo-adjudicacion.jpg"/>
+                        <br>
+                        <br>
+                    </ul>
+                    <br>
+                    <h3> Acciones de Registro de Transportista - DATOS DE TRANSPORTE / CONTROL DE ESTADOS </h3><br>
+                     <ul>
+                         <li><b>CONTROL DE ESTADOS:</b> A continucaci&oacute;n se detalla paso a paso el proceso de visualizaci&oacute;n de estados:</li>
+                                <ol>
+                                    <li>El usuario debe dirigirse al bot&oacute;n CONTROL DE ESTADOS ubicado en la casilla ACCIONES en la tabla de control de estados.</li><br>
+                                    <img src="img/manual/transporte_registro-transportista-control-estados-1.jpg" />
+                                    <br>
+                                    <br>
+                                    <li>Aparecer&aacute; una ventana con los nombres de los estados que conforman el proceso de transporte de carga. Junto a ellos habr&aacute; un check que al activar registrar&aacute;automaticamente la fecha y hora del evento. Adicionalmente se podr&aacute;realizar una calificaci&oacute;n del servicio.</li><br>
+                                    <img src="img/manual/transporte_control-estados-control-estados.jpg" />
+                                    <br>
+                                    <br>
+                                </ol>
+                        <br>
+                        <li><b>DATOS DE TRANSPORTE:</b> A continucaci&oacute;n se detalla paso a paso el proceso de visualizaci&oacute;n de datos de transporte:</li>
+                                <ol>
+                                    <li>El usuario debe dirigirse al bot&oacute;n DATOS TRANSPORTE ubicado en la casilla ACCIONES en la tabla de control de estados.</li><br>
+                                    <img src="img/manual/transporte_registro-transportista-datos-transporte-1.jpg" />
+                                    <br>
+                                    <br>
+                                    <li>Aparecer&aacute; una ventana para la visualizaci&oacute;n de informaci&oacute;n relacionada al chofer y el veh&iacute;culo asignado. Todos los campos estar&aacute;n bloqueados al ser s&oalo una pantalla de visualizaci&oacute;n.</li><br>
+                                    <img src="img/manual/transporte_registro-transportista-datos-transporte-2.jpg" />
+                                    <br>
+                                    <br>
+                                </ol>
+                        <br>
+                    </ul>
+                    <br>
+                    
+                    <br>
                         </p>
                     </div>
                     <div class="tab-pane" id="tab_process-tracking">
@@ -1254,15 +1829,88 @@
                                 <p>El manejo de este m&oacute;dulo es de nivel general…</p>
                                 <small class="help-block">Administrator TMPanel</small>
                             </blockquote>
+                       <br>        
+                    <br>        
+                    <br>        
+                    <br>        
+                    <br>       
+                    <h3> Definici&oacute;n </h3><br>
+                    <p>El siguiente manual nos explica el reporte por Nivel de Servicio. Este nivel de servicio se basa en una calificaci&oacute;n del 1 al 10 por cada servicio prestado.</p>
+                    <p>El reporte de nivel de servicio se encuentra dentro del m&oacute;dulo Reportes/Nivel de Servicio. A continuaci&oacute;n se presenta una imagen de la vista del reporte:</p><br>
+
+                    <h3>Descripci&oacute;n de Pantalla:</h3><br>
+                    <img src="img/manual/reportes_nivel-servicio-vista.jpg" width="95%" />
+                    <br>
+                    <br>
+                    <p>La vista del reporte de Nivel de Servicio cuenta con 16 columnas de datos. A continuaci&oacute;n se mencionar&aacute; cada una:</p>
+                    <ul>
+                        <li><b>NRO.SERVICIO:</b> (Ver Manual Servicio(s)).</li>
+                        <li><b>NRO.VIAJE:</b> (Ver Manual Servicio(s)).</li>
+                        <li><b>CLIENTE:</b> (Ver Manual Cliente(s)).</li>
+                        <li><b>CLASIFICACI&Oacute;N:</b> (Ver Manual Control de Estados)).</li>
+                        <li><b>TIPO VEH:</b> (Ver Manual Tipo Veh&iacute;culo(s)).</li>
+                        <li><b>CLASE VEH:</b> (Ver Manual Clase Veh&iacute;culo(s)).</li>
+                        <li><b>CATEGOR&Iacute;A VEH:</b> (Ver Manual Categor&iacute;a Veh&iacute;culo(s)).</li>
+                        <li><b>PLACA:</b> (Ver Manual Veh&iacute;culo(s)).</li>
+                        <li><b>CHOFER:</b> (Ver Manual Chofer(s)).</li>
+                        <li><b>ORIGEN:</b> (Ver Manual Servicio(s)).</li>
+                        <li><b>DESTINO:</b> (Ver Manual Servicio(s)).</li>
+                        <li><b>FECHA HORA REAL RECOJO:</b> (Ver Manual Control de Estados(s)).</li>
+                        <li><b>FECHA HORA PLAN RECOJO:</b> (Ver Manual Servicio(s)).</li>
+                        <li><b>FECHA HORA REAL LLEGADA</b> (Ver Manual Control de Estados(s)).</li>
+                        <li><b>FECHA HORA PLAN RECOJO:</b> (Ver Manual Servicio(s)).</li>
+                        <li><b>OBSERVACIONES:</b> (Ver Manual Servicio(s)).</li>
+                    </ul>
+                    <br>
                         </p>
                     </div>
                     <div class="tab-pane" id="tab_report-real-estimated">
                         <p>
-                        <h2>COSTO REAL/COSTO ESTIMADO</h2><br>
+                            <h2>COSTO REAL / COSTO ESTIMADO</h2><br>
                             <blockquote class="pull-right">
                                 <p>El manejo de este m&oacute;dulo es de nivel general…</p>
                                 <small class="help-block">Administrator TMPanel</small>
                             </blockquote>
+                            <br>        
+                    <br>        
+                    <br>        
+                    <br>        
+                    <br>       
+                    <h3> Definici&oacute;n </h3><br>
+                    <p>El siguiente manual nos explica el reporte por Costo Real vs Costo Estimado. Adem&aacute;s se calcula un margen estimado, tanto por kil&oacute;metro, por metro c&uacute;bico y por tonelada.</p>
+                    <p>El reporte de costo real vs costo estimado se encuentra dentro del m&oacute;dulo Reportes/Costo Real/Costo Estimado. A continuaci&oacute;n se presenta una imagen de la vista del reporte:</p><br>
+
+                    <h3>Descripci&oacute;n de Pantalla:</h3><br>
+                    <img src="img/manual/reportes_costo-real-costo-estimado-vista.jpg" width="99%"/>
+                    <br>
+                    <br>
+                    <p>La vista del reporte de Costo Real / Costo Estimado cuenta con 23 columnas de datos. A continuaci&oacute;n se mencionar&aacute; cada una:</p>
+                    <ul>
+                        <li><b>NRO.SERVICIO:</b> (Ver Manual Servicio(s)).</li>
+                        <li><b>NRO.VIAJE:</b> (Ver Manual Servicio(s)).</li>
+                        <li><b>CLIENTE:</b> (Ver Manual Cliente(s)).</li>
+                        <li><b>PRECIO:</b> (Ver Manual Pedido(s))).</li>
+                        <li><b>PROVEEDOR:</b> (Ver Manual Proveedor).</li>
+                        <li><b>COSTO:</b> (Ver Manual Pedido(s)).</li>
+                        <li><b>MARGEN (S/.):</b> Se calcula de la diferencia entre el precio y el costo expresado en soles.</li>
+                        <li><b>MARGEN (%):</b> Se calcula de la diferencia entre el precio y el costo expresado en porcentaje.</li>
+                        <li><b>ORIGEN:</b> (Ver Manual Servicio(s)).</li>
+                        <li><b>DESTINO:</b> (Ver Manual Servicio(s)).</li>
+                        <li><b>RUTA:</b> (Ver Manual Ruta(s)).</li>
+                        <li><b>KM. TOTALES:</b> (Ver Manual Pedido(s)).</li>
+                        <li><b>PRECIO X KM.:</b> Se calcula de la divisi&oacute;n entre el precio y los kil&oacute;metros totales expresado en soles.</li>
+                        <li><b>COSTO X KM.::</b> Se calcula de la divisi&oacute;n entre el costo y los kil&oacute;metros totales expresado en soles.</li>
+                        <li><b>MARGEN X KM.(S/.):</b> Se calcula de la diferencia entre el precio x kil&oacute;metro y el costo x kil&oacute;metro expresado en soles.</li>
+                        <li><b>M<sup>3</sup>TOTAL:</b> (Ver Manual Pedido(s)).</li>
+                        <li><b>PRECIO M<sup>3</sup>:</b> Se calcula de la divisi&oacute;n entre el precio y los metros c&uacute;bicos totales expresado en soles.</li>
+                        <li><b>COSTO POR M<sup>3</sup>:</b> Se calcula de la divisi&oacute;n entre el costo y los metros c&uacute;bicos totales expresado en soles.</li>
+                        <li><b>UTILIDAD POR M<sup>3</sup>:</b> Se calcula de la diferencia entre el precio x metros c&uacute;bicos y el costo x metros c&uacute;bicos expresado en soles.</li>
+                        <li><b>TON. TOTAL:</b> (Ver Manual Pedido(s)).</li>
+                        <li><b>PRECIO X TON.:</b> Se calcula de la divisi&oacute;n entre el precio y las toneladas totales expresado en soles.</li>
+                        <li><b>COSTO X TON.:</b> Se calcula de la divisi&oacute;n entre el costo y las toneladas totales expresado en soles.</li>
+                        <li><b>UTILIDAD X TON.:</b> Se calcula de la diferencia entre el precio x tonelada y el costo x tonelada expresado en soles.</li>
+                    </ul>
+                    <br>
                         </p>
                     </div>
                     <div class="tab-pane" id="tab_configuration-profile">

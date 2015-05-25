@@ -25,7 +25,8 @@
                 $measure_distance = measure_char($measure_distance_id, $mysqli);
                 $vehicle = ship_char_extreme_auction($order_detail_id, $mysqli);
                 $vehicle_code = vehicle_char($allocation_id, $mysqli);
-                if($order_type=='1'){$type='TRANSPORTE FRESCO';}else{$type='TRANSPORTE CONGELADO';}
+                $type = service_type_char($order_type, $mysqli);
+                //if($order_type=='1'){$type='TRANSPORTE FRESCO';}else{$type='TRANSPORTE CONGELADO';}
                 if($order_status=='3'){$status='<a class="hint--right hint--info" style="float:right;cursor:pointer;margin-left:5px;" data-hint="Orden Subastada"><i class="glyphicon glyphicon-flash" /></a>';}
                 /**
                  * Auction Data 

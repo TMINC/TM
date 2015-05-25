@@ -267,6 +267,7 @@ var agregar_datos = function(){
         var _carrier = $(this).data('carrier');$("#editCarrier").val(_carrier);
         var _name = $(this).data('vehicle');$("#editType").val(_name);
         var _vehicle = $(this).data('vehicle_id');
+        var _vehicle_aditional = $(this).data('vehicle_aditional');$("#editAditionalPlate").val(_vehicle_aditional);
         var _driver = $(this).data('driver');
         $.ajax({
             type: "POST",

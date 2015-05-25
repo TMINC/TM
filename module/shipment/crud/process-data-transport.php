@@ -22,8 +22,9 @@
                 $measure_volume = measure_char($measure_volume_id, $mysqli);
                 $measure_weight = measure_char($measure_weight_id, $mysqli); 
                 $measure_distance = measure_char($measure_distance_id, $mysqli);
+                $type = service_type_char($order_type, $mysqli);
 
-                if($order_type=='1'){$type='TRANSPORTE FRESCO';}else{$type='TRANSPORTE CONGELADO';}
+                //if($order_type=='1'){$type='TRANSPORTE FRESCO';}else{$type='TRANSPORTE CONGELADO';}
                 echo '<tr><td>'.format($order_detail_id).'<a style="cursor:help;float:right;" class="pop_over hint--left hint--info" data-hint="Nota" data-content="'.$order_note.'" title="NOTA" data-placement="right"><i class="glyphicon glyphicon-comment"/></a><br /><span class="help-block" style="font-size:8px;"><b>REF.ORDEN: </b>'.$order_id.'</span></td>'.
                     '<td>'.$type.'<a style="cursor:help;float:right;" class="pop_over hint--left hint--info" data-hint="Caracter&iacute;sticas" data-content="VOLUMEN: '.$order_volume.' '.$measure_volume.'. <br />PESO: '.$order_weight.' '.$measure_weight.'. <br />DISTANCIA APROX.: '.$order_distance.' '.$measure_distance.'" title="CARACTER&Iacute;STICAS" data-placement="right"><i class="glyphicon glyphicon-list-alt"/></a>'.
                     '<td><div style="float:left;">'.$center_origin.'<br /><span class="help-block" style="font-size:8px;">'.$center_type_origin.'</span></div><a style="cursor:help;float:right;" class="pop_over hint--left hint--info" data-hint="Cita Recojo" data-content="'.$order_origin_date.' '.$order_origin_hour.'" title="'.$center_origin.'" data-placement="right"><i class="glyphicon glyphicon-calendar"/></a></td>'.                            
@@ -34,13 +35,14 @@
     }else{        
         $allocation = $_POST['id'];
         $vehicle = $_POST['vehicle'];
+        $vehicle_aditional = $_POST['vehicle_aditional'];
         $driver = $_POST['driver'];
         $imei = $_POST['imei'];
         if($option=='insert'){
-            $mysqli->query("INSERT INTO tm_order_detail_assign (iAllTraDetID, iDriID, iVehID, cOrdDetAssIMEI) VALUES ('".$allocation."', '".$driver."', '".$vehicle."', '".$imei."')");
+            $mysqli->query("INSERT INTO tm_order_detail_assign (iAllTraDetID, iDriID, iVehID, iVehAdiID, cOrdDetAssIMEI) VALUES ('".$allocation."', '".$driver."', '".$vehicle."', '".$vehicle_aditional."', '".$imei."')");
         } 
         if($option=='update'){
-            $mysqli->query("UPDATE tm_order_detail_assign SET iDriID='".$driver."', iVehID='".$vehicle."', cOrdDetAssIMEI='".$imei."' WHERE iAllTraDetID='".$allocation."'");   
+            $mysqli->query("UPDATE tm_order_detail_assign SET iDriID='".$driver."', iVehID='".$vehicle."', iVehAdiID='".$vehicle_aditional."', cOrdDetAssIMEI='".$imei."' WHERE iAllTraDetID='".$allocation."'");   
         }
         if($option=='state'){
             $id = $_POST['id'];

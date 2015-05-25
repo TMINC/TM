@@ -106,6 +106,14 @@
                     <td class="form-group"><input class="form-control" type="text" id="editEmailContact" name="editEmailContact"></td>
                 </tr>
                 <tr>
+                    <td><b>USUARIO GPS :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editUserGPS" name="editUserGPS"></td>
+                </tr>
+                <tr>
+                    <td><b>PASSWORD GPS :</b></td>
+                    <td class="form-group"><input class="form-control" type="text" id="editPasswordGPS" name="editPasswordGPS"></td>
+                </tr>
+                <tr>
                     <td><b>ESTADO :</b></td>
                     <td class="form-group"><input type="checkbox" id="editStatus"></td>
                 </tr> 

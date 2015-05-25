@@ -627,11 +627,12 @@ function ship_char_extreme($detail_id, $mysqli){
             }
             $driver=order_detail_assign('iDriID',$allocation_detail_id, $mysqli);
             $plate=order_detail_assign('iVehID',$allocation_detail_id, $mysqli);
+            $plate_aditional=order_detail_assign('iVehAdiID',$allocation_detail_id, $mysqli);
             $imei=order_detail_assign('cOrdDetAssIMEI',$allocation_detail_id, $mysqli);
             $vehicletotal = $vehicle_class_total.' / '.$vehicle_type.' / '.$vehicle_category;
             $order_detail_id ="";//Ordenes relacionadas
             $vehicle .= '<div class="formSep">'.format($vehicle_code).' - '.$vehicle_class.' / '.$vehicle_type.' / '.$vehicle_category.$status.'</div>';
-            $graphic .= '<div class="formSep"><a style="cursor:pointer;" class="'.$class.'add_transport hint--left" data-hint="Datos Transporte" data-id="'.$detail_id.'" data-carrier_id="'.$current_id.'" data-carrier="'.$current_name.'" data-vehicle="'.$vehicletotal.'" data-allocation="'.$allocation_detail_id.'" data-vehicle_id="'.$vehicle_map.'" data-driver="'.$driver.'" data-plate="'.$plate.'" data-imei="'.$imei.'"><i class="glyphicon glyphicon-list"></i></a>'.
+            $graphic .= '<div class="formSep"><a style="cursor:pointer;" class="'.$class.'add_transport hint--left" data-hint="Datos Transporte" data-id="'.$detail_id.'" data-carrier_id="'.$current_id.'" data-carrier="'.$current_name.'" data-vehicle="'.$vehicletotal.'" data-allocation="'.$allocation_detail_id.'" data-vehicle_id="'.$vehicle_map.'" data-driver="'.$driver.'" data-plate="'.$plate.'"  data-vehicle_aditional="'.$plate_aditional.'" data-imei="'.$imei.'"><i class="glyphicon glyphicon-list"></i></a>'.
                         '<a style="cursor:pointer;margin-left:20px;" class="'.$class.'add_state hint--left" data-hint="Control de Estados" data-id="'.state_control_id($order_id, $detail_id, $allocation_detail_id,$mysqli).'"><i class="glyphicon glyphicon-check" /></a></div>';
         }
         $vehicle .= '</td>';

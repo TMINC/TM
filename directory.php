@@ -17,15 +17,16 @@ switch($mod){
     case 11: include "module/master/customer$page.php"; break;
     case 12: include "module/master/carrier$page.php"; break;
     case 13: include "module/master/driver$page.php"; break;
-    case 14: include "module/master/vehicle$page.php"; break; 
-    case 15: include "module/master/vehicle-type$page.php"; break;
-    case 16: include "module/master/vehicle-class$page.php"; break;
-    case 17: include "module/master/vehicle-category$page.php"; break;
-    case 18: include "module/master/vehicle-group$page.php"; break;
-    case 19: include "module/master/center$page.php"; break;
-    case 20: include "module/master/measure$page.php"; break;
-    case 21: include "module/master/route$page.php"; break;
-    case 22: include "module/master/service-type$page.php"; break;
+    case 14: include "module/master/registration-carrier-vehicle$page.php"; break;
+    case 15: include "module/master/vehicle$page.php"; break; 
+    case 16: include "module/master/vehicle-type$page.php"; break;
+    case 17: include "module/master/vehicle-class$page.php"; break;
+    case 18: include "module/master/vehicle-category$page.php"; break;
+    case 19: include "module/master/vehicle-group$page.php"; break;
+    case 20: include "module/master/center$page.php"; break;
+    case 21: include "module/master/measure$page.php"; break;
+    case 22: include "module/master/route$page.php"; break;
+    case 23: include "module/master/service-type$page.php"; break;
     
     case 25: include "module/order/order$page.php"; break;
 

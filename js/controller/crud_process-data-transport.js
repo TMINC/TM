@@ -121,6 +121,7 @@ var agregar_datos = function(){
         var _carrier = $(this).data('carrier');$("#editCarrier").val(_carrier);
         var _name = $(this).data('vehicle');$("#editType").val(_name);
         var _vehicle = $(this).data('vehicle_id');
+        var _vehicle_aditional = $(this).data('vehicle_aditional');$("#editAditionalPlate").val(_vehicle_aditional);
         var _driver = $(this).data('driver');
         var cnt=0;
         $.ajax({
@@ -184,12 +185,13 @@ var guardar = function () {
         var _id = $("#editID").val();
         var _driver = $("#editDriver option:selected").val();
         var _vehicle = $("#editPlate option:selected").val();
+        var _vehicle_aditional = $("#editAditionalPlate").val();
         var _imei = $("#editIMEI").val();
         var _action = $("#editAction").val();
         $.ajax({
             type: "POST",
             url: "module/shipment/crud/process-data-transport.php",
-            data: "action="+_action+"&driver="+_driver+"&vehicle="+_vehicle+"&imei="+_imei+"&id="+_id,
+            data: "action="+_action+"&driver="+_driver+"&vehicle="+_vehicle+"&vehicle_aditional="+_vehicle_aditional+"&imei="+_imei+"&id="+_id,
             success: function () {
                 $.sticky("&Eacute;xito<br>[Su solicitud ha sido procesada.]", {autoclose : 5000, position: "top-right", type: "st-success" });
                 load();

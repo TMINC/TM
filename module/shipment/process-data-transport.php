@@ -63,9 +63,13 @@
                             <td class="form-group"><select class="form-control chzn_edit" id="editDriver" name="editDriver" data-placeholder="SELECCIONE UN CHOFER..." /></td>
                         </tr>
                         <tr>
-                            <td><b>PLACA :</b></td>
+                            <td><b>PLACA PRINCIPAL :</b></td>
                             <td class="form-group"><select class="form-control chzn_edit" id="editPlate" name="editPlate" data-placeholder="SELECCIONE UNA PLACA..." /></td>
                         </tr>
+                        <tr>
+                            <td><b>PLACA ADICONAL :</b></td>
+                            <td class="form-group"><input class="form-control" type="text" id="editAditionalPlate" name="editAditionalPlate"></td>
+                        </tr>   
                         <tr>
                             <td><b>IMEI :</b></td>
                             <td class="form-group"><input class="form-control" type="text" id="editIMEI" name="editIMEI"></td>

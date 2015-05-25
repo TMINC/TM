@@ -14,15 +14,15 @@
             $stmt->store_result();
             $stmt->bind_result($numero_servicio, $numero_viaje, $cliente, $calificacion, $proveedor, $clase_vehiculo, $tipo_vehiculo, $categoria_vehiculo, $placa, $chofer1, $origen, $destino, $fecha_hora_plan_recojo, $fecha_hora_real_recojo, $fecha_hora_plan_llegada, $fecha_hora_real_llegada, $observaciones);
             while($row = $stmt->fetch()) { 
-                echo '<tr><td class="small">'.$numero_servicio.'</td>'.
-                    '<td class="small">'.$numero_viaje.'</td>'.
+                echo '<tr><td class="small center">'.$numero_servicio.'</td>'.
+                    '<td class="small center">'.$numero_viaje.'</td>'.
                     '<td class="small">'.$cliente.'</td>'.
-                    '<td class="small">'.$calificacion.'</td>'.
+                    '<td class="small center">'.$calificacion.'</td>'.
                     '<td class="small">'.$proveedor.'</td>'.                            
                     '<td class="small">'.$clase_vehiculo.'</td>'.
                     '<td class="small">'.$tipo_vehiculo.'</td>'.
                     '<td class="small">'.$categoria_vehiculo.'</td>'.
-                    '<td class="small">'.$placa.'</td>'.
+                    '<td class="small center">'.$placa.'</td>'.
                     '<td class="small">'.$chofer1.'</td>'.
                     '<td class="small">'.$origen.'</td>'.
                     '<td class="small">'.$destino.'</td>'.
@@ -40,8 +40,8 @@
             $stmt->store_result();
             $stmt->bind_result($numero_servicio, $numero_viaje, $cliente, $precio, $proveedor, $costo, $margen_s, $margen_p, $origen, $destino, $ruta, $kms_total, $precio_km, $costo_km, $margen_km, $total, $precio_m3, $costo_m3, $utilid_m3, $ton_total, $precio_ton, $costo_ton, $utilid_ton);
             while($row = $stmt->fetch()) { 
-                echo '<tr><td class="small">'.$numero_servicio.'</td>'.
-                    '<td class="small">'.$numero_viaje.'</td>'.
+                echo '<tr><td class="small center">'.$numero_servicio.'</td>'.
+                    '<td class="small center">'.$numero_viaje.'</td>'.
                     '<td class="small">'.$cliente.'</td>'.
                     '<td class="small" style="text-align:right;">'.number_format($precio,2).'</td>'.
                     '<td class="small">'.$proveedor.'</td>'.                        

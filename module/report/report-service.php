@@ -24,41 +24,41 @@
                                         <li><div class="checkbox"><label class="small" for="dt_col_3"><input type="checkbox" value="2" id="dt_col_3" name="toggle-cols" checked="checked" class="uni_style"/> CLIENTE</label></div></li>
                                         <li><div class="checkbox"><label class="small" for="dt_col_4"><input type="checkbox" value="3" id="dt_col_4" name="toggle-cols" checked="checked" class="uni_style"/> CALIFICACI&Oacute;N</label></div></li>
                                         <li><div class="checkbox"><label class="small" for="dt_col_5"><input type="checkbox" value="4" id="dt_col_5" name="toggle-cols" checked="checked" class="uni_style"/> PROVEEDOR</label></div></li>
-                                        <li><div class="checkbox"><label class="small" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> TIPO VEH.</label></div></li>
-                                        <li><div class="checkbox"><label class="small" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> CLASE VEH.</label></div></li>
+                                        <li><div class="checkbox"><label class="small" for="dt_col_6"><input type="checkbox" value="5" id="dt_col_6" name="toggle-cols" checked="checked" class="uni_style"/> CLASE VEH.</label></div></li>
+                                        <li><div class="checkbox"><label class="small" for="dt_col_7"><input type="checkbox" value="6" id="dt_col_7" name="toggle-cols" checked="checked" class="uni_style"/> TIPO VEH.</label></div></li>
                                         <li><div class="checkbox"><label class="small" for="dt_col_8"><input type="checkbox" value="7" id="dt_col_8" name="toggle-cols" checked="checked" class="uni_style"/> CATEGOR&Iacute;A VEH.</label></div></li>
                                         <li><div class="checkbox"><label class="small" for="dt_col_9"><input type="checkbox" value="8" id="dt_col_9" name="toggle-cols" checked="checked" class="uni_style"/> PLACA</label></div></li>
                                         <li><div class="checkbox"><label class="small" for="dt_col_10"><input type="checkbox" value="9" id="dt_col_10" name="toggle-cols" checked="checked" class="uni_style"/> CHOFER</label></div></li>
                                         <li><div class="checkbox"><label class="small" for="dt_col_11"><input type="checkbox" value="10" id="dt_col_11" name="toggle-cols" checked="checked" class="uni_style"/> ORIGEN</label></div></li>
                                         <li><div class="checkbox"><label class="small" for="dt_col_12"><input type="checkbox" value="11" id="dt_col_12" name="toggle-cols" checked="checked" class="uni_style"/> DESTINO</label></div></li>
-                                        <li><div class="checkbox"><label class="small" for="dt_col_13"><input type="checkbox" value="12" id="dt_col_13" name="toggle-cols" checked="checked" class="uni_style"/> FECHA-HORA PLA. RECOJO</label></div></li>
+                                        <li><div class="checkbox"><label class="small" for="dt_col_13"><input type="checkbox" value="12" id="dt_col_13" name="toggle-cols" checked="checked" class="uni_style"/> FECHA-HORA PLAN. RECOJO</label></div></li>
                                         <li><div class="checkbox"><label class="small" for="dt_col_14"><input type="checkbox" value="12" id="dt_col_14" name="toggle-cols" checked="checked" class="uni_style"/> FECHA-HORA REAL RECOJO</label></div></li>
-                                        <li><div class="checkbox"><label class="small" for="dt_col_15"><input type="checkbox" value="14" id="dt_col_15" name="toggle-cols" checked="checked" class="uni_style"/> FECHA-HORA PLA. LLEGADA</label></div></li>
+                                        <li><div class="checkbox"><label class="small" for="dt_col_15"><input type="checkbox" value="14" id="dt_col_15" name="toggle-cols" checked="checked" class="uni_style"/> FECHA-HORA PLAN. LLEGADA</label></div></li>
                                         <li><div class="checkbox"><label class="small" for="dt_col_16"><input type="checkbox" value="15" id="dt_col_16" name="toggle-cols" checked="checked" class="uni_style"/> FECHA-HORA REAL LLEGADA</label></div></li>
                                         <li><div class="checkbox"><label class="small" for="dt_col_17"><input type="checkbox" value="16" id="dt_col_17" name="toggle-cols" checked="checked" class="uni_style"/> OBSERVACI&Oacute;N</label></div></li>
                                     </ul>
                                 </div>
                             </div>
-                            <table class="table table-striped table-bordered dTableR" id="dt_maintenance">
+                            <table class="table table-striped table-condensed" id="dt_maintenance" >
                                 <thead>
                                     <tr>
-                                        <th class="center small">NRO.SERVICIO</th>
-                                        <th class="center small">NRO.VIAJE</th>
-                                        <th class="center small">CLIENTE</th>
-                                        <th class="center small">CALIFICACI&Oacute;N</th>
-                                        <th class="center small">PROVEEDOR</th>
-                                        <th class="center small">TIPO VEH.</th>
-                                        <th class="center small">CLASE VEH.</th>
-                                        <th class="center small">CATEGOR&Iacute;A VEH.</th>
-                                        <th class="center small">PLACA</th>
-                                        <th class="center small">CHOFER</th>
-                                        <th class="center small">ORIGEN</th>
-                                        <th class="center small">DESTINO</th>
-                                        <th class="center small">FECHA-HORA PLA. RECOJO</th>
-                                        <th class="center small">FECHA-HORA REAL RECOJO</th>
-                                        <th class="center small">FECHA-HORA PLA. LLEGADA</th>
-                                        <th class="center small">FECHA-HORA REAL LLEGADA</th>
-                                        <th class="center small">OBSERVACIONES</th>
+                                        <th class="center small">&nbsp;NRO.SERVICIO&nbsp;</th>
+                                        <th class="center small">&nbsp;NRO.VIAJE</th>
+                                        <th class="center small">&nbsp;CLIENTE&nbsp;</th>
+                                        <th class="center small">&nbsp;CALIFICACI&Oacute;N&nbsp;</th>
+                                        <th class="center small">&nbsp;PROVEEDOR&nbsp;</th>
+                                        <th class="center small">&nbsp;TIPO&nbsp;VEH.&nbsp;</th>
+                                        <th class="center small">&nbsp;CLASE&nbsp;VEH.&nbsp;</th>
+                                        <th class="center small">&nbsp;CATEGOR&Iacute;A&nbsp;VEH.&nbsp;</th>
+                                        <th class="center small">&nbsp;PLACA&nbsp;</th>
+                                        <th class="center small">&nbsp;CHOFER&nbsp;</th>
+                                        <th class="center small">&nbsp;ORIGEN&nbsp;</th>
+                                        <th class="center small">&nbsp;DESTINO&nbsp;</th>
+                                        <th class="center small">&nbsp;FECHA-HORA&nbsp;PLAN.&nbsp;RECOJO&nbsp;</th>
+                                        <th class="center small">&nbsp;FECHA-HORA&nbsp;REAL&nbsp;RECOJO&nbsp;</th>
+                                        <th class="center small">&nbsp;FECHA-HORA&nbsp;PLAN.&nbsp;LLEGADA&nbsp;</th>
+                                        <th class="center small">&nbsp;FECHA-HORA&nbsp;REAL&nbsp;LLEGADA&nbsp;</th>
+                                        <th class="center small">&nbsp;OBSERVACIONES&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>

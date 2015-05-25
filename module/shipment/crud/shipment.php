@@ -34,8 +34,9 @@
                         $measure_distance = measure_char($measure_distance_id, $mysqli);
                         $measure_price = measure_char($measure_price_id, $mysqli);
                         $measure_real_price = measure_char($measure_real_price_id, $mysqli);
+                        $type = service_type_char($order_type, $mysqli);
                         $disabled = ' disabled="disabled"';
-                        if($order_type=='1'){$type='TRANSPORTE FRESCO';}else{$type='TRANSPORTE CONGELADO';}
+                        //if($order_type=='1'){$type='TRANSPORTE FRESCO';}else{$type='TRANSPORTE CONGELADO';}
                         if($order_status=='0'){$status='<a class="hint--right hint--error" style="float:right;cursor:pointer;" data-hint="Rechazada"><i class="glyphicon glyphicon-unchecked" /></a>';$disabled = '';}
                         if($order_status=='1'){$status='<a class="hint--right hint--error" style="float:right;cursor:pointer;" data-hint="Pendiente de Liberaci&oacute;n"><i class="glyphicon glyphicon-unchecked" /></a>';$disabled = '';}
                         if($order_status=='2'){$status='<a class="hint--right hint--warning" style="float:right;cursor:pointer;" data-hint="Orden Liberada"><i class="glyphicon glyphicon-log-in" /></a>';$disabled = '';}
@@ -67,8 +68,9 @@
                         $measure_distance = measure_char($measure_distance_id, $mysqli);
                         $measure_price = measure_char($measure_price_id, $mysqli);
                         $measure_real_price = measure_char($measure_real_price_id, $mysqli);
+                        $type = service_type_char($order_type, $mysqli);
 
-                        if($order_type=='1'){$type='TRANSPORTE FRESCO';}else{$type='TRANSPORTE CONGELADO';}
+                        //if($order_type=='1'){$type='TRANSPORTE FRESCO';}else{$type='TRANSPORTE CONGELADO';}
                         if($order_status=='0'){$status='<a class="hint--right hint--error" style="float:right;cursor:pointer;" data-hint="Rechazada"><i class="glyphicon glyphicon-unchecked" /></a>';}
                         if($order_status=='1'){$status='<a class="hint--right hint--error" style="float:right;cursor:pointer;" data-hint="Pendiente de Liberaci&oacute;n"><i class="glyphicon glyphicon-unchecked" /></a>';}
                         if($order_status=='2'){$status='<a class="hint--right hint--warning" style="float:right;cursor:pointer;" data-hint="Orden Liberada"><i class="glyphicon glyphicon-log-in" /></a>';}
@@ -98,8 +100,9 @@
                         $measure_distance = measure_char($measure_distance_id, $mysqli);
                         $measure_price = measure_char($measure_price_id, $mysqli);
                         $measure_real_price = measure_char($measure_real_price_id, $mysqli);
+                        $type = service_type_char($order_type, $mysqli);
 
-                        if($order_type=='1'){$type='TRANSPORTE FRESCO';}else{$type='TRANSPORTE CONGELADO';}
+                        //if($order_type=='1'){$type='TRANSPORTE FRESCO';}else{$type='TRANSPORTE CONGELADO';}
                         if($order_flag=='0'){$flag='<a class="hint--right hint--warning" style="float:right;cursor:pointer;" data-hint="Pendiente de Liberar"><i class="glyphicon glyphicon-star-empty" /></a>';}
                         if($order_flag=='1'){$flag='<a class="hint--right hint--info" style="float:right;cursor:pointer;" data-hint="Liberada"><i class="glyphicon glyphicon-star" /></a>';}
                         if($order_status=='0'){$status='<a class="hint--right hint--error" style="float:right;cursor:pointer;" data-hint="Rechazada"><i class="glyphicon glyphicon-unchecked" /></a>';}
@@ -136,7 +139,8 @@
                         $measure_price = measure_char($measure_price_id, $mysqli);
                         $measure_real_price = measure_char($measure_real_price_id, $mysqli);
                         $gps = gps_all($order_id, $mysqli);
-                        if($order_type=='1'){$type='TRANSPORTE FRESCO';}else{$type='TRANSPORTE CONGELADO';}
+                        $type = service_type_char($order_type, $mysqli);
+                        //if($order_type=='1'){$type='TRANSPORTE FRESCO';}else{$type='TRANSPORTE CONGELADO';}
                         if($order_flag=='0'){$flag='<a class="hint--right hint--warning" style="float:right;cursor:pointer;" data-hint="Pendiente de Liberar"><i class="glyphicon glyphicon-star-empty" /></a>';}
                         if($order_flag=='1'){$flag='<a class="hint--right hint--info" style="float:right;cursor:pointer;" data-hint="Liberada"><i class="glyphicon glyphicon-star" /></a>';}
                         if($order_status=='0'){$status='<a class="hint--right hint--error" style="float:right;cursor:pointer;" data-hint="Rechazada"><i class="glyphicon glyphicon-unchecked" /></a>';}

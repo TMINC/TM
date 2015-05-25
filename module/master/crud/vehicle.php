@@ -21,6 +21,18 @@
             }            
         }
     }
+    if($action=='plates'){
+        $sel = $_POST['sel'];
+        if ($stmt = $mysqli->prepare("SELECT iVehID, CONCAT(cVehPla,' - ',cVehTuc) AS find FROM tm_vehicle WHERE cVehSta='1'")){
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($vehicle_id, $vehicle);
+            while($row = $stmt->fetch()) {
+                if($sel==$vehicle){$selected = " selected";}else{$selected = "";}
+                echo '<option value="'.$vehicle_id.'" '.$selected.'>'.$vehicle.'</option>';
+            }            
+        }
+    }
     if($action=='consult'){
         $sel = $_POST['sel'];
         if ($stmt = $mysqli->prepare("SELECT iVehID, CONCAT(cVehPla,' - ',cVehTuc) AS find FROM tm_vehicle WHERE cVehSta='1'")){

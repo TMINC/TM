@@ -31,17 +31,18 @@ include_once 'functions.php';
                                     <li id="info-carrier"><a href="./?mod=12">&ShortRightArrow; Proveedor(es)</a></li>
                                     <li id="info-driver"><a href="./?mod=13">&ShortRightArrow; Chofer(es)</a></li>
                                     <li class="nav-header">Transporte</li>
-                                    <li id="vehicle-description"><a href="./?mod=14">&ShortRightArrow; Veh&iacute;culo(s)</a></li>
-                                    <li id="vehicle-type"><a href="./?mod=15">&ShortRightArrow; Tipo(s)</a></li>
-                                    <li id="vehicle-class"><a href="./?mod=16">&ShortRightArrow; Clase(s)</a></li>
-                                    <li id="vehicle-category"><a href="./?mod=17">&ShortRightArrow; Categor&iacute;a(s)</a></li>
-                                    <li id="vehicle-group"><a href="./?mod=18">&ShortRightArrow; Grupo(s)</a></li>
+                                    <li id="registration-carrier-vehicle"><a href="./?mod=14">&ShortRightArrow; Registro Proveedor-Veh&iacute;culo</a></li>
+                                    <li id="vehicle-description"><a href="./?mod=15">&ShortRightArrow; Veh&iacute;culo(s)</a></li>
+                                    <li id="vehicle-type"><a href="./?mod=16">&ShortRightArrow; Tipo(s)</a></li>
+                                    <li id="vehicle-class"><a href="./?mod=17">&ShortRightArrow; Clase(s)</a></li>
+                                    <li id="vehicle-category"><a href="./?mod=18">&ShortRightArrow; Categor&iacute;a(s)</a></li>
+                                    <li id="vehicle-group"><a href="./?mod=19">&ShortRightArrow; Grupo(s)</a></li>
                                     <li class="nav-header">Traslado</li>
-                                    <li id="transfer-center"><a href="./?mod=19">&ShortRightArrow; Centro(s)</a></li>
+                                    <li id="transfer-center"><a href="./?mod=20">&ShortRightArrow; Centro(s)</a></li>
                                     <li class="nav-header">Generales</li>
-                                    <li id="other-measure"><a href="./?mod=20">&ShortRightArrow; U.Medida</a></li>
-                                    <li id="info-route"><a href="./?mod=21">&ShortRightArrow; Ruta(s)</a></li>
-                                    <li id="service-type"><a href="./?mod=22">&ShortRightArrow; Tipo Servicio(s)</a></li>
+                                    <li id="other-measure"><a href="./?mod=21">&ShortRightArrow; U.Medida</a></li>
+                                    <li id="info-route"><a href="./?mod=22">&ShortRightArrow; Ruta(s)</a></li>
+                                    <li id="service-type"><a href="./?mod=23">&ShortRightArrow; Tipo Servicio(s)</a></li>
                                  
                                 </ul>
                             </div>
